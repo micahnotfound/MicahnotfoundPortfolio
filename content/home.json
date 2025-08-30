@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Micah Milner",
+    "subtitle": "Creative Strategist | AR/XR Storytelling | Immersive Exhibitions",
+    "carousel": [
+      {
+        "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
+        "kind": "image",
+        "alt": "AfroFuturism project showcase"
+      },
+      {
+        "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
+        "kind": "image",
+        "alt": "BlackLands project showcase"
+      },
+      {
+        "public_id": "v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5",
+        "kind": "image",
+        "alt": "MoMA Exhibition project showcase"
+      }
+    ]
+  },
+  "featuredProjects": {
+    "title": "Featured Work",
+    "description": "Award-winning immersive experiences and digital storytelling projects",
+    "projects": ["afrofuturism", "blacklands", "moma"]
+  }
+}

@@ -11,8 +11,8 @@ interface ProjectPageClientProps {
 
 export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps) {
   // Distribute images evenly across two columns
-  const column1 = allMedia.filter((_, index) => index % 2 === 0)
-  const column2 = allMedia.filter((_, index) => index % 2 === 1)
+  const column1 = allMedia.filter((_, index) => index % 3 === 0)
+  const column2 = allMedia.filter((_, index) => index % 3 === 1)
 
   return (
     <main className="pt-32">
@@ -42,10 +42,10 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
         </div>
       </section>
 
-      {/* Project Content - Two Column Layout */}
+      {/* Project Content - Three Column Layout */}
       <section className="py-16 px-8">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-3 gap-16">
             {/* Column 1: Project Images */}
             <div className="space-y-6">
               {column1.length > 0 ? (
@@ -71,10 +71,9 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               )}
             </div>
 
-            {/* Column 2: Project Images and Information */}
-            <div className="space-y-8">
-              {/* Column 2 Images */}
-              {column2.length > 0 && (
+            {/* Column 2: Project Images */}
+            <div className="space-y-6">
+              {column2.length > 0 ? (
                 <div className="space-y-4">
                   {column2.map((item: any, index: number) => (
                     <div key={index} className="relative">
@@ -91,10 +90,15 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                     </div>
                   ))}
                 </div>
+              ) : (
+                <p className="text-gray-600 font-body">No additional images available.</p>
               )}
+            </div>
 
-              {/* Project Information */}
-              <div>
+            {/* Column 3: Project Information (Sticky) */}
+            <div className="space-y-8">
+              {/* Sticky About This Project Section */}
+              <div className="lg:sticky lg:top-32">
                 <h2 className="text-3xl font-body font-bold mb-6 text-gray-900">About This Project</h2>
                 {project.description && (
                   <div className="prose prose-lg">
@@ -108,7 +112,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               </div>
 
               <div>
-                <h3 className="text-2xl font-body font-bold mb-6 text-gray-900">Project Details</h3>
+                <h3 className="text-3xl font-body font-bold mb-6 text-gray-900">Project Details</h3>
                 <dl className="space-y-4">
                   <div>
                     <dt className="font-semibold text-gray-900 font-ui">Year</dt>

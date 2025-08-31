@@ -25,7 +25,7 @@ export function Header() {
 
             {/* 2px thick core-dark vertical separator */}
             <div className="flex items-center mx-4 lg:mx-8">
-              <div className="w-2 h-26 bg-core-dark"></div>
+              <div className="w-2 h-24 bg-core-dark"></div>
             </div>
 
             {/* About text */}

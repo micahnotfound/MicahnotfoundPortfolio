@@ -85,7 +85,8 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                 )}
               </div>
 
-              <div>
+              {/* Sticky Project Details Section */}
+              <div className="lg:sticky lg:top-32">
                 <h3 className="text-3xl font-body font-bold mb-6 text-gray-900">Project Details</h3>
                 <dl className="space-y-4">
                   <div>

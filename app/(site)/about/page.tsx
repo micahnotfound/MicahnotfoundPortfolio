@@ -159,27 +159,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 px-8 bg-blue-50">
-        <div className="container-custom max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-display font-bold mb-6 text-balance">
-            Let&apos;s Work Together
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 text-pretty">
-            Interested in creating immersive experiences that tell your story? 
-            I&apos;d love to hear about your project.
-          </p>
-          <a
-            href={`mailto:${siteSettings.email}`}
-            className="btn-primary inline-flex items-center"
-          >
-            Get in Touch
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </a>
-        </div>
-      </section>
+
     </main>
   )
 }

@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200 py-16 px-8">
+    <footer className="bg-white py-16 px-8">
       <div className="container-custom">
         {/* Desktop: Items on same row */}
         <div className="hidden md:flex items-center space-x-8">

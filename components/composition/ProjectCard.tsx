@@ -34,8 +34,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
         aria-label={`View ${project.title} project`}
       >
         <div className="flex flex-col">
-          {/* Date - Larger and Bold */}
-          <div className="text-2xl font-ui font-bold text-gray-600 mb-4 group-hover:text-gray-800 transition-colors duration-200">
+          {/* Date - Even Larger and Bold */}
+          <div className="text-4xl font-ui font-bold text-gray-600 mb-4 group-hover:text-gray-800 transition-colors duration-200">
             {project.year}
           </div>
 
@@ -48,11 +48,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             />
           </div>
 
-          {/* Thick Square Border Button - Full Width, Left Aligned */}
+          {/* Thick Square Border Button - Auto Width, Shorter Height, Left Aligned */}
           <div
             className={`
-              relative border-4 border-black px-6 py-4 text-left font-ui font-bold text-black 
+              relative border-4 border-black px-6 py-3 text-left font-ui font-bold text-black 
               group-hover:bg-black group-hover:text-white transition-all duration-300 ease-out
+              w-auto inline-block
               ${isLoading ? 'animate-pulse' : ''}
             `}
           >

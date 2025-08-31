@@ -179,46 +179,5 @@
       "kind": "image",
       "alt": "There Goes Nikki cover image - futuristic digital art"
     }
-  },
-  {
-    "slug": "afrofuturism",
-    "title": "AfroFuturism",
-    "year": "2024",
-    "role": "Creative Director",
-    "client": "Kinfolk Tech",
-    "summary": "An immersive augmented reality experience exploring Afrofuturist themes through the work of George Clinton, Octavia Butler, and Sun Ra.",
-    "description": "A groundbreaking AR experience that explores Afrofuturist themes and concepts through the lens of influential artists and thinkers, creating an immersive journey into alternative futures.",
-    "technologies": ["AR", "Afrofuturism", "Immersive Media", "Cultural Technology"],
-    "elements": [
-      {
-        "name": "Experience",
-        "detail": [
-          {
-            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
-            "kind": "image",
-            "alt": "AfroFuturism experience detail - futuristic abstract art"
-          }
-        ],
-        "profile": [
-          {
-            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=800&fit=crop",
-            "kind": "image",
-            "alt": "AfroFuturism experience profile - futuristic abstract art"
-          }
-        ]
-      }
-    ],
-    "thumbnails": [
-      {
-        "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=533&fit=crop",
-        "kind": "image",
-        "alt": "AfroFuturism portrait thumbnail - futuristic abstract art"
-      }
-    ],
-    "cover": {
-      "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=800&fit=crop",
-      "kind": "image",
-      "alt": "AfroFuturism cover image - futuristic abstract art"
-    }
   }
 ]

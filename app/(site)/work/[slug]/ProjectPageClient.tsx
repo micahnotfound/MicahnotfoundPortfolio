@@ -16,7 +16,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
   const column1B = allMedia.slice(midPoint)
 
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen pt-32">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center">
         <div className="absolute inset-0">

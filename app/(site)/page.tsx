@@ -18,7 +18,7 @@ export default function HomePage() {
   const projects = getProjects()
 
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen pt-32">
       {/* Projects Horizontal Row Section */}
       <section className="py-20 px-8">
         <div className="container-custom">

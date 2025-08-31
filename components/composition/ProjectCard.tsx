@@ -62,10 +62,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <div className="absolute inset-0 border-4 border-core-dark animate-ping opacity-20" />
             )}
             
-            {/* Button Content */}
-            <span className="relative z-10">
-              {isLoading ? 'Loading...' : project.title}
-            </span>
+                              {/* Button Content */}
+                  <span className="relative z-10 italic">
+                    {isLoading ? 'Loading...' : project.title}
+                  </span>
           </div>
         </div>
       </Link>

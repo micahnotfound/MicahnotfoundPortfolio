@@ -23,9 +23,9 @@ export function Header() {
               />
             </Link>
 
-            {/* 4px thick black vertical separator */}
+            {/* 2px thick black vertical separator */}
             <div className="flex items-center mx-4 lg:mx-8">
-              <div className="w-4 h-8 bg-black"></div>
+              <div className="w-2 h-8 bg-black"></div>
             </div>
 
             {/* About text */}
@@ -37,7 +37,14 @@ export function Header() {
             </Link>
           </div>
 
-
+          {/* Right Side: MICAH MILNER logotype (desktop only) */}
+          <div className="hidden md:flex items-center">
+            <img 
+              src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/Micah_text_vlnslw.svg"
+              alt="MICAH MILNER"
+              className="h-6 lg:h-8 w-auto"
+            />
+          </div>
         </div>
       </div>
     </header>

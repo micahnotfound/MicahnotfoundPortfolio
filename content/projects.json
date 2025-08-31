@@ -46,14 +46,9 @@
     ],
     "thumbnails": [
       {
-        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=MoMA+Thumbnail+1",
+        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5.png",
         "kind": "image",
-        "alt": "MoMA Exhibition thumbnail 1"
-      },
-      {
-        "public_id": "https://via.placeholder.com/400x300/4a4a4a/ffffff?text=MoMA+Thumbnail+2",
-        "kind": "image",
-        "alt": "MoMA Exhibition thumbnail 2"
+        "alt": "MoMA Exhibition thumbnail"
       }
     ],
     "cover": {
@@ -133,14 +128,9 @@
     ],
     "thumbnails": [
       {
-        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Signature+Series+Thumbnail+1",
+        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571826/BL_horizontal_0000_Layer-Comp-1_nnvxij.png",
         "kind": "image",
-        "alt": "eSignature Series thumbnail 1"
-      },
-      {
-        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=Signature+Series+Thumbnail+2",
-        "kind": "image",
-        "alt": "eSignature Series thumbnail 2"
+        "alt": "eSignature Series thumbnail"
       }
     ],
     "cover": {
@@ -179,14 +169,9 @@
     ],
     "thumbnails": [
       {
-        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=There+Goes+Nikki+Thumbnail+1",
+        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp.png",
         "kind": "image",
-        "alt": "There Goes Nikki thumbnail 1"
-      },
-      {
-        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=There+Goes+Nikki+Thumbnail+2",
-        "kind": "image",
-        "alt": "There Goes Nikki thumbnail 2"
+        "alt": "There Goes Nikki thumbnail"
       }
     ],
     "cover": {

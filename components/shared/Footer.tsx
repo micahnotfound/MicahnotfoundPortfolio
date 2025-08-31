@@ -2,8 +2,8 @@ export function Footer() {
   return (
     <footer className="bg-white border-t border-gray-200 py-16 px-8">
       <div className="container-custom">
-        {/* Desktop: Left-aligned Layout */}
-        <div className="hidden md:flex flex-col items-start space-y-6">
+        {/* Desktop: Items on same row */}
+        <div className="hidden md:flex items-center space-x-8">
           {/* Thick Contact Button */}
           <a
             href="mailto:micah@art404.com"
@@ -31,7 +31,7 @@ export function Footer() {
           </a>
         </div>
 
-        {/* Mobile: Stacked Layout */}
+        {/* Mobile & Tablet: Stacked Layout */}
         <div className="md:hidden flex flex-col items-center space-y-6">
           {/* Thick Contact Button */}
           <a

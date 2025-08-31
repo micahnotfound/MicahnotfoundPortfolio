@@ -24,7 +24,7 @@ export default function HomePage() {
       <section className="py-20 px-8">
         <div className="container-custom">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
-          <div className="flex overflow-x-auto space-x-8 pb-6 snap-x snap-mandatory">
+          <div className="flex overflow-x-auto space-x-4 md:space-x-6 lg:space-x-8 pb-6 snap-x snap-mandatory">
             {projects.map((project, index) => {
               // Use thumbnail if available, otherwise fall back to cover image
               const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
@@ -32,18 +32,18 @@ export default function HomePage() {
                 : project.cover
 
               return (
-                <div key={project.slug} className="flex-shrink-0 w-80 snap-start">
+                <div key={project.slug} className="flex-shrink-0 w-64 md:w-72 lg:w-80 snap-start">
                   <div className="flex flex-col">
                     {/* Date */}
                     <div className="text-sm font-ui text-gray-600 mb-4">
                       {project.year}
                     </div>
 
-                    {/* Thumbnail */}
+                    {/* Thumbnail - Portrait aspect ratio */}
                     <div className="mb-6">
                       <Media
                         media={thumbnailMedia}
-                        className="w-full aspect-[4/3] object-cover"
+                        className="w-full aspect-[3/4] object-cover"
                         alt={`${project.title} thumbnail`}
                       />
                     </div>

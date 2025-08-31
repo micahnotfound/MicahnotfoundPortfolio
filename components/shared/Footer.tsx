@@ -7,7 +7,7 @@ export function Footer() {
           {/* Thick Contact Button */}
           <a
             href="mailto:micah@art404.com"
-            className="border-2 border-core-dark px-8 py-4 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200"
+            className="border-4 border-core-dark px-8 py-4 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200"
           >
             CONTACT
           </a>
@@ -36,7 +36,7 @@ export function Footer() {
           {/* Thick Contact Button */}
           <a
             href="mailto:micah@art404.com"
-            className="border-2 border-core-dark px-8 py-4 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200 w-full max-w-xs"
+            className="border-4 border-core-dark px-8 py-4 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200 w-full max-w-xs"
           >
             CONTACT
           </a>

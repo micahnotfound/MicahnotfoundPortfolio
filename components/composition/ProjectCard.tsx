@@ -48,24 +48,24 @@ export function ProjectCard({ project }: ProjectCardProps) {
             />
           </div>
 
-          {/* Thick Square Border Button - Auto Width, Shorter Height, Left Aligned */}
+                    {/* Thick Square Border Button - Auto Width, Shorter Height, Left Aligned */}
           <div
             className={`
-              relative border-2 border-core-dark px-6 py-3 text-left font-ui font-bold text-core-dark 
+              relative border-4 border-core-dark px-6 py-3 text-left font-ui font-bold text-core-dark 
               group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
-              w-auto inline-block
+              w-fit inline-block
               ${isLoading ? 'animate-pulse' : ''}
             `}
           >
             {/* Loading Border Animation */}
             {isLoading && (
-              <div className="absolute inset-0 border-2 border-core-dark animate-ping opacity-20" />
+              <div className="absolute inset-0 border-4 border-core-dark animate-ping opacity-20" />
             )}
             
-                              {/* Button Content */}
-                  <span className="relative z-10 italic">
-                    {isLoading ? 'Loading...' : project.title}
-                  </span>
+            {/* Button Content */}
+            <span className="relative z-10 italic whitespace-pre-line">
+              {isLoading ? 'Loading...' : project.title}
+            </span>
           </div>
         </div>
       </Link>

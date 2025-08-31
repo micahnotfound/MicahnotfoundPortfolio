@@ -1,8 +1,7 @@
 import { Metadata } from 'next'
-import { Media } from '@/components/shared/Media'
+import { ProjectCard } from '@/components/composition/ProjectCard'
 import { getProjects } from '@/lib/content'
 import { siteSettings } from '@/config/siteSettings'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: siteSettings.siteTitle,
@@ -25,40 +24,9 @@ export default function HomePage() {
         <div className="container-custom">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div className="flex overflow-x-auto space-x-4 md:space-x-6 lg:space-x-8 pb-6 snap-x snap-mandatory">
-            {projects.map((project, index) => {
-              // Use thumbnail if available, otherwise fall back to cover image
-              const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
-                ? project.thumbnails[0]
-                : project.cover
-
-              return (
-                <div key={project.slug} className="flex-shrink-0 w-64 md:w-72 lg:w-80 snap-start">
-                  <div className="flex flex-col">
-                    {/* Date */}
-                    <div className="text-sm font-ui text-gray-600 mb-4">
-                      {project.year}
-                    </div>
-
-                    {/* Thumbnail - Portrait aspect ratio */}
-                    <div className="mb-6">
-                      <Media
-                        media={thumbnailMedia}
-                        className="w-full aspect-[3/4] object-cover"
-                        alt={`${project.title} thumbnail`}
-                      />
-                    </div>
-
-                    {/* Thick Square Border Button */}
-                    <Link
-                      href={`/work/${project.slug}`}
-                      className="border-4 border-black px-6 py-4 text-center font-ui font-bold text-black hover:bg-black hover:text-white transition-colors duration-200"
-                    >
-                      {project.title}
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
+            {projects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
           </div>
         </div>
       </section>

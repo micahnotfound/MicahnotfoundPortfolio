@@ -210,14 +210,9 @@
     ],
     "thumbnails": [
       {
-        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=AfroFuturism+Thumbnail+1",
+        "public_id": "https://via.placeholder.com/400x533/2a2a2a/ffffff?text=AfroFuturism+Portrait",
         "kind": "image",
-        "alt": "AfroFuturism thumbnail 1"
-      },
-      {
-        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=AfroFuturism+Thumbnail+2",
-        "kind": "image",
-        "alt": "AfroFuturism thumbnail 2"
+        "alt": "AfroFuturism portrait thumbnail"
       }
     ],
     "cover": {

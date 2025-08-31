@@ -18,18 +18,18 @@ export default function HomePage() {
   const projects = getProjects()
 
   return (
-    <main className="pt-32">
-      {/* Projects Horizontal Row Section */}
-      <section className="py-12 px-8">
-        <div className="container-custom">
+    <div className="h-screen flex flex-col">
+      {/* Projects Horizontal Row Section - Fixed height, no vertical scroll */}
+      <section className="flex-1 flex items-center px-6">
+        <div className="container-custom w-full">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
-          <div className="flex overflow-x-auto space-x-4 md:space-x-6 lg:space-x-8 pb-6 snap-x snap-mandatory">
+          <div className="flex overflow-x-auto space-x-3 md:space-x-4 lg:space-x-5 pb-6 snap-x snap-mandatory">
             {projects.map((project, index) => (
               <ProjectCard key={project.slug} project={project} index={index} />
             ))}
           </div>
         </div>
       </section>
-    </main>
+    </div>
   )
 }

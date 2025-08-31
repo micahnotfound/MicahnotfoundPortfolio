@@ -46,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${epilogue.variable}`}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased min-h-screen flex flex-col">
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
@@ -56,7 +56,7 @@ export default function RootLayout({
         </a>
 
         <Header />
-        <main id="main-content">
+        <main id="main-content" className="flex-1">
           {children}
         </main>
         <Footer />

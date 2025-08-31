@@ -12,7 +12,7 @@ interface ProjectPageClientProps {
 
 export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps) {
   return (
-    <main className="pt-32">
+    <main className="pt-32 min-h-screen">
       {/* Project Content - Masonry Layout */}
       <section className="py-16 px-8">
         <div className="container-custom">

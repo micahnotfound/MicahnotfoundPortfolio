@@ -49,7 +49,7 @@ export function Header() {
               <img 
                 src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/Micah_text_vlnslw.svg"
                 alt="MICAH MILNER"
-                className="h-8 lg:h-10 w-auto"
+                className="h-8 w-auto"
               />
             </Link>
           </div>

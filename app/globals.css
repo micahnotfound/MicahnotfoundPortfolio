@@ -166,7 +166,7 @@
 
   /* Layout utilities */
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto pl-6 pr-4 sm:pr-6 lg:pr-8;
   }
 
   /* Accessibility utilities */

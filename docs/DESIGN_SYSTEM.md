@@ -33,7 +33,8 @@ This document outlines the design system for Micah Milner's portfolio website, i
 ## 🎨 **Color Palette**
 
 ### **Primary Colors**
-- **Black**: `#0A0A0A`
+- **Core Dark**: `#2A033F` (primary dark color for text, borders, buttons)
+- **Black**: `#0A0A0A` (fallback for pure black)
 - **White**: `#F6F6F6`
 - **Gray Light**: `#F3F4F6`
 - **Gray Medium**: `#9CA3AF`
@@ -230,6 +231,7 @@ Mobile:
 ### **CSS Variables**
 ```css
 :root {
+  --color-core-dark: #2A033F;
   --color-black: #0A0A0A;
   --color-white: #F6F6F6;
   --color-blue: #3B82F6;

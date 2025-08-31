@@ -35,7 +35,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       >
         <div className="flex flex-col">
           {/* Date - Even Larger and Bold */}
-          <div className="text-4xl font-ui font-bold text-gray-600 mb-4 group-hover:text-gray-800 transition-colors duration-200">
+          <div className="text-4xl font-ui font-bold text-core-dark mb-4 group-hover:text-gray-800 transition-colors duration-200">
             {project.year}
           </div>
 
@@ -51,15 +51,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {/* Thick Square Border Button - Auto Width, Shorter Height, Left Aligned */}
           <div
             className={`
-              relative border-4 border-black px-6 py-3 text-left font-ui font-bold text-black 
-              group-hover:bg-black group-hover:text-white transition-all duration-300 ease-out
+              relative border-4 border-core-dark px-6 py-3 text-left font-ui font-bold text-core-dark 
+              group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
               w-auto inline-block
               ${isLoading ? 'animate-pulse' : ''}
             `}
           >
             {/* Loading Border Animation */}
             {isLoading && (
-              <div className="absolute inset-0 border-4 border-black animate-ping opacity-20" />
+              <div className="absolute inset-0 border-4 border-core-dark animate-ping opacity-20" />
             )}
             
             {/* Button Content */}

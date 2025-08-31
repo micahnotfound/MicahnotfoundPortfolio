@@ -24,7 +24,7 @@ export function Header() {
             </Link>
 
             {/* 2px thick black vertical separator */}
-            <div className="flex items-center mx-4 lg:mx-8">
+            <div className="flmex items-center mx-4 lg:mx-8">
               <div className="w-2 h-8 bg-black"></div>
             </div>
 

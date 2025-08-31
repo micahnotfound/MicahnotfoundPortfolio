@@ -62,8 +62,9 @@ export function Media({
   }
 
   const imageProps = {
-    src: media.public_id,
+    src: buildFullSizeUrl(media),
     alt: alt || media.alt || 'Media content',
+    srcSet: buildSrcSet(media.public_id),
     sizes,
     priority,
     ...(priority ? {} : { loading }), // Apply loading only if not priority

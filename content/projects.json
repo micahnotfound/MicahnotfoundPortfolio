@@ -1,60 +1,207 @@
 [
   {
-    "slug": "moma",
-    "title": "MoMA Exhibition",
-    "year": "2/21",
+    "slug": "afrofuturism",
+    "title": "AfroFuturism",
+    "year": "2/24",
     "role": "Creative Director",
-    "client": "Museum of Modern Art",
-    "summary": "A groundbreaking interactive exhibition exploring New York's hidden histories through digital storytelling and immersive experiences.",
-    "description": "The Monuments Project was a five-part installation featured in MoMA's 2023 exhibition New York, New Publics, reimagining the role of monuments in public space. Created by Kinfolk, the work centered on Black and Brown enclaves throughout New York City, honoring the ways these communities cultivated safety, resistance, and belonging. Each piece highlighted a pivotal figure or collective including Seneca Village, the Young Lords, Toussaint Louverture, and David Ruggles, brought to life through a blend of archival research and contemporary storytelling. The sculptures were anchored on raw, untreated red maple pedestals, referencing a tree once native to the region and emphasizing a return to organic, place-based memory. To This Day invited viewers to reconsider which histories are remembered and how they take shape in public space.",
-    "technologies": ["AR", "XR", "Interactive Design", "Digital Storytelling"],
+    "client": "Kinfolk Tech",
+    "summary": "Immersive AR experience exploring Afrofuturist themes through three key figures",
+    "description": "An award-winning augmented reality experience that brings to life the visionary work of George Clinton, Octavia Butler, and Sun Ra. Through interactive digital monuments, users explore themes of identity, technology, and cultural transformation.",
+    "technologies": ["AR", "Unity", "3D Modeling", "Interactive Design"],
     "elements": [
       {
-        "name": "Header",
+        "name": "George Clinton",
         "detail": [
           {
-            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&h=600&fit=crop",
+            "public_id": "v1756571818/Image_Sequence_009_0000_f808iv",
             "kind": "image",
-            "alt": "MoMA Exhibition header detail - modern art gallery"
+            "alt": "George Clinton detail sequence 1"
+          },
+          {
+            "public_id": "v1756571814/Image_Sequence_007_0000_jwffgk",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 2"
+          },
+          {
+            "public_id": "v1756571811/Image_Sequence_010_0000_cql4ew",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 3"
+          },
+          {
+            "public_id": "v1756571810/Image_Sequence_005_0000_obky0y",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 4"
+          },
+          {
+            "public_id": "v1756571810/Image_Sequence_008_0000_sijsep",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 5"
           }
         ],
         "profile": [
           {
-            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop",
+            "public_id": "v1756571817/Image_Sequence_1_uosixl",
             "kind": "image",
-            "alt": "MoMA Exhibition header profile - modern art gallery"
+            "alt": "George Clinton profile 1"
+          },
+          {
+            "public_id": "v1756571816/Image_Sequence_4_pe3b5t",
+            "kind": "image",
+            "alt": "George Clinton profile 2"
+          },
+          {
+            "public_id": "v1756571815/Image_Sequence_2_nha5zq",
+            "kind": "image",
+            "alt": "George Clinton profile 3"
+          },
+          {
+            "public_id": "v1756571815/Image_Sequence_3_jrwscc",
+            "kind": "image",
+            "alt": "George Clinton profile 4"
           }
         ]
       },
       {
-        "name": "Clips",
+        "name": "Octavia Butler",
         "detail": [
           {
-            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&h=600&fit=crop",
+            "public_id": "v1756571830/image_139_0000_uuoetf",
             "kind": "image",
-            "alt": "MoMA Exhibition clips detail - modern art gallery"
+            "alt": "Octavia Butler detail sequence 1"
+          },
+          {
+            "public_id": "v1756571829/image_134_0000_gvqfzb",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 2"
+          },
+          {
+            "public_id": "v1756571828/image_137_0000_ychewb",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 3"
+          },
+          {
+            "public_id": "v1756571828/image_130_0000_cec79e",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 4"
+          },
+          {
+            "public_id": "v1756571828/image_131_0000_x5fdzc",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 5"
+          },
+          {
+            "public_id": "v1756571826/image_132_0000_tygb0w",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 6"
+          },
+          {
+            "public_id": "v1756571826/image_133_0000_vqboed",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 7"
+          },
+          {
+            "public_id": "v1756571825/image_136_0000_gayaz5",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 8"
           }
         ],
         "profile": [
           {
-            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop",
+            "public_id": "v1756571818/image_129_0051_vgzyko",
             "kind": "image",
-            "alt": "MoMA Exhibition clips profile - modern art gallery"
+            "alt": "Octavia Butler profile 1"
+          },
+          {
+            "public_id": "v1756571818/image_129_0093_n9bvsr",
+            "kind": "image",
+            "alt": "Octavia Butler profile 2"
+          },
+          {
+            "public_id": "v1756571818/image_129_0003_hni8sz",
+            "kind": "image",
+            "alt": "Octavia Butler profile 3"
+          },
+          {
+            "public_id": "v1756571817/image_129_0023_wtnxlz",
+            "kind": "image",
+            "alt": "Octavia Butler profile 4"
+          }
+        ]
+      },
+      {
+        "name": "Sun Ra",
+        "detail": [
+          {
+            "public_id": "v1756571831/Image_Sequence_020_0000_misiv4",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 1"
+          },
+          {
+            "public_id": "v1756571828/Image_Sequence_018_0000_rkzn4q",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 2"
+          },
+          {
+            "public_id": "v1756571826/Image_Sequence_019_0000_ciu2tj",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 3"
+          },
+          {
+            "public_id": "v1756571824/Image_Sequence_021_0000_mwowrs",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 4"
+          },
+          {
+            "public_id": "v1756571822/Image_Sequence_017_0000_zenpfa",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 5"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571813/Image_Sequence_015_0074_krf7xb",
+            "kind": "image",
+            "alt": "Sun Ra profile 1"
+          },
+          {
+            "public_id": "v1756571812/Image_Sequence_015_0034_j07axl",
+            "kind": "image",
+            "alt": "Sun Ra profile 2"
+          },
+          {
+            "public_id": "v1756571812/Image_Sequence_015_0097_gwrxw7",
+            "kind": "image",
+            "alt": "Sun Ra profile 3"
+          },
+          {
+            "public_id": "v1756571811/Image_Sequence_015_0002_jegn2d",
+            "kind": "image",
+            "alt": "Sun Ra profile 4"
           }
         ]
       }
     ],
     "thumbnails": [
       {
-        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5.png",
+        "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
         "kind": "image",
-        "alt": "MoMA Exhibition thumbnail"
+        "alt": "AfroFuturism thumbnail 1"
+      },
+      {
+        "public_id": "v1756571808/AF_0001s_0001_Layer-3_smgeek",
+        "kind": "image",
+        "alt": "AfroFuturism thumbnail 2"
+      },
+      {
+        "public_id": "v1756571808/AF_0001s_0000_Layer-1_lwhrfq",
+        "kind": "image",
+        "alt": "AfroFuturism thumbnail 3"
       }
     ],
     "cover": {
-      "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200&h=800&fit=crop",
+      "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
       "kind": "image",
-      "alt": "MoMA Exhibition cover image - modern art gallery"
+      "alt": "AfroFuturism cover"
     }
   },
   {
@@ -62,81 +209,335 @@
     "title": "BlackLands",
     "year": "7/25",
     "role": "Creative Director",
-    "client": "Kinfolk Tech",
-    "summary": "Interactive digital monuments honoring African American historical figures, featuring Manuel Gerritt De Reus, Samuel Anderson, and Sojourner Truth.",
-    "description": "A series of interactive digital monuments that honor and celebrate African American historical figures, bringing their stories to life through immersive technology.",
-    "technologies": ["AR", "Digital Monuments", "Interactive Design", "Cultural Heritage"],
+    "client": "MoMA",
+    "summary": "Digital monuments honoring African American historical figures",
+    "description": "A series of interactive digital monuments that honor and celebrate the contributions of African American historical figures. Each monument tells a story through immersive digital experiences.",
+    "technologies": ["AR", "Digital Sculpture", "Interactive Design", "3D Modeling"],
     "elements": [
       {
-        "name": "Monuments",
+        "name": "Manuel Gerritt De Reus",
         "detail": [
           {
-            "public_id": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+            "public_id": "v1756571829/1_mjqzip",
             "kind": "image",
-            "alt": "BlackLands monuments detail - digital art landscape"
+            "alt": "Manuel Gerritt De Reus detail 1"
+          },
+          {
+            "public_id": "v1756571821/image_146_0000_kdvcqe",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 2"
+          },
+          {
+            "public_id": "v1756571820/image_144_0000_jd8z2p",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 3"
+          },
+          {
+            "public_id": "v1756571819/image_148_0000_vhsjwh",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 4"
+          },
+          {
+            "public_id": "v1756571818/image_147_0000_acwcyj",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 5"
           }
         ],
         "profile": [
           {
-            "public_id": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop",
+            "public_id": "v1756571809/Image_Sequence_011_0000_i9zz5t",
             "kind": "image",
-            "alt": "BlackLands monuments profile - digital art landscape"
+            "alt": "Manuel Gerritt De Reus profile 1"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0050_gcxlmf",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 2"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0086_bm5qet",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 3"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0021_wg7kqk",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 4"
+          }
+        ]
+      },
+      {
+        "name": "Samuel Anderson",
+        "detail": [
+          {
+            "public_id": "v1756571816/image_141_0000_ludkxz",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 1"
+          },
+          {
+            "public_id": "v1756571815/image_142_0000_g1lmzn",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 2"
+          },
+          {
+            "public_id": "v1756571815/image_120_00005_tdchxo",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 3"
+          },
+          {
+            "public_id": "v1756571814/image_140_0000_qztfsa",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 4"
+          },
+          {
+            "public_id": "v1756571814/image_120_00006_ryn6bo",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 5"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571813/image_120_00001_waahyv",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 1"
+          },
+          {
+            "public_id": "v1756571812/image_120_0000_sdws4y",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 2"
+          },
+          {
+            "public_id": "v1756571812/image_120_00003_wgdvct",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 3"
+          },
+          {
+            "public_id": "v1756571812/image_120_00004_uphy9t",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 4"
+          },
+          {
+            "public_id": "v1756571811/image_120_00002_qdvben",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 5"
+          }
+        ]
+      },
+      {
+        "name": "Sojourner Truth",
+        "detail": [
+          {
+            "public_id": "v1756571811/image_120_00002_qdvben",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 1"
+          },
+          {
+            "public_id": "v1756571820/image_153_0000_xobgpy",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 2"
+          },
+          {
+            "public_id": "v1756571820/image_158_0000_gov1fn",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 3"
+          },
+          {
+            "public_id": "v1756571820/image_152_0000_tzvpdc",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 4"
+          },
+          {
+            "public_id": "v1756571819/image_155_0000_ehra9u",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 5"
+          },
+          {
+            "public_id": "v1756571819/image_154_0000_vw5ua5",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 6"
+          },
+          {
+            "public_id": "v1756571817/image_157_0000_vffory",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 7"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571814/image_149_00003_jcromn",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 1"
+          },
+          {
+            "public_id": "v1756571813/image_149_00001_esma7w",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 2"
+          },
+          {
+            "public_id": "v1756571813/image_149_00002_uul0n4",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 3"
+          },
+          {
+            "public_id": "v1756571811/image_149_0000_unsa5r",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 4"
           }
         ]
       }
     ],
     "thumbnails": [
       {
-        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi.png",
+        "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
         "kind": "image",
-        "alt": "BlackLands horizontal thumbnail"
+        "alt": "BlackLands thumbnail"
       }
     ],
     "cover": {
-      "public_id": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop",
+      "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
       "kind": "image",
-      "alt": "BlackLands cover image - digital art landscape"
+      "alt": "BlackLands cover"
     }
   },
   {
-    "slug": "signature-series",
+    "slug": "moma",
+    "title": "MoMA Exhibition",
+    "year": "2/21",
+    "role": "Creative Director",
+    "client": "Museum of Modern Art",
+    "summary": "Interactive exhibition exploring New York's hidden histories",
+    "description": "The Monuments Project was a five-part installation featured in MoMA's 2023 exhibition New York, New Publics, reimagining the role of monuments in public space. Created by Kinfolk, the work centered on Black and Brown enclaves throughout New York City, honoring the ways these communities cultivated safety, resistance, and belonging. Each piece highlighted a pivotal figure or collective including Seneca Village, the Young Lords, Toussaint Louverture, and David Ruggles, brought to life through a blend of archival research and contemporary storytelling. The sculptures were anchored on raw, untreated red maple pedestals, referencing a tree once native to the region and emphasizing a return to organic, place-based memory. To This Day invited viewers to reconsider which histories are remembered and how they take shape in public space.",
+    "technologies": ["Interactive Design", "Digital Storytelling", "Museum Technology"],
+    "elements": [
+      {
+        "name": "David Ruggles",
+        "detail": [
+          {
+            "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
+            "kind": "image",
+            "alt": "David Ruggles detail 1"
+          },
+          {
+            "public_id": "v1756571816/Image_Sequence_3_h2mgfh",
+            "kind": "image",
+            "alt": "David Ruggles detail 2"
+          },
+          {
+            "public_id": "v1756571814/Image_Sequence_4_cllf9w",
+            "kind": "image",
+            "alt": "David Ruggles detail 3"
+          },
+          {
+            "public_id": "v1756571813/Image_Sequence_1_qyh9ir",
+            "kind": "image",
+            "alt": "David Ruggles detail 4"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571809/Image_Sequence_5_gf7mix",
+            "kind": "image",
+            "alt": "David Ruggles profile 1"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_8_npiysh",
+            "kind": "image",
+            "alt": "David Ruggles profile 2"
+          },
+          {
+            "public_id": "v1756571808/Image_Sequence_6_wuj6dh",
+            "kind": "image",
+            "alt": "David Ruggles profile 3"
+          },
+          {
+            "public_id": "v1756571808/Image_Sequence_7_ooxslj",
+            "kind": "image",
+            "alt": "David Ruggles profile 4"
+          }
+        ]
+      },
+      {
+        "name": "Seneca Village",
+        "detail": [
+          {
+            "public_id": "v1756571820/image_092_0000_jdztfz",
+            "kind": "image",
+            "alt": "Seneca Village detail 1"
+          },
+          {
+            "public_id": "v1756571820/image_093_0000_c6py37",
+            "kind": "image",
+            "alt": "Seneca Village detail 2"
+          },
+          {
+            "public_id": "v1756571817/image_094_0000_do08zs",
+            "kind": "image",
+            "alt": "Seneca Village detail 3"
+          },
+          {
+            "public_id": "v1756571816/Image_Sequence_022_0000_xzf6un",
+            "kind": "image",
+            "alt": "Seneca Village detail 4"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571811/Image_Sequence_003_0076_wsltq1",
+            "kind": "image",
+            "alt": "Seneca Village profile 1"
+          },
+          {
+            "public_id": "v1756571811/Image_Sequence_003_0027_k6tpe1",
+            "kind": "image",
+            "alt": "Seneca Village profile 2"
+          },
+          {
+            "public_id": "v1756571810/Image_Sequence_003_0104_tv0bop",
+            "kind": "image",
+            "alt": "Seneca Village profile 3"
+          },
+          {
+            "public_id": "v1756571810/Image_Sequence_003_0046_mxoejx",
+            "kind": "image",
+            "alt": "Seneca Village profile 4"
+          }
+        ]
+      }
+    ],
+    "thumbnails": [
+      {
+        "public_id": "v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5",
+        "kind": "image",
+        "alt": "MoMA Exhibition thumbnail"
+      }
+    ],
+    "cover": {
+      "public_id": "v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5",
+      "kind": "image",
+      "alt": "MoMA Exhibition cover"
+    }
+  },
+  {
+    "slug": "esignature-series",
     "title": "eSignature Series",
     "year": "12/23",
     "role": "Creative Director",
     "client": "Kinfolk Tech",
-    "summary": "A digital art series exploring identity and representation through electronic signatures and digital artifacts.",
-    "description": "An innovative digital art series that explores themes of identity, representation, and authenticity through the lens of electronic signatures and digital artifacts.",
-    "technologies": ["Digital Art", "Identity Design", "Electronic Signatures", "Digital Artifacts"],
-    "elements": [
-      {
-        "name": "Signatures",
-        "detail": [
-          {
-            "public_id": "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
-            "kind": "image",
-            "alt": "eSignature Series detail - digital signature concept"
-          }
-        ],
-        "profile": [
-          {
-            "public_id": "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=800&fit=crop",
-            "kind": "image",
-            "alt": "eSignature Series profile - digital signature concept"
-          }
-        ]
-      }
-    ],
+    "summary": "Digital signature collection exploring identity and technology",
+    "description": "A series of digital artworks that explore the intersection of identity, technology, and artistic expression through innovative digital signature techniques.",
+    "technologies": ["Digital Art", "Generative Design", "Interactive Media"],
+    "elements": [],
     "thumbnails": [
       {
-        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571826/BL_horizontal_0000_Layer-Comp-1_nnvxij.png",
+        "public_id": "v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5",
         "kind": "image",
         "alt": "eSignature Series thumbnail"
       }
     ],
     "cover": {
-      "public_id": "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&h=800&fit=crop",
+      "public_id": "v1756571816/BL_horizontal_0003_Layer-Comp-4_qmzdn5",
       "kind": "image",
-      "alt": "eSignature Series cover image - digital signature concept"
+      "alt": "eSignature Series cover"
     }
   },
   {
@@ -144,40 +545,22 @@
     "title": "There Goes Nikki",
     "year": "7/25",
     "role": "Creative Director",
-    "client": "Kinfolk Tech",
-    "summary": "An immersive storytelling experience that follows the journey of Nikki through digital landscapes and interactive narratives.",
-    "description": "A groundbreaking immersive storytelling experience that takes viewers on a journey through digital landscapes, exploring themes of identity, transformation, and digital existence.",
-    "technologies": ["Immersive Storytelling", "Digital Landscapes", "Interactive Narratives", "XR"],
-    "elements": [
-      {
-        "name": "Journey",
-        "detail": [
-          {
-            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
-            "kind": "image",
-            "alt": "There Goes Nikki journey detail - futuristic digital art"
-          }
-        ],
-        "profile": [
-          {
-            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=800&fit=crop",
-            "kind": "image",
-            "alt": "There Goes Nikki journey profile - futuristic digital art"
-          }
-        ]
-      }
-    ],
+    "client": "Independent",
+    "summary": "Immersive storytelling experience",
+    "description": "An immersive storytelling experience that pushes the boundaries of digital narrative and interactive media.",
+    "technologies": ["Interactive Storytelling", "3D Rendering", "Digital Media"],
+    "elements": [],
     "thumbnails": [
       {
-        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp.png",
+        "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
         "kind": "image",
         "alt": "There Goes Nikki thumbnail"
       }
     ],
     "cover": {
-      "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=800&fit=crop",
+      "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
       "kind": "image",
-      "alt": "There Goes Nikki cover image - futuristic digital art"
+      "alt": "There Goes Nikki cover"
     }
   }
 ]

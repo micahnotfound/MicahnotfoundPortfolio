@@ -33,8 +33,12 @@ export function Header() {
           </div>
 
           {/* Right Side: MICAH MILNER logotype */}
-          <div className="text-sm md:text-lg lg:text-xl font-heading font-bold text-gray-900 tracking-wide">
-            MICAH MILNER
+          <div className="flex items-center">
+            <img 
+              src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/Micah_text_vlnslw.svg"
+              alt="MICAH MILNER"
+              className="h-6 md:h-8 lg:h-10 w-auto"
+            />
           </div>
         </div>
       </div>

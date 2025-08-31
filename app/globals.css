@@ -14,13 +14,23 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   /* Typography improvements */
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+  }
+
+  /* Use Epilogue for body text and UI elements */
+  p, li, span, div {
+    @apply font-body;
+  }
+
+  /* Use Inter for small text and captions */
+  small, .text-sm, .text-xs {
+    @apply font-sans;
   }
 
   /* Smooth scrolling */

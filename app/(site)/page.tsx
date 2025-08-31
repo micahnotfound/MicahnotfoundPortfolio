@@ -34,10 +34,10 @@ export default function HomePage() {
         {/* Hero Content Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
           <div className="text-center text-white max-w-4xl mx-auto px-8">
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 tracking-tight text-balance">
+            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 tracking-tight text-balance">
               {homeData.hero.title}
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-pretty">
+            <p className="text-xl md:text-2xl mb-8 text-pretty font-body">
               {homeData.hero.subtitle}
             </p>
           </div>
@@ -57,8 +57,8 @@ export default function HomePage() {
       <section className="py-20 px-8 bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4 text-balance">{homeData.featuredProjects.title}</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
+            <h2 className="text-4xl font-heading font-bold mb-4 text-balance">{homeData.featuredProjects.title}</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto text-pretty font-body">
               {homeData.featuredProjects.description}
             </p>
           </div>
@@ -86,13 +86,13 @@ export default function HomePage() {
       {/* About Preview Section */}
       <section className="py-20 px-8">
         <div className="container-custom max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-display font-bold mb-6 text-balance">About</h2>
-          <p className="text-xl text-gray-600 mb-8 text-pretty">
+          <h2 className="text-4xl font-heading font-bold mb-6 text-balance">About</h2>
+          <p className="text-xl text-gray-600 mb-8 text-pretty font-body">
             Creative strategist specializing in immersive media and XR storytelling, with success in bringing complex cultural and environmental narratives to life.
           </p>
           <a
             href="/about"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200 font-ui"
           >
             Learn More
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

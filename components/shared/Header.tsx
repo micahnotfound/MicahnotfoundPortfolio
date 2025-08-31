@@ -13,7 +13,7 @@ export function Header() {
       <div className="container-custom">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-display font-bold text-gray-900">
+            <span className="text-xl font-heading font-bold text-gray-900">
               {siteSettings.siteTitle}
             </span>
           </Link>
@@ -23,7 +23,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-ui font-medium transition-colors duration-200"
               >
                 {item.label}
               </Link>

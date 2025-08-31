@@ -16,32 +16,6 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
 
   return (
     <main className="pt-32">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
-        <div className="absolute inset-0">
-          <Media
-            media={project.cover}
-            className="w-full h-full object-cover"
-            priority={true}
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-40" />
-        </div>
-        
-        <div className="relative z-10 text-center text-white px-8">
-          <h1 className="text-5xl md:text-7xl font-body font-bold mb-4">
-            {project.title}
-          </h1>
-          <p className="text-xl md:text-2xl mb-6 font-body">
-            {project.year} • {project.role}
-          </p>
-          {project.summary && (
-            <p className="text-lg md:text-xl max-w-2xl mx-auto font-body">
-              {project.summary}
-            </p>
-          )}
-        </div>
-      </section>
-
       {/* Project Content - Three Column Layout */}
       <section className="py-16 px-8">
         <div className="container-custom">

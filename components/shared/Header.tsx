@@ -9,12 +9,17 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Left Side: Logo, Separator, About */}
           <div className="flex items-center">
-            {/* Logo (icon + text combined) */}
+            {/* Logo - M logo on desktop, logoWithText on mobile */}
             <Link href="/" className="flex items-center">
               <img
                 src={buildLogoUrl('logoWithText')}
                 alt="Micah Milner Logo"
-                className="h-8 w-auto"
+                className="h-8 w-auto md:hidden"
+              />
+              <img
+                src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/M_logo_u3q1bg.svg"
+                alt="Micah Milner Logo"
+                className="h-8 w-auto hidden md:block"
               />
             </Link>
 
@@ -32,14 +37,7 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Right Side: MICAH MILNER logotype */}
-          <div className="flex items-center">
-            <img 
-              src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/Micah_text_vlnslw.svg"
-              alt="MICAH MILNER"
-              className="h-6 md:h-8 lg:h-10 w-auto"
-            />
-          </div>
+
         </div>
       </div>
     </header>

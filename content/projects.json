@@ -92,14 +92,9 @@
     ],
     "thumbnails": [
       {
-        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=BlackLands+Thumbnail+1",
+        "public_id": "https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi.png",
         "kind": "image",
-        "alt": "BlackLands thumbnail 1"
-      },
-      {
-        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=BlackLands+Thumbnail+2",
-        "kind": "image",
-        "alt": "BlackLands thumbnail 2"
+        "alt": "BlackLands horizontal thumbnail"
       }
     ],
     "cover": {

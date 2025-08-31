@@ -126,37 +126,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
         </div>
       </section>
 
-      {/* Navigation */}
-      <section className="py-16 px-8 bg-gray-50">
-        <div className="container-custom max-w-4xl mx-auto">
-          <div className="flex justify-between items-center">
-            <a
-              href="/work"
-              className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200 font-ui"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Work
-            </a>
 
-            <div className="flex space-x-4">
-              <button className="inline-flex items-center text-gray-600 hover:text-gray-800 font-semibold transition-colors duration-200 font-ui">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                Previous
-              </button>
-              <button className="inline-flex items-center text-gray-600 hover:text-gray-800 font-semibold transition-colors duration-200 font-ui">
-                Next
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   )
 }

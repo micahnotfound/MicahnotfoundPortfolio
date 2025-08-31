@@ -25,13 +25,13 @@ export function Header() {
 
             {/* 2px thick core-dark vertical separator */}
             <div className="flex items-center mx-4 lg:mx-8">
-              <div className="w-2 h-8 bg-core-dark"></div>
+              <div className="w-2 h-32 bg-core-dark"></div>
             </div>
 
             {/* About text */}
             <Link
               href="/about"
-              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-ui font-medium transition-colors duration-200"
+              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-2xl font-ui font-medium transition-colors duration-200"
             >
               about
             </Link>
@@ -42,7 +42,7 @@ export function Header() {
             <img 
               src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/Micah_text_vlnslw.svg"
               alt="MICAH MILNER"
-              className="h-12 lg:h-16 w-auto"
+              className="h-8 lg:h-10 w-auto"
             />
           </div>
         </div>

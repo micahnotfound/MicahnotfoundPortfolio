@@ -51,7 +51,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {/* Thick Square Border Button - Auto Width, Shorter Height, Left Aligned */}
           <div
             className={`
-              relative border-4 border-core-dark px-6 py-3 text-left font-ui font-bold text-core-dark 
+              relative border-2 border-core-dark px-6 py-3 text-left font-ui font-bold text-core-dark 
               group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
               w-auto inline-block
               ${isLoading ? 'animate-pulse' : ''}
@@ -59,7 +59,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           >
             {/* Loading Border Animation */}
             {isLoading && (
-              <div className="absolute inset-0 border-4 border-core-dark animate-ping opacity-20" />
+              <div className="absolute inset-0 border-2 border-core-dark animate-ping opacity-20" />
             )}
             
                               {/* Button Content */}

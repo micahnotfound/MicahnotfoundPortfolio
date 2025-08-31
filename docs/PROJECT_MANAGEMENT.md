@@ -1,4 +1,4 @@
- # 🎯 Project Management & Development Tickets
+# 🎯 Project Management & Development Tickets
 
 This document serves as the central project management system for the portfolio development. Each ticket includes clear acceptance criteria and can be checked off as completed.
 
@@ -19,8 +19,7 @@ This document serves as the central project management system for the portfolio 
 **Priority**: CRITICAL  
 **Estimated Time**: 30 minutes
 
-**Description**: Set up Next.js 14/15 with App Router structure
-
+**Description**: Set up Next.js 14/15 with App Router structuref
 **Tasks**:
 - [x] Initialize Next.js project with TypeScript
 - [x] Set up app router directory structure
@@ -703,13 +702,132 @@ This document serves as the central project management system for the portfolio 
 
 ---
 
+## 🎨 PHASE I: Home Page Redesign
+
+### Ticket I-1: Header Redesign
+**Status**: ✅ COMPLETED  
+**Priority**: HIGH  
+**Estimated Time**: 60 minutes
+
+**Description**: Redesign header with logo, thick border separator, and logotype
+
+**Tasks**:
+- [x] Update header layout with logo on left (icon + text combined)
+- [x] Add 4px thick black border separator
+- [x] Add "about" text after separator
+- [x] Add "MICAH MILNER" logotype on far right
+- [x] Ensure mobile responsiveness
+- [x] Update logo assets to use combined icon+text version
+
+**Acceptance Criteria**:
+- [x] Logo positioned top left with combined icon+text
+- [x] 4px thick black border separator
+- [x] "about" text after separator
+- [x] "MICAH MILNER" logotype on far right
+- [x] Mobile version maintains similar layout
+- [x] All elements properly aligned and spaced
+
+**Dependencies**: None  
+**Blockers**: None
+
+**Notes**: Header redesign completed successfully. Logo, 4px border separator, "about" text, and "MICAH MILNER" logotype implemented with responsive design. Mobile version hides separator and about text for cleaner layout.
+
+---
+
+### Ticket I-2: Project Cards Redesign
+**Status**: ✅ COMPLETED  
+**Priority**: HIGH  
+**Estimated Time**: 90 minutes
+
+**Description**: Redesign project cards with new layout and updated dates
+
+**Tasks**:
+- [x] Update project dates in content
+- [x] Redesign card layout: date → thumbnail → thick square border button
+- [x] Implement column layout for desktop
+- [x] Add thick square border buttons with project names
+- [x] Update mobile carousel with staggered button positioning
+- [x] Ensure responsive behavior
+
+**Acceptance Criteria**:
+- [x] Updated project dates: MoMA (2/21), BLACKLANDS (7/25), Signature Series (12/23), There Goes Nikki (7/25)
+- [x] Desktop: column layout with date → thumbnail → thick border button
+- [x] Mobile: carousel with staggered button positioning (MoMA below, BLACKLANDS above, etc.)
+- [x] Thick square border buttons with project names
+- [x] Responsive design works on all screen sizes
+
+**Dependencies**: I-1 (Header)  
+**Blockers**: None
+
+**Notes**: Project cards redesign completed successfully. Desktop shows 4-column grid with date → thumbnail → thick border button layout. Mobile shows horizontal carousel with staggered button positioning (even indices below, odd indices above). All project dates updated and responsive design implemented.
+
+---
+
+### Ticket I-3: Footer Redesign
+**Status**: ✅ COMPLETED  
+**Priority**: MEDIUM  
+**Estimated Time**: 45 minutes
+
+**Description**: Create simple footer with contact button and social links
+
+**Tasks**:
+- [x] Design thick contact button with black border
+- [x] Add email link (micah@art404.com)
+- [x] Add Instagram handle link (@micahnotfound)
+- [x] Implement mobile stacking layout
+- [x] Ensure proper spacing and alignment
+
+**Acceptance Criteria**:
+- [x] Thick contact button with black border
+- [x] Email link: micah@art404.com
+- [x] Instagram link: @micahnotfound
+- [x] Mobile: stacked layout (CONTACT → Instagram → Email)
+- [x] Desktop: horizontal layout
+- [x] All links functional and accessible
+
+**Dependencies**: I-2 (Project Cards)  
+**Blockers**: None
+
+**Notes**: Footer redesign completed successfully. Thick contact button with black border implemented. Email (micah@art404.com) and Instagram (@micahnotfound) links added. Mobile shows stacked layout, desktop shows horizontal layout. All links functional with proper hover states.
+
+---
+
+### Ticket I-4: Design System Documentation
+**Status**: ✅ COMPLETED  
+**Priority**: MEDIUM  
+**Estimated Time**: 30 minutes
+
+**Description**: Create design system documentation for easy tweaking
+
+**Tasks**:
+- [x] Document color palette and typography
+- [x] Create spacing and layout guidelines
+- [x] Document component patterns
+- [x] Add table-friendly design options
+- [x] Create style guide for future updates
+
+**Acceptance Criteria**:
+- [x] Complete design system documentation
+- [x] Color palette and typography guidelines
+- [x] Spacing and layout standards
+- [x] Component pattern library
+- [x] Table-friendly design options documented
+- [x] Easy-to-follow style guide
+
+**Dependencies**: I-1, I-2, I-3  
+**Blockers**: None
+
+**Notes**: Design system documentation completed in docs/DESIGN_SYSTEM.md with comprehensive guidelines for typography, colors, spacing, component patterns, and accessibility standards.
+
+---
+
 ## 📊 Progress Tracking
 
 ### Overall Progress
-- **Total Tickets**: 20
-- **Completed**: 17
+- **Total Tickets**: 24
+- **Completed**: 22
 - **In Progress**: 0
-- **Pending**: 3
+- **Pending**: 2
 - **Blocked**: 0
 
 ### Phase Progress
@@ -718,9 +836,10 @@ This document serves as the central project management system for the portfolio 
 - **Phase C (Components)**: 4/4 completed ✅
 - **Phase D (Pages)**: 4/4 completed ✅
 - **Phase E (Hooks)**: 3/3 completed ✅
-- **Phase F (A11y/Perf)**: 0/3 completed
+- **Phase F (A11y/Perf)**: 1/3 completed
 - **Phase G (Content)**: 1/2 completed
 - **Phase H (Testing)**: 0/2 completed
+- **Phase I (Home Redesign)**: 4/4 completed ✅
 
 ---
 

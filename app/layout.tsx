@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Playfair_Display, Epilogue } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/shared/Header'
+import { Footer } from '@/components/shared/Footer'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -53,11 +54,12 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        
+
         <Header />
         <main id="main-content">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   )

@@ -13,14 +13,14 @@
         "name": "Header",
         "detail": [
           {
-            "public_id": "v1756572604/moma_header_detail_1.jpg",
+            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=MoMA+Header+Detail",
             "kind": "image",
             "alt": "MoMA Exhibition header detail"
           }
         ],
         "profile": [
           {
-            "public_id": "v1756572604/moma_header_profile_1.jpg",
+            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=MoMA+Header+Profile",
             "kind": "image",
             "alt": "MoMA Exhibition header profile"
           }
@@ -30,14 +30,14 @@
         "name": "Clips",
         "detail": [
           {
-            "public_id": "v1756572604/moma_clips_detail_1.jpg",
+            "public_id": "https://via.placeholder.com/800x600/2a2a2a/ffffff?text=MoMA+Clips+Detail",
             "kind": "image",
             "alt": "MoMA Exhibition clips detail"
           }
         ],
         "profile": [
           {
-            "public_id": "v1756572604/moma_clips_profile_1.jpg",
+            "public_id": "https://via.placeholder.com/600x800/2a2a2a/ffffff?text=MoMA+Clips+Profile",
             "kind": "image",
             "alt": "MoMA Exhibition clips profile"
           }
@@ -46,18 +46,18 @@
     ],
     "thumbnails": [
       {
-        "public_id": "v1756572604/moma_thumb_1.jpg",
+        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=MoMA+Thumbnail+1",
         "kind": "image",
         "alt": "MoMA Exhibition thumbnail 1"
       },
       {
-        "public_id": "v1756572604/moma_thumb_2.jpg",
+        "public_id": "https://via.placeholder.com/400x300/4a4a4a/ffffff?text=MoMA+Thumbnail+2",
         "kind": "image",
         "alt": "MoMA Exhibition thumbnail 2"
       }
     ],
     "cover": {
-      "public_id": "v1756572604/moma_cover.jpg",
+      "public_id": "https://via.placeholder.com/1200x800/5a5a5a/ffffff?text=MoMA+Exhibition+Cover",
       "kind": "image",
       "alt": "MoMA Exhibition cover image"
     }
@@ -76,14 +76,14 @@
         "name": "Monuments",
         "detail": [
           {
-            "public_id": "v1756572604/blacklands_monuments_detail_1.jpg",
+            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=BlackLands+Monuments+Detail",
             "kind": "image",
             "alt": "BlackLands monuments detail"
           }
         ],
         "profile": [
           {
-            "public_id": "v1756572604/blacklands_monuments_profile_1.jpg",
+            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=BlackLands+Monuments+Profile",
             "kind": "image",
             "alt": "BlackLands monuments profile"
           }
@@ -92,18 +92,18 @@
     ],
     "thumbnails": [
       {
-        "public_id": "v1756572604/blacklands_thumb_1.jpg",
+        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=BlackLands+Thumbnail+1",
         "kind": "image",
         "alt": "BlackLands thumbnail 1"
       },
       {
-        "public_id": "v1756572604/blacklands_thumb_2.jpg",
+        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=BlackLands+Thumbnail+2",
         "kind": "image",
         "alt": "BlackLands thumbnail 2"
       }
     ],
     "cover": {
-      "public_id": "v1756572604/blacklands_cover.jpg",
+      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=BlackLands+Cover",
       "kind": "image",
       "alt": "BlackLands cover image"
     }
@@ -122,14 +122,14 @@
         "name": "Signatures",
         "detail": [
           {
-            "public_id": "v1756572604/signature_series_detail_1.jpg",
+            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Signature+Series+Detail",
             "kind": "image",
             "alt": "eSignature Series detail"
           }
         ],
         "profile": [
           {
-            "public_id": "v1756572604/signature_series_profile_1.jpg",
+            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=Signature+Series+Profile",
             "kind": "image",
             "alt": "eSignature Series profile"
           }
@@ -138,18 +138,18 @@
     ],
     "thumbnails": [
       {
-        "public_id": "v1756572604/signature_series_thumb_1.jpg",
+        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Signature+Series+Thumbnail+1",
         "kind": "image",
         "alt": "eSignature Series thumbnail 1"
       },
       {
-        "public_id": "v1756572604/signature_series_thumb_2.jpg",
+        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=Signature+Series+Thumbnail+2",
         "kind": "image",
         "alt": "eSignature Series thumbnail 2"
       }
     ],
     "cover": {
-      "public_id": "v1756572604/signature_series_cover.jpg",
+      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=Signature+Series+Cover",
       "kind": "image",
       "alt": "eSignature Series cover image"
     }
@@ -168,14 +168,14 @@
         "name": "Journey",
         "detail": [
           {
-            "public_id": "v1756572604/nikki_journey_detail_1.jpg",
+            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=There+Goes+Nikki+Journey+Detail",
             "kind": "image",
             "alt": "There Goes Nikki journey detail"
           }
         ],
         "profile": [
           {
-            "public_id": "v1756572604/nikki_journey_profile_1.jpg",
+            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=There+Goes+Nikki+Journey+Profile",
             "kind": "image",
             "alt": "There Goes Nikki journey profile"
           }
@@ -184,18 +184,18 @@
     ],
     "thumbnails": [
       {
-        "public_id": "v1756572604/nikki_thumb_1.jpg",
+        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=There+Goes+Nikki+Thumbnail+1",
         "kind": "image",
         "alt": "There Goes Nikki thumbnail 1"
       },
       {
-        "public_id": "v1756572604/nikki_thumb_2.jpg",
+        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=There+Goes+Nikki+Thumbnail+2",
         "kind": "image",
         "alt": "There Goes Nikki thumbnail 2"
       }
     ],
     "cover": {
-      "public_id": "v1756572604/nikki_cover.jpg",
+      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=There+Goes+Nikki+Cover",
       "kind": "image",
       "alt": "There Goes Nikki cover image"
     }
@@ -214,14 +214,14 @@
         "name": "Experience",
         "detail": [
           {
-            "public_id": "v1756572604/afrofuturism_experience_detail_1.jpg",
+            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=AfroFuturism+Experience+Detail",
             "kind": "image",
             "alt": "AfroFuturism experience detail"
           }
         ],
         "profile": [
           {
-            "public_id": "v1756572604/afrofuturism_experience_profile_1.jpg",
+            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=AfroFuturism+Experience+Profile",
             "kind": "image",
             "alt": "AfroFuturism experience profile"
           }
@@ -230,18 +230,18 @@
     ],
     "thumbnails": [
       {
-        "public_id": "v1756572604/afrofuturism_thumb_1.jpg",
+        "public_id": "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=AfroFuturism+Thumbnail+1",
         "kind": "image",
         "alt": "AfroFuturism thumbnail 1"
       },
       {
-        "public_id": "v1756572604/afrofuturism_thumb_2.jpg",
+        "public_id": "https://via.placeholder.com/400x300/3a3a3a/ffffff?text=AfroFuturism+Thumbnail+2",
         "kind": "image",
         "alt": "AfroFuturism thumbnail 2"
       }
     ],
     "cover": {
-      "public_id": "v1756572604/afrofuturism_cover.jpg",
+      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=AfroFuturism+Cover",
       "kind": "image",
       "alt": "AfroFuturism cover image"
     }

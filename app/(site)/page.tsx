@@ -20,66 +20,45 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen pt-16">
-      {/* Projects Grid Section */}
+      {/* Projects Horizontal Row Section */}
       <section className="py-20 px-8">
         <div className="container-custom">
-          {/* Desktop: Column Layout */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {projects.map((project, index) => (
-              <div key={project.slug} className="flex flex-col">
-                {/* Date */}
-                <div className="text-sm font-ui text-gray-600 mb-4">
-                  {project.year}
-                </div>
-                
-                {/* Thumbnail */}
-                <div className="mb-6">
-                  <Media
-                    media={project.thumbnails[0]}
-                    className="w-full aspect-[4/3] object-cover"
-                    alt={`${project.title} thumbnail`}
-                  />
-                </div>
-                
-                {/* Thick Square Border Button */}
-                <Link
-                  href={`/work/${project.slug}`}
-                  className="border-4 border-black px-6 py-4 text-center font-ui font-bold text-black hover:bg-black hover:text-white transition-colors duration-200"
-                >
-                  {project.title}
-                </Link>
-              </div>
-            ))}
-          </div>
-          
-          {/* Mobile: Carousel with Staggered Buttons */}
-          <div className="md:hidden">
-            <div className="flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory">
-              {projects.map((project, index) => (
+          {/* Single row with horizontal scroll - shows about 4 projects at once */}
+          <div className="flex overflow-x-auto space-x-8 pb-6 snap-x snap-mandatory">
+            {projects.map((project, index) => {
+              // Use thumbnail if available, otherwise fall back to cover image
+              const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
+                ? project.thumbnails[0]
+                : project.cover
+
+              return (
                 <div key={project.slug} className="flex-shrink-0 w-80 snap-start">
                   <div className="flex flex-col">
+                    {/* Date */}
+                    <div className="text-sm font-ui text-gray-600 mb-4">
+                      {project.year}
+                    </div>
+
                     {/* Thumbnail */}
-                    <div className="mb-4">
+                    <div className="mb-6">
                       <Media
-                        media={project.thumbnails[0]}
+                        media={thumbnailMedia}
                         className="w-full aspect-[4/3] object-cover"
                         alt={`${project.title} thumbnail`}
                       />
                     </div>
-                    
-                    {/* Staggered Button Positioning */}
-                    <div className={`${index % 2 === 0 ? 'order-1' : 'order-2'}`}>
-                      <Link
-                        href={`/work/${project.slug}`}
-                        className="border-4 border-black px-6 py-4 text-center font-ui font-bold text-black hover:bg-black hover:text-white transition-colors duration-200 block"
-                      >
-                        {project.title}
-                      </Link>
-                    </div>
+
+                    {/* Thick Square Border Button */}
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className="border-4 border-black px-6 py-4 text-center font-ui font-bold text-black hover:bg-black hover:text-white transition-colors duration-200"
+                    >
+                      {project.title}
+                    </Link>
                   </div>
                 </div>
-              ))}
-            </div>
+              )
+            })}
           </div>
         </div>
       </section>

@@ -171,7 +171,7 @@ This document serves as the central project management system for the portfolio 
 **Estimated Time**: 60 minutes
 
 **Description**: Create universal media component for images and videos
-
+r
 **Tasks**:
 - [x] Create `/components/shared/Media.tsx`
 - [x] Support both image and video rendering
@@ -718,6 +718,8 @@ This document serves as the central project management system for the portfolio 
 - [x] Add "MICAH MILNER" logotype on far right
 - [x] Ensure mobile responsiveness
 - [x] Update logo assets to use combined icon+text version
+- [x] Group left side elements: logo | separator | about
+- [x] Position MICAH MILNER on right side
 
 **Acceptance Criteria**:
 - [x] Logo positioned top left with combined icon+text
@@ -726,11 +728,12 @@ This document serves as the central project management system for the portfolio 
 - [x] "MICAH MILNER" logotype on far right
 - [x] Mobile version maintains similar layout
 - [x] All elements properly aligned and spaced
+- [x] Two distinct sides: left (logo|separator|about) and right (MICAH MILNER)
 
 **Dependencies**: None  
 **Blockers**: None
 
-**Notes**: Header redesign completed successfully. Logo, 4px border separator, "about" text, and "MICAH MILNER" logotype implemented with responsive design. Mobile version hides separator and about text for cleaner layout.
+**Notes**: Header redesign completed successfully. Logo, 4px border separator, "about" text, and "MICAH MILNER" logotype implemented with responsive design. Two-side layout implemented: left side groups logo, separator, and about together; right side shows MICAH MILNER logotype. Mobile version hides separator and about text for cleaner layout.
 
 ---
 
@@ -744,22 +747,26 @@ This document serves as the central project management system for the portfolio 
 **Tasks**:
 - [x] Update project dates in content
 - [x] Redesign card layout: date → thumbnail → thick square border button
-- [x] Implement column layout for desktop
+- [x] Implement single horizontal row layout for all projects
+- [x] Show about 4 projects visible at once
+- [x] Add horizontal scrolling to see more projects
 - [x] Add thick square border buttons with project names
-- [x] Update mobile carousel with staggered button positioning
+- [x] Implement snap scrolling for smooth navigation
 - [x] Ensure responsive behavior
 
 **Acceptance Criteria**:
 - [x] Updated project dates: MoMA (2/21), BLACKLANDS (7/25), Signature Series (12/23), There Goes Nikki (7/25)
-- [x] Desktop: column layout with date → thumbnail → thick border button
-- [x] Mobile: carousel with staggered button positioning (MoMA below, BLACKLANDS above, etc.)
+- [x] Single horizontal row layout for all projects
+- [x] About 4 projects visible at once
+- [x] Horizontal scrolling to see more projects
+- [x] Snap scrolling for smooth navigation
 - [x] Thick square border buttons with project names
 - [x] Responsive design works on all screen sizes
 
 **Dependencies**: I-1 (Header)  
 **Blockers**: None
 
-**Notes**: Project cards redesign completed successfully. Desktop shows 4-column grid with date → thumbnail → thick border button layout. Mobile shows horizontal carousel with staggered button positioning (even indices below, odd indices above). All project dates updated and responsive design implemented.
+**Notes**: Project cards redesign completed successfully. Single horizontal row layout implemented with about 4 projects visible at once. Horizontal scrolling allows users to see all projects. Snap scrolling provides smooth navigation. All project dates updated and responsive design implemented.
 
 ---
 
@@ -775,6 +782,7 @@ This document serves as the central project management system for the portfolio 
 - [x] Add email link (micah@art404.com)
 - [x] Add Instagram handle link (@micahnotfound)
 - [x] Implement mobile stacking layout
+- [x] Implement desktop left-aligned layout
 - [x] Ensure proper spacing and alignment
 
 **Acceptance Criteria**:
@@ -782,13 +790,13 @@ This document serves as the central project management system for the portfolio 
 - [x] Email link: micah@art404.com
 - [x] Instagram link: @micahnotfound
 - [x] Mobile: stacked layout (CONTACT → Instagram → Email)
-- [x] Desktop: horizontal layout
+- [x] Desktop: left-aligned layout
 - [x] All links functional and accessible
 
 **Dependencies**: I-2 (Project Cards)  
 **Blockers**: None
 
-**Notes**: Footer redesign completed successfully. Thick contact button with black border implemented. Email (micah@art404.com) and Instagram (@micahnotfound) links added. Mobile shows stacked layout, desktop shows horizontal layout. All links functional with proper hover states.
+**Notes**: Footer redesign completed successfully. Thick contact button with black border implemented. Email (micah@art404.com) and Instagram (@micahnotfound) links added. Mobile shows stacked layout, desktop shows left-aligned layout instead of spread across. All links functional with proper hover states.
 
 ---
 

@@ -2,8 +2,8 @@ export function Footer() {
   return (
     <footer className="bg-white border-t border-gray-200 py-16 px-8">
       <div className="container-custom">
-        {/* Desktop: Horizontal Layout */}
-        <div className="hidden md:flex justify-between items-center">
+        {/* Desktop: Left-aligned Layout */}
+        <div className="hidden md:flex flex-col items-start space-y-6">
           {/* Thick Contact Button */}
           <a
             href="mailto:micah@art404.com"
@@ -11,7 +11,7 @@ export function Footer() {
           >
             CONTACT
           </a>
-          
+
           {/* Instagram Handle */}
           <a
             href="https://instagram.com/micahnotfound"
@@ -21,7 +21,7 @@ export function Footer() {
           >
             @micahnotfound
           </a>
-          
+
           {/* Email */}
           <a
             href="mailto:micah@art404.com"
@@ -30,7 +30,7 @@ export function Footer() {
             micah@art404.com
           </a>
         </div>
-        
+
         {/* Mobile: Stacked Layout */}
         <div className="md:hidden flex flex-col items-center space-y-6">
           {/* Thick Contact Button */}
@@ -40,7 +40,7 @@ export function Footer() {
           >
             CONTACT
           </a>
-          
+
           {/* Instagram Handle */}
           <a
             href="https://instagram.com/micahnotfound"
@@ -50,7 +50,7 @@ export function Footer() {
           >
             @micahnotfound
           </a>
-          
+
           {/* Email */}
           <a
             href="mailto:micah@art404.com"

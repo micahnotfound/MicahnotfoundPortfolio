@@ -24,43 +24,50 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <div className="flex-shrink-0 w-64 md:w-72 lg:w-80 snap-start">
-      <div className="flex flex-col">
-        {/* Date */}
-        <div className="text-sm font-ui text-gray-600 mb-4">
-          {project.year}
-        </div>
+      <Link
+        href={`/work/${project.slug}`}
+        onClick={handleClick}
+        className={`
+          block group cursor-pointer
+          ${isLoading ? 'pointer-events-none' : ''}
+        `}
+        aria-label={`View ${project.title} project`}
+      >
+        <div className="flex flex-col">
+          {/* Date */}
+          <div className="text-sm font-ui text-gray-600 mb-4 group-hover:text-gray-800 transition-colors duration-200">
+            {project.year}
+          </div>
 
-        {/* Thumbnail - Portrait aspect ratio */}
-        <div className="mb-6">
-          <Media
-            media={thumbnailMedia}
-            className="w-full aspect-[3/4] object-cover"
-            alt={`${project.title} thumbnail`}
-          />
-        </div>
+          {/* Thumbnail - Portrait aspect ratio with hover effect */}
+          <div className="mb-6 overflow-hidden">
+            <Media
+              media={thumbnailMedia}
+              className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300"
+              alt={`${project.title} thumbnail`}
+            />
+          </div>
 
-        {/* Thick Square Border Button with Loading Animation */}
-        <Link
-          href={`/work/${project.slug}`}
-          onClick={handleClick}
-          className={`
-            relative border-4 border-black px-6 py-4 text-center font-ui font-bold text-black 
-            hover:bg-black hover:text-white transition-all duration-300 ease-out
-            ${isLoading ? 'animate-pulse' : ''}
-          `}
-          aria-label={`View ${project.title} project`}
-        >
-          {/* Loading Border Animation */}
-          {isLoading && (
-            <div className="absolute inset-0 border-4 border-black animate-ping opacity-20" />
-          )}
-          
-          {/* Button Content */}
-          <span className="relative z-10">
-            {isLoading ? 'Loading...' : project.title}
-          </span>
-        </Link>
-      </div>
+          {/* Thick Square Border Button with Loading Animation */}
+          <div
+            className={`
+              relative border-4 border-black px-6 py-4 text-center font-ui font-bold text-black 
+              group-hover:bg-black group-hover:text-white transition-all duration-300 ease-out
+              ${isLoading ? 'animate-pulse' : ''}
+            `}
+          >
+            {/* Loading Border Animation */}
+            {isLoading && (
+              <div className="absolute inset-0 border-4 border-black animate-ping opacity-20" />
+            )}
+            
+            {/* Button Content */}
+            <span className="relative z-10">
+              {isLoading ? 'Loading...' : project.title}
+            </span>
+          </div>
+        </div>
+      </Link>
     </div>
   )
 }

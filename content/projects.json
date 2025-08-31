@@ -13,16 +13,16 @@
         "name": "Header",
         "detail": [
           {
-            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=MoMA+Header+Detail",
+            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&h=600&fit=crop",
             "kind": "image",
-            "alt": "MoMA Exhibition header detail"
+            "alt": "MoMA Exhibition header detail - modern art gallery"
           }
         ],
         "profile": [
           {
-            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=MoMA+Header+Profile",
+            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop",
             "kind": "image",
-            "alt": "MoMA Exhibition header profile"
+            "alt": "MoMA Exhibition header profile - modern art gallery"
           }
         ]
       },
@@ -30,16 +30,16 @@
         "name": "Clips",
         "detail": [
           {
-            "public_id": "https://via.placeholder.com/800x600/2a2a2a/ffffff?text=MoMA+Clips+Detail",
+            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&h=600&fit=crop",
             "kind": "image",
-            "alt": "MoMA Exhibition clips detail"
+            "alt": "MoMA Exhibition clips detail - modern art gallery"
           }
         ],
         "profile": [
           {
-            "public_id": "https://via.placeholder.com/600x800/2a2a2a/ffffff?text=MoMA+Clips+Profile",
+            "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop",
             "kind": "image",
-            "alt": "MoMA Exhibition clips profile"
+            "alt": "MoMA Exhibition clips profile - modern art gallery"
           }
         ]
       }
@@ -52,9 +52,9 @@
       }
     ],
     "cover": {
-      "public_id": "https://via.placeholder.com/1200x800/5a5a5a/ffffff?text=MoMA+Exhibition+Cover",
+      "public_id": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200&h=800&fit=crop",
       "kind": "image",
-      "alt": "MoMA Exhibition cover image"
+      "alt": "MoMA Exhibition cover image - modern art gallery"
     }
   },
   {
@@ -71,16 +71,16 @@
         "name": "Monuments",
         "detail": [
           {
-            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=BlackLands+Monuments+Detail",
+            "public_id": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
             "kind": "image",
-            "alt": "BlackLands monuments detail"
+            "alt": "BlackLands monuments detail - digital art landscape"
           }
         ],
         "profile": [
           {
-            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=BlackLands+Monuments+Profile",
+            "public_id": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop",
             "kind": "image",
-            "alt": "BlackLands monuments profile"
+            "alt": "BlackLands monuments profile - digital art landscape"
           }
         ]
       }
@@ -93,9 +93,9 @@
       }
     ],
     "cover": {
-      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=BlackLands+Cover",
+      "public_id": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop",
       "kind": "image",
-      "alt": "BlackLands cover image"
+      "alt": "BlackLands cover image - digital art landscape"
     }
   },
   {
@@ -112,16 +112,16 @@
         "name": "Signatures",
         "detail": [
           {
-            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Signature+Series+Detail",
+            "public_id": "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
             "kind": "image",
-            "alt": "eSignature Series detail"
+            "alt": "eSignature Series detail - digital signature concept"
           }
         ],
         "profile": [
           {
-            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=Signature+Series+Profile",
+            "public_id": "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=800&fit=crop",
             "kind": "image",
-            "alt": "eSignature Series profile"
+            "alt": "eSignature Series profile - digital signature concept"
           }
         ]
       }
@@ -134,9 +134,9 @@
       }
     ],
     "cover": {
-      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=Signature+Series+Cover",
+      "public_id": "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&h=800&fit=crop",
       "kind": "image",
-      "alt": "eSignature Series cover image"
+      "alt": "eSignature Series cover image - digital signature concept"
     }
   },
   {
@@ -153,16 +153,16 @@
         "name": "Journey",
         "detail": [
           {
-            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=There+Goes+Nikki+Journey+Detail",
+            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
             "kind": "image",
-            "alt": "There Goes Nikki journey detail"
+            "alt": "There Goes Nikki journey detail - futuristic digital art"
           }
         ],
         "profile": [
           {
-            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=There+Goes+Nikki+Journey+Profile",
+            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=800&fit=crop",
             "kind": "image",
-            "alt": "There Goes Nikki journey profile"
+            "alt": "There Goes Nikki journey profile - futuristic digital art"
           }
         ]
       }
@@ -175,9 +175,9 @@
       }
     ],
     "cover": {
-      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=There+Goes+Nikki+Cover",
+      "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=800&fit=crop",
       "kind": "image",
-      "alt": "There Goes Nikki cover image"
+      "alt": "There Goes Nikki cover image - futuristic digital art"
     }
   },
   {
@@ -194,31 +194,31 @@
         "name": "Experience",
         "detail": [
           {
-            "public_id": "https://via.placeholder.com/800x600/1a1a1a/ffffff?text=AfroFuturism+Experience+Detail",
+            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
             "kind": "image",
-            "alt": "AfroFuturism experience detail"
+            "alt": "AfroFuturism experience detail - futuristic abstract art"
           }
         ],
         "profile": [
           {
-            "public_id": "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=AfroFuturism+Experience+Profile",
+            "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=800&fit=crop",
             "kind": "image",
-            "alt": "AfroFuturism experience profile"
+            "alt": "AfroFuturism experience profile - futuristic abstract art"
           }
         ]
       }
     ],
     "thumbnails": [
       {
-        "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=533&fit=crop&crop=center",
+        "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=533&fit=crop",
         "kind": "image",
         "alt": "AfroFuturism portrait thumbnail - futuristic abstract art"
       }
     ],
     "cover": {
-      "public_id": "https://via.placeholder.com/1200x800/4a4a4a/ffffff?text=AfroFuturism+Cover",
+      "public_id": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=800&fit=crop",
       "kind": "image",
-      "alt": "AfroFuturism cover image"
+      "alt": "AfroFuturism cover image - futuristic abstract art"
     }
   }
 ]

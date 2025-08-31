@@ -1,0 +1,23 @@
+ {
+    "slug": "there-goes-nikki",
+    "title": "There Goes Nikki",
+    "year": "7/25",
+    "role": "Creative Director",
+    "client": "Independent",
+    "summary": "Immersive storytelling experience",
+    "description": "An immersive storytelling experience that pushes the boundaries of digital narrative and interactive media.",
+    "technologies": ["Interactive Storytelling", "3D Rendering", "Digital Media"],
+    "elements": [],
+    "thumbnails": [
+      {
+        "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
+        "kind": "image",
+        "alt": "There Goes Nikki thumbnail"
+      }
+    ],
+    "cover": {
+      "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
+      "kind": "image",
+      "alt": "There Goes Nikki cover"
+    }
+  }

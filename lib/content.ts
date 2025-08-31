@@ -1,9 +1,44 @@
-import projectsData from '@/content/projects.json'
+import projectsManifest from '@/content/projects.json'
 import homeData from '@/content/home.json'
 import type { Project, HomeData, WorkData, ProjectData } from '@/types/content'
 
+// Import individual project files
+// import afrofuturismData from '@/content/afrofuturism.json'
+import blacklandsData from '@/content/blacklands.json'
+import dreamingWithArchivesData from '@/content/dreaming-with-the-archives.json'
+import momaData from '@/content/moma.json'
+import thereGoesNikkiData from '@/content/there-goes-nikki.json'
+
+// Map of project files
+const projectFiles: Record<string, any> = {
+  // 'afrofuturism.json': afrofuturismData,
+  'blacklands.json': blacklandsData,
+  'dreaming-with-the-archives.json': dreamingWithArchivesData,
+  'moma.json': momaData,
+  'there-goes-nikki.json': thereGoesNikkiData,
+}
+
 export function getProjects(): Project[] {
-  return projectsData as Project[]
+  return projectsManifest.map((manifestEntry: any) => {
+    const projectData = projectFiles[manifestEntry.file]
+    if (!projectData) {
+      throw new Error(`Project file not found: ${manifestEntry.file}`)
+    }
+    
+    // Handle both array and single object formats
+    const project = Array.isArray(projectData) ? projectData[0] : projectData
+    
+    return {
+      ...project,
+      // Ensure manifest metadata takes precedence
+      slug: manifestEntry.slug,
+      title: manifestEntry.title,
+      year: manifestEntry.year,
+      role: manifestEntry.role,
+      client: manifestEntry.client,
+      summary: manifestEntry.summary,
+    }
+  })
 }
 
 export function getProjectsSorted(): Project[] {

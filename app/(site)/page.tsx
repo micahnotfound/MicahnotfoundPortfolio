@@ -25,7 +25,7 @@ export default function HomePage() {
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div className="flex overflow-x-auto space-x-4 md:space-x-6 lg:space-x-8 pb-6 snap-x snap-mandatory">
             {projects.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} />
+              <ProjectCard key={project.slug} project={project} index={index} />
             ))}
           </div>
         </div>

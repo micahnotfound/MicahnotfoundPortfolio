@@ -9,7 +9,7 @@ export function Footer() {
             href="mailto:micah@art404.com"
             className="border-[7px] border-core-dark px-8 py-2 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200"
           >
-            CONTACT
+            Contact
           </a>
 
           {/* Instagram Handle */}
@@ -36,9 +36,9 @@ export function Footer() {
           {/* Thick Contact Button */}
           <a
             href="mailto:micah@art404.com"
-            className="border-[7px] border-core-dark px-8 py-4 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200 w-full max-w-xs"
+            className="border-[7px] border-core-dark px-8 py-2 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200 w-full max-w-xs"
           >
-            CONTACT
+            Contact
           </a>
 
           {/* Instagram Handle */}

@@ -1,0 +1,195 @@
+  {
+    "slug": "blacklands",
+    "title": "Black Lands",
+    "year": "7/25",
+    "role": "Director",
+    "client": "Kinfolk",
+    "summary": "Main Competition | United States | 10 MINUTES | English",
+    "description": "The past, present, and future of the Black communities that built New York City are monumentalized in Kinfolk: Black Lands. Black Lands explores the histories of Land of the Blacks, Flatbush Ancestral Burial Grounds, and the Pinkster Festival by highlighting the lived histories of individuals within those communities, creating a safe digital space to connect with our ancestors. This experience is a precursor to the launch of the location-based version of Kinfolk in New York City.\n\nCast & Credits\nKey Collaborator\nGrowhouse NYC, Black Gotham Experience, Transart, Pariah Interactive, Rada Studio\nDirector\nIdris Brewster, Micah Milner\nProject Creator\nKinfolk\nArchivist\nJasmine Maze, Joshua Briond\nWriter\nAjay Ram\nDesigner\nAngela Fan, David Garcia\nCast\nShanna Sabio, Kamau Ware, Greer Smith, Idris Brewster, Shaquille Nelson, Aixa Kendrick, and Mark Winston Griffith",
+    "technologies": ["AR", "Digital Sculpture", "Interactive Design", "3D Modeling"],
+    "elements": [
+      {
+        "name": "Manuel Gerritt De Reus",
+        "detail": [
+          {
+            "public_id": "v1756571829/1_mjqzip",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 1"
+          },
+          {
+            "public_id": "v1756571821/image_146_0000_kdvcqe",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 2"
+          },
+          {
+            "public_id": "v1756571820/image_144_0000_jd8z2p",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 3"
+          },
+          {
+            "public_id": "v1756571819/image_148_0000_vhsjwh",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 4"
+          },
+          {
+            "public_id": "v1756571818/image_147_0000_acwcyj",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus detail 5"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0000_i9zz5t",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 1"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0050_gcxlmf",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 2"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0086_bm5qet",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 3"
+          },
+          {
+            "public_id": "v1756571809/Image_Sequence_011_0021_wg7kqk",
+            "kind": "image",
+            "alt": "Manuel Gerritt De Reus profile 4"
+          }
+        ]
+      },
+      {
+        "name": "Samuel Anderson",
+        "detail": [
+          {
+            "public_id": "v1756571816/image_141_0000_ludkxz",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 1"
+          },
+          {
+            "public_id": "v1756571815/image_142_0000_g1lmzn",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 2"
+          },
+          {
+            "public_id": "v1756571815/image_120_00005_tdchxo",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 3"
+          },
+          {
+            "public_id": "v1756571814/image_140_0000_qztfsa",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 4"
+          },
+          {
+            "public_id": "v1756571814/image_120_00006_ryn6bo",
+            "kind": "image",
+            "alt": "Samuel Anderson detail 5"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571813/image_120_00001_waahyv",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 1"
+          },
+          {
+            "public_id": "v1756571812/image_120_0000_sdws4y",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 2"
+          },
+          {
+            "public_id": "v1756571812/image_120_00003_wgdvct",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 3"
+          },
+          {
+            "public_id": "v1756571812/image_120_00004_uphy9t",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 4"
+          },
+          {
+            "public_id": "v1756571811/image_120_00002_qdvben",
+            "kind": "image",
+            "alt": "Samuel Anderson profile 5"
+          }
+        ]
+      },
+      {
+        "name": "Sojourner Truth",
+        "detail": [
+          {
+            "public_id": "v1756571811/image_120_00002_qdvben",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 1"
+          },
+          {
+            "public_id": "v1756571820/image_153_0000_xobgpy",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 2"
+          },
+          {
+            "public_id": "v1756571820/image_158_0000_gov1fn",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 3"
+          },
+          {
+            "public_id": "v1756571820/image_152_0000_tzvpdc",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 4"
+          },
+          {
+            "public_id": "v1756571819/image_155_0000_ehra9u",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 5"
+          },
+          {
+            "public_id": "v1756571819/image_154_0000_vw5ua5",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 6"
+          },
+          {
+            "public_id": "v1756571817/image_157_0000_vffory",
+            "kind": "image",
+            "alt": "Sojourner Truth detail 7"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571814/image_149_00003_jcromn",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 1"
+          },
+          {
+            "public_id": "v1756571813/image_149_00001_esma7w",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 2"
+          },
+          {
+            "public_id": "v1756571813/image_149_00002_uul0n4",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 3"
+          },
+          {
+            "public_id": "v1756571811/image_149_0000_unsa5r",
+            "kind": "image",
+            "alt": "Sojourner Truth profile 4"
+          }
+        ]
+      }
+    ],
+    "thumbnails": [
+      {
+        "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
+        "kind": "image",
+        "alt": "BlackLands thumbnail"
+      }
+    ],
+    "cover": {
+      "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
+      "kind": "image",
+      "alt": "BlackLands cover"
+    }
+  }

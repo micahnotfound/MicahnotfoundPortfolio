@@ -1,0 +1,23 @@
+{
+    "slug": "dreaming-with-the-archives",
+    "title": "Dreaming With\nThe Archives",
+    "year": "12/23",
+    "role": "Creative Director",
+    "client": "Kinfolk Tech",
+    "summary": "Digital signature collection exploring identity and technology",
+    "description": "A series of digital artworks that explore the intersection of identity, technology, and artistic expression through innovative digital signature techniques.",
+    "technologies": ["Digital Art", "Generative Design", "Interactive Media"],
+    "elements": [],
+    "thumbnails": [
+      {
+        "public_id": "v1756571826/BL_horizontal_0000_Layer-Comp-1_nnvxij",
+        "kind": "image",
+        "alt": "Dreaming with the Archives thumbnail"
+      }
+    ],
+    "cover": {
+      "public_id": "v1756571826/BL_horizontal_0000_Layer-Comp-1_nnvxij",
+      "kind": "image",
+      "alt": "Dreaming with the Archives cover"
+    }
+  }

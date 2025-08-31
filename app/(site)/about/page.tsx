@@ -15,135 +15,34 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="pt-32">
-      {/* Hero Section */}
-      <section className="py-20 px-8 bg-gray-50">
-        <div className="container-custom max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-body font-bold mb-6 text-balance">
-            About Micah Milner
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 text-pretty">
-            Creative strategist specializing in immersive media and XR storytelling
-          </p>
-        </div>
-      </section>
 
       {/* Main Content */}
       <section className="py-16 px-8">
         <div className="container-custom max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12">
-            {/* Contact Sidebar */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Image Column */}
             <div className="md:col-span-1">
-              <div className="sticky top-24 space-y-8">
-                {/* Contact Info */}
-                <div className="card p-6">
-                  <h3 className="text-xl font-body font-bold mb-4">Contact</h3>
-                  <div className="space-y-3">
-                    <p className="text-gray-600">
-                      <strong>Email:</strong><br />
-                      <a href={`mailto:${siteSettings.email}`} className="text-blue-600 hover:text-blue-800">
-                        {siteSettings.email}
-                      </a>
-                    </p>
-                    <p className="text-gray-600">
-                      <strong>Location:</strong><br />
-                      New York, NY
-                    </p>
-                  </div>
-                </div>
-
-                {/* Education */}
-                <div className="card p-6">
-                  <h3 className="text-xl font-body font-bold mb-4">Education</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="font-semibold font-body">New World School of the Arts</p>
-                    </div>
-                  </div>
+              <div className="sticky top-24">
+                <div className="aspect-square bg-gray-200 overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=center"
+                    alt="Placeholder image"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
 
             {/* Main Content */}
             <div className="md:col-span-2 space-y-12">
-              {/* Professional Summary */}
-              <div className="card p-8">
-                <h2 className="text-3xl font-body font-bold mb-6">Professional Summary</h2>
+              {/* Kinfolk Tech Description */}
+              <div className="px-8">
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 mb-4">
-                    With over a decade of experience at the intersection of immersive technology, storytelling, and education, 
-                    I have dedicated my career to building transformative experiences that bring complex scientific and cultural narratives to life.
-                  </p>
-                  <p className="text-gray-700 mb-4">
-                    My work spans AR/VR installations, interactive documentaries, and digital exhibitions, with a focus on 
-                    creating accessible, engaging experiences that bridge the gap between complex subject matter and public understanding.
+                  <p className="text-gray-700 mb-6">
+                    Kinfolk Tech leverages over six years of leadership in AR and XR innovation to design award-winning educational and cultural experiences. As Chief Strategy Officer, the focus centers on directing creative vision and strategy for public exhibitions and immersive educational tools. Collaborating with schools, cultural institutions, and global brands, the team curates dynamic digital narratives, extending the reach of underrepresented stories in impactful ways.
                   </p>
                   <p className="text-gray-700">
-                    I&apos;ve collaborated with leading cultural institutions including the Museum of Modern Art, the Smithsonian, 
-                    and the American Museum of Natural History, helping them leverage emerging technologies to tell stories 
-                    that matter.
-                  </p>
-                </div>
-              </div>
-
-              {/* Current Role */}
-              <div className="card p-8">
-                <h2 className="text-3xl font-body font-bold mb-6">Current Role</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold">Creative Director, Kinfolk Tech</h3>
-                    <p className="text-gray-600">2020 - Present</p>
-                    <p className="text-gray-700 mt-2">
-                      Leading creative strategy and production for immersive media projects, with a focus on 
-                      AR/XR storytelling and interactive experiences.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Selected Projects */}
-              <div className="card p-8">
-                <h2 className="text-3xl font-display font-bold mb-6">Selected Projects</h2>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-semibold">AfroFuturism AR Experience</h3>
-                    <p className="text-gray-600">2024 - Award-winning AR installation</p>
-                    <p className="text-gray-700 mt-2">
-                      An immersive augmented reality experience exploring Afrofuturist themes through the work 
-                      of George Clinton, Octavia Butler, and Sun Ra.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">BlackLands Digital Monuments</h3>
-                    <p className="text-gray-600">2023 - MoMA Exhibition</p>
-                    <p className="text-gray-700 mt-2">
-                      Interactive digital monuments honoring African American historical figures, 
-                      featuring Manuel Gerritt De Reus, Samuel Anderson, and Sojourner Truth.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">MoMA Interactive Exhibition</h3>
-                    <p className="text-gray-600">2023 - Museum of Modern Art</p>
-                    <p className="text-gray-700 mt-2">
-                      A groundbreaking interactive exhibition exploring New York&apos;s hidden histories 
-                      through digital storytelling and immersive experiences.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* About Kinfolk Tech */}
-              <div className="card p-8">
-                <h2 className="text-3xl font-display font-bold mb-6">About Kinfolk Tech</h2>
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 mb-4">
-                    Kinfolk Tech is a creative studio specializing in immersive media and XR storytelling. 
-                    We work with cultural institutions, educational organizations, and brands to create 
-                    meaningful experiences that engage and inspire.
-                  </p>
-                  <p className="text-gray-700">
-                    Our approach combines cutting-edge technology with thoughtful storytelling, 
-                    ensuring that every project not only showcases technical innovation but also 
-                    delivers meaningful content that resonates with audiences.
+                    By managing multidisciplinary teams and fostering cross-sector partnerships, Kinfolk Tech creates engaging digital monuments and exhibitions featured in prestigious spaces like MoMA and Tribeca Festival. The mission is to integrate art, equity, and technology into transformative experiences, reimagining how audiences connect with history and culture. Values of inclusion and collaboration drive efforts to amplify diverse narratives in public and educational contexts.
                   </p>
                 </div>
               </div>
@@ -151,8 +50,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-
     </main>
   )
 }

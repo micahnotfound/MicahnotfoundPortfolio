@@ -7,9 +7,10 @@ import type { Project } from '@/types/content'
 
 interface ProjectCardProps {
   project: Project
+  index?: number // Add index prop for staggered layout
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   // Use thumbnail if available, otherwise fall back to cover image
@@ -21,6 +22,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
     setIsLoading(true)
     // The loading state will be cleared when the page navigation completes
   }
+
+  // Determine if this card should have title at top (odd indices) or bottom (even indices)
+  const isTitleAtTop = index % 2 === 1
 
   return (
     <div className="flex-shrink-0 w-64 md:w-72 lg:w-80 snap-start">
@@ -34,10 +38,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
         aria-label={`View ${project.title} project`}
       >
         <div className="flex flex-col">
-          {/* Date - Even Larger and Bold */}
-          <div className="text-4xl font-ui font-bold text-core-dark mb-4 group-hover:text-gray-800 transition-colors duration-200">
-            {project.year}
-          </div>
+          {/* Mobile Layout: Title at top for odd indices */}
+          {isTitleAtTop && (
+            <div className="md:hidden mb-4">
+              <div
+                className={`
+                  relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
+                  group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
+                  w-fit inline-block
+                  ${isLoading ? 'animate-pulse' : ''}
+                `}
+              >
+                {/* Loading Border Animation */}
+                {isLoading && (
+                  <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
+                )}
+                
+                {/* Button Content */}
+                <span className="relative z-10 italic whitespace-pre-line">
+                  {isLoading ? 'Loading...' : project.title}
+                </span>
+              </div>
+            </div>
+          )}
 
           {/* Thumbnail - Portrait aspect ratio with hover effect */}
           <div className="mb-6 overflow-hidden">
@@ -48,25 +71,51 @@ export function ProjectCard({ project }: ProjectCardProps) {
             />
           </div>
 
-                    {/* Thick Square Border Button - Auto Width, Shorter Height, Left Aligned */}
-          <div
-            className={`
-              relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
-              group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
-              w-fit inline-block
-              ${isLoading ? 'animate-pulse' : ''}
-            `}
-          >
-            {/* Loading Border Animation */}
-            {isLoading && (
-              <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
-            )}
-            
-            {/* Button Content */}
-            <span className="relative z-10 italic whitespace-pre-line">
-              {isLoading ? 'Loading...' : project.title}
-            </span>
+          {/* Desktop Layout: Title always at bottom */}
+          <div className="hidden md:block">
+            <div
+              className={`
+                relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
+                group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
+                w-fit inline-block
+                ${isLoading ? 'animate-pulse' : ''}
+              `}
+            >
+              {/* Loading Border Animation */}
+              {isLoading && (
+                <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
+              )}
+              
+              {/* Button Content */}
+              <span className="relative z-10 italic whitespace-pre-line">
+                {isLoading ? 'Loading...' : project.title}
+              </span>
+            </div>
           </div>
+
+          {/* Mobile Layout: Title at bottom for even indices */}
+          {!isTitleAtTop && (
+            <div className="md:hidden">
+              <div
+                className={`
+                  relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
+                  group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
+                  w-fit inline-block
+                  ${isLoading ? 'animate-pulse' : ''}
+                `}
+              >
+                {/* Loading Border Animation */}
+                {isLoading && (
+                  <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
+                )}
+                
+                {/* Button Content */}
+                <span className="relative z-10 italic whitespace-pre-line">
+                  {isLoading ? 'Loading...' : project.title}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </Link>
     </div>

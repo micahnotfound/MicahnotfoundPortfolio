@@ -1,0 +1,207 @@
+[
+  {
+    "slug": "afrofuturism",
+    "title": "AfroFuturism",
+    "year": "2/24",
+    "role": "Creative Director",
+    "client": "Kinfolk Tech",
+    "summary": "Immersive AR experience exploring Afrofuturist themes through three key figures",
+    "description": "An award-winning augmented reality experience that brings to life the visionary work of George Clinton, Octavia Butler, and Sun Ra. Through interactive digital monuments, users explore themes of identity, technology, and cultural transformation.",
+    "technologies": ["AR", "Unity", "3D Modeling", "Interactive Design"],
+    "elements": [
+      {
+        "name": "George Clinton",
+        "detail": [
+          {
+            "public_id": "v1756571818/Image_Sequence_009_0000_f808iv",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 1"
+          },
+          {
+            "public_id": "v1756571814/Image_Sequence_007_0000_jwffgk",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 2"
+          },
+          {
+            "public_id": "v1756571811/Image_Sequence_010_0000_cql4ew",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 3"
+          },
+          {
+            "public_id": "v1756571810/Image_Sequence_005_0000_obky0y",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 4"
+          },
+          {
+            "public_id": "v1756571810/Image_Sequence_008_0000_sijsep",
+            "kind": "image",
+            "alt": "George Clinton detail sequence 5"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571817/Image_Sequence_1_uosixl",
+            "kind": "image",
+            "alt": "George Clinton profile 1"
+          },
+          {
+            "public_id": "v1756571816/Image_Sequence_4_pe3b5t",
+            "kind": "image",
+            "alt": "George Clinton profile 2"
+          },
+          {
+            "public_id": "v1756571815/Image_Sequence_2_nha5zq",
+            "kind": "image",
+            "alt": "George Clinton profile 3"
+          },
+          {
+            "public_id": "v1756571815/Image_Sequence_3_jrwscc",
+            "kind": "image",
+            "alt": "George Clinton profile 4"
+          }
+        ]
+      },
+      {
+        "name": "Octavia Butler",
+        "detail": [
+          {
+            "public_id": "v1756571830/image_139_0000_uuoetf",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 1"
+          },
+          {
+            "public_id": "v1756571829/image_134_0000_gvqfzb",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 2"
+          },
+          {
+            "public_id": "v1756571828/image_137_0000_ychewb",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 3"
+          },
+          {
+            "public_id": "v1756571828/image_130_0000_cec79e",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 4"
+          },
+          {
+            "public_id": "v1756571828/image_131_0000_x5fdzc",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 5"
+          },
+          {
+            "public_id": "v1756571826/image_132_0000_tygb0w",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 6"
+          },
+          {
+            "public_id": "v1756571826/image_133_0000_vqboed",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 7"
+          },
+          {
+            "public_id": "v1756571825/image_136_0000_gayaz5",
+            "kind": "image",
+            "alt": "Octavia Butler detail sequence 8"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571818/image_129_0051_vgzyko",
+            "kind": "image",
+            "alt": "Octavia Butler profile 1"
+          },
+          {
+            "public_id": "v1756571818/image_129_0093_n9bvsr",
+            "kind": "image",
+            "alt": "Octavia Butler profile 2"
+          },
+          {
+            "public_id": "v1756571818/image_129_0003_hni8sz",
+            "kind": "image",
+            "alt": "Octavia Butler profile 3"
+          },
+          {
+            "public_id": "v1756571817/image_129_0023_wtnxlz",
+            "kind": "image",
+            "alt": "Octavia Butler profile 4"
+          }
+        ]
+      },
+      {
+        "name": "Sun Ra",
+        "detail": [
+          {
+            "public_id": "v1756571831/Image_Sequence_020_0000_misiv4",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 1"
+          },
+          {
+            "public_id": "v1756571828/Image_Sequence_018_0000_rkzn4q",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 2"
+          },
+          {
+            "public_id": "v1756571826/Image_Sequence_019_0000_ciu2tj",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 3"
+          },
+          {
+            "public_id": "v1756571824/Image_Sequence_021_0000_mwowrs",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 4"
+          },
+          {
+            "public_id": "v1756571822/Image_Sequence_017_0000_zenpfa",
+            "kind": "image",
+            "alt": "Sun Ra detail sequence 5"
+          }
+        ],
+        "profile": [
+          {
+            "public_id": "v1756571813/Image_Sequence_015_0074_krf7xb",
+            "kind": "image",
+            "alt": "Sun Ra profile 1"
+          },
+          {
+            "public_id": "v1756571812/Image_Sequence_015_0034_j07axl",
+            "kind": "image",
+            "alt": "Sun Ra profile 2"
+          },
+          {
+            "public_id": "v1756571812/Image_Sequence_015_0097_gwrxw7",
+            "kind": "image",
+            "alt": "Sun Ra profile 3"
+          },
+          {
+            "public_id": "v1756571811/Image_Sequence_015_0002_jegn2d",
+            "kind": "image",
+            "alt": "Sun Ra profile 4"
+          }
+        ]
+      }
+    ],
+    "thumbnails": [
+      {
+        "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
+        "kind": "image",
+        "alt": "AfroFuturism thumbnail 1"
+      },
+      {
+        "public_id": "v1756571808/AF_0001s_0001_Layer-3_smgeek",
+        "kind": "image",
+        "alt": "AfroFuturism thumbnail 2"
+      },
+      {
+        "public_id": "v1756571808/AF_0001s_0000_Layer-1_lwhrfq",
+        "kind": "image",
+        "alt": "AfroFuturism thumbnail 3"
+      }
+    ],
+    "cover": {
+      "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
+      "kind": "image",
+      "alt": "AfroFuturism cover"
+    }
+  }
+]

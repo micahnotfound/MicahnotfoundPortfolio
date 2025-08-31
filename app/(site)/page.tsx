@@ -18,9 +18,9 @@ export default function HomePage() {
   const projects = getProjects()
 
   return (
-    <main className="min-h-screen pt-32">
+    <main className="pt-32">
       {/* Projects Horizontal Row Section */}
-      <section className="py-20 px-8">
+      <section className="py-12 px-8">
         <div className="container-custom">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div className="flex overflow-x-auto space-x-4 md:space-x-6 lg:space-x-8 pb-6 snap-x snap-mandatory">

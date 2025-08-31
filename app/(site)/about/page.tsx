@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen pt-32">
+    <main className="pt-32">
       {/* Hero Section */}
       <section className="py-20 px-8 bg-gray-50">
         <div className="container-custom max-w-4xl mx-auto text-center">

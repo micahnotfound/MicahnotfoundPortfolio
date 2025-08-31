@@ -18,7 +18,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="py-20 px-8 bg-gray-50">
         <div className="container-custom max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 text-balance">
+          <h1 className="text-5xl md:text-7xl font-body font-bold mb-6 text-balance">
             About Micah Milner
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 text-pretty">
@@ -36,7 +36,7 @@ export default function AboutPage() {
               <div className="sticky top-24 space-y-8">
                 {/* Contact Info */}
                 <div className="card p-6">
-                  <h3 className="text-xl font-display font-bold mb-4">Contact</h3>
+                  <h3 className="text-xl font-body font-bold mb-4">Contact</h3>
                   <div className="space-y-3">
                     <p className="text-gray-600">
                       <strong>Email:</strong><br />
@@ -53,17 +53,10 @@ export default function AboutPage() {
 
                 {/* Education */}
                 <div className="card p-6">
-                  <h3 className="text-xl font-display font-bold mb-4">Education</h3>
+                  <h3 className="text-xl font-body font-bold mb-4">Education</h3>
                   <div className="space-y-3">
                     <div>
-                      <p className="font-semibold">MFA, Design & Technology</p>
-                      <p className="text-gray-600">Parsons School of Design</p>
-                      <p className="text-sm text-gray-500">2018</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold">BA, Media Studies</p>
-                      <p className="text-gray-600">University of California, Berkeley</p>
-                      <p className="text-sm text-gray-500">2015</p>
+                      <p className="font-semibold font-body">New World School of the Arts</p>
                     </div>
                   </div>
                 </div>
@@ -74,7 +67,7 @@ export default function AboutPage() {
             <div className="md:col-span-2 space-y-12">
               {/* Professional Summary */}
               <div className="card p-8">
-                <h2 className="text-3xl font-display font-bold mb-6">Professional Summary</h2>
+                <h2 className="text-3xl font-body font-bold mb-6">Professional Summary</h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-gray-700 mb-4">
                     With over a decade of experience at the intersection of immersive technology, storytelling, and education, 
@@ -94,7 +87,7 @@ export default function AboutPage() {
 
               {/* Current Role */}
               <div className="card p-8">
-                <h2 className="text-3xl font-display font-bold mb-6">Current Role</h2>
+                <h2 className="text-3xl font-body font-bold mb-6">Current Role</h2>
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold">Creative Director, Kinfolk Tech</h3>

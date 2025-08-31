@@ -6,7 +6,7 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm">
       <div className="container-custom">
-        <div className="flex justify-between items-center h-32">
+        <div className="flex justify-between items-center h-32 py-4">
           {/* Left Side: Logo, Separator, About */}
           <div className="flex items-center">
             {/* Logo - M logo on desktop, logoWithText on mobile */}
@@ -25,7 +25,7 @@ export function Header() {
 
             {/* 2px thick core-dark vertical separator */}
             <div className="flex items-center mx-4 lg:mx-8">
-              <div className="w-2 h-32 bg-core-dark"></div>
+              <div className="w-2 h-26 bg-core-dark"></div>
             </div>
 
             {/* About text */}

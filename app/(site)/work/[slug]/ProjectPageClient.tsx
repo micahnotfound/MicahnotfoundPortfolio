@@ -58,7 +58,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
             {/* Project Information - Full width on mobile/tablet */}
             <div>
               {/* Project Title */}
-              <h1 className="text-4xl md:text-5xl font-enigma font-bold mb-8 text-gray-900 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-body font-bold mb-8 text-core-dark leading-tight">
                 {project.slug === "moma" ? (
                   <>
                     The<br />
@@ -131,7 +131,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                 {/* Gallery Images - Adaptive Grid */}
                 {element.gallery && element.gallery.length > 0 && (
                   <div>
-                    <h3 className="text-xl font-enigma font-bold text-gray-900 mb-4">{element.name}</h3>
+                    <h3 className="text-xl font-body font-bold text-core-dark mb-4">{element.name}</h3>
                     <AdaptiveGrid
                       images={buildGalleryImages(element.gallery)}
                       className="w-full"
@@ -195,7 +195,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                   {/* Gallery Images - Adaptive Grid */}
                   {element.gallery && element.gallery.length > 0 && (
                     <div>
-                      <h3 className="text-xl font-enigma font-bold text-gray-900 mb-4">{element.name}</h3>
+                      <h3 className="text-xl font-body font-bold text-core-dark mb-4">{element.name}</h3>
                       <AdaptiveGrid
                         images={buildGalleryImages(element.gallery)}
                         className="w-full"
@@ -211,7 +211,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               {/* Sticky Project Information Section */}
               <div className="lg:sticky lg:top-32">
                 {/* Project Title */}
-                <h1 className="text-4xl md:text-5xl font-enigma font-bold mb-8 text-gray-900 leading-tight">
+                <h1 className="text-4xl md:text-5xl font-body font-bold mb-8 text-core-dark leading-tight">
                   {project.slug === "moma" ? (
                     <>
                       The<br />

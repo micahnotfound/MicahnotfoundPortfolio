@@ -21,25 +21,23 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
   // Auto-advance carousel every 5 seconds (only when not dragging)
   useEffect(() => {
     if (images.length <= 1 || isDragging) return
-    
     const interval = setInterval(() => {
       nextSlide()
     }, 5000)
-
     return () => clearInterval(interval)
   }, [currentIndex, images.length, isDragging])
 
   const nextSlide = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
-    setCurrentIndex((prev) => (prev + 1) % images.length)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
     setTimeout(() => setIsTransitioning(false), 300)
   }
 
   const prevSlide = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
     setTimeout(() => setIsTransitioning(false), 300)
   }
 
@@ -55,68 +53,52 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
     setIsDragging(true)
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
     setDragStartX(clientX)
-    setDragOffset(0)
   }
 
   const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging) return
-    
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-    const offset = clientX - dragStartX
-    setDragOffset(offset)
+    const dragDistance = clientX - dragStartX
+    setDragOffset(dragDistance)
   }
 
   const handleDragEnd = () => {
     if (!isDragging) return
-    
     setIsDragging(false)
     
-    // Determine if we should change slides based on drag distance
-    const threshold = 100 // minimum drag distance to trigger slide change
-    
-    if (Math.abs(dragOffset) > threshold) {
+    if (Math.abs(dragOffset) > 100) {
       if (dragOffset > 0) {
         prevSlide()
       } else {
         nextSlide()
       }
     }
-    
     setDragOffset(0)
   }
 
-  // Prevent default behavior for touch events
   const preventDefault = (e: React.TouchEvent) => {
     e.preventDefault()
   }
 
-  if (!images || images.length === 0) {
-    return null
-  }
-
   const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'detail':
-        return 'Detail Images'
-      case 'profile':
-        return 'Profile Images'
-      case 'header-clips':
-        return 'Installation Clips'
-      default:
-        return 'Images'
+      case 'detail': return 'Detail'
+      case 'profile': return 'Profile'
+      case 'header-clips': return 'Installation Clips'
+      default: return 'Images'
     }
   }
 
   return (
     <div className={`relative w-full ${className}`}>
-      {/* Title and Type Badge */}
+      {/* Carousel Info */}
       {(title || type) && (
         <div className="mb-4 flex items-center gap-3">
           {title && (
-            <h3 className="text-xl font-enigma font-bold text-gray-900">{title}</h3>
+            <h3 className="text-xl font-body font-bold text-core-dark">{title}</h3>
           )}
           {type && (
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium bg-core-dark/10 text-core-dark border border-core-dark/20">
               {getTypeLabel(type)}
             </span>
           )}
@@ -124,8 +106,8 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
       )}
 
       {/* Carousel Container */}
-      <div 
-        className="relative overflow-hidden bg-gray-100 cursor-grab active:cursor-grabbing"
+      <div
+        className="relative overflow-hidden bg-white cursor-grab active:cursor-grabbing"
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
         onMouseUp={handleDragEnd}
@@ -146,11 +128,7 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
           }}
         >
           {images.map((image, index) => (
-            <div
-              key={index}
-              className="w-full flex-shrink-0 select-none"
-              style={{ width: '100%' }}
-            >
+            <div key={index} className="w-full flex-shrink-0 select-none" style={{ width: '100%' }}>
               <img
                 src={image}
                 alt={`${title || 'Image'} ${index + 1}`}
@@ -167,48 +145,46 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110 z-10"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent text-core-dark p-2 transition-all duration-200 hover:scale-110"
               aria-label="Previous image"
             >
-              <ChevronLeftIcon className="w-5 h-5" />
+              <ChevronLeftIcon className="w-8 h-8" strokeWidth={3} />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110 z-10"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent text-core-dark p-2 transition-all duration-200 hover:scale-110"
               aria-label="Next image"
             >
-              <ChevronRightIcon className="w-5 h-5" />
+              <ChevronRightIcon className="w-8 h-8" strokeWidth={3} />
             </button>
           </>
         )}
 
         {/* Image Counter */}
         {images.length > 1 && (
-          <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-sm z-10">
+          <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-sm font-medium">
             {currentIndex + 1} / {images.length}
           </div>
         )}
 
         {/* Drag Indicator */}
-        {isDragging && (
-          <div className="absolute inset-0 bg-black/5 flex items-center justify-center z-5">
-            <div className="text-gray-600 text-sm font-medium">
-              {dragOffset > 0 ? '← Swipe left' : dragOffset < 0 ? 'Swipe right →' : 'Drag to navigate'}
-            </div>
+        {images.length > 1 && (
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white px-2 py-1 rounded text-xs">
+            Drag to navigate
           </div>
         )}
       </div>
 
-      {/* Dots Indicator */}
+      {/* Pagination Dots */}
       {images.length > 1 && (
         <div className="flex justify-center mt-4 space-x-2">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-200 ${
+              className={`w-2 h-2 transition-all duration-200 ${
                 index === currentIndex
-                  ? 'bg-blue-600 scale-125'
+                  ? 'bg-core-dark scale-125'
                   : 'bg-gray-300 hover:bg-gray-400'
               }`}
               aria-label={`Go to image ${index + 1}`}
@@ -217,5 +193,5 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -7,6 +7,7 @@ import type { Project, HomeData, WorkData, ProjectData } from '@/types/content'
 import blacklandsData from '@/content/blacklands.json'
 import dreamingWithArchivesData from '@/content/dreaming-with-the-archives.json'
 import momaData from '@/content/moma.json'
+import nycamData from '@/content/nycam.json'
 import thereGoesNikkiData from '@/content/there-goes-nikki.json'
 
 // Map of project files
@@ -15,6 +16,7 @@ const projectFiles: Record<string, any> = {
   'blacklands.json': blacklandsData,
   'dreaming-with-the-archives.json': dreamingWithArchivesData,
   'moma.json': momaData,
+  'nycam.json': nycamData,
   'there-goes-nikki.json': thereGoesNikkiData,
 }
 

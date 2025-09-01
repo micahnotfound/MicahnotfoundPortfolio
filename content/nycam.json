@@ -1,0 +1,45 @@
+{
+  "slug": "nycam",
+  "title": "NYCAM",
+  "year": "2024",
+  "role": "Art Director & 3D Artist",
+  "client": "Kinfolk",
+  "summary": "Portals of Remembrance exhibition reimagining the New York City AIDS Memorial",
+  "description": "Portals of Remembrance was an exhibition produced by Kinfolk, reimagining the New York City AIDS Memorial through the work of celebrated contemporary artists. Presented at St. Vincent's Triangle, the project honored underrepresented figures within the HIV and AIDS movement, from Black horse jockeys to disco icon Sylvester. Guided by Kinfolk's vision, the exhibition bridged timelines and communities, transforming the memorial into a living archive of resilience, joy, and collective memory.",
+  "technologies": ["3D Art", "Exhibition Design", "Digital Memorial", "Contemporary Art"],
+  "elements": [
+    {
+      "name": "Main Content",
+      "detail": [
+        {
+          "public_id": "nycam_main_content_1",
+          "kind": "image",
+          "alt": "NYCAM main content showcase",
+          "caption": "Main content showcase for NYCAM project"
+        }
+      ],
+      "profile": [
+        {
+          "public_id": "nycam_profile_1",
+          "kind": "image",
+          "alt": "NYCAM project profile",
+          "caption": "Project profile and overview"
+        }
+      ]
+    }
+  ],
+  "thumbnails": [
+    {
+      "public_id": "v1756680418/NYCAM_0002_Background_c2dfan",
+      "kind": "image",
+      "alt": "NYCAM project thumbnail",
+      "caption": "NYCAM project thumbnail"
+    }
+  ],
+  "cover": {
+    "public_id": "v1756680418/NYCAM_0002_Background_c2dfan",
+    "kind": "image",
+    "alt": "NYCAM project cover",
+    "caption": "NYCAM project cover image"
+  }
+}

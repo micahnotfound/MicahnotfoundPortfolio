@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { Media } from '@/components/shared/Media'
 import { MasonryGallery } from '@/components/composition/MasonryGallery'
+import { ImageCarousel } from '@/components/composition/ImageCarousel'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import type { Project, MediaItem } from '@/types/content'
 
@@ -12,26 +13,31 @@ interface ProjectPageClientProps {
 }
 
 export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps) {
+  // Get the video publicId based on the project
+  const getVideoPublicId = (slug: string) => {
+    switch (slug) {
+      case 'blacklands':
+        return 'BLACKLANDS_reel_vpw5br'
+      case 'dreaming-with-the-archives':
+        return 'DWA_Reel_oegaxm'
+      case 'moma':
+        return 'Nested_Sequence_02_lwwymc'
+      case 'nycam':
+        return 'NYCAM_reel_qpkje9'
+      default:
+        return null
+    }
+  }
+
+  const videoPublicId = getVideoPublicId(project.slug)
+
+  // Build Cloudinary URLs for carousel images
+  const buildCloudinaryUrl = (publicId: string) => {
+    return `https://res.cloudinary.com/dxmq5ewnv/image/upload/q_auto,f_auto/${publicId}`
+  }
+
   return (
     <main className="pt-32 min-h-screen">
-      {/* Video Player Section - Top of every project page */}
-      <section className="py-8 px-8 bg-gray-50">
-        <div className="container-custom">
-          <div className="max-w-6xl mx-auto">
-            <VideoPlayer 
-              publicId="BLACKLANDS_reel_vpw5br"
-              width={16}
-              height={9}
-              className="rounded-lg shadow-lg"
-              controls={true}
-              autoPlay={false}
-              muted={true}
-              loop={false}
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Project Content - Masonry Layout */}
       <section className="py-16 px-8">
         <div className="container-custom">
@@ -62,43 +68,46 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                   ))}
                 </div>
               )}
-
-              {/* Project Details */}
-              {/* <h3 className="text-3xl font-body font-bold mb-6 text-gray-900 mt-8">Project Details</h3>
-              <dl className="space-y-4">
-                <div>
-                  <dt className="font-semibold text-gray-900 font-ui">Year</dt>
-                  <dd className="text-gray-600 font-body">{project.year}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-gray-900 font-ui">Role</dt>
-                  <dd className="text-gray-600 font-body">{project.role}</dd>
-                </div>
-                {project.client && (
-                  <div>
-                    <dt className="font-semibold text-gray-900 font-ui">Client</dt>
-                    <dd className="text-gray-600 font-body">{project.client}</dd>
-                  </div>
-                )}
-                {project.technologies && project.technologies.length > 0 && (
-                  <div>
-                    <dt className="font-semibold text-gray-900 font-ui">Technologies</dt>
-                    <dd className="text-gray-600 font-body">
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        {project.technologies.map((tech, index) => (
-                          <span
-                            key={index}
-                            className="inline-block px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-full"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </dd>
-                  </div>
-                )}
-              </dl> */}
             </div>
+
+            {/* Video Player - Full width on mobile/tablet */}
+            {videoPublicId && (
+              <div className="py-8 bg-gray-50">
+                <VideoPlayer 
+                  publicId={videoPublicId}
+                  width={16}
+                  height={9}
+                  className="shadow-lg"
+                  controls={true}
+                  autoPlay={false}
+                  muted={true}
+                  loop={false}
+                />
+              </div>
+            )}
+
+            {/* Image Carousels - Full width on mobile/tablet */}
+            {project.elements.map((element, elementIndex) => (
+              <div key={elementIndex} className="space-y-8">
+                {/* Detail Images Carousel */}
+                {element.detail && element.detail.length > 0 && (
+                  <ImageCarousel
+                    images={element.detail.map(img => buildCloudinaryUrl(img.public_id))}
+                    title={element.name}
+                    type="detail"
+                  />
+                )}
+
+                {/* Profile Images Carousel */}
+                {element.profile && element.profile.length > 0 && (
+                  <ImageCarousel
+                    images={element.profile.map(img => buildCloudinaryUrl(img.public_id))}
+                    title={`${element.name} Profile Views`}
+                    type="profile"
+                  />
+                )}
+              </div>
+            ))}
 
             {/* Masonry Gallery - Full width on mobile/tablet */}
             <div>
@@ -108,8 +117,48 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
 
           {/* Desktop Layout: Side-by-side with sticky sidebar */}
           <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-            {/* Masonry Gallery - Takes up 3 columns */}
-            <div className="lg:col-span-3">
+            {/* Masonry Gallery Column - Takes up 3 columns */}
+            <div className="lg:col-span-3 space-y-8">
+              {/* Video Player - Top of masonry column */}
+              {videoPublicId && (
+                <div className="py-8 bg-gray-50">
+                  <VideoPlayer 
+                    publicId={videoPublicId}
+                    width={16}
+                    height={9}
+                    className="shadow-lg"
+                    controls={true}
+                    autoPlay={false}
+                    muted={true}
+                    loop={false}
+                  />
+                </div>
+              )}
+
+              {/* Image Carousels */}
+              {project.elements.map((element, elementIndex) => (
+                <div key={elementIndex} className="space-y-8">
+                  {/* Detail Images Carousel */}
+                  {element.detail && element.detail.length > 0 && (
+                    <ImageCarousel
+                      images={element.detail.map(img => buildCloudinaryUrl(img.public_id))}
+                      title={element.name}
+                      type="detail"
+                    />
+                  )}
+
+                  {/* Profile Images Carousel */}
+                  {element.profile && element.profile.length > 0 && (
+                    <ImageCarousel
+                      images={element.profile.map(img => buildCloudinaryUrl(img.public_id))}
+                      title={`${element.name} Profile Views`}
+                      type="profile"
+                    />
+                  )}
+                </div>
+              ))}
+
+              {/* Masonry Gallery */}
               <MasonryGallery media={allMedia} />
             </div>
 
@@ -140,42 +189,6 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                     ))}
                   </div>
                 )}
-
-                {/* Project Details */}
-                {/* <h3 className="text-3xl font-body font-bold mb-6 text-gray-900">Project Details</h3>
-                <dl className="space-y-4">
-                  <div>
-                    <dt className="font-semibold text-gray-900 font-ui">Year</dt>
-                    <dd className="text-gray-600 font-body">{project.year}</dd>
-                  </div>
-                  <div>
-                    <dt className="font-semibold text-gray-900 font-ui">Role</dt>
-                    <dd className="text-gray-600 font-body">{project.role}</dd>
-                  </div>
-                  {project.client && (
-                    <div>
-                      <dt className="font-semibold text-gray-900 font-ui">Client</dt>
-                      <dd className="text-gray-600 font-body">{project.client}</dd>
-                    </div>
-                  )}
-                  {project.technologies && project.technologies.length > 0 && (
-                    <div>
-                      <dt className="font-semibold text-gray-900 font-ui">Technologies</dt>
-                      <dd className="text-gray-600 font-body">
-                        <div className="flex flex-wrap gap-2 mt-1">
-                          {project.technologies.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="text-sm bg-gray-200 text-gray-700 rounded-full"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </dd>
-                    </div>
-                  )}
-                </dl> */}
               </div>
             </div>
           </div>

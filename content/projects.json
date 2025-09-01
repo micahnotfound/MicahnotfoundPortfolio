@@ -3,36 +3,45 @@
     "slug": "moma",
     "title": "MoMA",
     "year": "2/21",
-    "role": "Creative Director",
+    "role": "Principal Artist & Exhibition Lead",
     "client": "Museum of Modern Art",
-    "summary": "Interactive exhibition exploring New York's hidden histories",
+    "summary": "Five-part installation reimagining the role of monuments in public space",
     "file": "moma.json"
   },
   {
     "slug": "blacklands",
     "title": "BLACKLANDS",
     "year": "7/25",
-    "role": "Creative Director",
-    "client": "MoMA",
-    "summary": "Digital monuments honoring African American historical figures",
+    "role": "Art Director & Exhibition Lead",
+    "client": "Kinfolk",
+    "summary": "Award-winning immersive AR exhibition exploring early Black communities in New York history",
     "file": "blacklands.json"
   },
   {
     "slug": "dreaming-with-the-archives",
     "title": "Dreaming With\nThe Archives",
     "year": "12/23",
-    "role": "Creative Director",
+    "role": "Art Director & Exhibition Lead",
     "client": "Kinfolk Tech",
-    "summary": "Digital signature collection exploring identity and technology",
+    "summary": "Free public AR art exhibition transforming Brooklyn Bridge Park into a digital monument",
     "file": "dreaming-with-the-archives.json"
+  },
+  {
+    "slug": "nycam",
+    "title": "NYCAM",
+    "year": "2024",
+    "role": "Art Director & 3D Artist",
+    "client": "Kinfolk",
+    "summary": "Portals of Remembrance exhibition reimagining the New York City AIDS Memorial",
+    "file": "nycam.json"
   },
   {
     "slug": "there-goes-nikki",
     "title": "There Goes Nikki",
     "year": "7/25",
-    "role": "3D Artist",
-    "client": "Kinfolk Tech",
-    "summary": "Official Selection - Immersive | United States | 5 MINUTES | English",
+    "role": "Art Director & Exhibition Lead",
+    "client": "Kinfolk",
+    "summary": "Augmented reality ode to the late poet Nikki Giovanni",
     "file": "there-goes-nikki.json"
   }
 ]

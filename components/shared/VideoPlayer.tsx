@@ -33,7 +33,7 @@ export function VideoPlayer({
     <div className={`w-full ${className}`} style={{ aspectRatio: `${width}/${height}` }}>
       <video
         ref={videoRef}
-        className="w-full h-full object-cover rounded-lg shadow-lg"
+        className="w-full h-full object-cover shadow-lg"
         controls={controls}
         autoPlay={autoPlay}
         muted={muted}

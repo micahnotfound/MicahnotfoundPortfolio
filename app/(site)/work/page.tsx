@@ -11,6 +11,21 @@ export const metadata: Metadata = {
     title: `Work - ${siteSettings.siteTitle}`,
     description: 'A collection of projects showcasing creative work and collaborations.',
     type: 'website',
+    url: 'https://micahmilner.com/work',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680400/BL_horizontal_0003_Layer-Comp-4_rosizh.png',
+        width: 1200,
+        height: 630,
+        alt: 'Micah Milner Work Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Work - ${siteSettings.siteTitle}`,
+    description: 'A collection of projects showcasing creative work and collaborations.',
+    images: ['https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680400/BL_horizontal_0003_Layer-Comp-4_rosizh.png'],
   },
 }
 

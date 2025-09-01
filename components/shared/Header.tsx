@@ -13,7 +13,7 @@ export function Header() {
 
   return (
     <header className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 bg-white/90 backdrop-blur-sm`}>
-      <div className="container-custom">
+      <div className="w-full max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-32 py-4">
           {/* Left Side: Logo, Separator, About/Work */}
           <div className="flex items-center">

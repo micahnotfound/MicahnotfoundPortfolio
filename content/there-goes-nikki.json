@@ -1,23 +1,104 @@
- {
-    "slug": "there-goes-nikki",
-    "title": "There Goes Nikki",
-    "year": "7/25",
-    "role": "Creative Director",
-    "client": "Independent",
-    "summary": "Immersive storytelling experience",
-    "description": "An immersive storytelling experience that pushes the boundaries of digital narrative and interactive media.",
-    "technologies": ["Interactive Storytelling", "3D Rendering", "Digital Media"],
-    "elements": [],
-    "thumbnails": [
-      {
-        "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
-        "kind": "image",
-        "alt": "There Goes Nikki thumbnail"
-      }
-    ],
-    "cover": {
+{
+  "slug": "there-goes-nikki",
+  "title": "There Goes Nikki",
+  "year": "7/25",
+  "role": "Art Director & Exhibition Lead",
+  "client": "Independent",
+  "summary": "Immersive storytelling experience",
+  "description": "Brought to life by Kinfolk, There Goes Nikki is an augmented reality ode to the late poet Nikki Giovanni. Her voice, reciting Quilting the Black-Eyed Pea (We're Going to Mars), carries viewers through a cosmic expanse into a lush spiral landscape. The spiral embodies infinity and the life journey, entwined with florals that evoke mourning, memory, and return to earth. Here, the celestial and terrestrial mirror one another, and poetry becomes the vessel that opens into the universe Giovanni envisioned—for herself, and for all of us.",
+  "technologies": ["Interactive Storytelling", "3D Rendering", "Digital Media"],
+  "elements": [
+    {
+      "name": "Gallery",
+      "gallery": [
+        {
+          "public_id": "v1756680429/There_Goes_Nikki_Render_2_ik0vol",
+          "kind": "image",
+          "alt": "There Goes Nikki Render 2"
+        },
+        {
+          "public_id": "v1756680425/There_Goes_Nikki_060725_ZhenQIN_11_nyx6cf",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 11"
+        },
+        {
+          "public_id": "v1756680424/There_Goes_Nikki_060725_ZhenQIN_7_jn6ld1",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 7"
+        },
+        {
+          "public_id": "v1756680422/There_Goes_Nikki_060725_ZhenQIN_12_lozp7q",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 12"
+        },
+        {
+          "public_id": "v1756680422/There_Goes_Nikki_060725_ZhenQIN_19_nnz8dr",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 19"
+        },
+        {
+          "public_id": "v1756680422/There_Goes_Nikki_060725_ZhenQIN_1_ld0nmz",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 1"
+        },
+        {
+          "public_id": "v1756680421/There_Goes_Nikki_060725_ZhenQIN_8_b7mzcn",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 8"
+        },
+        {
+          "public_id": "v1756680421/There_Goes_Nikki_060725_ZhenQIN_9_qqcd9j",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 9"
+        },
+        {
+          "public_id": "v1756680420/There_Goes_Nikki_060725_ZhenQIN_6_uomzp1",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 6"
+        },
+        {
+          "public_id": "v1756680420/There_Goes_Nikki_060725_ZhenQIN_15_nrp5iv",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 15"
+        },
+        {
+          "public_id": "v1756680418/There_Goes_Nikki_060725_ZhenQIN_20_zt6izk",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 20"
+        },
+        {
+          "public_id": "v1756680416/There_Goes_Nikki_060725_ZhenQIN_21_io3ixq",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 21"
+        },
+        {
+          "public_id": "v1756680415/There_Goes_Nikki_060725_ZhenQIN_2_rdpton",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 2"
+        },
+        {
+          "public_id": "v1756680415/There_Goes_Nikki_060725_ZhenQIN_13_mmwqot",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 13"
+        },
+        {
+          "public_id": "v1756680413/There_Goes_Nikki_060725_ZhenQIN_5_j4ynzh",
+          "kind": "image",
+          "alt": "There Goes Nikki 060725 ZhenQIN 5"
+        }
+      ]
+    }
+  ],
+  "thumbnails": [
+    {
       "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
       "kind": "image",
-      "alt": "There Goes Nikki cover"
+      "alt": "There Goes Nikki thumbnail"
     }
+  ],
+  "cover": {
+    "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
+    "kind": "image",
+    "alt": "There Goes Nikki cover"
   }
+}

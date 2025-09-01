@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer className="bg-white py-16 px-8">
-      <div className="container-custom">
+      <div className="w-full max-w-7xl mx-auto px-6">
         {/* Desktop: Items on same row */}
         <div className="hidden md:flex items-center space-x-8">
           {/* Thick Contact Button */}

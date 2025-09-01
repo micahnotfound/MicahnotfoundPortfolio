@@ -8,10 +8,11 @@ import { buildLogoUrl } from '@/lib/cloudinary'
 export function Header() {
   const pathname = usePathname()
   const isAboutPage = pathname === '/about'
+  const isHomePage = pathname === '/'
   
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm">
+    <header className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 bg-white/90 backdrop-blur-sm`}>
       <div className="container-custom">
         <div className="flex justify-between items-center h-32 py-4">
           {/* Left Side: Logo, Separator, About/Work */}

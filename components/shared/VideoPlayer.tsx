@@ -37,9 +37,11 @@ export function VideoPlayer({
         cloudinaryRef.current = window.cloudinary
         
         if (videoRef.current) {
-          playerRef.current = cloudinaryRef.current.videoPlayer(videoRef.current, {
-            cloud_name: 'dxmq5ewnv',
-            secure: true,
+          // Use the correct Cloudinary Video Player API
+          playerRef.current = cloudinaryRef.current.player(videoRef.current, {
+            cloudName: 'dxmq5ewnv',
+            publicId: publicId,
+            profile: 'cld-default',
             responsive: true,
             fluid: true
           })
@@ -70,7 +72,6 @@ export function VideoPlayer({
         muted={muted}
         loop={loop}
         playsInline
-        data-cld-public-id={publicId}
       />
     </div>
   )

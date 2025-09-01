@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { Media } from '@/components/shared/Media'
 import { MasonryGallery } from '@/components/composition/MasonryGallery'
+import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import type { Project, MediaItem } from '@/types/content'
 
 interface ProjectPageClientProps {
@@ -13,6 +14,24 @@ interface ProjectPageClientProps {
 export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps) {
   return (
     <main className="pt-32 min-h-screen">
+      {/* Video Player Section - Top of every project page */}
+      <section className="py-8 px-8 bg-gray-50">
+        <div className="container-custom">
+          <div className="max-w-6xl mx-auto">
+            <VideoPlayer 
+              publicId="BLACKLANDS_reel_vpw5br"
+              width={16}
+              height={9}
+              className="rounded-lg shadow-lg"
+              controls={true}
+              autoPlay={false}
+              muted={true}
+              loop={false}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Project Content - Masonry Layout */}
       <section className="py-16 px-8">
         <div className="container-custom">
@@ -147,7 +166,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                           {project.technologies.map((tech, index) => (
                             <span
                               key={index}
-                              className="inline-block px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-full"
+                              className="text-sm bg-gray-200 text-gray-700 rounded-full"
                             >
                               {tech}
                             </span>

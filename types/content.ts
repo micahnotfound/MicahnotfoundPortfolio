@@ -10,6 +10,15 @@ export interface SiteSettings {
   }
 }
 
+// Cloudinary Video Player types
+declare global {
+  interface Window {
+    cloudinary: {
+      videoPlayer: (element: HTMLVideoElement, options: any) => any
+    }
+  }
+}
+
 // Media
 export type MediaKind = 'image' | 'video'
 

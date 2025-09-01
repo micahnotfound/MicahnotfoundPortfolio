@@ -14,7 +14,7 @@ export interface SiteSettings {
 declare global {
   interface Window {
     cloudinary: {
-      player: (element: HTMLVideoElement, options: any) => any
+      videoPlayer: (element: HTMLVideoElement, options: any) => any
     }
   }
 }

@@ -37,14 +37,15 @@ export function VideoPlayer({
         cloudinaryRef.current = window.cloudinary
         
         if (videoRef.current) {
-          // Use the correct Cloudinary Video Player API
-          playerRef.current = cloudinaryRef.current.player(videoRef.current, {
-            cloudName: 'dxmq5ewnv',
-            publicId: publicId,
-            profile: 'cld-default',
-            responsive: true,
-            fluid: true
+          // Use the correct Cloudinary Video Player API for version 3.x
+          playerRef.current = cloudinaryRef.current.videoPlayer(videoRef.current, {
+            cloudName: 'dxmq5ewnv'
           })
+          
+          // Set the video source after player initialization
+          if (playerRef.current && playerRef.current.source) {
+            playerRef.current.source(publicId)
+          }
         }
       } else {
         // Retry after a short delay

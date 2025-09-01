@@ -6,7 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 interface ImageCarouselProps {
   images: string[]
   title?: string
-  type?: 'detail' | 'profile'
+  type?: 'detail' | 'profile' | 'header-clips'
   className?: string
 }
 
@@ -94,17 +94,30 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
     return null
   }
 
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case 'detail':
+        return 'Detail Images'
+      case 'profile':
+        return 'Profile Images'
+      case 'header-clips':
+        return 'Installation Clips'
+      default:
+        return 'Images'
+    }
+  }
+
   return (
     <div className={`relative w-full ${className}`}>
       {/* Title and Type Badge */}
       {(title || type) && (
         <div className="mb-4 flex items-center gap-3">
           {title && (
-            <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+            <h3 className="text-xl font-enigma font-bold text-gray-900">{title}</h3>
           )}
           {type && (
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-              {type === 'detail' ? 'Detail Images' : 'Profile Images'}
+              {getTypeLabel(type)}
             </span>
           )}
         </div>
@@ -112,7 +125,7 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
 
       {/* Carousel Container */}
       <div 
-        className="relative overflow-hidden rounded-lg bg-gray-100 cursor-grab active:cursor-grabbing"
+        className="relative overflow-hidden bg-gray-100 cursor-grab active:cursor-grabbing"
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
         onMouseUp={handleDragEnd}

@@ -14,6 +14,7 @@ const config: Config = {
         display: ['var(--font-playfair)', 'Playfair Display', 'serif'],
         body: ['var(--font-epilogue)', 'Epilogue', 'system-ui', 'sans-serif'],
         ui: ['var(--font-epilogue)', 'Epilogue', 'system-ui', 'sans-serif'],
+        enigma: ['var(--font-crimson)', 'Crimson Text', 'serif'],
       },
       colors: {
         background: 'var(--background)',

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Epilogue } from 'next/font/google'
+import { Inter, Playfair_Display, Epilogue, Crimson_Text } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/shared/Header'
 import { Footer } from '@/components/shared/Footer'
@@ -20,6 +20,13 @@ const epilogue = Epilogue({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-epilogue',
+})
+
+const crimson = Crimson_Text({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-crimson',
+  weight: ['400', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -45,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${epilogue.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${epilogue.variable} ${crimson.variable}`}>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         {/* Skip to main content link for accessibility */}
         <a

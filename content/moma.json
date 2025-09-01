@@ -62,6 +62,290 @@
           "caption": "David Ruggles profile view 4"
         }
       ]
+    },
+    {
+      "name": "Seneca Village",
+      "detail": [
+        {
+          "public_id": "v1756680413/image_092_0000_xvdpx2",
+          "kind": "image",
+          "alt": "Seneca Village detail 1",
+          "caption": "Seneca Village detail view 1"
+        },
+        {
+          "public_id": "v1756680410/image_093_0000_ll4rlr",
+          "kind": "image",
+          "alt": "Seneca Village detail 2",
+          "caption": "Seneca Village detail view 2"
+        },
+        {
+          "public_id": "v1756680403/image_094_0000_ux3iow",
+          "kind": "image",
+          "alt": "Seneca Village detail 3",
+          "caption": "Seneca Village detail view 3"
+        },
+        {
+          "public_id": "v1756680400/Image_Sequence_022_0000_nhs3pn",
+          "kind": "image",
+          "alt": "Seneca Village detail 4",
+          "caption": "Seneca Village detail view 4"
+        },
+        {
+          "public_id": "v1756571820/image_092_0000_jdztfz",
+          "kind": "image",
+          "alt": "Seneca Village detail 5",
+          "caption": "Seneca Village detail view 5"
+        },
+        {
+          "public_id": "v1756571820/image_093_0000_c6py37",
+          "kind": "image",
+          "alt": "Seneca Village detail 6",
+          "caption": "Seneca Village detail view 6"
+        },
+        {
+          "public_id": "v1756571817/image_094_0000_do08zs",
+          "kind": "image",
+          "alt": "Seneca Village detail 7",
+          "caption": "Seneca Village detail view 7"
+        },
+        {
+          "public_id": "v1756571816/Image_Sequence_022_0000_xzf6un",
+          "kind": "image",
+          "alt": "Seneca Village detail 8",
+          "caption": "Seneca Village detail view 8"
+        }
+      ],
+      "profile": [
+        {
+          "public_id": "v1756680394/Image_Sequence_003_0076_gxagjf",
+          "kind": "image",
+          "alt": "Seneca Village profile 1",
+          "caption": "Seneca Village profile view 1"
+        },
+        {
+          "public_id": "v1756680394/Image_Sequence_003_0027_ruews2",
+          "kind": "image",
+          "alt": "Seneca Village profile 2",
+          "caption": "Seneca Village profile view 2"
+        },
+        {
+          "public_id": "v1756680391/Image_Sequence_003_0046_ol2zae",
+          "kind": "image",
+          "alt": "Seneca Village profile 3",
+          "caption": "Seneca Village profile view 3"
+        },
+        {
+          "public_id": "v1756680391/Image_Sequence_003_0104_auxzwe",
+          "kind": "image",
+          "alt": "Seneca Village profile 4",
+          "caption": "Seneca Village profile view 4"
+        },
+        {
+          "public_id": "v1756571811/Image_Sequence_003_0076_wsltq1",
+          "kind": "image",
+          "alt": "Seneca Village profile 5",
+          "caption": "Seneca Village profile view 5"
+        },
+        {
+          "public_id": "v1756571811/Image_Sequence_003_0027_k6tpe1",
+          "kind": "image",
+          "alt": "Seneca Village profile 6",
+          "caption": "Seneca Village profile view 6"
+        },
+        {
+          "public_id": "v1756571810/Image_Sequence_003_0104_tv0bop",
+          "kind": "image",
+          "alt": "Seneca Village profile 7",
+          "caption": "Seneca Village profile view 7"
+        },
+        {
+          "public_id": "v1756571810/Image_Sequence_003_0046_mxoejx",
+          "kind": "image",
+          "alt": "Seneca Village profile 8",
+          "caption": "Seneca Village profile view 8"
+        }
+      ]
+    },
+    {
+      "name": "Young Lords",
+      "profile": [
+        {
+          "public_id": "v1756680396/image_017_0000_0003_Layer-1_xbqhk2",
+          "kind": "image",
+          "alt": "Young Lords profile 1",
+          "caption": "Young Lords profile view 1"
+        },
+        {
+          "public_id": "v1756680395/image_017_0000_0002_image_017_0217_ujaosr",
+          "kind": "image",
+          "alt": "Young Lords profile 2",
+          "caption": "Young Lords profile view 2"
+        },
+        {
+          "public_id": "v1756680389/image_017_0000_0000_image_017_0114_fjblhc",
+          "kind": "image",
+          "alt": "Young Lords profile 3",
+          "caption": "Young Lords profile view 3"
+        },
+        {
+          "public_id": "v1756680389/image_017_0000_0000_image_017_0114_fjblhc",
+          "kind": "image",
+          "alt": "Young Lords profile 4",
+          "caption": "Young Lords profile view 4"
+        }
+      ]
+    },
+    {
+      "name": "The Monuments Project Clips",
+      "header-clips": [
+        {
+          "public_id": "v1756571830/YoungLords2_mbbkpt",
+          "kind": "image",
+          "alt": "Young Lords clip 1",
+          "caption": "Young Lords installation clip"
+        },
+        {
+          "public_id": "v1756571829/Seneca_Village1_v9lcsh",
+          "kind": "image",
+          "alt": "Seneca Village clip 1",
+          "caption": "Seneca Village installation clip"
+        },
+        {
+          "public_id": "v1756571828/YoungLords1_upamdu",
+          "kind": "image",
+          "alt": "Young Lords clip 2",
+          "caption": "Young Lords installation clip"
+        },
+        {
+          "public_id": "v1756571821/DavidRuggles2_shtk42",
+          "kind": "image",
+          "alt": "David Ruggles clip 1",
+          "caption": "David Ruggles installation clip"
+        },
+        {
+          "public_id": "v1756571819/DavidRuggles1_b2z4v5",
+          "kind": "image",
+          "alt": "David Ruggles clip 2",
+          "caption": "David Ruggles installation clip"
+        }
+      ]
+    },
+    {
+      "name": "Exhibition Gallery",
+      "gallery": [
+        {
+          "public_id": "v1756680423/exhibit1_cqi1kq",
+          "kind": "image",
+          "alt": "MoMA exhibition view 1",
+          "caption": "Exhibition installation view",
+          "width": 1200,
+          "height": 800
+        },
+        {
+          "public_id": "v1756680415/exhibit3_k5nllt",
+          "kind": "image",
+          "alt": "MoMA exhibition view 3",
+          "caption": "Exhibition detail view",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680415/momaphotos4_0003_140223_moma_architecture_now_highres_001_nftegg",
+          "kind": "image",
+          "alt": "MoMA architecture view 1",
+          "caption": "Architectural detail",
+          "width": 1200,
+          "height": 800
+        },
+        {
+          "public_id": "v1756680413/momaphotos4_0001_140223_moma_architecture_now_highres_026_wbxyqk",
+          "kind": "image",
+          "alt": "MoMA architecture view 2",
+          "caption": "Architectural perspective",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680412/momaphotos4_0005_Background_tgwpkr",
+          "kind": "image",
+          "alt": "MoMA background view",
+          "caption": "Background installation",
+          "width": 1200,
+          "height": 800
+        },
+        {
+          "public_id": "v1756680412/momaphotos4_0002_140223_moma_architecture_now_highres_021_tlqhpv",
+          "kind": "image",
+          "alt": "MoMA architecture view 3",
+          "caption": "Architectural composition",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680412/momaphotos4_0000_140223_moma_architecture_now_highres_079_rycakz",
+          "kind": "image",
+          "alt": "MoMA architecture view 4",
+          "caption": "Architectural detail view",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680410/momaphotos4_0004_140223_moma_architecture_now_highres_080_w0fvvt",
+          "kind": "image",
+          "alt": "MoMA architecture view 5",
+          "caption": "Architectural perspective",
+          "width": 1200,
+          "height": 800
+        },
+        {
+          "public_id": "v1756680409/140223_moma_architecture_now_highres_025_wqfzfn",
+          "kind": "image",
+          "alt": "MoMA architecture view 6",
+          "caption": "Architectural composition",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680408/exhibit2_kodwbo",
+          "kind": "image",
+          "alt": "MoMA exhibition view 2",
+          "caption": "Exhibition installation",
+          "width": 1200,
+          "height": 800
+        },
+        {
+          "public_id": "v1756680404/BL_horizontal_0000_Layer-Comp-1_byl2eb",
+          "kind": "image",
+          "alt": "MoMA horizontal view 1",
+          "caption": "Horizontal installation view",
+          "width": 1200,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680403/BL_horizontal_0002_Layer-Comp-3_xn6tr3",
+          "kind": "image",
+          "alt": "MoMA horizontal view 2",
+          "caption": "Horizontal composition",
+          "width": 1200,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680399/BL_horizontal_0001_Layer-Comp-2_kzy0ps",
+          "kind": "image",
+          "alt": "MoMA horizontal view 3",
+          "caption": "Horizontal perspective",
+          "width": 1200,
+          "height": 600
+        },
+        {
+          "public_id": "v1756680390/ToussaintCircle_sm_qibt0c",
+          "kind": "image",
+          "alt": "Toussaint Circle view",
+          "caption": "Toussaint Circle installation",
+          "width": 800,
+          "height": 600
+        }
+      ]
     }
   ],
   "thumbnails": [

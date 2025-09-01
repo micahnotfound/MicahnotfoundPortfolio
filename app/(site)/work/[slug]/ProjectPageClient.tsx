@@ -2,8 +2,8 @@
 
 import { useCallback } from 'react'
 import { Media } from '@/components/shared/Media'
-import { MasonryGallery } from '@/components/composition/MasonryGallery'
 import { ImageCarousel } from '@/components/composition/ImageCarousel'
+import { AdaptiveGrid } from '@/components/composition/AdaptiveGrid'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import type { Project, MediaItem } from '@/types/content'
 
@@ -36,6 +36,18 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
     return `https://res.cloudinary.com/dxmq5ewnv/image/upload/q_auto,f_auto/${publicId}`
   }
 
+  // Build gallery images for AdaptiveGrid
+  const buildGalleryImages = (galleryData: any[]) => {
+    return galleryData.map((item, index) => ({
+      id: `${item.public_id}_${index}`,
+      src: buildCloudinaryUrl(item.public_id),
+      alt: item.alt || `Gallery image ${index + 1}`,
+      caption: item.caption,
+      width: item.width || 1200,
+      height: item.height || 800
+    }))
+  }
+
   return (
     <main className="pt-32 min-h-screen">
       {/* Project Content - Masonry Layout */}
@@ -46,7 +58,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
             {/* Project Information - Full width on mobile/tablet */}
             <div>
               {/* Project Title */}
-              <h1 className="text-4xl md:text-5xl font-body font-bold mb-8 text-gray-900 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-enigma font-bold mb-8 text-gray-900 leading-tight">
                 {project.slug === "moma" ? (
                   <>
                     The<br />
@@ -86,7 +98,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               </div>
             )}
 
-            {/* Image Carousels - Full width on mobile/tablet */}
+            {/* Image Carousels and Gallery - Full width on mobile/tablet */}
             {project.elements.map((element, elementIndex) => (
               <div key={elementIndex} className="space-y-8">
                 {/* Detail Images Carousel */}
@@ -106,13 +118,28 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                     type="profile"
                   />
                 )}
+
+                {/* Header Clips Carousel */}
+                {element['header-clips'] && element['header-clips'].length > 0 && (
+                  <ImageCarousel
+                    images={element['header-clips'].map(img => buildCloudinaryUrl(img.public_id))}
+                    title={element.name}
+                    type="header-clips"
+                  />
+                )}
+
+                {/* Gallery Images - Adaptive Grid */}
+                {element.gallery && element.gallery.length > 0 && (
+                  <div>
+                    <h3 className="text-xl font-enigma font-bold text-gray-900 mb-4">{element.name}</h3>
+                    <AdaptiveGrid
+                      images={buildGalleryImages(element.gallery)}
+                      className="w-full"
+                    />
+                  </div>
+                )}
               </div>
             ))}
-
-            {/* Masonry Gallery - Full width on mobile/tablet */}
-            <div>
-              <MasonryGallery media={allMedia} />
-            </div>
           </div>
 
           {/* Desktop Layout: Side-by-side with sticky sidebar */}
@@ -135,7 +162,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                 </div>
               )}
 
-              {/* Image Carousels */}
+              {/* Image Carousels and Gallery */}
               {project.elements.map((element, elementIndex) => (
                 <div key={elementIndex} className="space-y-8">
                   {/* Detail Images Carousel */}
@@ -155,11 +182,28 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                       type="profile"
                     />
                   )}
+
+                  {/* Header Clips Carousel */}
+                  {element['header-clips'] && element['header-clips'].length > 0 && (
+                    <ImageCarousel
+                      images={element['header-clips'].map(img => buildCloudinaryUrl(img.public_id))}
+                      title={element.name}
+                      type="header-clips"
+                    />
+                  )}
+
+                  {/* Gallery Images - Adaptive Grid */}
+                  {element.gallery && element.gallery.length > 0 && (
+                    <div>
+                      <h3 className="text-xl font-enigma font-bold text-gray-900 mb-4">{element.name}</h3>
+                      <AdaptiveGrid
+                        images={buildGalleryImages(element.gallery)}
+                        className="w-full"
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
-
-              {/* Masonry Gallery */}
-              <MasonryGallery media={allMedia} />
             </div>
 
             {/* Project Information (Sticky) - Takes up 1 column */}
@@ -167,7 +211,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               {/* Sticky Project Information Section */}
               <div className="lg:sticky lg:top-32">
                 {/* Project Title */}
-                <h1 className="text-4xl md:text-5xl font-body font-bold mb-8 text-gray-900 leading-tight">
+                <h1 className="text-4xl md:text-5xl font-enigma font-bold mb-8 text-gray-900 leading-tight">
                   {project.slug === "moma" ? (
                     <>
                       The<br />

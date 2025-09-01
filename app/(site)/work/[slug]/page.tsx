@@ -72,17 +72,17 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = getProjectBySlug(params.slug)
   
   if (!project) {
     notFound()
   }
 
-  // Get all media for the project
+  // Get all media for the project - safely handle optional properties
   const allMedia = project.elements.flatMap(element => [
-    ...element.detail,
-    ...element.profile
+    ...(element.detail || []),
+    ...(element.profile || [])
   ])
 
   return <ProjectPageClient project={project} allMedia={allMedia} />

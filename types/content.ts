@@ -32,8 +32,19 @@ export interface MediaItem {
 // Project
 export interface ProjectElement {
   name: string
-  detail: MediaItem[]
-  profile: MediaItem[]
+  detail?: MediaItem[]
+  profile?: MediaItem[]
+  'header-clips'?: MediaItem[]
+  gallery?: GalleryItem[]
+}
+
+export interface GalleryItem {
+  public_id: string
+  kind: string
+  alt: string
+  caption: string
+  width: number
+  height: number
 }
 
 export interface Project {

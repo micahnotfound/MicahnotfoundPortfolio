@@ -1,45 +1,106 @@
 {
   "slug": "blacklands",
   "title": "BLACKLANDS",
-  "year": "7/25",
+  "year": "2023",
   "role": "Art Director & Exhibition Lead",
   "client": "Kinfolk",
   "summary": "Award-winning immersive AR exhibition exploring early Black communities in New York history",
   "description": "Produced by Kinfolk, Black Lands was an award-winning immersive AR exhibition recognized at the Tribeca Film Festival. The project explored early Black communities in New York history, featuring digital monuments to Sojourner Truth, Manuel de Gerrit de Reus, and Samuel Anderson. Each figure was co-created with nonprofit partners who rooted the stories in authentic community memory. By weaving art, technology, and liberation, Kinfolk ensured these legacies continue to inform and empower the present.",
-  "technologies": ["AR", "Immersive Media", "Digital Monuments", "Community Memory", "Digital Storytelling"],
+  "technologies": ["Augmented Reality", "Immersive Exhibition", "Digital Monuments", "Community Memory", "Historical Research"],
   "elements": [
     {
-      "name": "Digital Monuments",
+      "name": "Manuel Gerrit De Reus",
       "detail": [
-        {
-          "public_id": "blacklands_monument_1",
-          "kind": "image",
-          "alt": "Black Lands digital monument 1",
-          "caption": "Digital monument showcase"
-        }
+        { "public_id": "v1756680427/1_cozcjv", "kind": "image", "alt": "Manuel Gerrit De Reus detail 1", "caption": "Manuel Gerrit De Reus detail view 1" },
+        { "public_id": "v1756680413/image_146_0000_njhhpy", "kind": "image", "alt": "Manuel Gerrit De Reus detail 2", "caption": "Manuel Gerrit De Reus detail view 2" },
+        { "public_id": "v1756680409/image_144_0000_cgrxr3", "kind": "image", "alt": "Manuel Gerrit De Reus detail 3", "caption": "Manuel Gerrit De Reus detail view 3" },
+        { "public_id": "v1756680408/image_148_0000_agyvjd", "kind": "image", "alt": "Manuel Gerrit De Reus detail 4", "caption": "Manuel Gerrit De Reus detail view 4" },
+        { "public_id": "v1756680402/image_147_0000_fvewf9", "kind": "image", "alt": "Manuel Gerrit De Reus detail 5", "caption": "Manuel Gerrit De Reus detail view 5" },
+        { "public_id": "v1756571829/1_mjqzip", "kind": "image", "alt": "Manuel Gerrit De Reus detail 6", "caption": "Manuel Gerrit De Reus detail view 6" },
+        { "public_id": "v1756571821/image_146_0000_kdvcqe", "kind": "image", "alt": "Manuel Gerrit De Reus detail 7", "caption": "Manuel Gerrit De Reus detail view 7" },
+        { "public_id": "v1756571820/image_144_0000_jd8z2p", "kind": "image", "alt": "Manuel Gerrit De Reus detail 8", "caption": "Manuel Gerrit De Reus detail view 8" },
+        { "public_id": "v1756571819/image_148_0000_vhsjwh", "kind": "image", "alt": "Manuel Gerrit De Reus detail 9", "caption": "Manuel Gerrit De Reus detail view 9" },
+        { "public_id": "v1756571818/image_147_0000_acwcyj", "kind": "image", "alt": "Manuel Gerrit De Reus detail 10", "caption": "Manuel Gerrit De Reus detail view 10" }
       ],
       "profile": [
-        {
-          "public_id": "blacklands_profile_1",
-          "kind": "image",
-          "alt": "Black Lands project profile",
-          "caption": "Project profile and overview"
-        }
+        { "public_id": "v1756680386/Image_Sequence_011_0086_q6z24m", "kind": "image", "alt": "Manuel Gerrit De Reus profile 1", "caption": "Manuel Gerrit De Reus profile view 1" },
+        { "public_id": "v1756680386/Image_Sequence_011_0000_rrl5zm", "kind": "image", "alt": "Manuel Gerrit De Reus profile 2", "caption": "Manuel Gerrit De Reus profile view 2" },
+        { "public_id": "v1756680385/Image_Sequence_011_0050_drl1di", "kind": "image", "alt": "Manuel Gerrit De Reus profile 3", "caption": "Manuel Gerrit De Reus profile view 3" },
+        { "public_id": "v1756680385/Image_Sequence_011_0021_d4uv4n", "kind": "image", "alt": "Manuel Gerrit De Reus profile 4", "caption": "Manuel Gerrit De Reus profile view 4" },
+        { "public_id": "v1756571809/Image_Sequence_011_0000_i9zz5t", "kind": "image", "alt": "Manuel Gerrit De Reus profile 5", "caption": "Manuel Gerrit De Reus profile view 5" },
+        { "public_id": "v1756571809/Image_Sequence_011_0050_gcxlmf", "kind": "image", "alt": "Manuel Gerrit De Reus profile 6", "caption": "Manuel Gerrit De Reus profile view 6" },
+        { "public_id": "v1756571809/Image_Sequence_011_0086_bm5qet", "kind": "image", "alt": "Manuel Gerrit De Reus profile 7", "caption": "Manuel Gerrit De Reus profile view 7" },
+        { "public_id": "v1756571809/Image_Sequence_011_0021_wg7kqk", "kind": "image", "alt": "Manuel Gerrit De Reus profile 8", "caption": "Manuel Gerrit De Reus profile view 8" }
+      ]
+    },
+    {
+      "name": "Samuel Anderson",
+      "detail": [
+        { "public_id": "v1756680401/image_141_0000_lwqeay", "kind": "image", "alt": "Samuel Anderson detail 1", "caption": "Samuel Anderson detail view 1" },
+        { "public_id": "v1756680398/image_142_0000_ccisj5", "kind": "image", "alt": "Samuel Anderson detail 2", "caption": "Samuel Anderson detail view 2" },
+        { "public_id": "v1756680398/image_120_00005_r6bu61", "kind": "image", "alt": "Samuel Anderson detail 3", "caption": "Samuel Anderson detail view 3" },
+        { "public_id": "v1756680397/image_120_00006_vsej6v", "kind": "image", "alt": "Samuel Anderson detail 4", "caption": "Samuel Anderson detail view 4" },
+        { "public_id": "v1756680397/image_140_0000_rrvabd", "kind": "image", "alt": "Samuel Anderson detail 5", "caption": "Samuel Anderson detail view 5" },
+        { "public_id": "v1756571816/image_141_0000_ludkxz", "kind": "image", "alt": "Samuel Anderson detail 6", "caption": "Samuel Anderson detail view 6" },
+        { "public_id": "v1756571815/image_142_0000_g1lmzn", "kind": "image", "alt": "Samuel Anderson detail 7", "caption": "Samuel Anderson detail view 7" },
+        { "public_id": "v1756571815/image_120_00005_tdchxo", "kind": "image", "alt": "Samuel Anderson detail 8", "caption": "Samuel Anderson detail view 8" },
+        { "public_id": "v1756571814/image_140_0000_qztfsa", "kind": "image", "alt": "Samuel Anderson detail 9", "caption": "Samuel Anderson detail view 9" },
+        { "public_id": "v1756571814/image_120_00006_ryn6bo", "kind": "image", "alt": "Samuel Anderson detail 10", "caption": "Samuel Anderson detail view 10" }
+      ],
+      "profile": [
+        { "public_id": "v1756680395/image_120_00001_fol26d", "kind": "image", "alt": "Samuel Anderson profile 1", "caption": "Samuel Anderson profile view 1" },
+        { "public_id": "v1756680393/image_120_00003_oiihmb", "kind": "image", "alt": "Samuel Anderson profile 2", "caption": "Samuel Anderson profile view 2" },
+        { "public_id": "v1756680393/image_120_00004_vjah9q", "kind": "image", "alt": "Samuel Anderson profile 3", "caption": "Samuel Anderson profile view 3" },
+        { "public_id": "v1756680392/image_120_0000_jrngyo", "kind": "image", "alt": "Samuel Anderson profile 4", "caption": "Samuel Anderson profile view 4" },
+        { "public_id": "v1756680391/image_120_00002_jz2vek", "kind": "image", "alt": "Samuel Anderson profile 5", "caption": "Samuel Anderson profile view 5" },
+        { "public_id": "v1756571813/image_120_00001_waahyv", "kind": "image", "alt": "Samuel Anderson profile 6", "caption": "Samuel Anderson profile view 6" },
+        { "public_id": "v1756571812/image_120_0000_sdws4y", "kind": "image", "alt": "Samuel Anderson profile 7", "caption": "Samuel Anderson profile view 7" },
+        { "public_id": "v1756571812/image_120_00003_wgdvct", "kind": "image", "alt": "Samuel Anderson profile 8", "caption": "Samuel Anderson profile view 8" },
+        { "public_id": "v1756571812/image_120_00004_uphy9t", "kind": "image", "alt": "Samuel Anderson profile 9", "caption": "Samuel Anderson profile view 9" },
+        { "public_id": "v1756571811/image_120_00002_qdvben", "kind": "image", "alt": "Samuel Anderson profile 10", "caption": "Samuel Anderson profile view 10" }
+      ]
+    },
+    {
+      "name": "Sojourner Truth",
+      "detail": [
+        { "public_id": "v1756680414/image_156_0000_egxmp2", "kind": "image", "alt": "Sojourner Truth detail 1", "caption": "Sojourner Truth detail view 1" },
+        { "public_id": "v1756680411/image_153_0000_ham9tb", "kind": "image", "alt": "Sojourner Truth detail 2", "caption": "Sojourner Truth detail view 2" },
+        { "public_id": "v1756680409/image_152_0000_gkzosu", "kind": "image", "alt": "Sojourner Truth detail 3", "caption": "Sojourner Truth detail view 3" },
+        { "public_id": "v1756680409/image_158_0000_ozaocr", "kind": "image", "alt": "Sojourner Truth detail 4", "caption": "Sojourner Truth detail view 4" },
+        { "public_id": "v1756680408/image_155_0000_me1h3g", "kind": "image", "alt": "Sojourner Truth detail 5", "caption": "Sojourner Truth detail view 5" },
+        { "public_id": "v1756680408/image_154_0000_i6s9ou", "kind": "image", "alt": "Sojourner Truth detail 6", "caption": "Sojourner Truth detail view 6" },
+        { "public_id": "v1756680401/image_157_0000_ymmazj", "kind": "image", "alt": "Sojourner Truth detail 7", "caption": "Sojourner Truth detail view 7" },
+        { "public_id": "v1756571821/image_156_0000_t1zp0n", "kind": "image", "alt": "Sojourner Truth detail 8", "caption": "Sojourner Truth detail view 8" },
+        { "public_id": "v1756571820/image_153_0000_xobgpy", "kind": "image", "alt": "Sojourner Truth detail 9", "caption": "Sojourner Truth detail view 9" },
+        { "public_id": "v1756571820/image_158_0000_gov1fn", "kind": "image", "alt": "Sojourner Truth detail 10", "caption": "Sojourner Truth detail view 10" },
+        { "public_id": "v1756571820/image_152_0000_tzvpdc", "kind": "image", "alt": "Sojourner Truth detail 11", "caption": "Sojourner Truth detail view 11" },
+        { "public_id": "v1756571819/image_155_0000_ehra9u", "kind": "image", "alt": "Sojourner Truth detail 12", "caption": "Sojourner Truth detail view 12" },
+        { "public_id": "v1756571819/image_154_0000_vw5ua5", "kind": "image", "alt": "Sojourner Truth detail 13", "caption": "Sojourner Truth detail view 13" },
+        { "public_id": "v1756571817/image_157_0000_vffory", "kind": "image", "alt": "Sojourner Truth detail 14", "caption": "Sojourner Truth detail view 14" }
+      ],
+      "profile": [
+        { "public_id": "v1756680395/image_149_00003_txr0tf", "kind": "image", "alt": "Sojourner Truth profile 1", "caption": "Sojourner Truth profile view 1" },
+        { "public_id": "v1756680394/image_149_00001_ygzh05", "kind": "image", "alt": "Sojourner Truth profile 2", "caption": "Sojourner Truth profile view 2" },
+        { "public_id": "v1756680393/image_149_00002_uwc65i", "kind": "image", "alt": "Sojourner Truth profile 3", "caption": "Sojourner Truth profile view 3" },
+        { "public_id": "v1756680391/image_149_0000_xqpkui", "kind": "image", "alt": "Sojourner Truth profile 4", "caption": "Sojourner Truth profile view 4" },
+        { "public_id": "v1756571814/image_149_00003_jcromn", "kind": "image", "alt": "Sojourner Truth profile 5", "caption": "Sojourner Truth profile view 5" },
+        { "public_id": "v1756571813/image_149_00001_esma7w", "kind": "image", "alt": "Sojourner Truth profile 6", "caption": "Sojourner Truth profile view 6" },
+        { "public_id": "v1756571813/image_149_00002_uul0n4", "kind": "image", "alt": "Sojourner Truth profile 7", "caption": "Sojourner Truth profile view 7" },
+        { "public_id": "v1756571811/image_149_0000_unsa5r", "kind": "image", "alt": "Sojourner Truth profile 8", "caption": "Sojourner Truth profile view 8" }
+      ]
+    },
+    {
+      "name": "Exhibition Gallery",
+      "gallery": [
+        { "public_id": "v1756680406/BL_horizontal_0000_Layer-Comp-1_tw9qhu", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view", "width": 1200, "height": 600 },
+        { "public_id": "v1756680405/Untitled-1_mfynyf", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view", "width": 800, "height": 600 },
+        { "public_id": "v1756680404/BL_horizontal_0001_Layer-Comp-2_dnmcc1", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition", "width": 1200, "height": 600 },
+        { "public_id": "v1756680402/BL_horizontal_0002_Layer-Comp-3_znz6il", "kind": "image", "alt": "BLACKLANDS exhibition view 4", "caption": "Exhibition perspective", "width": 1200, "height": 600 }
       ]
     }
   ],
   "thumbnails": [
-    {
-      "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
-      "kind": "image",
-      "alt": "Black Lands project thumbnail",
-      "caption": "Black Lands project thumbnail"
-    }
+    { "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi", "kind": "image", "alt": "BLACKLANDS project thumbnail", "caption": "BLACKLANDS project thumbnail" }
   ],
-  "cover": {
-    "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi",
-    "kind": "image",
-    "alt": "Black Lands project cover",
-    "caption": "Black Lands project cover image"
-  }
+  "cover": { "public_id": "v1756571814/BL_horizontal_0002_Layer-Comp-3_twmcsi", "kind": "image", "alt": "BLACKLANDS project cover", "caption": "BLACKLANDS project cover image" }
 }

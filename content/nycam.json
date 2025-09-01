@@ -1,45 +1,72 @@
 {
   "slug": "nycam",
   "title": "NYCAM",
-  "year": "2024",
+  "year": "2023",
   "role": "Art Director & 3D Artist",
   "client": "Kinfolk",
-  "summary": "Portals of Remembrance exhibition reimagining the New York City AIDS Memorial",
+  "summary": "Portals of Remembrance exhibition reimagining the New York City AIDS Memorial through contemporary art",
   "description": "Portals of Remembrance was an exhibition produced by Kinfolk, reimagining the New York City AIDS Memorial through the work of celebrated contemporary artists. Presented at St. Vincent's Triangle, the project honored underrepresented figures within the HIV and AIDS movement, from Black horse jockeys to disco icon Sylvester. Guided by Kinfolk's vision, the exhibition bridged timelines and communities, transforming the memorial into a living archive of resilience, joy, and collective memory.",
-  "technologies": ["3D Art", "Exhibition Design", "Digital Memorial", "Contemporary Art"],
+  "technologies": ["Exhibition Design", "3D Art", "Public Art", "Memorial Design", "Contemporary Art"],
   "elements": [
     {
-      "name": "Main Content",
+      "name": "Derek Fordjour",
       "detail": [
-        {
-          "public_id": "nycam_main_content_1",
-          "kind": "image",
-          "alt": "NYCAM main content showcase",
-          "caption": "Main content showcase for NYCAM project"
-        }
+        { "public_id": "v1756696363/Image_Sequence_014_0000_kt7c06", "kind": "image", "alt": "Derek Fordjour detail 1", "caption": "Derek Fordjour detail view 1" },
+        { "public_id": "v1756696361/Image_Sequence_016_0000_znfgit", "kind": "image", "alt": "Derek Fordjour detail 2", "caption": "Derek Fordjour detail view 2" },
+        { "public_id": "v1756696358/Image_Sequence_015_0000_c9koeg", "kind": "image", "alt": "Derek Fordjour detail 3", "caption": "Derek Fordjour detail view 3" },
+        { "public_id": "v1756696343/df_ifkvaf", "kind": "image", "alt": "Derek Fordjour detail 4", "caption": "Derek Fordjour detail view 4" },
+        { "public_id": "v1756680434/Image_Sequence_016_0000_xz9ktm", "kind": "image", "alt": "Derek Fordjour detail 5", "caption": "Derek Fordjour detail view 5" },
+        { "public_id": "v1756680434/Image_Sequence_015_0000_guggor", "kind": "image", "alt": "Derek Fordjour detail 6", "caption": "Derek Fordjour detail view 6" },
+        { "public_id": "v1756680433/Image_Sequence_014_0000_zs9pec", "kind": "image", "alt": "Derek Fordjour detail 7", "caption": "Derek Fordjour detail view 7" },
+        { "public_id": "v1756680419/df_if7hud", "kind": "image", "alt": "Derek Fordjour detail 8", "caption": "Derek Fordjour detail view 8" }
       ],
       "profile": [
-        {
-          "public_id": "nycam_profile_1",
-          "kind": "image",
-          "alt": "NYCAM project profile",
-          "caption": "Project profile and overview"
-        }
+        { "public_id": "v1756680419/df_if7hud", "kind": "image", "alt": "Derek Fordjour profile 1", "caption": "Derek Fordjour profile view 1" },
+        { "public_id": "v1756696352/Image_Sequence_013_0000_bx5mai", "kind": "image", "alt": "Derek Fordjour profile 2", "caption": "Derek Fordjour profile view 2" },
+        { "public_id": "v1756696350/Image_Sequence_013_0082_fpmmdr", "kind": "image", "alt": "Derek Fordjour profile 3", "caption": "Derek Fordjour profile view 3" },
+        { "public_id": "v1756696346/Image_Sequence_013_0028_q4vaqa", "kind": "image", "alt": "Derek Fordjour profile 4", "caption": "Derek Fordjour profile view 4" },
+        { "public_id": "v1756680435/Image_Sequence_005_0059_qdqhsv", "kind": "image", "alt": "Derek Fordjour profile 5", "caption": "Derek Fordjour profile view 5" },
+        { "public_id": "v1756680433/Image_Sequence_005_0000_cl7bvu", "kind": "image", "alt": "Derek Fordjour profile 6", "caption": "Derek Fordjour profile view 6" },
+        { "public_id": "v1756680432/Image_Sequence_005_0067_qsbfif", "kind": "image", "alt": "Derek Fordjour profile 7", "caption": "Derek Fordjour profile view 7" },
+        { "public_id": "v1756680432/Image_Sequence_005_0019_cd4hov", "kind": "image", "alt": "Derek Fordjour profile 8", "caption": "Derek Fordjour profile view 8" }
+      ]
+    },
+    {
+      "name": "Gallery Exhibition",
+      "gallery": [
+        { "public_id": "v1756680421/NYCAM_0001_jacolby_vwodzn", "kind": "image", "alt": "NYCAM exhibition view 1", "caption": "Jacolby exhibition view", "width": 1200, "height": 800 },
+        { "public_id": "v1756680419/NYCAM_0000_Derek_cqs6wb", "kind": "image", "alt": "NYCAM exhibition view 2", "caption": "Derek Fordjour exhibition view", "width": 1200, "height": 800 },
+        { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM exhibition view 3", "caption": "Exhibition background view", "width": 1200, "height": 800 },
+        { "public_id": "v1756680411/NYCAM_0000_BL_horizontal_0004_Layer-Comp-5_awcv2v", "kind": "image", "alt": "NYCAM exhibition view 4", "caption": "Exhibition composition view", "width": 1200, "height": 600 },
+        { "public_id": "v1756680410/NYCAM_0003_BL_horizontal_0001_Layer-Comp-2_xitx2h", "kind": "image", "alt": "NYCAM exhibition view 5", "caption": "Exhibition perspective view", "width": 1200, "height": 600 },
+        { "public_id": "v1756680407/NYCAM_0002_BL_horizontal_0002_Layer-Comp-3_wfnryt", "kind": "image", "alt": "NYCAM exhibition view 6", "caption": "Exhibition composition", "width": 1200, "height": 600 },
+        { "public_id": "v1756680406/55_mbvxf0", "kind": "image", "alt": "NYCAM exhibition view 7", "caption": "Exhibition detail view", "width": 800, "height": 600 },
+        { "public_id": "v1756680405/NYCAM_0004_BL_horizontal_0000_Layer-Comp-1_i4olno", "kind": "image", "alt": "NYCAM exhibition view 8", "caption": "Exhibition perspective", "width": 1200, "height": 600 },
+        { "public_id": "v1756680405/BL_horizontal_0000_Layer-Comp-1_nsrdox", "kind": "image", "alt": "NYCAM exhibition view 9", "caption": "Exhibition composition", "width": 1200, "height": 600 },
+        { "public_id": "v1756680400/NYCAM_0001_BL_horizontal_0003_Layer-Comp-4_qztlfk", "kind": "image", "alt": "NYCAM exhibition view 10", "caption": "Exhibition detail", "width": 1200, "height": 600 }
+      ]
+    },
+    {
+      "name": "Sylvester",
+      "profile": [
+        { "public_id": "v1756696341/image_205_0000_fbikoh", "kind": "image", "alt": "Sylvester profile 1", "caption": "Sylvester profile view 1" },
+        { "public_id": "v1756696336/image_203_0000_xusm6x", "kind": "image", "alt": "Sylvester profile 2", "caption": "Sylvester profile view 2" },
+        { "public_id": "v1756696330/image_204_0000_o0ycun", "kind": "image", "alt": "Sylvester profile 3", "caption": "Sylvester profile view 3" },
+        { "public_id": "v1756696323/image_206_0000_ld73ub", "kind": "image", "alt": "Sylvester profile 4", "caption": "Sylvester profile view 4" }
+      ]
+    },
+    {
+      "name": "Tourmaline",
+      "profile": [
+        { "public_id": "v1756696338/image_208_0000_r0mx4l", "kind": "image", "alt": "Tourmaline profile 1", "caption": "Tourmaline profile view 1" },
+        { "public_id": "v1756696333/image_210_0000_kf4ecn", "kind": "image", "alt": "Tourmaline profile 2", "caption": "Tourmaline profile view 2" },
+        { "public_id": "v1756696328/image_209_0000_yb30ch", "kind": "image", "alt": "Tourmaline profile 3", "caption": "Tourmaline profile view 3" },
+        { "public_id": "v1756696325/image_211_0000_br0dpz", "kind": "image", "alt": "Tourmaline profile 4", "caption": "Tourmaline profile view 4" }
       ]
     }
   ],
   "thumbnails": [
-    {
-      "public_id": "v1756680418/NYCAM_0002_Background_c2dfan",
-      "kind": "image",
-      "alt": "NYCAM project thumbnail",
-      "caption": "NYCAM project thumbnail"
-    }
+    { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM project thumbnail", "caption": "NYCAM project thumbnail" }
   ],
-  "cover": {
-    "public_id": "v1756680418/NYCAM_0002_Background_c2dfan",
-    "kind": "image",
-    "alt": "NYCAM project cover",
-    "caption": "NYCAM project cover image"
-  }
+  "cover": { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM project cover", "caption": "NYCAM project cover image" }
 }

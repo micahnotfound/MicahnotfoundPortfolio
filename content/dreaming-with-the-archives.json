@@ -1,23 +1,111 @@
 {
-    "slug": "dreaming-with-the-archives",
-    "title": "Dreaming With\nThe Archives",
-    "year": "12/23",
-    "role": "Art Director & Exhibition Lead",
-    "client": "Kinfolk Tech",
-    "summary": "Free public AR art exhibition transforming Brooklyn Bridge Park into a digital monument",
-    "description": "Produced by Kinfolk Tech, Dreaming with the Archives was a free public AR art exhibition that transformed Brooklyn Bridge Park into a digital monument to layered histories of Brooklyn and the African diaspora. Launched on Juneteenth 2025, the experience featured site-specific works by leading artists and marked the beginning of a year-long, multi-city initiative reimagining public space and collective memory through art and technology.",
-    "technologies": ["AR", "Exhibition Design", "Digital Monument", "Public Art", "Site-Specific Installation"],
-    "elements": [],
-    "thumbnails": [
-      {
-        "public_id": "v1756571826/BL_horizontal_0000_Layer-Comp-1_nnvxij",
-        "kind": "image",
-        "alt": "Dreaming with the Archives thumbnail"
-      }
-    ],
-    "cover": {
-      "public_id": "v1756571826/BL_horizontal_0000_Layer-Comp-1_nnvxij",
-      "kind": "image",
-      "alt": "Dreaming with the Archives cover"
+  "slug": "dreaming-with-the-archives",
+  "title": "Dreaming With The Archives",
+  "year": "2025",
+  "role": "Art Director & Exhibition Lead",
+  "client": "Kinfolk Tech",
+  "summary": "Free public AR art exhibition transforming Brooklyn Bridge Park into a digital monument to layered histories",
+  "description": "Produced by Kinfolk Tech, Dreaming with the Archives was a free public AR art exhibition that transformed Brooklyn Bridge Park into a digital monument to layered histories of Brooklyn and the African diaspora. Launched on Juneteenth 2025, the experience featured site-specific works by leading artists and marked the beginning of a year-long, multi-city initiative reimagining public space and collective memory through art and technology.",
+  "technologies": ["Augmented Reality", "Public Art", "Digital Monuments", "Site-Specific Installation", "Collective Memory"],
+  "elements": [
+    {
+      "name": "Bibi Bahari",
+      "profile": [
+        { "public_id": "v1756696184/image_212_0000_ypfi90", "kind": "image", "alt": "Bibi Bahari profile 1", "caption": "Bibi Bahari profile view 1" },
+        { "public_id": "v1756696182/image_214_0000_lynn0h", "kind": "image", "alt": "Bibi Bahari profile 2", "caption": "Bibi Bahari profile view 2" },
+        { "public_id": "v1756696180/image_213_0000_gf3axa", "kind": "image", "alt": "Bibi Bahari profile 3", "caption": "Bibi Bahari profile view 3" },
+        { "public_id": "v1756696178/image_215_0000_nfecde", "kind": "image", "alt": "Bibi Bahari profile 4", "caption": "Bibi Bahari profile view 4" }
+      ]
+    },
+    {
+      "name": "Birds",
+      "profile": [
+        { "public_id": "v1756696221/Image_Sequence_013_0172_bov8yb", "kind": "image", "alt": "Birds profile 1", "caption": "Birds profile view 1" },
+        { "public_id": "v1756696215/Image_Sequence_013_0106_xvgwbh", "kind": "image", "alt": "Birds profile 2", "caption": "Birds profile view 2" },
+        { "public_id": "v1756696213/Image_Sequence_013_0000_kuvldw", "kind": "image", "alt": "Birds profile 3", "caption": "Birds profile view 3" },
+        { "public_id": "v1756696211/Image_Sequence_013_0037_qi8cvi", "kind": "image", "alt": "Birds profile 4", "caption": "Birds profile view 4" },
+        { "public_id": "v1756680431/Image_Sequence_013_0037_nyxst6", "kind": "image", "alt": "Birds profile 5", "caption": "Birds profile view 5" },
+        { "public_id": "v1756680425/Image_Sequence_013_0172_r1n2m1", "kind": "image", "alt": "Birds profile 6", "caption": "Birds profile view 6" },
+        { "public_id": "v1756680417/Image_Sequence_013_0106_e3wuqj", "kind": "image", "alt": "Birds profile 7", "caption": "Birds profile view 7" },
+        { "public_id": "v1756680417/Image_Sequence_013_0000_oaw9sy", "kind": "image", "alt": "Birds profile 8", "caption": "Birds profile view 8" }
+      ]
+    },
+    {
+      "name": "Exhibition Gallery",
+      "gallery": [
+        { "public_id": "v1756680389/Banners_0003_Layer_2_pt4aly", "kind": "image", "alt": "DWA exhibition banner 1", "caption": "Exhibition banner view 1", "width": 1200, "height": 600 },
+        { "public_id": "v1756680386/Banners_0001_Layer_4_p8xv53", "kind": "image", "alt": "DWA exhibition banner 2", "caption": "Exhibition banner view 2", "width": 1200, "height": 600 },
+        { "public_id": "v1756680385/Banners_0004_Layer_1_gkay4z", "kind": "image", "alt": "DWA exhibition banner 3", "caption": "Exhibition banner view 3", "width": 1200, "height": 600 },
+        { "public_id": "v1756680385/Banners_0000_Layer_5_mgu7nc", "kind": "image", "alt": "DWA exhibition banner 4", "caption": "Exhibition banner view 4", "width": 1200, "height": 600 },
+        { "public_id": "v1756680384/Banners_0002_Layer_3_wsydzy", "kind": "image", "alt": "DWA exhibition banner 5", "caption": "Exhibition banner view 5", "width": 1200, "height": 600 },
+        { "public_id": "v1756680384/thumbnails_0000_Layer_7_abpzsq", "kind": "image", "alt": "DWA exhibition thumbnail", "caption": "Exhibition thumbnail view", "width": 800, "height": 600 }
+      ]
+    },
+    {
+      "name": "Last Farmer",
+      "detail": [
+        { "public_id": "v1756696234/Image_Sequence_007_0000_zrohf0", "kind": "image", "alt": "Last Farmer detail 1", "caption": "Last Farmer detail view 1" },
+        { "public_id": "v1756696231/image_188_0000_tnng2r", "kind": "image", "alt": "Last Farmer detail 2", "caption": "Last Farmer detail view 2" },
+        { "public_id": "v1756696219/image_186_0000_ex8qla", "kind": "image", "alt": "Last Farmer detail 3", "caption": "Last Farmer detail view 3" },
+        { "public_id": "v1756696217/image_184_0000_fykeu7", "kind": "image", "alt": "Last Farmer detail 4", "caption": "Last Farmer detail view 4" },
+        { "public_id": "v1756696200/image_185_0000_hkr6mh", "kind": "image", "alt": "Last Farmer detail 5", "caption": "Last Farmer detail view 5" },
+        { "public_id": "v1756696198/image_187_0000_cerlaz", "kind": "image", "alt": "Last Farmer detail 6", "caption": "Last Farmer detail view 6" },
+        { "public_id": "v1756680433/Image_Sequence_007_0000_g6uj6x", "kind": "image", "alt": "Last Farmer detail 7", "caption": "Last Farmer detail view 7" },
+        { "public_id": "v1756680430/image_188_0000_luh0lp", "kind": "image", "alt": "Last Farmer detail 8", "caption": "Last Farmer detail view 8" },
+        { "public_id": "v1756680430/image_184_0000_zefdog", "kind": "image", "alt": "Last Farmer detail 9", "caption": "Last Farmer detail view 9" },
+        { "public_id": "v1756680419/image_187_0000_nuilct", "kind": "image", "alt": "Last Farmer detail 10", "caption": "Last Farmer detail view 10" },
+        { "public_id": "v1756680418/image_186_0000_c8dc1n", "kind": "image", "alt": "Last Farmer detail 11", "caption": "Last Farmer detail view 11" },
+        { "public_id": "v1756680417/image_185_0000_w4mwmb", "kind": "image", "alt": "Last Farmer detail 12", "caption": "Last Farmer detail view 12" }
+      ],
+      "profile": [
+        { "public_id": "v1756696229/Image_Sequence_005_0000_qegaln", "kind": "image", "alt": "Last Farmer profile 1", "caption": "Last Farmer profile view 1" },
+        { "public_id": "v1756696227/Image_Sequence_005_0019_udqb9w", "kind": "image", "alt": "Last Farmer profile 2", "caption": "Last Farmer profile view 2" },
+        { "public_id": "v1756696225/Image_Sequence_005_0067_ys45on", "kind": "image", "alt": "Last Farmer profile 3", "caption": "Last Farmer profile view 3" },
+        { "public_id": "v1756696223/Image_Sequence_005_0059_qogf0e", "kind": "image", "alt": "Last Farmer profile 4", "caption": "Last Farmer profile view 4" },
+        { "public_id": "v1756680431/Image_Sequence_005_0000_uhegav", "kind": "image", "alt": "Last Farmer profile 5", "caption": "Last Farmer profile view 5" },
+        { "public_id": "v1756680431/Image_Sequence_005_0059_mvrfsq", "kind": "image", "alt": "Last Farmer profile 6", "caption": "Last Farmer profile view 6" },
+        { "public_id": "v1756680429/Image_Sequence_005_0067_yzvjyn", "kind": "image", "alt": "Last Farmer profile 7", "caption": "Last Farmer profile view 7" },
+        { "public_id": "v1756680427/Image_Sequence_005_0019_eiuw32", "kind": "image", "alt": "Last Farmer profile 8", "caption": "Last Farmer profile view 8" }
+      ]
+    },
+    {
+      "name": "Lek",
+      "detail": [
+        { "public_id": "v1756696209/image_193_0000_wmccmo", "kind": "image", "alt": "Lek detail 1", "caption": "Lek detail view 1" },
+        { "public_id": "v1756696207/image_194_0000_cxyw8w", "kind": "image", "alt": "Lek detail 2", "caption": "Lek detail view 2" },
+        { "public_id": "v1756696196/image_196_0000_euly5d", "kind": "image", "alt": "Lek detail 3", "caption": "Lek detail view 3" },
+        { "public_id": "v1756696194/image_195_0000_y91znu", "kind": "image", "alt": "Lek detail 4", "caption": "Lek detail view 4" },
+        { "public_id": "v1756696192/image_192_0000_zwizgw", "kind": "image", "alt": "Lek detail 5", "caption": "Lek detail view 5" },
+        { "public_id": "v1756680429/image_192_0000_k7oih8", "kind": "image", "alt": "Lek detail 6", "caption": "Lek detail view 6" },
+        { "public_id": "v1756680428/image_196_0000_wm9kkv", "kind": "image", "alt": "Lek detail 7", "caption": "Lek detail view 7" },
+        { "public_id": "v1756680424/image_195_0000_ve1xt3", "kind": "image", "alt": "Lek detail 8", "caption": "Lek detail view 8" },
+        { "public_id": "v1756680416/image_194_0000_s2t2cf", "kind": "image", "alt": "Lek detail 9", "caption": "Lek detail view 9" },
+        { "public_id": "v1756680416/image_193_0000_b0puto", "kind": "image", "alt": "Lek detail 10", "caption": "Lek detail view 10" }
+      ],
+      "profile": [
+        { "public_id": "v1756680416/image_193_0000_b0puto", "kind": "image", "alt": "Lek profile 1", "caption": "Lek profile view 1" },
+        { "public_id": "v1756696204/image_190_0000_fm2bss", "kind": "image", "alt": "Lek profile 2", "caption": "Lek profile view 2" },
+        { "public_id": "v1756696188/image_191_0079_wtdt5f", "kind": "image", "alt": "Lek profile 3", "caption": "Lek profile view 3" },
+        { "public_id": "v1756696186/image_191_0025_fbinvj", "kind": "image", "alt": "Lek profile 4", "caption": "Lek profile view 4" },
+        { "public_id": "v1756680433/image_191_0059_yieyd1", "kind": "image", "alt": "Lek profile 5", "caption": "Lek profile view 5" },
+        { "public_id": "v1756680427/image_191_0079_xuwme0", "kind": "image", "alt": "Lek profile 6", "caption": "Lek profile view 6" },
+        { "public_id": "v1756680419/image_190_0000_fcfctb", "kind": "image", "alt": "Lek profile 7", "caption": "Lek profile view 7" },
+        { "public_id": "v1756680414/image_191_0025_tsvkaa", "kind": "image", "alt": "Lek profile 8", "caption": "Lek profile view 8" }
+      ]
+    },
+    {
+      "name": "OysterHouse",
+      "profile": [
+        { "public_id": "v1756680429/image_197_0016_uki2bd", "kind": "image", "alt": "OysterHouse profile 1", "caption": "OysterHouse profile view 1" },
+        { "public_id": "v1756680412/image_197_0000_pkxu3u", "kind": "image", "alt": "OysterHouse profile 2", "caption": "OysterHouse profile view 2" },
+        { "public_id": "v1756680411/image_197_0107_irbruq", "kind": "image", "alt": "OysterHouse profile 3", "caption": "OysterHouse profile view 3" },
+        { "public_id": "v1756680407/image_197_0085_mhoer5", "kind": "image", "alt": "OysterHouse profile 4", "caption": "OysterHouse profile view 4" },
+        { "public_id": "v1756680406/image_197_0053_rukw8x", "kind": "image", "alt": "OysterHouse profile 5", "caption": "OysterHouse profile view 5" }
+      ]
     }
-  }
+  ],
+  "thumbnails": [
+    { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "Dreaming With The Archives project thumbnail", "caption": "Dreaming With The Archives project thumbnail" }
+  ],
+  "cover": { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "Dreaming With The Archives project cover", "caption": "Dreaming With The Archives project cover image" }
+}

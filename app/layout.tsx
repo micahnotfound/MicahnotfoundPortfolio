@@ -46,17 +46,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${epilogue.variable}`}>
-      <head>
-        {/* Cloudinary Video Player */}
-        <link
-          href="https://unpkg.com/cloudinary-video-player@1.9.4/dist/cld-video-player.min.css"
-          rel="stylesheet"
-        />
-        <script
-          src="https://unpkg.com/cloudinary-video-player@1.9.4/dist/cld-video-player.min.js"
-          defer
-        />
-      </head>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         {/* Skip to main content link for accessibility */}
         <a

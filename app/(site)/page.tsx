@@ -18,7 +18,7 @@ export default function HomePage() {
   const projects = getProjects()
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex flex-col">
       {/* Projects Horizontal Row Section - Fixed height, no vertical scroll */}
       <section className="flex-1 flex items-center px-6">
         <div className="container-custom w-full">

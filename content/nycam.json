@@ -55,9 +55,9 @@
     {
       "name": "Sylvester",
       "profile": [
-        { "public_id": "v1756696341/image_205_0000_fbikoh", "kind": "image", "alt": "Sylvester profile 1", "caption": "Sylvester profile view 1" },
         { "public_id": "v1756696336/image_203_0000_xusm6x", "kind": "image", "alt": "Sylvester profile 2", "caption": "Sylvester profile view 2" },
         { "public_id": "v1756696330/image_204_0000_o0ycun", "kind": "image", "alt": "Sylvester profile 3", "caption": "Sylvester profile view 3" },
+        { "public_id": "v1756696341/image_205_0000_fbikoh", "kind": "image", "alt": "Sylvester profile 1", "caption": "Sylvester profile view 1" },
         { "public_id": "v1756696323/image_206_0000_ld73ub", "kind": "image", "alt": "Sylvester profile 4", "caption": "Sylvester profile view 4" }
       ]
     },
@@ -65,8 +65,8 @@
       "name": "Tourmaline",
       "profile": [
         { "public_id": "v1756696338/image_208_0000_r0mx4l", "kind": "image", "alt": "Tourmaline profile 1", "caption": "Tourmaline profile view 1" },
-        { "public_id": "v1756696333/image_210_0000_kf4ecn", "kind": "image", "alt": "Tourmaline profile 2", "caption": "Tourmaline profile view 2" },
         { "public_id": "v1756696328/image_209_0000_yb30ch", "kind": "image", "alt": "Tourmaline profile 3", "caption": "Tourmaline profile view 3" },
+        { "public_id": "v1756696333/image_210_0000_kf4ecn", "kind": "image", "alt": "Tourmaline profile 2", "caption": "Tourmaline profile view 2" },
         { "public_id": "v1756696325/image_211_0000_br0dpz", "kind": "image", "alt": "Tourmaline profile 4", "caption": "Tourmaline profile view 4" }
       ]
     }

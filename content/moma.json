@@ -178,16 +178,16 @@
       "name": "Young Lords",
       "profile": [
         {
-          "public_id": "v1756680396/image_017_0000_0003_Layer-1_xbqhk2",
-          "kind": "image",
-          "alt": "Young Lords profile 1",
-          "caption": "Young Lords profile view 1"
-        },
-        {
           "public_id": "v1756680395/image_017_0000_0002_image_017_0217_ujaosr",
           "kind": "image",
           "alt": "Young Lords profile 2",
           "caption": "Young Lords profile view 2"
+        },
+        {
+          "public_id": "v1756680396/image_017_0000_0003_Layer-1_xbqhk2",
+          "kind": "image",
+          "alt": "Young Lords profile 1",
+          "caption": "Young Lords profile view 1"
         },
         {
           "public_id": "v1756680389/image_017_0000_0000_image_017_0114_fjblhc",

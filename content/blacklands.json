@@ -20,6 +20,14 @@
       ]
     },
     {
+      "name": "Exhibition Gallery",
+      "gallery": [
+        { "public_id": "v1756775074/Blacklands_R1_cobywl", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view", "width": 1200, "height": 600 },
+        { "public_id": "v1756775074/Blacklands_R2_qaects", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view", "width": 1200, "height": 600 },
+        { "public_id": "v1756775074/Blacklands_R3_fija7f", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition", "width": 1200, "height": 600 }
+      ]
+    },
+    {
       "name": "Manuel Gerrit De Reus",
       "profile": [
         { "public_id": "v1756680386/Image_Sequence_011_0086_q6z24m", "kind": "image", "alt": "Manuel Gerrit De Reus profile 1", "caption": "Manuel Gerrit De Reus profile view 1" },
@@ -58,14 +66,6 @@
         { "public_id": "v1756571813/image_149_00001_esma7w", "kind": "image", "alt": "Sojourner Truth profile 6", "caption": "Sojourner Truth profile view 6" },
         { "public_id": "v1756571813/image_149_00002_uul0n4", "kind": "image", "alt": "Sojourner Truth profile 7", "caption": "Sojourner Truth profile view 7" },
         { "public_id": "v1756571811/image_149_0000_unsa5r", "kind": "image", "alt": "Sojourner Truth profile 8", "caption": "Sojourner Truth profile view 8" }
-      ]
-    },
-    {
-      "name": "Exhibition Gallery",
-      "gallery": [
-        { "public_id": "v1756775074/Blacklands_R1_cobywl", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view", "width": 1200, "height": 600 },
-        { "public_id": "v1756775074/Blacklands_R2_qaects", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view", "width": 1200, "height": 600 },
-        { "public_id": "v1756775074/Blacklands_R3_fija7f", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition", "width": 1200, "height": 600 }
       ]
     }
   ],

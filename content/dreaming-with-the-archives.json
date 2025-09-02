@@ -32,6 +32,14 @@
       ]
     },
     {
+      "name": "Exhibition Gallery",
+      "gallery": [
+        { "public_id": "v1756680389/Banners_0003_Layer_2_pt4aly", "kind": "image", "alt": "DWA exhibition banner 1", "caption": "Exhibition banner view 1", "width": 800, "height": 600 },
+        { "public_id": "v1756680384/thumbnails_0000_Layer_7_abpzsq", "kind": "image", "alt": "DWA exhibition thumbnail", "caption": "Exhibition thumbnail view", "width": 800, "height": 600 },
+        { "public_id": "v1756680384/Banners_0002_Layer_3_wsydzy", "kind": "image", "alt": "DWA exhibition banner 5", "caption": "Exhibition banner view 5", "width": 1200, "height": 600 }
+      ]
+    },
+    {
       "name": "Bibi Bahari",
       "profile": [
         { "public_id": "v1756696184/image_212_0000_ypfi90", "kind": "image", "alt": "Bibi Bahari profile 1", "caption": "Bibi Bahari profile view 1" },
@@ -51,14 +59,6 @@
         { "public_id": "v1756680425/Image_Sequence_013_0172_r1n2m1", "kind": "image", "alt": "Birds profile 6", "caption": "Birds profile view 6" },
         { "public_id": "v1756680417/Image_Sequence_013_0106_e3wuqj", "kind": "image", "alt": "Birds profile 7", "caption": "Birds profile view 7" },
         { "public_id": "v1756680417/Image_Sequence_013_0000_oaw9sy", "kind": "image", "alt": "Birds profile 8", "caption": "Birds profile view 8" }
-      ]
-    },
-    {
-      "name": "Exhibition Gallery",
-      "gallery": [
-        { "public_id": "v1756680389/Banners_0003_Layer_2_pt4aly", "kind": "image", "alt": "DWA exhibition banner 1", "caption": "Exhibition banner view 1", "width": 800, "height": 600 },
-        { "public_id": "v1756680384/thumbnails_0000_Layer_7_abpzsq", "kind": "image", "alt": "DWA exhibition thumbnail", "caption": "Exhibition thumbnail view", "width": 800, "height": 600 },
-        { "public_id": "v1756680384/Banners_0002_Layer_3_wsydzy", "kind": "image", "alt": "DWA exhibition banner 5", "caption": "Exhibition banner view 5", "width": 1200, "height": 600 }
       ]
     },
     {

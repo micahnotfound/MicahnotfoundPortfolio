@@ -32,6 +32,14 @@
       ]
     },
     {
+      "name": "Gallery Exhibition",
+      "gallery": [
+        { "public_id": "v1756780621/R1_A_ryxn1y.png", "kind": "image", "alt": "NYCAM exhibition view 1", "caption": "Jacolby exhibition view", "width": 1200, "height": 800 },
+        { "public_id": "v1756780486/R1_B_kbxmbz.png", "kind": "image", "alt": "NYCAM exhibition view 2", "caption": "Derek Fordjour exhibition view", "width": 1200, "height": 800 },
+        { "public_id": "v1756780508/R2_A_oqvezy.png", "kind": "image", "alt": "NYCAM exhibition view 3", "caption": "Exhibition background view", "width": 1200, "height": 800 },
+        { "public_id": "v1756780504/NYCAM_0002_BL_horizontal_0002_Layer-Comp-3_tjjla8.png", "kind": "image", "alt": "NYCAM exhibition view 4", "caption": "Exhibition composition view", "width": 1200, "height": 800 }      ]
+    },
+    {
       "name": "Derek Fordjour",
       "profile": [
         { "public_id": "v1756680419/df_if7hud", "kind": "image", "alt": "Derek Fordjour profile 1", "caption": "Derek Fordjour profile view 1" },
@@ -43,14 +51,6 @@
         { "public_id": "v1756680432/Image_Sequence_005_0067_qsbfif", "kind": "image", "alt": "Derek Fordjour profile 7", "caption": "Derek Fordjour profile view 7" },
         { "public_id": "v1756680432/Image_Sequence_005_0019_cd4hov", "kind": "image", "alt": "Derek Fordjour profile 8", "caption": "Derek Fordjour profile view 8" }
       ]
-    },
-    {
-      "name": "Gallery Exhibition",
-      "gallery": [
-        { "public_id": "v1756780621/R1_A_ryxn1y.png", "kind": "image", "alt": "NYCAM exhibition view 1", "caption": "Jacolby exhibition view", "width": 1200, "height": 800 },
-        { "public_id": "v1756780486/R1_B_kbxmbz.png", "kind": "image", "alt": "NYCAM exhibition view 2", "caption": "Derek Fordjour exhibition view", "width": 1200, "height": 800 },
-        { "public_id": "v1756780508/R2_A_oqvezy.png", "kind": "image", "alt": "NYCAM exhibition view 3", "caption": "Exhibition background view", "width": 1200, "height": 800 },
-        { "public_id": "v1756780504/NYCAM_0002_BL_horizontal_0002_Layer-Comp-3_tjjla8.png", "kind": "image", "alt": "NYCAM exhibition view 4", "caption": "Exhibition composition view", "width": 1200, "height": 800 }      ]
     },
     {
       "name": "Sylvester",

@@ -32,6 +32,67 @@
       ]
     },
     {
+      "name": "Exhibition Gallery",
+      "gallery": [
+        {
+          "public_id": "v1756780128/R1_A_awyxgz.png",
+          "kind": "image",
+          "alt": "MoMA exhibition view 1",
+          "caption": "Exhibition installation view",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "public_id": "v1756780152/R1_B_tqtykc.png",
+          "kind": "image",
+          "alt": "MoMA exhibition view 3",
+          "caption": "Exhibition detail view",
+          "width": 800,
+          "height": 800
+        },
+        {
+          "public_id": "v1756780124/R2_pad3q3.jpg",
+          "kind": "image",
+          "alt": "MoMA architecture view 1",
+          "caption": "Architectural detail",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756780144/R3_A_iztwci.png",
+          "kind": "image",
+          "alt": "MoMA architecture view 2",
+          "caption": "Architectural perspective",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756780140/R3_B_dbzhsf.png",
+          "kind": "image",
+          "alt": "MoMA background view",
+          "caption": "Background installation",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756780136/R3_C_qfosmh.png",
+          "kind": "image",
+          "alt": "MoMA architecture view 3",
+          "caption": "Architectural composition",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "public_id": "v1756780132/R_4_vdy042.png",
+          "kind": "image",
+          "alt": "MoMA architecture view 4",
+          "caption": "Architectural detail view",
+          "width": 800,
+          "height": 600
+        }
+      ]
+    },
+    {
       "name": "David Ruggles",
       "profile": [
         {
@@ -174,67 +235,6 @@
           "kind": "image",
           "alt": "David Ruggles clip 2",
           "caption": "David Ruggles installation clip"
-        }
-      ]
-    },
-    {
-      "name": "Exhibition Gallery",
-      "gallery": [
-        {
-          "public_id": "v1756780128/R1_A_awyxgz.png",
-          "kind": "image",
-          "alt": "MoMA exhibition view 1",
-          "caption": "Exhibition installation view",
-          "width": 800,
-          "height": 800
-        },
-        {
-          "public_id": "v1756780152/R1_B_tqtykc.png",
-          "kind": "image",
-          "alt": "MoMA exhibition view 3",
-          "caption": "Exhibition detail view",
-          "width": 800,
-          "height": 800
-        },
-        {
-          "public_id": "v1756780124/R2_pad3q3.jpg",
-          "kind": "image",
-          "alt": "MoMA architecture view 1",
-          "caption": "Architectural detail",
-          "width": 800,
-          "height": 600
-        },
-        {
-          "public_id": "v1756780144/R3_A_iztwci.png",
-          "kind": "image",
-          "alt": "MoMA architecture view 2",
-          "caption": "Architectural perspective",
-          "width": 800,
-          "height": 600
-        },
-        {
-          "public_id": "v1756780140/R3_B_dbzhsf.png",
-          "kind": "image",
-          "alt": "MoMA background view",
-          "caption": "Background installation",
-          "width": 800,
-          "height": 600
-        },
-        {
-          "public_id": "v1756780136/R3_C_qfosmh.png",
-          "kind": "image",
-          "alt": "MoMA architecture view 3",
-          "caption": "Architectural composition",
-          "width": 800,
-          "height": 600
-        },
-        {
-          "public_id": "v1756780132/R_4_vdy042.png",
-          "kind": "image",
-          "alt": "MoMA architecture view 4",
-          "caption": "Architectural detail view",
-          "width": 800,
-          "height": 600
         }
       ]
     }

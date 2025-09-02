@@ -33,32 +33,6 @@
     },
     {
       "name": "David Ruggles",
-      "detail": [
-        {
-          "public_id": "v1756680396/Image_Sequence_1_g5ysmz",
-          "kind": "image",
-          "alt": "David Ruggles detail 4",
-          "caption": "David Ruggles detail view 4"
-        },
-        {
-          "public_id": "v1756680403/Image_Sequence_2_tsyvzh",
-          "kind": "image",
-          "alt": "David Ruggles detail 1",
-          "caption": "David Ruggles detail view 1"
-        },
-        {
-          "public_id": "v1756680399/Image_Sequence_3_wrrqbe",
-          "kind": "image",
-          "alt": "David Ruggles detail 2",
-          "caption": "David Ruggles detail view 2"
-        },
-        {
-          "public_id": "v1756680397/Image_Sequence_4_rdv4l5",
-          "kind": "image",
-          "alt": "David Ruggles detail 3",
-          "caption": "David Ruggles detail view 3"
-        }
-      ],
       "profile": [
         {
           "public_id": "v1756680387/Image_Sequence_5_egk7kq",
@@ -88,56 +62,6 @@
     },
     {
       "name": "Seneca Village",
-      "detail": [
-        {
-          "public_id": "v1756680413/image_092_0000_xvdpx2",
-          "kind": "image",
-          "alt": "Seneca Village detail 1",
-          "caption": "Seneca Village detail view 1"
-        },
-        {
-          "public_id": "v1756680410/image_093_0000_ll4rlr",
-          "kind": "image",
-          "alt": "Seneca Village detail 2",
-          "caption": "Seneca Village detail view 2"
-        },
-        {
-          "public_id": "v1756680403/image_094_0000_ux3iow",
-          "kind": "image",
-          "alt": "Seneca Village detail 3",
-          "caption": "Seneca Village detail view 3"
-        },
-        {
-          "public_id": "v1756680400/Image_Sequence_022_0000_nhs3pn",
-          "kind": "image",
-          "alt": "Seneca Village detail 4",
-          "caption": "Seneca Village detail view 4"
-        },
-        {
-          "public_id": "v1756571820/image_092_0000_jdztfz",
-          "kind": "image",
-          "alt": "Seneca Village detail 5",
-          "caption": "Seneca Village detail view 5"
-        },
-        {
-          "public_id": "v1756571820/image_093_0000_c6py37",
-          "kind": "image",
-          "alt": "Seneca Village detail 6",
-          "caption": "Seneca Village detail view 6"
-        },
-        {
-          "public_id": "v1756571817/image_094_0000_do08zs",
-          "kind": "image",
-          "alt": "Seneca Village detail 7",
-          "caption": "Seneca Village detail view 7"
-        },
-        {
-          "public_id": "v1756571816/Image_Sequence_022_0000_xzf6un",
-          "kind": "image",
-          "alt": "Seneca Village detail 8",
-          "caption": "Seneca Village detail view 8"
-        }
-      ],
       "profile": [
         {
           "public_id": "v1756680394/Image_Sequence_003_0076_gxagjf",

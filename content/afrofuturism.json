@@ -11,33 +11,6 @@
     "elements": [
       {
         "name": "George Clinton",
-        "detail": [
-          {
-            "public_id": "v1756571818/Image_Sequence_009_0000_f808iv",
-            "kind": "image",
-            "alt": "George Clinton detail sequence 1"
-          },
-          {
-            "public_id": "v1756571814/Image_Sequence_007_0000_jwffgk",
-            "kind": "image",
-            "alt": "George Clinton detail sequence 2"
-          },
-          {
-            "public_id": "v1756571811/Image_Sequence_010_0000_cql4ew",
-            "kind": "image",
-            "alt": "George Clinton detail sequence 3"
-          },
-          {
-            "public_id": "v1756571810/Image_Sequence_005_0000_obky0y",
-            "kind": "image",
-            "alt": "George Clinton detail sequence 4"
-          },
-          {
-            "public_id": "v1756571810/Image_Sequence_008_0000_sijsep",
-            "kind": "image",
-            "alt": "George Clinton detail sequence 5"
-          }
-        ],
         "profile": [
           {
             "public_id": "v1756571817/Image_Sequence_1_uosixl",
@@ -63,48 +36,6 @@
       },
       {
         "name": "Octavia Butler",
-        "detail": [
-          {
-            "public_id": "v1756571830/image_139_0000_uuoetf",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 1"
-          },
-          {
-            "public_id": "v1756571829/image_134_0000_gvqfzb",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 2"
-          },
-          {
-            "public_id": "v1756571828/image_137_0000_ychewb",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 3"
-          },
-          {
-            "public_id": "v1756571828/image_130_0000_cec79e",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 4"
-          },
-          {
-            "public_id": "v1756571828/image_131_0000_x5fdzc",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 5"
-          },
-          {
-            "public_id": "v1756571826/image_132_0000_tygb0w",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 6"
-          },
-          {
-            "public_id": "v1756571826/image_133_0000_vqboed",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 7"
-          },
-          {
-            "public_id": "v1756571825/image_136_0000_gayaz5",
-            "kind": "image",
-            "alt": "Octavia Butler detail sequence 8"
-          }
-        ],
         "profile": [
           {
             "public_id": "v1756571818/image_129_0051_vgzyko",
@@ -130,33 +61,6 @@
       },
       {
         "name": "Sun Ra",
-        "detail": [
-          {
-            "public_id": "v1756571831/Image_Sequence_020_0000_misiv4",
-            "kind": "image",
-            "alt": "Sun Ra detail sequence 1"
-          },
-          {
-            "public_id": "v1756571828/Image_Sequence_018_0000_rkzn4q",
-            "kind": "image",
-            "alt": "Sun Ra detail sequence 2"
-          },
-          {
-            "public_id": "v1756571826/Image_Sequence_019_0000_ciu2tj",
-            "kind": "image",
-            "alt": "Sun Ra detail sequence 3"
-          },
-          {
-            "public_id": "v1756571824/Image_Sequence_021_0000_mwowrs",
-            "kind": "image",
-            "alt": "Sun Ra detail sequence 4"
-          },
-          {
-            "public_id": "v1756571822/Image_Sequence_017_0000_zenpfa",
-            "kind": "image",
-            "alt": "Sun Ra detail sequence 5"
-          }
-        ],
         "profile": [
           {
             "public_id": "v1756571813/Image_Sequence_015_0074_krf7xb",

@@ -485,6 +485,17 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                     </div>
                   ) : null}
 
+                  {/* Gallery Images - Adaptive Grid */}
+                  {element.gallery && element.gallery.length > 0 && (
+                    <div>
+                      <h3 className="text-xl font-body font-bold text-core-dark mb-4">{element.name}</h3>
+                      <AdaptiveGrid
+                        images={buildGalleryImages(element.gallery)}
+                        className="w-full"
+                      />
+                    </div>
+                  )}
+
                   {/* Profile Images Carousel - Default */}
                   {element.profile && element.profile.length > 0 && (getActiveCarouselType(element.name) === 'profile' || !element.detail) && (
                     <ImageCarousel
@@ -510,17 +521,6 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                       title={element.name}
                       type="header-clips"
                     />
-                  )}
-
-                  {/* Gallery Images - Adaptive Grid */}
-                  {element.gallery && element.gallery.length > 0 && (
-                    <div>
-                      <h3 className="text-xl font-body font-bold text-core-dark mb-4">{element.name}</h3>
-                      <AdaptiveGrid
-                        images={buildGalleryImages(element.gallery)}
-                        className="w-full"
-                      />
-                    </div>
                   )}
                 </div>
               ))}

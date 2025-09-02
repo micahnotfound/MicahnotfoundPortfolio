@@ -63,20 +63,6 @@
     },
     {
       "name": "Last Farmer",
-      "detail": [
-        { "public_id": "v1756696234/Image_Sequence_007_0000_zrohf0", "kind": "image", "alt": "Last Farmer detail 1", "caption": "Last Farmer detail view 1" },
-        { "public_id": "v1756696231/image_188_0000_tnng2r", "kind": "image", "alt": "Last Farmer detail 2", "caption": "Last Farmer detail view 2" },
-        { "public_id": "v1756696219/image_186_0000_ex8qla", "kind": "image", "alt": "Last Farmer detail 3", "caption": "Last Farmer detail view 3" },
-        { "public_id": "v1756696217/image_184_0000_fykeu7", "kind": "image", "alt": "Last Farmer detail 4", "caption": "Last Farmer detail view 4" },
-        { "public_id": "v1756696200/image_185_0000_hkr6mh", "kind": "image", "alt": "Last Farmer detail 5", "caption": "Last Farmer detail view 5" },
-        { "public_id": "v1756696198/image_187_0000_cerlaz", "kind": "image", "alt": "Last Farmer detail 6", "caption": "Last Farmer detail view 6" },
-        { "public_id": "v1756680433/Image_Sequence_007_0000_g6uj6x", "kind": "image", "alt": "Last Farmer detail 7", "caption": "Last Farmer detail view 7" },
-        { "public_id": "v1756680430/image_188_0000_luh0lp", "kind": "image", "alt": "Last Farmer detail 8", "caption": "Last Farmer detail view 8" },
-        { "public_id": "v1756680430/image_184_0000_zefdog", "kind": "image", "alt": "Last Farmer detail 9", "caption": "Last Farmer detail view 9" },
-        { "public_id": "v1756696198/image_187_0000_cerlaz", "kind": "image", "alt": "Last Farmer detail 10", "caption": "Last Farmer detail view 10" },
-        { "public_id": "v1756680418/image_186_0000_c8dc1n", "kind": "image", "alt": "Last Farmer detail 11", "caption": "Last Farmer detail view 11" },
-        { "public_id": "v1756680417/image_185_0000_w4mwmb", "kind": "image", "alt": "Last Farmer detail 12", "caption": "Last Farmer detail view 12" }
-      ],
       "profile": [
         { "public_id": "v1756696229/Image_Sequence_005_0000_qegaln", "kind": "image", "alt": "Last Farmer profile 1", "caption": "Last Farmer profile view 1" },
         { "public_id": "v1756696227/Image_Sequence_005_0019_udqb9w", "kind": "image", "alt": "Last Farmer profile 2", "caption": "Last Farmer profile view 2" },
@@ -90,18 +76,6 @@
     },
     {
       "name": "Lek",
-      "detail": [
-        { "public_id": "v1756696209/image_193_0000_wmccmo", "kind": "image", "alt": "Lek detail 1", "caption": "Lek detail view 1" },
-        { "public_id": "v1756696207/image_194_0000_cxyw8w", "kind": "image", "alt": "Lek detail 2", "caption": "Lek detail view 2" },
-        { "public_id": "v1756696196/image_196_0000_euly5d", "kind": "image", "alt": "Lek detail 3", "caption": "Lek detail view 3" },
-        { "public_id": "v1756696194/image_195_0000_y91znu", "kind": "image", "alt": "Lek detail 4", "caption": "Lek detail view 4" },
-        { "public_id": "v1756696192/image_192_0000_zwizgw", "kind": "image", "alt": "Lek detail 5", "caption": "Lek detail view 5" },
-        { "public_id": "v1756680429/image_192_0000_k7oih8", "kind": "image", "alt": "Lek detail 6", "caption": "Lek detail view 6" },
-        { "public_id": "v1756680428/image_196_0000_wm9kkv", "kind": "image", "alt": "Lek detail 7", "caption": "Lek detail view 7" },
-        { "public_id": "v1756680424/image_195_0000_ve1xt3", "kind": "image", "alt": "Lek detail 8", "caption": "Lek detail view 8" },
-        { "public_id": "v1756680416/image_194_0000_s2t2cf", "kind": "image", "alt": "Lek detail 9", "caption": "Lek detail view 9" },
-        { "public_id": "v1756680416/image_193_0000_b0puto", "kind": "image", "alt": "Lek detail 10", "caption": "Lek detail view 10" }
-      ],
       "profile": [
         { "public_id": "v1756680416/image_193_0000_b0puto", "kind": "image", "alt": "Lek profile 1", "caption": "Lek profile view 1" },
         { "public_id": "v1756696204/image_190_0000_fm2bss", "kind": "image", "alt": "Lek profile 2", "caption": "Lek profile view 2" },

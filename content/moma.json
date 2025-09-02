@@ -137,34 +137,10 @@
           "caption": "Seneca Village profile view 2"
         },
         {
-          "public_id": "v1756680391/Image_Sequence_003_0046_ol2zae",
-          "kind": "image",
-          "alt": "Seneca Village profile 3",
-          "caption": "Seneca Village profile view 3"
-        },
-        {
           "public_id": "v1756680391/Image_Sequence_003_0104_auxzwe",
           "kind": "image",
           "alt": "Seneca Village profile 4",
           "caption": "Seneca Village profile view 4"
-        },
-        {
-          "public_id": "v1756571811/Image_Sequence_003_0076_wsltq1",
-          "kind": "image",
-          "alt": "Seneca Village profile 5",
-          "caption": "Seneca Village profile view 5"
-        },
-        {
-          "public_id": "v1756571811/Image_Sequence_003_0027_k6tpe1",
-          "kind": "image",
-          "alt": "Seneca Village profile 6",
-          "caption": "Seneca Village profile view 6"
-        },
-        {
-          "public_id": "v1756571810/Image_Sequence_003_0104_tv0bop",
-          "kind": "image",
-          "alt": "Seneca Village profile 7",
-          "caption": "Seneca Village profile view 7"
         },
         {
           "public_id": "v1756571810/Image_Sequence_003_0046_mxoejx",
@@ -178,19 +154,19 @@
       "name": "Young Lords",
       "profile": [
         {
-          "public_id": "v1756680395/image_017_0000_0002_image_017_0217_ujaosr",
+          "public_id": "v1756680396/image_017_0000_0003_Layer-1_xbqhk2",
           "kind": "image",
           "alt": "Young Lords profile 2",
           "caption": "Young Lords profile view 2"
         },
         {
-          "public_id": "v1756680396/image_017_0000_0003_Layer-1_xbqhk2",
+          "public_id": "v1756680395/image_017_0000_0002_image_017_0217_ujaosr",
           "kind": "image",
           "alt": "Young Lords profile 1",
           "caption": "Young Lords profile view 1"
         },
         {
-          "public_id": "v1756680389/image_017_0000_0000_image_017_0114_fjblhc",
+          "public_id": "v1756680389/image_017_0000_0001_image_017_0318_ml64zv",
           "kind": "image",
           "alt": "Young Lords profile 3",
           "caption": "Young Lords profile view 3"
@@ -198,43 +174,8 @@
         {
           "public_id": "v1756680389/image_017_0000_0000_image_017_0114_fjblhc",
           "kind": "image",
-          "alt": "Young Lords profile 4",
-          "caption": "Young Lords profile view 4"
-        }
-      ]
-    },
-    {
-      "name": "The Monuments Project Clips",
-      "header-clips": [
-        {
-          "public_id": "v1756571830/YoungLords2_mbbkpt",
-          "kind": "image",
-          "alt": "Young Lords clip 1",
-          "caption": "Young Lords installation clip"
-        },
-        {
-          "public_id": "v1756571829/Seneca_Village1_v9lcsh",
-          "kind": "image",
-          "alt": "Seneca Village clip 1",
-          "caption": "Seneca Village installation clip"
-        },
-        {
-          "public_id": "v1756571828/YoungLords1_upamdu",
-          "kind": "image",
-          "alt": "Young Lords clip 2",
-          "caption": "Young Lords installation clip"
-        },
-        {
-          "public_id": "v1756571821/DavidRuggles2_shtk42",
-          "kind": "image",
-          "alt": "David Ruggles clip 1",
-          "caption": "David Ruggles installation clip"
-        },
-        {
-          "public_id": "v1756571819/DavidRuggles1_b2z4v5",
-          "kind": "image",
-          "alt": "David Ruggles clip 2",
-          "caption": "David Ruggles installation clip"
+          "alt": "Young Lords profile 3",
+          "caption": "Young Lords profile view 3"
         }
       ]
     }

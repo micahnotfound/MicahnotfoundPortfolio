@@ -91,19 +91,6 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
 
   return (
     <div className={`relative w-full ${className}`}>
-      {/* Carousel Info */}
-      {(title || type) && (
-        <div className="mb-4 flex items-center gap-3">
-          {title && (
-            <h3 className="text-xl font-body font-bold text-core-dark">{title}</h3>
-          )}
-          {type && (
-            <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium bg-core-dark/10 text-core-dark border border-core-dark/20">
-              {getTypeLabel(type)}
-            </span>
-          )}
-        </div>
-      )}
 
       {/* Carousel Container */}
       <div

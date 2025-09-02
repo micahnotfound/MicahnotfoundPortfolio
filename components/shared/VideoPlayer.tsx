@@ -12,6 +12,7 @@ interface VideoPlayerProps {
   autoPlay?: boolean
   muted?: boolean
   loop?: boolean
+  portrait?: boolean
 }
 
 export function VideoPlayer({ 
@@ -22,15 +23,19 @@ export function VideoPlayer({
   controls = true,
   autoPlay = false,
   muted = true,
-  loop = false
+  loop = false,
+  portrait = false
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   // Build Cloudinary video URL
   const videoUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload/q_auto,f_auto/${publicId}`
 
+  // Use portrait mode (9:16) if specified, otherwise use the provided dimensions
+  const aspectRatio = portrait ? '9/16' : `${width}/${height}`
+
   return (
-    <div className={`w-full ${className}`} style={{ aspectRatio: `${width}/${height}` }}>
+    <div className={`w-full ${className}`} style={{ aspectRatio }}>
       <video
         ref={videoRef}
         className="w-full h-full object-cover shadow-lg"

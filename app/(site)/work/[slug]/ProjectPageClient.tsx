@@ -1,10 +1,11 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { Media } from '@/components/shared/Media'
 import { ImageCarousel } from '@/components/composition/ImageCarousel'
 import { AdaptiveGrid } from '@/components/composition/AdaptiveGrid'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
+import { TabSelector } from '@/components/composition/TabSelector'
 import type { Project, MediaItem } from '@/types/content'
 
 interface ProjectPageClientProps {
@@ -48,6 +49,23 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
     }))
   }
 
+  // Filter out the Main Content element for regular processing
+  const regularElements = project.elements.filter(element => element.name !== 'Main Content')
+
+  // State to manage the active carousel type for each element
+  const [activeCarouselTypes, setActiveCarouselTypes] = useState<Record<string, 'profile' | 'detail'>>({})
+
+  const handleTabChange = useCallback((elementName: string, tabType: 'profile' | 'detail') => {
+    setActiveCarouselTypes(prev => ({
+      ...prev,
+      [elementName]: tabType
+    }))
+  }, [])
+
+  const getActiveCarouselType = (elementName: string) => {
+    return activeCarouselTypes[elementName] || 'profile' // Default to profile if not set
+  }
+
   return (
     <main className="pt-32 min-h-screen">
       {/* Project Content - Masonry Layout */}
@@ -82,8 +100,144 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               )}
             </div>
 
-            {/* Video Player - Full width on mobile/tablet */}
-            {videoPublicId && (
+            {/* Hero Section - Two Column Layout for Blacklands */}
+            {project.slug === 'blacklands' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+              <div className="space-y-8">
+                {/* Hero Image */}
+                <div>
+                  {project.elements.find(el => el.name === 'Main Content')?.hero?.[0] && (
+                    <Media
+                      media={project.elements.find(el => el.name === 'Main Content')?.hero![0]!}
+                      className="w-full aspect-[9/16] object-cover"
+                      alt="BLACKLANDS Hero Image"
+                    />
+                  )}
+                </div>
+                
+                {/* Video Player */}
+                {videoPublicId && (
+                  <div>
+                    <VideoPlayer 
+                      publicId={videoPublicId}
+                      portrait={true}
+                      className="shadow-lg"
+                      controls={true}
+                      autoPlay={false}
+                      muted={true}
+                      loop={false}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Hero Section - Three Stacked Images Layout for MOMA */}
+            {project.slug === 'moma' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+              <div className="space-y-8">
+                {/* Three Stacked Hero Images */}
+                <div className="flex flex-col h-full space-y-4">
+                  {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
+                    <div key={index} className="flex-1 min-h-0">
+                      <div className="w-full h-full" style={{ aspectRatio: '3/1' }}>
+                        <Media
+                          media={image}
+                          className="w-full h-full object-cover overflow-hidden"
+                          alt={`MoMA header image ${index + 1}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Video Player */}
+                {videoPublicId && (
+                  <div>
+                    <VideoPlayer 
+                      publicId={videoPublicId}
+                      portrait={true}
+                      className="shadow-lg"
+                      controls={true}
+                      autoPlay={false}
+                      muted={true}
+                      loop={false}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Hero Section - Three Stacked Images Layout for NYCAM */}
+            {project.slug === 'nycam' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+              <div className="space-y-8">
+                {/* Three Stacked Hero Images */}
+                <div className="flex flex-col h-full space-y-4">
+                  {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
+                    <div key={index} className="flex-1 min-h-0">
+                      <div className="w-full h-full" style={{ aspectRatio: '3/1' }}>
+                        <Media
+                          media={image}
+                          className="w-full h-full object-cover overflow-hidden"
+                          alt={`NYCAM header image ${index + 1}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Video Player */}
+                {videoPublicId && (
+                  <div>
+                    <VideoPlayer 
+                      publicId={videoPublicId}
+                      portrait={true}
+                      className="shadow-lg"
+                      controls={true}
+                      autoPlay={false}
+                      muted={true}
+                      loop={false}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Hero Section - Three Stacked Images Layout for Dreaming with the Archives */}
+            {project.slug === 'dreaming-with-the-archives' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+              <div className="space-y-8">
+                {/* Three Stacked Hero Images */}
+                <div className="flex flex-col h-full space-y-4">
+                  {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
+                    <div key={index} className="flex-1 min-h-0">
+                      <div className="w-full h-full" style={{ aspectRatio: '3/1' }}>
+                        <Media
+                          media={image}
+                          className="w-full h-full object-cover overflow-hidden"
+                          alt={`Dreaming with the Archives header image ${index + 1}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Video Player */}
+                {videoPublicId && (
+                  <div>
+                    <VideoPlayer 
+                      publicId={videoPublicId}
+                      portrait={true}
+                      className="shadow-lg"
+                      controls={true}
+                      autoPlay={false}
+                      muted={true}
+                      loop={false}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Standard Video Player for other projects */}
+            {project.slug !== 'blacklands' && project.slug !== 'moma' && project.slug !== 'nycam' && project.slug !== 'dreaming-with-the-archives' && videoPublicId && (
               <div className="py-8 bg-gray-50">
                 <VideoPlayer 
                   publicId={videoPublicId}
@@ -99,23 +253,39 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
             )}
 
             {/* Image Carousels and Gallery - Full width on mobile/tablet */}
-            {project.elements.map((element, elementIndex) => (
+            {regularElements.map((element, elementIndex) => (
               <div key={elementIndex} className="space-y-8">
-                {/* Detail Images Carousel */}
-                {element.detail && element.detail.length > 0 && (
+                {/* Element Title and Tab Selector */}
+                {(element.profile && element.profile.length > 0) || (element.detail && element.detail.length > 0) ? (
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-body font-bold text-core-dark">
+                      {element.name}
+                    </h3>
+                    {(element.profile && element.profile.length > 0) && (element.detail && element.detail.length > 0) && (
+                      <TabSelector 
+                        onTabChange={(tabType) => handleTabChange(element.name, tabType)} 
+                        hasProfile={!!(element.profile && element.profile.length > 0)} 
+                        hasDetail={!!(element.detail && element.detail.length > 0)} 
+                      />
+                    )}
+                  </div>
+                ) : null}
+
+                {/* Profile Images Carousel - Default */}
+                {element.profile && element.profile.length > 0 && (getActiveCarouselType(element.name) === 'profile' || !element.detail) && (
+                  <ImageCarousel
+                    images={element.profile.map(img => buildCloudinaryUrl(img.public_id))}
+                    title={element.name}
+                    type="profile"
+                  />
+                )}
+
+                {/* Detail Images Carousel - Only when selected */}
+                {element.detail && element.detail.length > 0 && getActiveCarouselType(element.name) === 'detail' && (
                   <ImageCarousel
                     images={element.detail.map(img => buildCloudinaryUrl(img.public_id))}
                     title={element.name}
                     type="detail"
-                  />
-                )}
-
-                {/* Profile Images Carousel */}
-                {element.profile && element.profile.length > 0 && (
-                  <ImageCarousel
-                    images={element.profile.map(img => buildCloudinaryUrl(img.public_id))}
-                    title={`${element.name} Profile Views`}
-                    type="profile"
                   />
                 )}
 
@@ -146,8 +316,142 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
           <div className="hidden lg:grid lg:grid-cols-4 gap-6">
             {/* Masonry Gallery Column - Takes up 3 columns */}
             <div className="lg:col-span-3 space-y-8">
-              {/* Video Player - Top of masonry column */}
-              {videoPublicId && (
+              {/* Hero Section - Two Column Layout for Blacklands */}
+              {project.slug === 'blacklands' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Column 1: Hero Image */}
+                  <div>
+                    {project.elements.find(el => el.name === 'Main Content')?.hero?.[0] && (
+                      <Media
+                        media={project.elements.find(el => el.name === 'Main Content')?.hero![0]!}
+                        className="w-full aspect-[9/16] object-cover"
+                        alt="BLACKLANDS Hero Image"
+                      />
+                    )}
+                  </div>
+                  
+                  {/* Column 2: Video Player */}
+                  {videoPublicId && (
+                    <div>
+                      <VideoPlayer 
+                        publicId={videoPublicId}
+                        portrait={true}
+                        className="shadow-lg"
+                        controls={true}
+                        autoPlay={false}
+                        muted={true}
+                        loop={false}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Hero Section - Three Stacked Images Layout for Dreaming with the Archives */}
+              {project.slug === 'dreaming-with-the-archives' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Column 1: Three Stacked Hero Images */}
+                  <div className="flex flex-col h-full space-y-4">
+                    {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
+                      <div key={index} className="flex-1 min-h-0">
+                        <div className="w-full h-full" style={{ aspectRatio: '3/1' }}>
+                          <Media
+                            media={image}
+                            className="w-full h-full object-cover overflow-hidden"
+                            alt={`Dreaming with the Archives header image ${index + 1}`}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Column 2: Video Player */}
+                  {videoPublicId && (
+                    <div>
+                      <VideoPlayer 
+                        publicId={videoPublicId}
+                        portrait={true}
+                        className="shadow-lg"
+                        controls={true}
+                        autoPlay={false}
+                        muted={true}
+                        loop={false}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Hero Section - Three Stacked Images Layout for MOMA */}
+              {project.slug === 'moma' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Column 1: Three Stacked Hero Images */}
+                  <div className="flex flex-col h-full space-y-4">
+                    {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
+                      <div key={index} className="flex-1 min-h-0">
+                        <div className="w-full h-full" style={{ aspectRatio: '3/1' }}>
+                          <Media
+                            media={image}
+                            className="w-full h-full object-cover overflow-hidden"
+                            alt={`MoMA header image ${index + 1}`}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Column 2: Video Player */}
+                  {videoPublicId && (
+                    <div>
+                      <VideoPlayer 
+                        publicId={videoPublicId}
+                        portrait={true}
+                        className="shadow-lg"
+                        controls={true}
+                        autoPlay={false}
+                        muted={true}
+                        loop={false}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Hero Section - Three Stacked Images Layout for NYCAM */}
+              {project.slug === 'nycam' && project.elements.find(el => el.name === 'Main Content')?.hero && (
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Column 1: Three Stacked Hero Images */}
+                  <div className="flex flex-col h-full space-y-4">
+                    {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
+                      <div key={index} className="flex-1 min-h-0">
+                        <Media
+                          media={image}
+                          className="w-full h-full object-cover overflow-hidden"
+                          alt={`NYCAM header image ${index + 1}`}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Column 2: Video Player */}
+                  {videoPublicId && (
+                    <div>
+                      <VideoPlayer 
+                        publicId={videoPublicId}
+                        portrait={true}
+                        className="shadow-lg"
+                        controls={true}
+                        autoPlay={false}
+                        muted={true}
+                        loop={false}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Standard Video Player for other projects */}
+              {project.slug !== 'blacklands' && project.slug !== 'dreaming-with-the-archives' && project.slug !== 'moma' && project.slug !== 'nycam' && videoPublicId && (
                 <div className="py-8 bg-gray-50">
                   <VideoPlayer 
                     publicId={videoPublicId}
@@ -163,23 +467,39 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
               )}
 
               {/* Image Carousels and Gallery */}
-              {project.elements.map((element, elementIndex) => (
+              {regularElements.map((element, elementIndex) => (
                 <div key={elementIndex} className="space-y-8">
-                  {/* Detail Images Carousel */}
-                  {element.detail && element.detail.length > 0 && (
+                  {/* Element Title and Tab Selector */}
+                  {(element.profile && element.profile.length > 0) || (element.detail && element.detail.length > 0) ? (
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-body font-bold text-core-dark">
+                        {element.name}
+                      </h3>
+                      {(element.profile && element.profile.length > 0) && (element.detail && element.detail.length > 0) && (
+                        <TabSelector 
+                          onTabChange={(tabType) => handleTabChange(element.name, tabType)} 
+                          hasProfile={!!(element.profile && element.profile.length > 0)} 
+                          hasDetail={!!(element.detail && element.detail.length > 0)} 
+                        />
+                      )}
+                    </div>
+                  ) : null}
+
+                  {/* Profile Images Carousel - Default */}
+                  {element.profile && element.profile.length > 0 && (getActiveCarouselType(element.name) === 'profile' || !element.detail) && (
+                    <ImageCarousel
+                      images={element.profile.map(img => buildCloudinaryUrl(img.public_id))}
+                      title={element.name}
+                      type="profile"
+                    />
+                  )}
+
+                  {/* Detail Images Carousel - Only when selected */}
+                  {element.detail && element.detail.length > 0 && getActiveCarouselType(element.name) === 'detail' && (
                     <ImageCarousel
                       images={element.detail.map(img => buildCloudinaryUrl(img.public_id))}
                       title={element.name}
                       type="detail"
-                    />
-                  )}
-
-                  {/* Profile Images Carousel */}
-                  {element.profile && element.profile.length > 0 && (
-                    <ImageCarousel
-                      images={element.profile.map(img => buildCloudinaryUrl(img.public_id))}
-                      title={`${element.name} Profile Views`}
-                      type="profile"
                     />
                   )}
 

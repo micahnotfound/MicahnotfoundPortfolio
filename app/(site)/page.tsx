@@ -33,9 +33,9 @@ export default function HomePage() {
     <div className="flex flex-col">
       {/* Projects Horizontal Row Section - Fixed height, no vertical scroll */}
       <section className="flex-1 flex items-center">
-        <div className="w-full max-w-7xl mx-auto flex justify-center">
+        <div className="w-full max-w-7xl mx-auto flex justify-center px-6 xl:px-[25px]">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
-          <div className="flex overflow-x-auto space-x-3 md:space-x-4 lg:space-x-5 pb-6 snap-x snap-mandatory ml-6">
+          <div className="flex overflow-x-auto space-x-3 md:space-x-4 lg:space-x-5 pb-6 snap-x snap-mandatory">
             {isLoading ? (
               // Show skeleton loading animation
               Array.from({ length: skeletonCount }).map((_, index) => (

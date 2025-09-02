@@ -9,6 +9,17 @@
   "technologies": ["Augmented Reality", "Immersive Exhibition", "Digital Monuments", "Community Memory", "Historical Research"],
   "elements": [
     {
+      "name": "Main Content",
+      "hero": [
+        {
+          "public_id": "v1756775322/Blacklands_H1_okkjx9",
+          "kind": "image",
+          "alt": "BLACKLANDS Hero Image",
+          "caption": "BLACKLANDS main hero image"
+        }
+      ]
+    },
+    {
       "name": "Manuel Gerrit De Reus",
       "detail": [
         { "public_id": "v1756680427/1_cozcjv", "kind": "image", "alt": "Manuel Gerrit De Reus detail 1", "caption": "Manuel Gerrit De Reus detail view 1" },
@@ -18,7 +29,7 @@
         { "public_id": "v1756680402/image_147_0000_fvewf9", "kind": "image", "alt": "Manuel Gerrit De Reus detail 5", "caption": "Manuel Gerrit De Reus detail view 5" },
         { "public_id": "v1756571829/1_mjqzip", "kind": "image", "alt": "Manuel Gerrit De Reus detail 6", "caption": "Manuel Gerrit De Reus detail view 6" },
         { "public_id": "v1756571821/image_146_0000_kdvcqe", "kind": "image", "alt": "Manuel Gerrit De Reus detail 7", "caption": "Manuel Gerrit De Reus detail view 7" },
-        { "public_id": "v1756571820/image_144_0000_jd8z2p", "kind": "image", "alt": "Manuel Gerrit De Reus detail 8", "caption": "Manuel Gerrit De Reus detail view 8" },
+        { "public_id": "v1756571820/image_144_0000_jd8z2p", "kind": "image", "alt": "Manuel Gerrit De Reus detail view 8", "caption": "Manuel Gerrit De Reus detail view 8" },
         { "public_id": "v1756571819/image_148_0000_vhsjwh", "kind": "image", "alt": "Manuel Gerrit De Reus detail 9", "caption": "Manuel Gerrit De Reus detail view 9" },
         { "public_id": "v1756571818/image_147_0000_acwcyj", "kind": "image", "alt": "Manuel Gerrit De Reus detail 10", "caption": "Manuel Gerrit De Reus detail view 10" }
       ],
@@ -70,7 +81,7 @@
         { "public_id": "v1756680408/image_155_0000_me1h3g", "kind": "image", "alt": "Sojourner Truth detail 5", "caption": "Sojourner Truth detail view 5" },
         { "public_id": "v1756680408/image_154_0000_i6s9ou", "kind": "image", "alt": "Sojourner Truth detail 6", "caption": "Sojourner Truth detail view 6" },
         { "public_id": "v1756680401/image_157_0000_ymmazj", "kind": "image", "alt": "Sojourner Truth detail 7", "caption": "Sojourner Truth detail view 7" },
-        { "public_id": "v1756571821/image_156_0000_t1zp0n", "kind": "image", "alt": "Sojourner Truth detail 8", "caption": "Sojourner Truth detail view 8" },
+        { "public_id": "v1756571821/image_156_0000_t1zp0n", "kind": "image", "alt": "Sojourner Truth detail view 8", "caption": "Sojourner Truth detail view 8" },
         { "public_id": "v1756571820/image_153_0000_xobgpy", "kind": "image", "alt": "Sojourner Truth detail 9", "caption": "Sojourner Truth detail view 9" },
         { "public_id": "v1756571820/image_158_0000_gov1fn", "kind": "image", "alt": "Sojourner Truth detail 10", "caption": "Sojourner Truth detail view 10" },
         { "public_id": "v1756571820/image_152_0000_tzvpdc", "kind": "image", "alt": "Sojourner Truth detail 11", "caption": "Sojourner Truth detail view 11" },
@@ -92,10 +103,9 @@
     {
       "name": "Exhibition Gallery",
       "gallery": [
-        { "public_id": "v1756680406/BL_horizontal_0000_Layer-Comp-1_tw9qhu", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view", "width": 1200, "height": 600 },
-        { "public_id": "v1756680405/Untitled-1_mfynyf", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view", "width": 800, "height": 600 },
-        { "public_id": "v1756680404/BL_horizontal_0001_Layer-Comp-2_dnmcc1", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition", "width": 1200, "height": 600 },
-        { "public_id": "v1756680402/BL_horizontal_0002_Layer-Comp-3_znz6il", "kind": "image", "alt": "BLACKLANDS exhibition view 4", "caption": "Exhibition perspective", "width": 1200, "height": 600 }
+        { "public_id": "v1756775074/Blacklands_R1_cobywl", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view", "width": 1200, "height": 600 },
+        { "public_id": "v1756775074/Blacklands_R2_qaects", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view", "width": 1200, "height": 600 },
+        { "public_id": "v1756775074/Blacklands_R3_fija7f", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition", "width": 1200, "height": 600 }
       ]
     }
   ],

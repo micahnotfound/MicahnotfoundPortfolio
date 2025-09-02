@@ -34,8 +34,9 @@ export interface ProjectElement {
   name: string
   detail?: MediaItem[]
   profile?: MediaItem[]
+  gallery?: MediaItem[]
   'header-clips'?: MediaItem[]
-  gallery?: GalleryItem[]
+  hero?: MediaItem[]
 }
 
 export interface GalleryItem {

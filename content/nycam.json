@@ -9,6 +9,29 @@
   "technologies": ["Exhibition Design", "3D Art", "Public Art", "Memorial Design", "Contemporary Art"],
   "elements": [
     {
+      "name": "Main Content",
+      "hero": [
+        {
+          "public_id": "v1756782105/H1_idij9u",
+          "kind": "image",
+          "alt": "NYCAM header image 1",
+          "caption": "Header image 1"
+        },
+        {
+          "public_id": "v1756782099/NYCAM_0000_Derek_nyouvl",
+          "kind": "image",
+          "alt": "NYCAM header image 2",
+          "caption": "Header image 2"
+        },
+        {
+          "public_id": "v1756782110/H3_ppxroy",
+          "kind": "image",
+          "alt": "NYCAM header image 3",
+          "caption": "Header image 3"
+        }
+      ]
+    },
+    {
       "name": "Derek Fordjour",
       "detail": [
         { "public_id": "v1756696363/Image_Sequence_014_0000_kt7c06", "kind": "image", "alt": "Derek Fordjour detail 1", "caption": "Derek Fordjour detail view 1" },
@@ -34,17 +57,10 @@
     {
       "name": "Gallery Exhibition",
       "gallery": [
-        { "public_id": "v1756680421/NYCAM_0001_jacolby_vwodzn", "kind": "image", "alt": "NYCAM exhibition view 1", "caption": "Jacolby exhibition view", "width": 1200, "height": 800 },
-        { "public_id": "v1756680419/NYCAM_0000_Derek_cqs6wb", "kind": "image", "alt": "NYCAM exhibition view 2", "caption": "Derek Fordjour exhibition view", "width": 1200, "height": 800 },
-        { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM exhibition view 3", "caption": "Exhibition background view", "width": 1200, "height": 800 },
-        { "public_id": "v1756680411/NYCAM_0000_BL_horizontal_0004_Layer-Comp-5_awcv2v", "kind": "image", "alt": "NYCAM exhibition view 4", "caption": "Exhibition composition view", "width": 1200, "height": 600 },
-        { "public_id": "v1756680410/NYCAM_0003_BL_horizontal_0001_Layer-Comp-2_xitx2h", "kind": "image", "alt": "NYCAM exhibition view 5", "caption": "Exhibition perspective view", "width": 1200, "height": 600 },
-        { "public_id": "v1756680407/NYCAM_0002_BL_horizontal_0002_Layer-Comp-3_wfnryt", "kind": "image", "alt": "NYCAM exhibition view 6", "caption": "Exhibition composition", "width": 1200, "height": 600 },
-        { "public_id": "v1756680406/55_mbvxf0", "kind": "image", "alt": "NYCAM exhibition view 7", "caption": "Exhibition detail view", "width": 800, "height": 600 },
-        { "public_id": "v1756680405/NYCAM_0004_BL_horizontal_0000_Layer-Comp-1_i4olno", "kind": "image", "alt": "NYCAM exhibition view 8", "caption": "Exhibition perspective", "width": 1200, "height": 600 },
-        { "public_id": "v1756680405/BL_horizontal_0000_Layer-Comp-1_nsrdox", "kind": "image", "alt": "NYCAM exhibition view 9", "caption": "Exhibition composition", "width": 1200, "height": 600 },
-        { "public_id": "v1756680400/NYCAM_0001_BL_horizontal_0003_Layer-Comp-4_qztlfk", "kind": "image", "alt": "NYCAM exhibition view 10", "caption": "Exhibition detail", "width": 1200, "height": 600 }
-      ]
+        { "public_id": "v1756780621/R1_A_ryxn1y.png", "kind": "image", "alt": "NYCAM exhibition view 1", "caption": "Jacolby exhibition view", "width": 1200, "height": 800 },
+        { "public_id": "v1756780486/R1_B_kbxmbz.png", "kind": "image", "alt": "NYCAM exhibition view 2", "caption": "Derek Fordjour exhibition view", "width": 1200, "height": 800 },
+        { "public_id": "v1756780508/R2_A_oqvezy.png", "kind": "image", "alt": "NYCAM exhibition view 3", "caption": "Exhibition background view", "width": 1200, "height": 800 },
+        { "public_id": "v1756780504/NYCAM_0002_BL_horizontal_0002_Layer-Comp-3_tjjla8.png", "kind": "image", "alt": "NYCAM exhibition view 4", "caption": "Exhibition composition view", "width": 1200, "height": 800 }      ]
     },
     {
       "name": "Sylvester",
@@ -66,7 +82,7 @@
     }
   ],
   "thumbnails": [
-    { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM project thumbnail", "caption": "NYCAM project thumbnail" }
+    { "public_id": "v1756782105/H1_idij9u.png", "kind": "image", "alt": "NYCAM project thumbnail", "caption": "NYCAM project thumbnail" }
   ],
   "cover": { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM project cover", "caption": "NYCAM project cover image" }
 }

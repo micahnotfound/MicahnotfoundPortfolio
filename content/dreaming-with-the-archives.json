@@ -9,6 +9,29 @@
   "technologies": ["Augmented Reality", "Public Art", "Digital Monuments", "Site-Specific Installation", "Collective Memory"],
   "elements": [
     {
+      "name": "Main Content",
+      "hero": [
+        {
+          "public_id": "v1756779258/h2_cjjt1w",
+          "kind": "image",
+          "alt": "Dreaming with the Archives header image 2",
+          "caption": "Header image 2"
+        },
+        {
+          "public_id": "v1756779255/h1_uotwpd",
+          "kind": "image",
+          "alt": "Dreaming with the Archives header image 1",
+          "caption": "Header image 1"
+        },
+        {
+          "public_id": "v1756779251/h3_eyedug",
+          "kind": "image",
+          "alt": "Dreaming with the Archives header image 3",
+          "caption": "Header image 3"
+        }
+      ]
+    },
+    {
       "name": "Bibi Bahari",
       "profile": [
         { "public_id": "v1756696184/image_212_0000_ypfi90", "kind": "image", "alt": "Bibi Bahari profile 1", "caption": "Bibi Bahari profile view 1" },
@@ -33,12 +56,9 @@
     {
       "name": "Exhibition Gallery",
       "gallery": [
-        { "public_id": "v1756680389/Banners_0003_Layer_2_pt4aly", "kind": "image", "alt": "DWA exhibition banner 1", "caption": "Exhibition banner view 1", "width": 1200, "height": 600 },
-        { "public_id": "v1756680386/Banners_0001_Layer_4_p8xv53", "kind": "image", "alt": "DWA exhibition banner 2", "caption": "Exhibition banner view 2", "width": 1200, "height": 600 },
-        { "public_id": "v1756680385/Banners_0004_Layer_1_gkay4z", "kind": "image", "alt": "DWA exhibition banner 3", "caption": "Exhibition banner view 3", "width": 1200, "height": 600 },
-        { "public_id": "v1756680385/Banners_0000_Layer_5_mgu7nc", "kind": "image", "alt": "DWA exhibition banner 4", "caption": "Exhibition banner view 4", "width": 1200, "height": 600 },
-        { "public_id": "v1756680384/Banners_0002_Layer_3_wsydzy", "kind": "image", "alt": "DWA exhibition banner 5", "caption": "Exhibition banner view 5", "width": 1200, "height": 600 },
-        { "public_id": "v1756680384/thumbnails_0000_Layer_7_abpzsq", "kind": "image", "alt": "DWA exhibition thumbnail", "caption": "Exhibition thumbnail view", "width": 800, "height": 600 }
+        { "public_id": "v1756680389/Banners_0003_Layer_2_pt4aly", "kind": "image", "alt": "DWA exhibition banner 1", "caption": "Exhibition banner view 1", "width": 800, "height": 600 },
+        { "public_id": "v1756680384/thumbnails_0000_Layer_7_abpzsq", "kind": "image", "alt": "DWA exhibition thumbnail", "caption": "Exhibition thumbnail view", "width": 800, "height": 600 },
+        { "public_id": "v1756680384/Banners_0002_Layer_3_wsydzy", "kind": "image", "alt": "DWA exhibition banner 5", "caption": "Exhibition banner view 5", "width": 1200, "height": 600 }
       ]
     },
     {
@@ -53,7 +73,7 @@
         { "public_id": "v1756680433/Image_Sequence_007_0000_g6uj6x", "kind": "image", "alt": "Last Farmer detail 7", "caption": "Last Farmer detail view 7" },
         { "public_id": "v1756680430/image_188_0000_luh0lp", "kind": "image", "alt": "Last Farmer detail 8", "caption": "Last Farmer detail view 8" },
         { "public_id": "v1756680430/image_184_0000_zefdog", "kind": "image", "alt": "Last Farmer detail 9", "caption": "Last Farmer detail view 9" },
-        { "public_id": "v1756680419/image_187_0000_nuilct", "kind": "image", "alt": "Last Farmer detail 10", "caption": "Last Farmer detail view 10" },
+        { "public_id": "v1756696198/image_187_0000_cerlaz", "kind": "image", "alt": "Last Farmer detail 10", "caption": "Last Farmer detail view 10" },
         { "public_id": "v1756680418/image_186_0000_c8dc1n", "kind": "image", "alt": "Last Farmer detail 11", "caption": "Last Farmer detail view 11" },
         { "public_id": "v1756680417/image_185_0000_w4mwmb", "kind": "image", "alt": "Last Farmer detail 12", "caption": "Last Farmer detail view 12" }
       ],

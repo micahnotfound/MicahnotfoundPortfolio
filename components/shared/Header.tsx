@@ -13,7 +13,7 @@ export function Header() {
 
   return (
     <header className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 bg-white/90 backdrop-blur-sm`}>
-      <div className="w-full max-w-7xl mx-auto px-6">
+      <div className="w-full max-w-7xl mx-auto px-6 xl:px-[25px]">
         <div className="flex justify-between items-center h-32 py-4">
           {/* Left Side: Logo, Separator, About/Work */}
           <div className="flex items-center">
@@ -46,7 +46,7 @@ export function Header() {
           </div>
 
           {/* Right Side: MICAH MILNER logotype (desktop only) */}
-          <div className="hidden md:flex items-center px-4">
+          <div className="hidden md:flex items-center">
             <Link href="/" className="hover:opacity-80 transition-opacity duration-200">
               <img 
                 src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756572604/Micah_text_vlnslw.svg"

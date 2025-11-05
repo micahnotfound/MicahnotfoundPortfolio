@@ -417,13 +417,13 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                 </div>
               )}
 
-              {/* Hero Section - Three Stacked Images Layout for NYCAM */}
-              {project.slug === 'nycam' && project.elements.find(el => el.name === 'Main Content')?.hero && (
-                <div className="grid grid-cols-2 gap-6">
+                            {/* Hero Section - Three Stacked Images Layout for NYCAM */}      
+              {project.slug === 'nycam' && project.elements.find(el => el.name === 'Main Content')?.hero && (                                                   
+                <div className="grid grid-cols-2 gap-6 items-end">
                   {/* Column 1: Three Stacked Hero Images */}
-                  <div className="flex flex-col h-full space-y-4">
-                    {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (
-                      <div key={index} className="flex-1 min-h-0">
+                  <div className="w-full aspect-[9/16] flex flex-col justify-end gap-4">
+                    {project.elements.find(el => el.name === 'Main Content')?.hero?.map((image, index) => (                                                     
+                      <div key={index} style={{ height: 'calc((100% - 2rem) / 3)' }} className="flex-shrink-0">
                         <Media
                           media={image}
                           className="w-full h-full object-cover overflow-hidden"
@@ -432,11 +432,11 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
                       </div>
                     ))}
                   </div>
-                  
+
                   {/* Column 2: Video Player */}
                   {videoPublicId && (
-                    <div>
-                      <VideoPlayer 
+                    <div className="w-full">
+                      <VideoPlayer
                         publicId={videoPublicId}
                         portrait={true}
                         className="shadow-lg"

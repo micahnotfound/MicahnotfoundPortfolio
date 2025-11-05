@@ -27,6 +27,11 @@ export interface MediaItem {
   kind: MediaKind
   alt?: string
   caption?: string
+  posterId?: string
+  transforms?: {
+    thumb?: string
+    full?: string
+  }
 }
 
 // Project
@@ -67,7 +72,11 @@ export interface HomeData {
   hero: {
     title: string
     subtitle: string
-    carousel: MediaItem[]
+    carousel: Array<{
+      public_id: string
+      kind: string
+      alt: string
+    }>
   }
   featuredProjects: {
     title: string

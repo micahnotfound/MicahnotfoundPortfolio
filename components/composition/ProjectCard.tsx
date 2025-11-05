@@ -27,95 +27,52 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   const isTitleAtTop = index % 2 === 1
 
   return (
-    <div className="flex-shrink-0 w-64 md:w-72 lg:w-80 snap-start">
+    <div className="flex-shrink-0 snap-start animate-fadeIn flex flex-col h-full" style={{ animationDelay: `${index * 100}ms` }}>
+      {/* Thumbnail - Portrait aspect ratio - scales with available height, maintaining aspect ratio */}
       <Link
         href={`/work/${project.slug}`}
         onClick={handleClick}
         className={`
-          block group cursor-pointer
+          block cursor-pointer mb-3 flex-1 min-h-0
+          ${isLoading ? 'pointer-events-none' : ''}
+        `}
+        aria-label={`View ${project.title} project`}
+        style={{ width: '15rem' }} // Fixed width (240px / w-60)
+      >
+        <Media
+          media={thumbnailMedia}
+          className="w-full h-full object-cover object-top"
+          alt={`${project.title} thumbnail`}
+        />
+      </Link>
+
+      {/* Title button below image - fixed size, always visible */}
+      <Link
+        href={`/work/${project.slug}`}
+        onClick={handleClick}
+        className={`
+          block cursor-pointer group flex-shrink-0
           ${isLoading ? 'pointer-events-none' : ''}
         `}
         aria-label={`View ${project.title} project`}
       >
-        <div className="flex flex-col">
-          {/* Mobile Layout: Title at top for odd indices */}
-          {isTitleAtTop && (
-            <div className="md:hidden mb-4">
-              <div
-                className={`
-                  relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
-                  group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
-                  w-fit inline-block
-                  ${isLoading ? 'animate-pulse' : ''}
-                `}
-              >
-                {/* Loading Border Animation */}
-                {isLoading && (
-                  <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
-                )}
-                
-                {/* Button Content */}
-                <span className="relative z-10 italic whitespace-pre-line">
-                  {isLoading ? 'Loading...' : project.title}
-                </span>
-              </div>
-            </div>
+        <div
+          className={`
+            relative border-[5px] border-core-dark px-4 py-1 text-left font-ui font-bold bg-core-dark text-white
+            group-hover:bg-white group-hover:text-core-dark transition-all duration-300 ease-out
+            inline-block text-[0.95em] whitespace-nowrap
+            ${isLoading ? 'animate-pulse' : ''}
+          `}
+        >
+          {/* Loading Border Animation */}
+          {isLoading && (
+            <div className="absolute inset-0 border-[5px] border-core-dark animate-ping opacity-20" />
           )}
 
-          {/* Thumbnail - Portrait aspect ratio with hover effect */}
-          <div className="mb-6 overflow-hidden">
-            <Media
-              media={thumbnailMedia}
-              className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300"
-              alt={`${project.title} thumbnail`}
-            />
-          </div>
-
-          {/* Desktop Layout: Title always at bottom */}
-          <div className="hidden md:block">
-            <div
-              className={`
-                relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
-                group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
-                w-fit inline-block
-                ${isLoading ? 'animate-pulse' : ''}
-              `}
-            >
-              {/* Loading Border Animation */}
-              {isLoading && (
-                <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
-              )}
-              
-              {/* Button Content */}
-              <span className="relative z-10 italic whitespace-pre-line">
-                {isLoading ? 'Loading...' : project.title}
-              </span>
-            </div>
-          </div>
-
-          {/* Mobile Layout: Title at bottom for even indices */}
-          {!isTitleAtTop && (
-            <div className="md:hidden">
-              <div
-                className={`
-                  relative border-[7px] border-core-dark px-6 py-2 text-left font-ui font-bold text-core-dark 
-                  group-hover:bg-core-dark group-hover:text-white transition-all duration-300 ease-out
-                  w-fit inline-block
-                  ${isLoading ? 'animate-pulse' : ''}
-                `}
-              >
-                {/* Loading Border Animation */}
-                {isLoading && (
-                  <div className="absolute inset-0 border-[7px] border-core-dark animate-ping opacity-20" />
-                )}
-                
-                {/* Button Content */}
-                <span className="relative z-10 italic whitespace-pre-line">
-                  {isLoading ? 'Loading...' : project.title}
-                </span>
-              </div>
-            </div>
-          )}
+          {/* Button Content */}
+          <span className="relative z-10 italic">
+            {isLoading ? 'Loading...' : project.title}
+          </span>
         </div>
       </Link>
     </div>

@@ -34,6 +34,22 @@
     @apply font-sans;
   }
 
+  /* Make body copy 10% smaller */
+  .prose,
+  .prose p,
+  .prose-lg,
+  .prose-lg p,
+  p.text-gray-700.font-body {
+    font-size: 0.9em !important;
+  }
+
+  /* Make homepage project card buttons 10% smaller */
+  /* Target buttons within project cards on homepage (section with flex-1 class) */
+  section.flex-1 .border-core-dark.font-ui.font-bold span,
+  section.flex-1 .border-core-dark.font-ui.font-bold {
+    font-size: 0.9em !important;
+  }
+
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
@@ -64,6 +80,16 @@
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-400;
+  }
+
+  /* Hide scrollbar utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
   }
 
   /* Reduced motion support */

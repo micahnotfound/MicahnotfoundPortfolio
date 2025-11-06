@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Inter, Playfair_Display, Epilogue, Crimson_Text } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/shared/Header'
-import { Footer } from '@/components/shared/Footer'
 import { ConditionalLayout } from '@/components/shared/ConditionalLayout'
+import { MagneticCursor } from '@/components/shared/MagneticCursor'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -63,12 +63,12 @@ export default function RootLayout({
           Skip to main content
         </a>
 
+        <MagneticCursor />
         <ConditionalLayout>
           <Header />
           <main id="main-content" className="flex-1">
             {children}
           </main>
-          <Footer />
         </ConditionalLayout>
       </body>
     </html>

@@ -14,15 +14,15 @@ export function Header() {
   return (
     <header className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 bg-white/90 backdrop-blur-sm`}>
       <div className="w-full max-w-[2000px] px-20 xl:px-[100px]">
-        <div className="flex justify-between items-center h-32 py-4 mt-[5px] mb-[10px]">
+        <div className="flex justify-between items-center h-[138px] py-4 mt-[5px] mb-[10px]">
                     {/* Left Side: Logo, Separator, About/Work */}
           <div className="flex items-center">
-            {/* Logo - logoWithText for all screen sizes */}
+            {/* Logo - icon only without text */}
             <Link href="/" className="flex items-center">
               <img
-                src={buildLogoUrl('logoWithText')}
+                src={buildLogoUrl('logoIconOnly')}
                 alt="Micah Milner Logo"
-                className="h-[90px] w-auto"
+                className="h-[100px] w-auto"
               />
             </Link>
 
@@ -35,9 +35,20 @@ export function Header() {
             <Link
               href={isAboutPage ? "/" : "/about"}
               className="border-[5px] border-core-dark px-4 py-1 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200 text-[0.95em]"
+              data-cursor-hover
             >
               {isAboutPage ? "work" : "about"}
             </Link>
+
+            {/* Contact button - moved 25px further right */}
+            <a
+              href="mailto:micah@art404.com"
+              className="border-[5px] border-core-dark px-4 py-1 text-center font-ui font-bold text-core-dark hover:bg-core-dark hover:text-white transition-colors duration-200 text-[0.95em]"
+              style={{ marginLeft: '57px' }}
+              data-cursor-hover
+            >
+              contact
+            </a>
           </div>
         </div>
       </div>

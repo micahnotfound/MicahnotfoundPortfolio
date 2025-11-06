@@ -10,8 +10,10 @@ import type { Project } from '@/types/content'
 export default function HomePage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
   const verticalScrollRef = useRef<HTMLDivElement>(null)
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     // Simulate loading time for the cool skeleton effect
@@ -124,7 +126,7 @@ export default function HomePage() {
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory flex-1 items-end pb-6 min-h-0 scrollbar-hide"
+            className="flex overflow-x-auto flex-1 items-end pb-6 min-h-0 scrollbar-hide"
             style={{
               gap: '0.6rem', // 4x wider: 0.15rem * 4 = 0.6rem
             }}
@@ -136,13 +138,42 @@ export default function HomePage() {
               ))
             ) : (
               // Show actual project cards with fade-in animation, plus two placeholder projects
-              [...projects, ...projects.slice(0, 2)].map((project, index) => (
-                <ProjectCard
-                  key={`${project.slug}-${index}`}
-                  project={project}
-                  index={index}
-                />
-              ))
+              [...projects, ...projects.slice(0, 2)].map((project, index) => {
+                const totalCards = projects.length + 2
+                const isHovered = hoveredIndex === index
+                const someoneIsHovered = hoveredIndex !== null
+                const distance = hoveredIndex !== null ? Math.abs(index - hoveredIndex) : 0
+
+                const handleMouseEnter = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  setHoveredIndex(index)
+                }
+
+                const handleMouseLeave = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  hoverTimeoutRef.current = setTimeout(() => {
+                    setHoveredIndex(null)
+                  }, 50)
+                }
+
+                return (
+                  <ProjectCard
+                    key={`${project.slug}-${index}`}
+                    project={project}
+                    index={index}
+                    isHovered={isHovered}
+                    someoneIsHovered={someoneIsHovered}
+                    distanceFromHovered={distance}
+                    totalCards={totalCards}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  />
+                )
+              })
             )}
           </div>
         </div>

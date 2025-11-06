@@ -14,7 +14,7 @@ export function Header() {
   return (
     <header className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 bg-white/90 backdrop-blur-sm`}>
       <div className="w-full max-w-[2000px] px-20 xl:px-[100px]">
-        <div className="flex justify-between items-center h-32 py-4 mt-[5px]">
+        <div className="flex justify-between items-center h-32 py-4 mt-[5px] mb-[10px]">
                     {/* Left Side: Logo, Separator, About/Work */}
           <div className="flex items-center">
             {/* Logo - logoWithText for all screen sizes */}

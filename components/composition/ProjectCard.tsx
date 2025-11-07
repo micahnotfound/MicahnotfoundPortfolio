@@ -12,11 +12,14 @@ interface ProjectCardProps {
   someoneIsHovered?: boolean
   distanceFromHovered?: number
   totalCards?: number
+  hoverArea?: 'photo' | 'button' | null
   onMouseEnter?: () => void
   onMouseLeave?: () => void
+  onButtonAreaEnter?: () => void
+  onButtonAreaLeave?: () => void
 }
 
-export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHovered = false, distanceFromHovered = 0, totalCards = 8, onMouseEnter, onMouseLeave }: ProjectCardProps) {
+export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHovered = false, distanceFromHovered = 0, totalCards = 8, hoverArea = null, onMouseEnter, onMouseLeave, onButtonAreaEnter, onButtonAreaLeave }: ProjectCardProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 }) // percentage
   const [entryPoint, setEntryPoint] = useState({ x: 50, y: 50 }) // Store entry point
@@ -61,6 +64,40 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   // Generate full card polygon
   const getFullCard = () => {
     return `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)`
+  }
+
+  // Calculate image flex - GLOBAL effect based on which area is hovered
+  const getImageFlex = () => {
+    if (hoverArea === 'button') {
+      return '1 1 50%' // ALL cards shrink when button area hovered
+    } else if (hoverArea === 'photo') {
+      return '1 1 70%' // ALL cards grow when photo area hovered
+    } else {
+      return '1 1 60%' // Default size
+    }
+  }
+
+  // Button height - GLOBAL effect, shrinks when photo hovered, grows when button hovered
+  const getButtonHeight = () => {
+    if (hoverArea === 'button') {
+      return '280px' // ALL buttons grow when button area hovered
+    } else if (hoverArea === 'photo') {
+      return '140px' // ALL buttons shrink when photo area hovered
+    } else {
+      return '210px' // Default size
+    }
+  }
+
+  // Calculate button padding based on hover states - only for hovered card
+  const getButtonPadding = () => {
+    if (someoneIsHovered && isHovered) {
+      if (hoverArea === 'button') {
+        return '4px 1rem 160px 1rem' // Large padding when button area hovered
+      } else {
+        return '4px 1rem 80px 1rem' // Smaller padding when photo area hovered
+      }
+    }
+    return '0'
   }
 
   // Calculate flex-grow with progressive falloff based on distance from hovered card
@@ -151,21 +188,27 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
         onMouseMove={handleMouseMove}
-        className={`block cursor-pointer mb-3 flex-1 min-h-0 overflow-hidden relative ${isLoading ? 'pointer-events-none' : ''}`}
+        className={`block cursor-pointer mb-3 overflow-hidden relative ${isLoading ? 'pointer-events-none' : ''}`}
+        style={{
+          flex: getImageFlex(),
+          minHeight: 0,
+          transition: 'flex 300ms ease-out',
+        }}
         aria-label={`View ${project.title} project`}
         data-cursor-hover
         ref={cardRef}
       >
         {/* Dark blue background */}
-        <div className="absolute inset-0 w-full h-full bg-core-dark" />
+        <div className="absolute inset-0 w-full h-full bg-core-dark" style={{ zIndex: 1 }} />
 
-        {/* Image that grows from horizontal line at entry point */}
+        {/* Image that reveals from horizontal line at entry point */}
         <div
           className="absolute w-full h-full transition-all duration-700 ease-out"
           style={{
             clipPath: isHovered
               ? getFullCard()  // Expand to full card
               : `polygon(0% ${entryPoint.y}%, 100% ${entryPoint.y}%, 100% ${entryPoint.y}%, 0% ${entryPoint.y}%)`,  // Horizontal line at entry Y position
+            zIndex: 2,
           }}
         >
           <Media
@@ -181,6 +224,14 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
       <Link
         href={`/work/${project.slug}`}
         onClick={handleClick}
+        onMouseEnter={(e) => {
+          // Set entry point to bottom (100%) when entering button area
+          setEntryPoint({ x: 50, y: 100 })
+          if (onButtonAreaEnter) onButtonAreaEnter()
+        }}
+        onMouseLeave={() => {
+          if (onButtonAreaLeave) onButtonAreaLeave()
+        }}
         className={`block cursor-pointer ${isLoading ? 'pointer-events-none' : ''}`}
         aria-label={`View ${project.title} project`}
         data-cursor-hover
@@ -193,12 +244,12 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
           `}
           style={{
             width: someoneIsHovered && isHovered ? `${buttonWidth}px` : '8px',
-            height: '65px',
-            padding: someoneIsHovered && isHovered ? '4px 1rem 20px 1rem' : '0',
+            height: getButtonHeight(),
+            padding: getButtonPadding(),
             display: 'flex',
             alignItems: 'flex-start',
             whiteSpace: 'nowrap',
-            transition: 'width 150ms linear, padding 150ms linear'
+            transition: 'width 150ms linear, padding 150ms linear, height 300ms ease-out'
           }}
         >
           {/* Loading Border Animation */}

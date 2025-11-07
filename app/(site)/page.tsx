@@ -6,11 +6,13 @@ import { ProjectCardSkeleton } from '@/components/composition/ProjectCardSkeleto
 import { getProjects } from '@/lib/content'
 import { siteSettings } from '@/config/siteSettings'
 import type { Project } from '@/types/content'
+import { useHover } from '@/contexts/HoverContext'
 
 export default function HomePage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const { hoverArea, setHoverArea } = useHover() // Use context for hoverArea
   const carouselRef = useRef<HTMLDivElement>(null)
   const verticalScrollRef = useRef<HTMLDivElement>(null)
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -149,6 +151,7 @@ export default function HomePage() {
                     clearTimeout(hoverTimeoutRef.current)
                   }
                   setHoveredIndex(index)
+                  setHoverArea('photo') // Hovering photo area
                 }
 
                 const handleMouseLeave = () => {
@@ -157,6 +160,25 @@ export default function HomePage() {
                   }
                   hoverTimeoutRef.current = setTimeout(() => {
                     setHoveredIndex(null)
+                    setHoverArea(null)
+                  }, 50)
+                }
+
+                const handleButtonAreaEnter = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  setHoveredIndex(index)
+                  setHoverArea('button') // Hovering button area
+                }
+
+                const handleButtonAreaLeave = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  hoverTimeoutRef.current = setTimeout(() => {
+                    setHoveredIndex(null)
+                    setHoverArea(null)
                   }, 50)
                 }
 
@@ -169,8 +191,11 @@ export default function HomePage() {
                     someoneIsHovered={someoneIsHovered}
                     distanceFromHovered={distance}
                     totalCards={totalCards}
+                    hoverArea={hoverArea}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
+                    onButtonAreaEnter={handleButtonAreaEnter}
+                    onButtonAreaLeave={handleButtonAreaLeave}
                   />
                 )
               })

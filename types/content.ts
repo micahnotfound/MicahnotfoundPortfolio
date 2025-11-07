@@ -65,6 +65,7 @@ export interface Project {
   elements: ProjectElement[]
   thumbnails: MediaItem[]
   cover: MediaItem // Primary thumbnail for cards
+  reel?: MediaItem // Optional video reel that plays on 1s hover
 }
 
 // Page props (derivable)

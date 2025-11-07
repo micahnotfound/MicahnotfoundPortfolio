@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #0a0a0a;
-    --color-core-dark: #2A033F;
+    --background: #D1D5DB;
+    --foreground: #000000;
+    --color-core-dark: #000000;
   }
 
   .dark {
-    --background: #0a0a0a;
-    --foreground: #ffffff;
+    --background: #D1D5DB;
+    --foreground: #000000;
   }
 
   body {

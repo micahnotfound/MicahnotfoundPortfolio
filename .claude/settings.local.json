@@ -4,7 +4,16 @@
       "Bash(cat:*)",
       "Bash(netstat:*)",
       "Bash(findstr:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(git commit:*)",
+      "Bash(taskkill:*)",
+      "Bash(git checkout:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(dir:*)",
+      "Bash(git add:*)",
+      "Bash(git push)",
+      "Bash(npx tsc:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

@@ -41,7 +41,7 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        'core-dark': '#2A033F',
+        'core-dark': '#000000', // Swapped to black
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

@@ -151,7 +151,7 @@ export default function HomePage() {
                     clearTimeout(hoverTimeoutRef.current)
                   }
                   setHoveredIndex(index)
-                  setHoverArea('photo') // Hovering photo area
+                  setHoverArea('card') // Card state: hovering over photo card
                 }
 
                 const handleMouseLeave = () => {
@@ -160,25 +160,25 @@ export default function HomePage() {
                   }
                   hoverTimeoutRef.current = setTimeout(() => {
                     setHoveredIndex(null)
-                    setHoverArea(null)
+                    setHoverArea(null) // Return to home state
                   }, 50)
                 }
 
-                const handleButtonAreaEnter = () => {
+                const handleTextboxAreaEnter = () => {
                   if (hoverTimeoutRef.current) {
                     clearTimeout(hoverTimeoutRef.current)
                   }
                   setHoveredIndex(index)
-                  setHoverArea('button') // Hovering button area
+                  setHoverArea('textbox') // Textbox state: hovering over text box
                 }
 
-                const handleButtonAreaLeave = () => {
+                const handleTextboxAreaLeave = () => {
                   if (hoverTimeoutRef.current) {
                     clearTimeout(hoverTimeoutRef.current)
                   }
                   hoverTimeoutRef.current = setTimeout(() => {
                     setHoveredIndex(null)
-                    setHoverArea(null)
+                    setHoverArea(null) // Return to home state
                   }, 50)
                 }
 
@@ -194,8 +194,8 @@ export default function HomePage() {
                     hoverArea={hoverArea}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    onButtonAreaEnter={handleButtonAreaEnter}
-                    onButtonAreaLeave={handleButtonAreaLeave}
+                    onTextboxAreaEnter={handleTextboxAreaEnter}
+                    onTextboxAreaLeave={handleTextboxAreaLeave}
                   />
                 )
               })

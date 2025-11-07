@@ -48,6 +48,7 @@ export function Media({
           loop
           muted
           playsInline
+          autoPlay
           controls={false}
           poster={media.posterId ? buildFullSizeUrl({ ...media, public_id: media.posterId }) : undefined}
           onPlay={() => setIsPlaying(true)}

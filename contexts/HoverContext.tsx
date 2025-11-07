@@ -2,7 +2,12 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react'
 
-type HoverArea = 'photo' | 'button' | null
+// State system:
+// - null (home state): Logo, About, Contact visible - default when nothing is hovered
+// - 'card': Hovering over photo cards in carousel
+// - 'textbox': Hovering over text boxes below cards
+// - 'header': Hovering over header area
+type HoverArea = 'header' | 'card' | 'textbox' | null
 
 interface HoverContextType {
   hoverArea: HoverArea

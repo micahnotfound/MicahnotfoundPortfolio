@@ -187,7 +187,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   // Calculate textbox padding - more margin for better readability
   const getTextboxPadding = () => {
     const leftPadding = '16px' // Comfortable left margin
-    const rightPadding = '40px' // Wide right margin for pill-shaped bevel
+    const rightPadding = '70px' // Extra wide right margin for pill-shaped bevel (40px + 30px)
 
     if (someoneIsHovered && isHovered) {
       if (isTextboxHovered) {

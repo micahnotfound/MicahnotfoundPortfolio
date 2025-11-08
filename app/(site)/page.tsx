@@ -72,18 +72,20 @@ export default function HomePage() {
     <div className="h-full flex flex-col">
       {/* Projects Horizontal Row Section - Takes remaining space between header and footer */}
       <section
-        className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative mb-10 transition-all duration-500 ease-out"
+        className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative transition-all duration-500 ease-out"
         style={{
-          marginTop: (hoverArea === 'card' || hoverArea === 'textbox') ? '40px' : '0px'
+          marginTop: (hoverArea === 'card' || hoverArea === 'textbox') ? '40px' : '0px',
+          marginBottom: '10px' // Small bottom margin matching top border
         }}
       >
         <div className="w-full max-w-[2000px] flex-1 flex flex-col justify-start min-h-0">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto flex-1 items-end pb-6 min-h-0 scrollbar-hide"
+            className="flex overflow-x-auto flex-1 items-end min-h-0 scrollbar-hide"
             style={{
               gap: '0.6rem', // 4x wider: 0.15rem * 4 = 0.6rem
+              paddingBottom: '10px' // Small bottom padding matching top border
             }}
           >
             {isLoading ? (

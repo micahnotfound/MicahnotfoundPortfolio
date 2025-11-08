@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { VerticalCarouselRow } from './VerticalCarouselRow'
+import { ProjectHeader } from '@/components/shared/ProjectHeader'
 import type { MediaItem } from '@/types/content'
 
 interface CarouselSection {
@@ -11,9 +12,11 @@ interface CarouselSection {
 
 interface VerticalCarouselProps {
   sections: CarouselSection[]
+  projectTitle: string
+  projectDescription?: string
 }
 
-export function VerticalCarousel({ sections }: VerticalCarouselProps) {
+export function VerticalCarousel({ sections, projectTitle, projectDescription }: VerticalCarouselProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [edgeHover, setEdgeHover] = useState<'top' | 'bottom' | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -89,32 +92,42 @@ export function VerticalCarousel({ sections }: VerticalCarouselProps) {
   }, [])
 
   return (
-    <div
-      ref={containerRef}
-      className="h-screen w-full overflow-y-auto snap-y snap-proximity"
-      style={{
-        scrollBehavior: edgeHover ? 'auto' : 'smooth'
-      }}
-    >
-      <div className="flex flex-col">
-        {sections.map((section, index) => (
-          <div
-            key={index}
-            data-row-index={index}
-            className="snap-center"
-          >
-            <VerticalCarouselRow
-              title={section.title}
-              images={section.images}
-              index={index}
-              isHovered={hoveredIndex === index}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              onEdgeHover={setEdgeHover}
-            />
-          </div>
-        ))}
+    <>
+      {/* Project Header */}
+      <ProjectHeader
+        projectTitle={projectTitle}
+        projectDescription={projectDescription}
+      />
+
+      {/* Vertical Carousel with padding for header */}
+      <div
+        ref={containerRef}
+        className="h-screen w-full overflow-y-auto snap-y snap-proximity"
+        style={{
+          scrollBehavior: edgeHover ? 'auto' : 'smooth',
+          paddingTop: '140px' // Space for fixed header
+        }}
+      >
+        <div className="flex flex-col">
+          {sections.map((section, index) => (
+            <div
+              key={index}
+              data-row-index={index}
+              className="snap-center"
+            >
+              <VerticalCarouselRow
+                title={section.title}
+                images={section.images}
+                index={index}
+                isHovered={hoveredIndex === index}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                onEdgeHover={setEdgeHover}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }

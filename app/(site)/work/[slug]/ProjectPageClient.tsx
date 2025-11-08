@@ -98,7 +98,11 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
 
     return (
       <main className="fixed inset-0 overflow-hidden">
-        <VerticalCarousel sections={carouselSections} />
+        <VerticalCarousel
+          sections={carouselSections}
+          projectTitle={project.title}
+          projectDescription={project.description}
+        />
       </main>
     )
   }

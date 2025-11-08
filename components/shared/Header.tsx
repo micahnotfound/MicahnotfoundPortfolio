@@ -11,7 +11,13 @@ export function Header() {
   const pathname = usePathname()
   const isAboutPage = pathname === '/about'
   const isHomePage = pathname === '/'
+  const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
+
+  // Don't render this header on project detail pages - they use ProjectHeader instead
+  if (isProjectPage) {
+    return null
+  }
 
   // Get logo state based on current state
   // State 1 (home/header state): Extra tall logo with About/Contact buttons visible

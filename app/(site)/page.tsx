@@ -62,54 +62,30 @@ export default function HomePage() {
 
   // Handle wheel events for horizontal scrolling - Homepage only
   useEffect(() => {
-    console.log('Setting up wheel event listener for homepage, carousel ref:', carouselRef.current)
-
     const handleWheel = (e: WheelEvent) => {
-      console.log('WHEEL EVENT CAPTURED!', {
-        deltaY: e.deltaY,
-        target: e.target,
-        currentTarget: e.currentTarget,
-        carouselRef: carouselRef.current
-      })
-
       // Always prevent default to stop vertical scrolling on homepage
       e.preventDefault()
       e.stopPropagation()
 
       // Check if carousel ref exists
-      if (!carouselRef.current) {
-        console.log('ERROR: Carousel ref is null!')
-        return
-      }
+      if (!carouselRef.current) return
 
-      // Simple direct scroll without throttling for testing
-      const scrollAmount = e.deltaY * 2 // Increase sensitivity for testing
-      const newScrollLeft = carouselRef.current.scrollLeft + scrollAmount
-
-      console.log('Scrolling:', {
-        currentScrollLeft: carouselRef.current.scrollLeft,
-        scrollAmount,
-        newScrollLeft,
-        maxScroll: carouselRef.current.scrollWidth - carouselRef.current.clientWidth
-      })
-
-      carouselRef.current.scrollLeft = newScrollLeft
+      // Convert vertical scroll to horizontal scroll
+      const scrollAmount = e.deltaY * 2
+      carouselRef.current.scrollLeft += scrollAmount
     }
 
     // Add wheel listener to both carousel and document for full page coverage
     const carouselElement = carouselRef.current
 
     if (carouselElement) {
-      console.log('Adding wheel listener to carousel element')
       carouselElement.addEventListener('wheel', handleWheel, { passive: false })
     }
 
     // Always add document listener for page-wide scrolling
-    console.log('Adding wheel listener to document')
     document.addEventListener('wheel', handleWheel, { passive: false })
 
     return () => {
-      console.log('Cleaning up wheel event listeners')
       if (carouselElement) {
         carouselElement.removeEventListener('wheel', handleWheel)
       }
@@ -123,7 +99,7 @@ export default function HomePage() {
   return (
     <div className="h-full flex flex-col">
       {/* Projects Horizontal Row Section - Takes remaining space between header and footer */}
-      <section className="flex-[1.725] flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative">
+      <section className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative mb-10">
         <div className="w-full max-w-[2000px] flex-1 flex flex-col justify-start min-h-0">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div

@@ -24,6 +24,8 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 }) // percentage
   const [entryPoint, setEntryPoint] = useState({ x: 50, y: 50 }) // Store entry point
   const [buttonWidth, setButtonWidth] = useState(0) // Store calculated width
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
+  const [isTextboxHovered, setIsTextboxHovered] = useState(false) // LOCAL state for textbox hover
   const cardRef = useRef<HTMLDivElement>(null)
   const buttonTextRef = useRef<HTMLDivElement>(null)
   const lastMousePosRef = useRef({ x: 0, y: 0, time: 0 })
@@ -37,6 +39,16 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   const handleClick = () => {
     setIsLoading(true)
   }
+
+  // Track window width for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // Calculate button width to match card width with ResizeObserver
   useEffect(() => {
@@ -74,34 +86,38 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   // Calculate image flex - GLOBAL effect based on which state is active
   const getImageFlex = () => {
     if (hoverArea === 'textbox') {
-      return '1 1 50%' // ALL cards shrink when textbox state
+      return '1 1 85%' // ALL cards when textbox state
     } else if (hoverArea === 'card') {
-      return '1 1 70%' // ALL cards grow when card state
+      return '1 1 98.5%' // ALL cards grow EXTREMELY tall when card state - fill almost entire screen
     } else {
-      return '1 1 60%' // Home state default size
+      return '1 1 97%' // Home state: photos VERY tall by default, textboxes tiny
     }
   }
 
-  // Textbox height - GLOBAL effect, shrinks when card hovered, grows when textbox hovered
+  // Textbox height - ONLY grows when THIS specific textbox is directly hovered
   const getTextboxHeight = () => {
-    if (hoverArea === 'textbox') {
-      return '280px' // ALL textboxes grow when textbox state
-    } else if (hoverArea === 'card') {
-      return '140px' // ALL textboxes shrink when card state
-    } else if (hoverArea === null) {
-      return '320px' // Extra tall in home state to compress carousel
+    if (isTextboxHovered) {
+      return '340px' // THIS textbox is hovered: grow tall
     } else {
-      return '210px' // Default size
+      return '50px' // Always short unless THIS textbox is hovered
     }
   }
 
   // Calculate textbox padding based on hover states - only for hovered card
   const getTextboxPadding = () => {
     if (someoneIsHovered && isHovered) {
-      if (hoverArea === 'textbox') {
-        return '11px calc(1rem + 7px) 160px calc(1rem + 7px)' // Large padding with extra 7px on sides
+      const height = parseInt(getTextboxHeight())
+      // Use smaller bevel on narrow screens
+      const bevelRadius = windowWidth < 1300 ? 39 : height / 2
+      const leftPadding = `${bevelRadius + 24}px` // Bevel radius + extra space (24px instead of 16px)
+      const rightPadding = '32px' // Right margin to prevent text overflow
+
+      if (isTextboxHovered) {
+        // THIS textbox is hovered: more vertical padding for description
+        return `16px ${rightPadding} 160px ${leftPadding}` // Moved down from 11px to 16px
       } else {
-        return '11px calc(1rem + 7px) 80px calc(1rem + 7px)' // Smaller padding with extra 7px on sides
+        // Card state (textbox showing but not hovered): less vertical padding
+        return `14px ${rightPadding} 80px ${leftPadding}` // Moved down from 11px to 14px
       }
     }
     return '0'
@@ -112,27 +128,42 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     if (!someoneIsHovered) {
       return 1.2 // Wider default - more breathing room for all cards
     }
+
+    // Active card: Make it MUCH wider across all screen sizes
     if (isHovered) {
-      return 2.2 // Hovered card expands much wider for textbox visibility
+      if (windowWidth < 500) {
+        return 10.0 // Extra wide on mobile to ensure >500px
+      } else if (windowWidth < 1000) {
+        return 4.5 // Wider on medium screens
+      } else {
+        return 3.5 // Much wider on large screens (was 2.2)
+      }
     }
 
-    // Progressive width falloff based on distance from hovered card
+    // On screens < 500px, shrink non-active cards more aggressively
+    if (windowWidth < 500) {
+      if (distanceFromHovered === 1) return 0.25
+      if (distanceFromHovered === 2) return 0.15
+      return 0.08 // Even smaller for furthest cards
+    }
+
+    // Progressive width falloff - make furthest cards even smaller
     if (distanceFromHovered === 1) {
-      return 1.0
+      return 0.9 // Reduced from 1.0
     }
     if (distanceFromHovered === 2) {
-      return 0.8
+      return 0.7 // Reduced from 0.8
     }
     if (distanceFromHovered === 3) {
-      return 0.6
+      return 0.5 // Reduced from 0.6
     }
     if (distanceFromHovered === 4) {
-      return 0.45
+      return 0.35 // Reduced from 0.45
     }
     if (distanceFromHovered === 5) {
-      return 0.3
+      return 0.2 // Reduced from 0.3
     }
-    return 0.2 // Distance 6+
+    return 0.12 // Even smaller for distance 6+ (was 0.2)
   }
 
   // Track mouse position and calculate velocity
@@ -201,8 +232,8 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
           minHeight: 0,
           transition: 'flex 300ms ease-out',
           borderRadius: '200px', // Pill shape - rounded all sides
-          border: 'none', // No border - invisible until image reveals
-          backgroundColor: '#D1D5DB', // Light grey background
+          border: 'none', // No border
+          backgroundColor: '#D1D5DB', // Grey background - same as page background
         }}
         aria-label={`View ${project.title} project`}
         data-cursor-hover
@@ -237,9 +268,11 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
         onMouseEnter={(e) => {
           // Set entry point to bottom (100%) when entering textbox area
           setEntryPoint({ x: 50, y: 100 })
+          setIsTextboxHovered(true) // Set LOCAL state for THIS textbox
           if (onTextboxAreaEnter) onTextboxAreaEnter()
         }}
         onMouseLeave={() => {
+          setIsTextboxHovered(false) // Clear LOCAL state
           if (onTextboxAreaLeave) onTextboxAreaLeave()
         }}
         className={`block cursor-pointer ${isLoading ? 'pointer-events-none' : ''}`}
@@ -260,11 +293,13 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            // Left side is half-circle (height/2), right side is flat (0)
+            // Responsive border-radius: half-circle only on screens > 1300px
             borderRadius: someoneIsHovered && isHovered
-              ? `${parseInt(getTextboxHeight()) / 2}px 0 0 ${parseInt(getTextboxHeight()) / 2}px`
+              ? (windowWidth < 1300
+                  ? '39px 0 0 39px' // Regular left bezel for screens < 1300px - more text fits
+                  : `${parseInt(getTextboxHeight()) / 2}px 0 0 ${parseInt(getTextboxHeight()) / 2}px`) // Half-circle on wide screens (>1300px)
               : '27px',
-            transition: 'width 150ms linear, padding 150ms linear, height 300ms ease-out, border-radius 300ms ease-out'
+            transition: 'all 300ms ease-out' // Unified transition - no hitch
           }}
         >
           {/* Loading Border Animation */}
@@ -273,29 +308,42 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
           )}
 
           {/* Textbox Content */}
-          <div className="relative z-10 w-full">
+          <div
+            className="relative z-10"
+            style={{
+              width: '100%',
+              opacity: someoneIsHovered && isHovered ? 1 : 0,
+              transition: 'opacity 300ms ease-out'
+            }}
+          >
             {/* Title */}
             <div
               ref={buttonTextRef}
               className="font-bold"
               style={{
-                fontSize: '1.075em', // Increased by 2 points from 0.95em
-                opacity: 1,
-                marginBottom: someoneIsHovered && isHovered && hoverArea === 'textbox' && project.description ? '0.5rem' : '0',
-                transition: 'margin-bottom 150ms linear'
+                fontSize: '1.075em',
+                marginBottom: someoneIsHovered && isHovered && isTextboxHovered && project.description ? '0.5rem' : '0',
+                transition: 'margin-bottom 150ms linear',
+                whiteSpace: 'normal',
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
+                width: '100%'
               }}
             >
               {isLoading ? 'Loading...' : project.title}
             </div>
 
-            {/* Description - appears only when textbox is fully expanded */}
-            {project.description && someoneIsHovered && isHovered && hoverArea === 'textbox' && (
+            {/* Description - appears only when THIS textbox is hovered */}
+            {project.description && someoneIsHovered && isHovered && isTextboxHovered && (
               <div
                 className="font-normal"
                 style={{
-                  fontSize: '0.75em', // Smaller font for description
+                  fontSize: '0.75em',
                   lineHeight: '1.4',
                   whiteSpace: 'normal',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
+                  width: '100%',
                   animation: 'fadeIn 300ms ease-out forwards',
                   animationDelay: '150ms',
                   opacity: 0

@@ -41,9 +41,14 @@ export function Header() {
       {/* Full-width hover area background */}
       <div className="w-full bg-[#D1D5DB]/90 backdrop-blur-sm">
         <div className="w-full max-w-[2000px] mx-auto px-20 xl:px-[100px]">
-          <div className="flex justify-between items-start pt-12 pb-6 transition-all duration-500 ease-out">
+          <div
+            className="flex justify-between items-start pb-6 transition-all duration-500 ease-out"
+            style={{
+              paddingTop: getLogoState() === 1 ? '52px' : '12px' // 40px lower in home state (52px vs 12px)
+            }}
+          >
             {/* Left Side: Logo, Separator, About/Contact */}
-            <div className="flex items-start gap-8 lg:gap-16">
+            <div className="flex items-center gap-8 lg:gap-16">
               {/* Morphing Logo - anchored to top */}
               <Link href="/" className="flex-shrink-0">
                 <MorphingHeaderLogo
@@ -57,21 +62,21 @@ export function Header() {
               </Link>
 
               {/* Vertical separator and buttons container */}
-              <div className="flex items-start gap-8 lg:gap-16">
+              <div className="flex items-center gap-8 lg:gap-16">
                 {/* 5px thick vertical separator - visible only in home state */}
                 <div
-                  className="flex-shrink-0 transition-opacity duration-500 ease-out"
+                  className="flex-shrink-0 transition-all duration-500 ease-out overflow-hidden"
                   style={{
-                    opacity: getLogoState() === 1 ? 1 : 0,
                     width: getLogoState() === 1 ? 'auto' : '0px',
-                    overflow: 'hidden'
+                    height: getLogoState() === 1 ? 'auto' : '0px',
+                    transform: getLogoState() === 1 ? 'translateY(0)' : 'translateY(-20px)'
                   }}
                 >
                   <div className="w-[5px] h-24 bg-core-dark rounded-full"></div>
                 </div>
 
                 {/* About/Contact buttons - visible only in home state */}
-                <div className="flex items-start gap-[57px]">
+                <div className="flex items-center gap-[57px]">
                   {/* About/Work button */}
                   <Link
                     href={isAboutPage ? "/" : "/about"}
@@ -80,7 +85,8 @@ export function Header() {
                       border: 'none',
                       padding: getLogoState() === 1 ? '0.25rem 1rem' : '0',
                       borderRadius: '39px',
-                      opacity: getLogoState() === 1 ? 1 : 0,
+                      height: getLogoState() === 1 ? 'auto' : '0px',
+                      transform: getLogoState() === 1 ? 'translateY(0)' : 'translateY(-20px)',
                       pointerEvents: getLogoState() === 1 ? 'auto' : 'none'
                     }}
                     data-cursor-hover
@@ -96,7 +102,8 @@ export function Header() {
                       border: 'none',
                       padding: getLogoState() === 1 ? '0.25rem 1rem' : '0',
                       borderRadius: '39px',
-                      opacity: getLogoState() === 1 ? 1 : 0,
+                      height: getLogoState() === 1 ? 'auto' : '0px',
+                      transform: getLogoState() === 1 ? 'translateY(0)' : 'translateY(-20px)',
                       pointerEvents: getLogoState() === 1 ? 'auto' : 'none'
                     }}
                     data-cursor-hover

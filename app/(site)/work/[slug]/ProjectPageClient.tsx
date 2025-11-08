@@ -6,6 +6,7 @@ import { ImageCarousel } from '@/components/composition/ImageCarousel'
 import { AdaptiveGrid } from '@/components/composition/AdaptiveGrid'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { TabSelector } from '@/components/composition/TabSelector'
+import { VerticalCarousel } from '@/components/composition/VerticalCarousel'
 import type { Project, MediaItem } from '@/types/content'
 
 interface ProjectPageClientProps {
@@ -64,6 +65,42 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
 
   const getActiveCarouselType = (elementName: string) => {
     return activeCarouselTypes[elementName] || 'profile' // Default to profile if not set
+  }
+
+  // Render vertical carousel for Blacklands project
+  if (project.slug === 'blacklands') {
+    // Build carousel sections from project elements
+    const carouselSections = [
+      // Hero section
+      ...(() => {
+        const mainContent = project.elements.find(el => el.name === 'Main Content')
+        return mainContent?.hero ? [{
+          title: 'BLACKLANDS',
+          images: mainContent.hero
+        }] : []
+      })(),
+      // Exhibition Gallery
+      ...(() => {
+        const gallery = project.elements.find(el => el.name === 'Exhibition Gallery')
+        return gallery?.gallery ? [{
+          title: 'Exhibition Gallery',
+          images: gallery.gallery
+        }] : []
+      })(),
+      // Character profiles
+      ...regularElements
+        .filter(el => el.profile && el.profile.length > 0)
+        .map(el => ({
+          title: el.name,
+          images: el.profile!
+        }))
+    ]
+
+    return (
+      <main className="fixed inset-0 overflow-hidden">
+        <VerticalCarousel sections={carouselSections} />
+      </main>
+    )
   }
 
   return (

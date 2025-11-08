@@ -20,6 +20,7 @@ interface VerticalCarouselProps {
 export function VerticalCarousel({ sections, projectTitle, projectDescription }: VerticalCarouselProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [edgeHover, setEdgeHover] = useState<'top' | 'bottom' | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -98,15 +99,18 @@ export function VerticalCarousel({ sections, projectTitle, projectDescription }:
       <ProjectHeader
         projectTitle={projectTitle}
         projectDescription={projectDescription}
+        onScroll={setIsScrolled}
       />
 
-      {/* Vertical Carousel with padding for header */}
+      {/* Vertical Carousel with dynamic padding for header */}
       <div
         ref={containerRef}
         className="h-screen w-full overflow-y-auto snap-y snap-proximity"
         style={{
           scrollBehavior: edgeHover ? 'auto' : 'smooth',
-          paddingTop: '140px' // Space for fixed header
+          paddingTop: isScrolled ? '100px' : '280px', // Dynamic padding based on header state
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#000000 #D1D5DB'
         }}
       >
         <div className="flex flex-col">

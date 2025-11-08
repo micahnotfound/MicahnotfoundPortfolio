@@ -20,35 +20,45 @@
       ]
     },
     {
-      "name": "Exhibition Gallery",
-      "gallery": [
-        { "public_id": "v1756775074/Blacklands_R1_cobywl", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view", "width": 1200, "height": 600 },
-        { "public_id": "v1756775074/Blacklands_R2_qaects", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view", "width": 1200, "height": 600 },
-        { "public_id": "v1756775074/Blacklands_R3_fija7f", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition", "width": 1200, "height": 600 }
+      "name": "Exhibition Installation View",
+      "profile": [
+        { "public_id": "v1756775074/Blacklands_R1_cobywl", "kind": "image", "alt": "BLACKLANDS exhibition view 1", "caption": "Exhibition installation view" }
+      ]
+    },
+    {
+      "name": "Exhibition Detail View",
+      "profile": [
+        { "public_id": "v1756775074/Blacklands_R2_qaects", "kind": "image", "alt": "BLACKLANDS exhibition view 2", "caption": "Exhibition detail view" }
+      ]
+    },
+    {
+      "name": "Exhibition Composition",
+      "profile": [
+        { "public_id": "v1756775074/Blacklands_R3_fija7f", "kind": "image", "alt": "BLACKLANDS exhibition view 3", "caption": "Exhibition composition" }
       ]
     },
     {
       "name": "Manuel Gerrit De Reus",
       "profile": [
-        { "public_id": "Image_Sequence_011_0086_q6z24m", "kind": "image", "alt": "Manuel Gerrit De Reus profile 1", "caption": "Manuel Gerrit De Reus profile view 1" },
-        { "public_id": "Image_Sequence_011_0050_gcxlmf", "kind": "image", "alt": "Manuel Gerrit De Reus profile 2", "caption": "Manuel Gerrit De Reus profile view 2" },
-        { "public_id": "Image_Sequence_011_0021_d4uv4n", "kind": "image", "alt": "Manuel Gerrit De Reus profile 3", "caption": "Manuel Gerrit De Reus profile view 3" }
+        { "public_id": "v1756680386/Image_Sequence_011_0086_q6z24m", "kind": "image", "alt": "Manuel Gerrit De Reus profile 1", "caption": "Manuel Gerrit De Reus profile view 1" },
+        { "public_id": "v1756571809/Image_Sequence_011_0050_gcxlmf", "kind": "image", "alt": "Manuel Gerrit De Reus profile 2", "caption": "Manuel Gerrit De Reus profile view 2" },
+        { "public_id": "v1756680385/Image_Sequence_011_0021_d4uv4n", "kind": "image", "alt": "Manuel Gerrit De Reus profile 3", "caption": "Manuel Gerrit De Reus profile view 3" }
       ]
     },
     {
       "name": "Samuel Anderson",
       "profile": [
-        { "public_id": "image_120_0000_sdws4y", "kind": "image", "alt": "Samuel Anderson profile 1", "caption": "Samuel Anderson profile view 1" },
-        { "public_id": "image_120_00003_wgdvct", "kind": "image", "alt": "Samuel Anderson profile 2", "caption": "Samuel Anderson profile view 2" },
-        { "public_id": "image_120_00002_jz2vek", "kind": "image", "alt": "Samuel Anderson profile 3", "caption": "Samuel Anderson profile view 3" }
+        { "public_id": "v1756571812/image_120_0000_sdws4y", "kind": "image", "alt": "Samuel Anderson profile 1", "caption": "Samuel Anderson profile view 1" },
+        { "public_id": "v1756571812/image_120_00003_wgdvct", "kind": "image", "alt": "Samuel Anderson profile 2", "caption": "Samuel Anderson profile view 2" },
+        { "public_id": "v1756680391/image_120_00002_jz2vek", "kind": "image", "alt": "Samuel Anderson profile 3", "caption": "Samuel Anderson profile view 3" }
       ]
     },
     {
       "name": "Sojourner Truth",
       "profile": [
-        { "public_id": "image_149_00001_ygzh05", "kind": "image", "alt": "Sojourner Truth profile 1", "caption": "Sojourner Truth profile view 1" },
-        { "public_id": "image_149_00002_uwc65i", "kind": "image", "alt": "Sojourner Truth profile 2", "caption": "Sojourner Truth profile view 2" },
-        { "public_id": "image_149_0000_xqpkui", "kind": "image", "alt": "Sojourner Truth profile 3", "caption": "Sojourner Truth profile view 3" }
+        { "public_id": "v1756680394/image_149_00001_ygzh05", "kind": "image", "alt": "Sojourner Truth profile 1", "caption": "Sojourner Truth profile view 1" },
+        { "public_id": "v1756680393/image_149_00002_uwc65i", "kind": "image", "alt": "Sojourner Truth profile 2", "caption": "Sojourner Truth profile view 2" },
+        { "public_id": "v1756680391/image_149_0000_xqpkui", "kind": "image", "alt": "Sojourner Truth profile 3", "caption": "Sojourner Truth profile view 3" }
       ]
     }
   ],

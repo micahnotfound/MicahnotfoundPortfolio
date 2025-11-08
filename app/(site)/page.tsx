@@ -17,19 +17,22 @@ export default function HomePage() {
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
+    // Reset hover state to home state when component mounts
+    setHoverArea(null)
+
     // Simulate loading time for the cool skeleton effect
     const loadProjects = async () => {
       const projectsData = getProjects()
-      
+
       // Add a minimum loading time to show the skeleton animation
       await new Promise(resolve => setTimeout(resolve, 2000))
-      
+
       setProjects(projectsData)
       setIsLoading(false)
     }
 
     loadProjects()
-  }, [])
+  }, [setHoverArea])
 
 
   // Handle wheel events for horizontal scrolling - Homepage only

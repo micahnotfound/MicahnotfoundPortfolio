@@ -40,15 +40,15 @@ export function Header() {
     >
       {/* Full-width hover area background */}
       <div className="w-full bg-[#D1D5DB]/90 backdrop-blur-sm">
-        <div className="w-full max-w-[2000px] mx-auto px-20 xl:px-[100px]">
+        <div className="w-full px-20 xl:px-[100px]">
           <div
-            className="flex justify-between items-start pb-6 transition-all duration-500 ease-out"
+            className="flex justify-start items-start pb-6 transition-all duration-500 ease-out"
             style={{
               paddingTop: getLogoState() === 1 ? '52px' : '12px' // 40px lower in home state (52px vs 12px)
             }}
           >
             {/* Left Side: Logo, Separator, About/Contact */}
-            <div className="flex items-center gap-8 lg:gap-16">
+            <div className="flex items-center gap-12 lg:gap-20">
               {/* Morphing Logo - anchored to top */}
               <Link href="/" className="flex-shrink-0">
                 <MorphingHeaderLogo

@@ -14,7 +14,6 @@ export default function HomePage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const { hoverArea, setHoverArea } = useHover() // Use context for hoverArea
   const carouselRef = useRef<HTMLDivElement>(null)
-  const verticalScrollRef = useRef<HTMLDivElement>(null)
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
@@ -32,33 +31,6 @@ export default function HomePage() {
     loadProjects()
   }, [])
 
-  // Sync vertical scrollbar with horizontal carousel
-  useEffect(() => {
-    const carousel = carouselRef.current
-    const verticalScroll = verticalScrollRef.current
-
-    if (!carousel || !verticalScroll) return
-
-    // Update vertical scrollbar when carousel scrolls
-    const handleCarouselScroll = () => {
-      const scrollPercentage = carousel.scrollLeft / (carousel.scrollWidth - carousel.clientWidth)
-      verticalScroll.scrollTop = scrollPercentage * (verticalScroll.scrollHeight - verticalScroll.clientHeight)
-    }
-
-    // Update carousel when vertical scrollbar scrolls
-    const handleVerticalScroll = () => {
-      const scrollPercentage = verticalScroll.scrollTop / (verticalScroll.scrollHeight - verticalScroll.clientHeight)
-      carousel.scrollLeft = scrollPercentage * (carousel.scrollWidth - carousel.clientWidth)
-    }
-
-    carousel.addEventListener('scroll', handleCarouselScroll)
-    verticalScroll.addEventListener('scroll', handleVerticalScroll)
-
-    return () => {
-      carousel.removeEventListener('scroll', handleCarouselScroll)
-      verticalScroll.removeEventListener('scroll', handleVerticalScroll)
-    }
-  }, [isLoading, projects])
 
   // Handle wheel events for horizontal scrolling - Homepage only
   useEffect(() => {
@@ -177,14 +149,6 @@ export default function HomePage() {
               })
             )}
           </div>
-        </div>
-
-        {/* Vertical scrollbar on the right that controls horizontal carousel */}
-        <div
-          ref={verticalScrollRef}
-          className="absolute right-0 top-0 bottom-0 w-4 overflow-y-auto overflow-x-hidden"
-        >
-          <div style={{ height: '200vh' }} /> {/* Dummy content to create scrollbar */}
         </div>
       </section>
     </div>

@@ -26,10 +26,14 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   const [buttonWidth, setButtonWidth] = useState(0) // Store calculated width
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
   const [isTextboxHovered, setIsTextboxHovered] = useState(false) // LOCAL state for textbox hover
+  const [showText, setShowText] = useState(false) // Control text fade-in with delay
+  const [showDescription, setShowDescription] = useState(false) // Control description fade separately
   const cardRef = useRef<HTMLDivElement>(null)
   const buttonTextRef = useRef<HTMLDivElement>(null)
   const lastMousePosRef = useRef({ x: 0, y: 0, time: 0 })
   const velocityRef = useRef({ x: 0, y: 0, speed: 0 })
+  const textFadeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const descriptionFadeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Use thumbnail if available, otherwise fall back to cover image
   const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
@@ -49,6 +53,76 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  // Handle text fade-in with delay when card is hovered
+  useEffect(() => {
+    if (someoneIsHovered && isHovered) {
+      // Clear any existing timeouts
+      if (textFadeTimeoutRef.current) {
+        clearTimeout(textFadeTimeoutRef.current)
+      }
+      if (descriptionFadeTimeoutRef.current) {
+        clearTimeout(descriptionFadeTimeoutRef.current)
+      }
+
+      // Start with text hidden, then fade in after short delay
+      setShowText(false)
+      setShowDescription(false)
+
+      textFadeTimeoutRef.current = setTimeout(() => {
+        setShowText(true)
+      }, 50) // Small delay before starting title fade
+
+      // Description fades in slower and later (after textbox is hovered)
+    } else {
+      // Immediately hide text when not hovered
+      if (textFadeTimeoutRef.current) {
+        clearTimeout(textFadeTimeoutRef.current)
+      }
+      if (descriptionFadeTimeoutRef.current) {
+        clearTimeout(descriptionFadeTimeoutRef.current)
+      }
+      setShowText(false)
+      setShowDescription(false)
+    }
+
+    return () => {
+      if (textFadeTimeoutRef.current) {
+        clearTimeout(textFadeTimeoutRef.current)
+      }
+      if (descriptionFadeTimeoutRef.current) {
+        clearTimeout(descriptionFadeTimeoutRef.current)
+      }
+    }
+  }, [someoneIsHovered, isHovered])
+
+  // Handle description fade-in when textbox is hovered
+  useEffect(() => {
+    if (isTextboxHovered) {
+      // Clear any existing timeout
+      if (descriptionFadeTimeoutRef.current) {
+        clearTimeout(descriptionFadeTimeoutRef.current)
+      }
+
+      // Start description fade after delay
+      setShowDescription(false)
+      descriptionFadeTimeoutRef.current = setTimeout(() => {
+        setShowDescription(true)
+      }, 200) // Delay before description starts fading
+    } else {
+      // Hide description when textbox not hovered
+      if (descriptionFadeTimeoutRef.current) {
+        clearTimeout(descriptionFadeTimeoutRef.current)
+      }
+      setShowDescription(false)
+    }
+
+    return () => {
+      if (descriptionFadeTimeoutRef.current) {
+        clearTimeout(descriptionFadeTimeoutRef.current)
+      }
+    }
+  }, [isTextboxHovered])
 
   // Calculate button width to match card width with ResizeObserver
   useEffect(() => {
@@ -95,11 +169,13 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   }
 
   // Textbox height - ONLY grows when THIS specific textbox is directly hovered
+  // About button is approximately 28px tall (including padding)
+  // 1.5x that = 42px
   const getTextboxHeight = () => {
     if (isTextboxHovered) {
-      return '340px' // THIS textbox is hovered: grow tall
+      return '340px' // THIS textbox is hovered: grow tall for description
     } else {
-      return '50px' // Always short unless THIS textbox is hovered
+      return '42px' // Card state: 1.5x About button height (28px * 1.5 = 42px)
     }
   }
 
@@ -123,21 +199,15 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     return '0'
   }
 
-  // Calculate flex-grow with progressive falloff based on distance from hovered card
+  // Calculate flex-grow with progressive falloff - targeting ~550px for active card
   const getFlexGrow = () => {
     if (!someoneIsHovered) {
       return 1.2 // Wider default - more breathing room for all cards
     }
 
-    // Active card: Make it MUCH wider across all screen sizes
+    // Active card: Use smaller flex-grow to target ~550px width
     if (isHovered) {
-      if (windowWidth < 500) {
-        return 10.0 // Extra wide on mobile to ensure >500px
-      } else if (windowWidth < 1000) {
-        return 4.5 // Wider on medium screens
-      } else {
-        return 3.5 // Much wider on large screens (was 2.2)
-      }
+      return 2.0 // Reduced from 3.5 to make active card thinner (~550px)
     }
 
     // On screens < 500px, shrink non-active cards more aggressively
@@ -149,21 +219,21 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
 
     // Progressive width falloff - make furthest cards even smaller
     if (distanceFromHovered === 1) {
-      return 0.9 // Reduced from 1.0
+      return 0.9
     }
     if (distanceFromHovered === 2) {
-      return 0.7 // Reduced from 0.8
+      return 0.7
     }
     if (distanceFromHovered === 3) {
-      return 0.5 // Reduced from 0.6
+      return 0.5
     }
     if (distanceFromHovered === 4) {
-      return 0.35 // Reduced from 0.45
+      return 0.35
     }
     if (distanceFromHovered === 5) {
-      return 0.2 // Reduced from 0.3
+      return 0.2
     }
-    return 0.12 // Even smaller for distance 6+ (was 0.2)
+    return 0.12 // Even smaller for distance 6+
   }
 
   // Track mouse position and calculate velocity
@@ -312,8 +382,8 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
             className="relative z-10"
             style={{
               width: '100%',
-              opacity: someoneIsHovered && isHovered ? 1 : 0,
-              transition: 'opacity 300ms ease-out'
+              opacity: showText ? 1 : 0,
+              transition: 'opacity 1000ms ease-out' // 1 second fade-in
             }}
           >
             {/* Title */}
@@ -344,9 +414,8 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
                   wordBreak: 'break-word',
                   overflowWrap: 'break-word',
                   width: '100%',
-                  animation: 'fadeIn 300ms ease-out forwards',
-                  animationDelay: '150ms',
-                  opacity: 0
+                  opacity: showDescription ? 1 : 0,
+                  transition: 'opacity 1500ms ease-out' // Slower fade-in for description (1.5 seconds)
                 }}
               >
                 {project.description}

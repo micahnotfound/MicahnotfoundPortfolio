@@ -1,12 +1,14 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { Media } from '@/components/shared/Media'
+import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import type { MediaItem } from '@/types/content'
 
 interface VerticalCarouselRowProps {
   title: string
   images: MediaItem[]
+  videoPublicId?: string
   index: number
   isHovered: boolean
   onMouseEnter: () => void
@@ -17,25 +19,14 @@ interface VerticalCarouselRowProps {
 export function VerticalCarouselRow({
   title,
   images,
+  videoPublicId,
   index,
   isHovered,
   onMouseEnter,
   onMouseLeave,
   onEdgeHover
 }: VerticalCarouselRowProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const rowRef = useRef<HTMLDivElement>(null)
-
-  // Auto-advance images when hovered
-  useEffect(() => {
-    if (!isHovered || images.length <= 1) return
-
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length)
-    }, 2000) // Change image every 2 seconds
-
-    return () => clearInterval(interval)
-  }, [isHovered, images.length])
 
   // Detect edge hover for auto-scroll
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,14 +46,18 @@ export function VerticalCarouselRow({
     }
   }
 
+  // Calculate number of items (images + optional video)
+  const totalItems = images.length + (videoPublicId ? 1 : 0)
+
   return (
     <div
       ref={rowRef}
-      className="relative w-full transition-all duration-700 ease-out overflow-hidden"
+      className="relative w-full transition-all duration-700 ease-out overflow-hidden bg-[#D1D5DB]"
       style={{
         height: isHovered ? '90vh' : '25vh',
         minHeight: isHovered ? '90vh' : '25vh',
-        flexShrink: 0
+        flexShrink: 0,
+        padding: '20px'
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={() => {
@@ -71,39 +66,68 @@ export function VerticalCarouselRow({
       }}
       onMouseMove={handleMouseMove}
     >
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Media
-          media={images[currentImageIndex]}
-          className="w-full h-full object-cover"
-          alt={images[currentImageIndex].alt || `${title} image ${currentImageIndex + 1}`}
-        />
-      </div>
-
-      {/* Overlay gradient for text readability */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-700"
-        style={{
-          opacity: isHovered ? 1 : 0.5
-        }}
-      />
-
-      {/* Title */}
-      <div
-        className="absolute bottom-0 left-0 right-0 p-8 transition-all duration-700"
-        style={{
-          transform: isHovered ? 'translateY(0)' : 'translateY(20px)',
-          opacity: isHovered ? 1 : 0.8
-        }}
-      >
-        <h2 className="text-4xl md:text-6xl font-body font-bold text-white">
+      {/* Title at top left */}
+      <div className="absolute top-6 left-8 z-10">
+        <h2 className="text-3xl md:text-4xl font-body font-bold text-core-dark">
           {title}
         </h2>
+      </div>
 
-        {/* Image counter when hovered */}
-        {isHovered && images.length > 1 && (
-          <div className="mt-4 text-white/80 text-lg font-ui">
-            {currentImageIndex + 1} / {images.length}
+      {/* Images Grid - Horizontally scrolling when many items */}
+      <div
+        className="flex gap-5 h-full items-center justify-start overflow-x-auto scrollbar-hide px-8"
+        style={{
+          paddingTop: '60px' // Space for title
+        }}
+      >
+        {/* Images with beveled edges */}
+        {images.map((image, idx) => (
+          <div
+            key={idx}
+            className="flex-shrink-0 overflow-hidden transition-all duration-500"
+            style={{
+              borderRadius: '24px', // Beveled edges
+              height: isHovered ? 'calc(90vh - 120px)' : 'calc(25vh - 100px)',
+              width: isHovered
+                ? totalItems === 1
+                  ? '90%'
+                  : `${Math.min(45, 90 / totalItems)}%`
+                : `${Math.min(80, 100 / totalItems)}%`,
+              minWidth: isHovered ? '400px' : '200px'
+            }}
+          >
+            <Media
+              media={image}
+              className="w-full h-full object-cover"
+              alt={image.alt || `${title} image ${idx + 1}`}
+            />
+          </div>
+        ))}
+
+        {/* Video Player if provided */}
+        {videoPublicId && (
+          <div
+            className="flex-shrink-0 overflow-hidden transition-all duration-500"
+            style={{
+              borderRadius: '24px',
+              height: isHovered ? 'calc(90vh - 120px)' : 'calc(25vh - 100px)',
+              width: isHovered
+                ? totalItems === 1
+                  ? '90%'
+                  : `${Math.min(45, 90 / totalItems)}%`
+                : `${Math.min(80, 100 / totalItems)}%`,
+              minWidth: isHovered ? '400px' : '200px'
+            }}
+          >
+            <VideoPlayer
+              publicId={videoPublicId}
+              portrait={true}
+              className="w-full h-full"
+              controls={isHovered}
+              autoPlay={false}
+              muted={true}
+              loop={false}
+            />
           </div>
         )}
       </div>
@@ -112,13 +136,13 @@ export function VerticalCarouselRow({
       {isHovered && (
         <>
           {/* Top edge indicator */}
-          <div className="absolute top-0 left-0 right-0 h-24 pointer-events-none">
-            <div className="w-full h-full bg-gradient-to-b from-white/10 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-24 pointer-events-none z-20">
+            <div className="w-full h-full bg-gradient-to-b from-black/10 to-transparent" />
           </div>
 
           {/* Bottom edge indicator */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none">
-            <div className="w-full h-full bg-gradient-to-t from-white/10 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none z-20">
+            <div className="w-full h-full bg-gradient-to-t from-black/10 to-transparent" />
           </div>
         </>
       )}

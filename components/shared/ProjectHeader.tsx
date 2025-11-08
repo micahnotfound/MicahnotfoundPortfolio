@@ -39,15 +39,15 @@ export function ProjectHeader({ projectTitle, projectDescription }: ProjectHeade
               </Link>
 
               {/* Project Title and Description */}
-              <div className="flex flex-col justify-start pt-2">
+              <div className="flex flex-col justify-center gap-2 flex-1">
                 {/* Project Title */}
-                <h1 className="text-2xl font-body font-bold text-core-dark leading-tight mb-1">
+                <h1 className="text-3xl font-body font-bold text-core-dark leading-none">
                   {projectTitle}
                 </h1>
 
                 {/* Project Description */}
                 {projectDescription && (
-                  <p className="text-sm font-ui text-gray-700 leading-relaxed max-w-2xl line-clamp-2">
+                  <p className="text-base font-ui text-gray-600 leading-snug max-w-3xl">
                     {projectDescription}
                   </p>
                 )}

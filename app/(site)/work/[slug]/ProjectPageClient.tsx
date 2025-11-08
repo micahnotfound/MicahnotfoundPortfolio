@@ -71,12 +71,13 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
   if (project.slug === 'blacklands') {
     // Build carousel sections from project elements
     const carouselSections = [
-      // Hero section
+      // Hero section with video
       ...(() => {
         const mainContent = project.elements.find(el => el.name === 'Main Content')
         return mainContent?.hero ? [{
           title: 'BLACKLANDS',
-          images: mainContent.hero
+          images: mainContent.hero,
+          videoPublicId: videoPublicId || undefined
         }] : []
       })(),
       // Exhibition Gallery

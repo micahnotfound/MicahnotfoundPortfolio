@@ -8,6 +8,7 @@ import type { MediaItem } from '@/types/content'
 interface CarouselSection {
   title: string
   images: MediaItem[]
+  videoPublicId?: string
 }
 
 interface VerticalCarouselProps {
@@ -118,6 +119,7 @@ export function VerticalCarousel({ sections, projectTitle, projectDescription }:
               <VerticalCarouselRow
                 title={section.title}
                 images={section.images}
+                videoPublicId={section.videoPublicId}
                 index={index}
                 isHovered={hoveredIndex === index}
                 onMouseEnter={() => setHoveredIndex(index)}

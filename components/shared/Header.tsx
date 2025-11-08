@@ -24,9 +24,20 @@ export function Header() {
     return 3 // Card or textbox state: short, buttons hidden
   }
 
+  // Get header max-height based on logo state to physically shrink header
+  const getHeaderMaxHeight = () => {
+    const logoState = getLogoState()
+    if (logoState === 1) return '280px' // Extra tall for state 1
+    if (logoState === 2) return '160px' // Medium for state 2
+    return '100px' // Compact for state 3
+  }
+
   return (
     <header
-      className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 transition-all duration-500 ease-out`}
+      className={`${isHomePage ? 'relative' : 'fixed top-0 left-0 right-0'} z-50 transition-all duration-500 ease-out overflow-hidden`}
+      style={{
+        maxHeight: getHeaderMaxHeight()
+      }}
       onMouseEnter={() => {
         if (isHomePage) {
           setHoverArea('header')
@@ -39,10 +50,10 @@ export function Header() {
       }}
     >
       {/* Full-width hover area background */}
-      <div className="w-full bg-[#D1D5DB]/90 backdrop-blur-sm">
-        <div className="w-full px-20 xl:px-[100px]">
+      <div className="w-full bg-[#D1D5DB]/90 backdrop-blur-sm h-full">
+        <div className="w-full px-20 xl:px-[100px] h-full">
           <div
-            className="flex justify-start items-start pb-6 transition-all duration-500 ease-out"
+            className="flex justify-start items-start pb-6 transition-all duration-500 ease-out h-full"
             style={{
               paddingTop: getLogoState() === 1 ? '52px' : '12px' // 40px lower in home state (52px vs 12px)
             }}

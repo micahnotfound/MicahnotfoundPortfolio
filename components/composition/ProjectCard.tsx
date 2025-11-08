@@ -168,18 +168,18 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     }
   }
 
-  // Textbox height - Always visible at 60px, grows when textbox is hovered
+  // Textbox height - Always visible at 80px, grows when textbox is hovered
   const getTextboxHeight = () => {
     if (isTextboxHovered) {
-      return '200px' // THIS textbox is hovered: grow tall for description (reduced from 340px)
+      return '220px' // THIS textbox is hovered: grow tall for description (20px taller)
     } else {
-      return '60px' // Always visible at 60px height (20px taller)
+      return '80px' // Always visible at 80px height (20px taller)
     }
   }
 
   // Calculate border-radius for pill shape on right side
   const getBorderRadius = () => {
-    const height = isTextboxHovered ? 200 : 60
+    const height = isTextboxHovered ? 220 : 80
     const radius = height / 2 // Half the height for perfect pill shape
     return `0 ${radius}px ${radius}px 0` // Only round right side
   }

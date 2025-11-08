@@ -168,35 +168,31 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     }
   }
 
-  // Textbox height - ONLY grows when THIS specific textbox is directly hovered
-  // About button is approximately 28px tall (including padding)
-  // 1.5x that = 42px
+  // Textbox height - Always visible at 60px, grows when textbox is hovered
   const getTextboxHeight = () => {
     if (isTextboxHovered) {
-      return '340px' // THIS textbox is hovered: grow tall for description
+      return '200px' // THIS textbox is hovered: grow tall for description (reduced from 340px)
     } else {
-      return '42px' // Card state: 1.5x About button height (28px * 1.5 = 42px)
+      return '60px' // Always visible at 60px height (20px taller)
     }
   }
 
-  // Calculate textbox padding based on hover states - only for hovered card
+  // Calculate textbox padding - more margin for better readability
   const getTextboxPadding = () => {
-    if (someoneIsHovered && isHovered) {
-      const height = parseInt(getTextboxHeight())
-      // Use smaller bevel on narrow screens
-      const bevelRadius = windowWidth < 1300 ? 39 : height / 2
-      const leftPadding = `${bevelRadius + 24}px` // Bevel radius + extra space (24px instead of 16px)
-      const rightPadding = '32px' // Right margin to prevent text overflow
+    const leftPadding = '16px' // Comfortable left margin
+    const rightPadding = '16px' // Comfortable right margin
 
+    if (someoneIsHovered && isHovered) {
       if (isTextboxHovered) {
-        // THIS textbox is hovered: more vertical padding for description
-        return `16px ${rightPadding} 160px ${leftPadding}` // Moved down from 11px to 16px
+        // THIS textbox is hovered: comfortable padding for description
+        return `16px ${rightPadding} 16px ${leftPadding}`
       } else {
-        // Card state (textbox showing but not hovered): less vertical padding
-        return `14px ${rightPadding} 80px ${leftPadding}` // Moved down from 11px to 14px
+        // Card state (textbox showing but not hovered): comfortable padding
+        return `12px ${rightPadding} 12px ${leftPadding}`
       }
     }
-    return '0'
+    // Not hovered: comfortable padding for white outline state
+    return `10px ${rightPadding} 10px ${leftPadding}`
   }
 
   // Calculate flex-grow with progressive falloff - targeting ~550px for active card
@@ -352,23 +348,20 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
         <div
           className={`
             relative font-ui font-bold overflow-hidden
-            bg-core-dark text-white
             ${isLoading ? 'animate-pulse' : ''}
           `}
           style={{
-            border: 'none',
-            width: someoneIsHovered && isHovered ? `${buttonWidth}px` : '0px',
+            backgroundColor: (someoneIsHovered && isHovered) ? '#000000' : '#D1D5DB', // Black when active, background gray when inactive
+            color: (someoneIsHovered && isHovered) ? '#ffffff' : '#D1D5DB', // White text when active, gray text when inactive (invisible)
+            border: '3px solid #D1D5DB', // Border color matches background
+            width: (someoneIsHovered && isHovered) ? `${buttonWidth}px` : `${buttonWidth}px`,
             height: getTextboxHeight(),
             padding: getTextboxPadding(),
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            // Responsive border-radius: half-circle only on screens > 1300px
-            borderRadius: someoneIsHovered && isHovered
-              ? (windowWidth < 1300
-                  ? '39px 0 0 39px' // Regular left bezel for screens < 1300px - more text fits
-                  : `${parseInt(getTextboxHeight()) / 2}px 0 0 ${parseInt(getTextboxHeight()) / 2}px`) // Half-circle on wide screens (>1300px)
-              : '27px',
+            // No border-radius - simple rectangular textbox
+            borderRadius: '0',
             transition: 'all 300ms ease-out' // Unified transition - no hitch
           }}
         >

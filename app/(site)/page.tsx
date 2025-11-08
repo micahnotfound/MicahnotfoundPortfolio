@@ -71,7 +71,12 @@ export default function HomePage() {
   return (
     <div className="h-full flex flex-col">
       {/* Projects Horizontal Row Section - Takes remaining space between header and footer */}
-      <section className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative mb-10">
+      <section
+        className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative mb-10 transition-all duration-500 ease-out"
+        style={{
+          marginTop: (hoverArea === 'card' || hoverArea === 'textbox') ? '40px' : '0px'
+        }}
+      >
         <div className="w-full max-w-[2000px] flex-1 flex flex-col justify-start min-h-0">
           {/* Single row with horizontal scroll - shows about 4 projects at once */}
           <div

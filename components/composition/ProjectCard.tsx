@@ -177,6 +177,13 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     }
   }
 
+  // Calculate border-radius for pill shape on right side
+  const getBorderRadius = () => {
+    const height = isTextboxHovered ? 200 : 60
+    const radius = height / 2 // Half the height for perfect pill shape
+    return `0 ${radius}px ${radius}px 0` // Only round right side
+  }
+
   // Calculate textbox padding - more margin for better readability
   const getTextboxPadding = () => {
     const leftPadding = '16px' // Comfortable left margin
@@ -360,8 +367,8 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            // No border-radius - simple rectangular textbox
-            borderRadius: '0',
+            // Pill shape on right side - rounded based on height
+            borderRadius: getBorderRadius(),
             transition: 'all 300ms ease-out' // Unified transition - no hitch
           }}
         >

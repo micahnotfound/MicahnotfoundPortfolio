@@ -14,13 +14,12 @@ export function Header() {
   const { hoverArea, setHoverArea } = useHover()
 
   // Get logo state based on current state
-  // State 1 (home state): Extra tall logo with About/Contact buttons visible
-  // State 2 (header hover): Medium tall logo
+  // State 1 (home/header state): Extra tall logo with About/Contact buttons visible
   // State 3 (card/textbox state): Short logo, buttons hidden
+  // State 2 has been removed to fix animation clipping issues
   const getLogoState = (): 1 | 2 | 3 => {
     if (!isHomePage) return 3 // Short on other pages
-    if (hoverArea === null) return 1 // Home state: extra tall, buttons visible
-    if (hoverArea === 'header') return 2 // Header hover: medium tall
+    if (hoverArea === null || hoverArea === 'header') return 1 // Home/header state: extra tall, buttons visible
     return 3 // Card or textbox state: short, buttons hidden
   }
 
@@ -28,7 +27,6 @@ export function Header() {
   const getHeaderMaxHeight = () => {
     const logoState = getLogoState()
     if (logoState === 1) return '280px' // Extra tall for state 1
-    if (logoState === 2) return '160px' // Medium for state 2
     return '100px' // Compact for state 3
   }
 

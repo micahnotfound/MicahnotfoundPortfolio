@@ -7,6 +7,7 @@ import { AdaptiveGrid } from '@/components/composition/AdaptiveGrid'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { TabSelector } from '@/components/composition/TabSelector'
 import { VerticalCarousel } from '@/components/composition/VerticalCarousel'
+import { BlacklandsLayout } from '@/components/composition/BlacklandsLayout'
 import type { Project, MediaItem } from '@/types/content'
 
 interface ProjectPageClientProps {
@@ -67,44 +68,22 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
     return activeCarouselTypes[elementName] || 'profile' // Default to profile if not set
   }
 
-  // Render vertical carousel for Blacklands project
+  // Render simplified layout for Blacklands project
   if (project.slug === 'blacklands') {
-    // Build carousel sections from project elements
-    const carouselSections = [
-      // Hero section with video
-      ...(() => {
-        const mainContent = project.elements.find(el => el.name === 'Main Content')
-        return mainContent?.hero ? [{
-          title: 'BLACKLANDS',
-          images: mainContent.hero,
-          videoPublicId: videoPublicId || undefined
-        }] : []
-      })(),
-      // Exhibition Gallery
-      ...(() => {
-        const gallery = project.elements.find(el => el.name === 'Exhibition Gallery')
-        return gallery?.gallery ? [{
-          title: 'Exhibition Gallery',
-          images: gallery.gallery
-        }] : []
-      })(),
-      // Character profiles
-      ...regularElements
-        .filter(el => el.profile && el.profile.length > 0)
-        .map(el => ({
-          title: el.name,
-          images: el.profile!
-        }))
-    ]
+    const mainContent = project.elements.find(el => el.name === 'Main Content')
+    const heroImage = mainContent?.hero?.[0]
+
+    if (!heroImage || !videoPublicId) {
+      return <div>Missing required content</div>
+    }
 
     return (
-      <main className="fixed inset-0 overflow-hidden">
-        <VerticalCarousel
-          sections={carouselSections}
-          projectTitle={project.title}
-          projectDescription={project.description}
-        />
-      </main>
+      <BlacklandsLayout
+        projectTitle={project.title}
+        projectDescription={project.description}
+        heroImage={heroImage}
+        videoPublicId={videoPublicId}
+      />
     )
   }
 

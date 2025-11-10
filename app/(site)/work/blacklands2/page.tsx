@@ -365,9 +365,17 @@ export default function Blacklands2Page() {
       </div>
 
       {/* Exhibition photos section - all rows */}
-      <div className="bg-[#D1D5DB] px-20 xl:px-[100px] pb-12 space-y-12" style={{ paddingTop: '52px', marginTop: '100vh' }}>
+      <div
+        className="fixed bg-[#D1D5DB] px-20 xl:px-[100px] pb-12 space-y-12 left-0 right-0"
+        style={{
+          top: '100vh',
+          paddingTop: '52px',
+          transform: `translateY(-${contentScrollOffset}px)`,
+          transition: 'transform 0ms linear'
+        }}
+      >
         {/* Row 1 */}
-        <div className="flex" style={{ gap: '15px' }}>
+        <div className="flex" style={{ gap: '25px' }}>
           <div
             className="overflow-hidden"
             style={{
@@ -400,7 +408,7 @@ export default function Blacklands2Page() {
         </div>
 
         {/* Row 2 */}
-        <div className="flex" style={{ gap: '15px' }}>
+        <div className="flex" style={{ gap: '25px' }}>
           <div
             className="overflow-hidden"
             style={{
@@ -433,7 +441,7 @@ export default function Blacklands2Page() {
         </div>
 
         {/* Row 3 */}
-        <div className="flex" style={{ gap: '15px' }}>
+        <div className="flex" style={{ gap: '25px' }}>
           <div
             className="overflow-hidden"
             style={{
@@ -466,7 +474,7 @@ export default function Blacklands2Page() {
         </div>
 
         {/* Row 4 */}
-        <div className="flex" style={{ gap: '15px' }}>
+        <div className="flex" style={{ gap: '25px' }}>
           <div
             className="overflow-hidden"
             style={{
@@ -499,7 +507,7 @@ export default function Blacklands2Page() {
         </div>
 
         {/* Row 5 - Single photo */}
-        <div className="flex" style={{ gap: '15px' }}>
+        <div className="flex" style={{ gap: '25px' }}>
           <div
             className="overflow-hidden"
             style={{
@@ -516,6 +524,9 @@ export default function Blacklands2Page() {
           </div>
         </div>
       </div>
+
+      {/* Spacer to enable scrolling - creates document height */}
+      <div style={{ height: '4600px' }} aria-hidden="true" />
     </div>
   )
 }

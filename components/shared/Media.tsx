@@ -15,6 +15,7 @@ interface MediaProps {
   width?: number
   height?: number
   alt?: string
+  style?: React.CSSProperties
 }
 
 export function Media({
@@ -26,7 +27,8 @@ export function Media({
   fill = false,
   width = 1600,
   height = 1200,
-  alt
+  alt,
+  style
 }: MediaProps) {
   const [imageError, setImageError] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -143,6 +145,7 @@ export function Media({
     ...(priority ? {} : { loading }), // Apply loading only if not priority
     ...(fill ? { fill } : { width, height }),
     className,
+    style,
     onError: () => setImageError(true)
   }
 

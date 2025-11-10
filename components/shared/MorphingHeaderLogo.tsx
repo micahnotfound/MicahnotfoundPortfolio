@@ -3,44 +3,55 @@
 import { CSSProperties } from 'react'
 
 interface MorphingHeaderLogoProps {
-  state: 0 | 1 | 2 | 3
+  state: 0 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5
   className?: string
   style?: CSSProperties
+  disableTransition?: boolean
 }
 
-export function MorphingHeaderLogo({ state, className = '', style }: MorphingHeaderLogoProps) {
-  // STATE ZERO: Super tall version for Blacklands - lower third extended ~2x State 1 (~710px)
-  const stateZeroPath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,598.6h109.45l6.56-598.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,598.59h109.46l6.57-598.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,598.59h50.38l-6.33-600.62c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,569.75h-11.26l-5.08-569.63c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,569.75h-11.31l-5.34-569.75C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,654.67h50.38l6.25-598.59Z"
+export function MorphingHeaderLogo({ state, className = '', style, disableTransition = false }: MorphingHeaderLogoProps) {
+  // STATE ZERO: Super tall version for Blacklands - 130px shorter than original (~525px)
+  const stateZeroPath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,468.6h109.45l6.56-468.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,468.59h109.46l6.57-468.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,468.59h50.38l-6.33-470.62c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,439.75h-11.26l-5.08-439.63c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,439.75h-11.31l-5.34-439.75C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,524.67h50.38l6.25-468.59Z"
 
-  // STATE ONE: Extra tall version - 2x tall for initial state (~410px)
-  const stateOnePath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,298.6h109.45l6.56-298.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,298.59h109.46l6.57-298.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,298.59h50.38l-6.33-300.62c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,269.75h-11.26l-5.08-269.63c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,269.75h-11.31l-5.34-269.75C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,354.67h50.38l6.25-298.59Z"
+  // STATE ONE: Extra tall version - 100px taller than before (~510px)
+  // Extended lower third by 100 pixels: 298.6 → 398.6, 354.67 → 454.67
+  const stateOnePath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,398.6h109.45l6.56-398.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,398.59h109.46l6.57-398.6c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,398.59h50.38l-6.33-400.62c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,369.75h-11.26l-5.08-369.63c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,369.75h-11.31l-5.34-369.75C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,454.67h50.38l6.25-398.59Z"
 
-  // STATE TWO: Tall version - bottom third points moved down, top curves preserved
-  const stateTwoPath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,148.8h109.45l6.56-148.8c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,148.79h109.46l6.57-148.8c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,148.79h50.38l-6.33-150.82c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,119.95h-11.26l-5.08-119.83c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,119.95h-11.31l-5.34-119.95C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,204.87h50.38l6.25-148.79Z"
+  // STATE ONE POINT FIVE: Between State 1 (455px) and State 2 (292px) = ~373px
+  // Leg height: (398.6 + 236.2) / 2 ≈ 317.4
+  const stateOnePointFivePath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,317.4h109.45l6.56-317.4c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,317.39h109.46l6.57-317.4c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,317.39h50.38l-6.33-319.42c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,288.55h-11.26l-5.08-288.43c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,288.55h-11.31l-5.34-288.55C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,373.47h50.38l6.25-317.39Z"
 
-  // STATE THREE: Short version - bottom third points moved up, top curves preserved
+  // STATE TWO: Medium tall version - proper intermediate between State 1 and State 3
+  // State 1 is 454.67px, State 3 is 129.87px, so State 2 should be ~292px (middle point)
+  // Leg height: (398.6 + 73.8) / 2 ≈ 236.2
+  const stateTwoPath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,236.2h109.45l6.56-236.2c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,236.19h109.46l6.57-236.2c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,236.19h50.38l-6.33-238.22c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,207.35h-11.26l-5.08-207.23c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,207.35h-11.31l-5.34-207.35C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,292.27h50.38l6.25-236.19Z"
+
+  // STATE TWO POINT FIVE: Between State 2 (292px) and State 3 (130px) = ~211px
+  // Leg height: (236.2 + 73.8) / 2 ≈ 155
+  const stateTwoPointFivePath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,155h109.45l6.56-155c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,154.99h109.46l6.57-155c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,154.99h50.38l-6.33-157.02c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,126.15h-11.26l-5.08-126.03c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,126.15h-11.31l-5.34-126.15C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,211.07h50.38l6.25-154.99Z"
+
+  // STATE THREE POINT FIVE: Between State 3 (130px) and State 2.5 (211px) = ~170px
+  // Leg height: (73.8 + 155) / 2 ≈ 114.4
+  const stateThreePointFivePath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,114.4h109.45l6.56-114.4c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,114.39h109.46l6.57-114.4c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,114.39h50.38l-6.33-116.42c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,85.55h-11.26l-5.08-85.43c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,85.55h-11.31l-5.34-85.55C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,170.47h50.38l6.25-114.39Z"
+
+  // STATE THREE: Short version - bottom third points moved up, top curves preserved (~130px)
   const stateThreePath = "M56.62,56.07c.13-3.22,2.75-5.74,5.98-5.74s5.84,2.52,5.97,5.73l6.56,73.8h109.45l6.56-73.8c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,73.79h109.46l6.57-73.8c.14-3.21,2.76-5.73,5.97-5.73s5.84,2.52,5.97,5.74l6.25,73.79h50.38l-6.33-75.82c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,44.95h-11.26l-5.08-44.83c-1.22-30.31-25.94-54.05-56.27-54.05s-54.98,23.69-56.26,53.93l-5.34,44.95h-11.31l-5.34-44.95C117.58,23.69,92.87,0,62.6,0S7.55,23.74,6.33,54.05L0,129.87h50.38l6.25-73.79Z"
 
   const getCurrentPath = () => {
-    if (state === 0) return stateZeroPath // Super tall for Blacklands
-    if (state === 1) return stateOnePath // Extra tall
-    if (state === 2) return stateTwoPath // Tall
-    return stateThreePath // Short
-  }
-
-  // Adjust viewBox height based on state
-  const getViewBoxHeight = () => {
-    if (state === 0) return '654.67' // Super tall
-    if (state === 1) return '354.67' // Extra tall
-    if (state === 2) return '204.87' // Tall
-    return '129.87' // Short
+    if (state === 0) return stateZeroPath // Super tall for Blacklands (~525px)
+    if (state === 1) return stateOnePath // Extra tall (~455px)
+    if (state === 1.5) return stateOnePointFivePath // Between 1 and 2 (~373px)
+    if (state === 2) return stateTwoPath // Tall (~292px)
+    if (state === 2.5) return stateTwoPointFivePath // Between 2 and 3 (~211px)
+    if (state === 3.5) return stateThreePointFivePath // Between 3 and 2.5 (~170px)
+    return stateThreePath // Short (~130px) - minimum size
   }
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 393.95 ${getViewBoxHeight()}`}
-      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 393.95 524.67"
+      preserveAspectRatio="xMidYMin meet"
       className={className}
       style={style}
     >
@@ -49,7 +60,7 @@ export function MorphingHeaderLogo({ state, className = '', style }: MorphingHea
         d={getCurrentPath()}
         fill="#000000"
         style={{
-          transition: 'd 500ms ease-out'
+          transition: disableTransition ? 'none' : 'd 500ms ease-out'
         }}
       />
     </svg>

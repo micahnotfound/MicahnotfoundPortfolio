@@ -15,7 +15,12 @@
       "Bash(npx tsc:*)",
       "Bash(git log:*)",
       "Bash(ls:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(if exist .next rmdir /s /q .next)",
+      "Bash(rm:*)",
+      "Bash(timeout:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)"
     ],
     "deny": [],
     "ask": []

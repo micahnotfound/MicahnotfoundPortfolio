@@ -6,12 +6,13 @@ import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 
-export default function Blacklands2Page() {
+export default function NYCAMPage() {
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200) // Better initial estimate for text height
   const [isMounted, setIsMounted] = useState(false)
+  const [hoveredHeroImage, setHoveredHeroImage] = useState<number | null>(null) // Track which hero image is hovered (0, 1, or 2)
   const textRef = useRef<HTMLDivElement>(null)
 
   // Track viewport height
@@ -77,74 +78,56 @@ export default function Blacklands2Page() {
     return () => cancelAnimationFrame(animationFrame)
   }, [scrollY])
 
-  // Header image - using Cloudinary face detection and custom focal point
-  const heroImage = {
-    public_id: "v1756775322/Blacklands_H1_okkjx9",
+  // Header images - three stacked images
+  const heroImage1 = {
+    public_id: "v1756782105/H1_idij9u",
     kind: "image" as const,
-    alt: "BLACKLANDS Header"
+    alt: "NYCAM header image 1"
   }
 
-  // Exhibition photos - unique images for each position
-  const exhibitionPhoto1 = {
-    public_id: "v1756775074/Blacklands_R1_cobywl",
+  const heroImage2 = {
+    public_id: "v1756782099/NYCAM_0000_Derek_nyouvl",
     kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 1"
+    alt: "NYCAM header image 2"
+  }
+
+  const heroImage3 = {
+    public_id: "v1756782110/H3_ppxroy",
+    kind: "image" as const,
+    alt: "NYCAM header image 3"
+  }
+
+  // Exhibition photos
+  const exhibitionPhoto1 = {
+    public_id: "v1756780621/R1_A_ryxn1y",
+    kind: "image" as const,
+    alt: "NYCAM exhibition view 1"
   }
 
   const exhibitionPhoto2 = {
-    public_id: "v1756775074/Blacklands_R2_qaects",
+    public_id: "v1756780486/R1_B_kbxmbz",
     kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 2"
+    alt: "NYCAM exhibition view 2"
   }
 
   const exhibitionPhoto3 = {
-    public_id: "v1756775074/Blacklands_R3_fija7f",
+    public_id: "v1756780508/R2_A_oqvezy",
     kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 3"
+    alt: "NYCAM exhibition view 3"
   }
 
   const exhibitionPhoto4 = {
-    public_id: "v1756775074/Blacklands_R1_cobywl",
+    public_id: "v1756780504/NYCAM_0002_BL_horizontal_0002_Layer-Comp-3_tjjla8",
     kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 4"
-  }
-
-  const exhibitionPhoto5 = {
-    public_id: "v1756775074/Blacklands_R2_qaects",
-    kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 5"
-  }
-
-  const exhibitionPhoto6 = {
-    public_id: "v1756775074/Blacklands_R3_fija7f",
-    kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 6"
-  }
-
-  const exhibitionPhoto7 = {
-    public_id: "v1756775074/Blacklands_R1_cobywl",
-    kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 7"
-  }
-
-  const exhibitionPhoto8 = {
-    public_id: "v1756775074/Blacklands_R2_qaects",
-    kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 8"
-  }
-
-  const exhibitionPhoto9 = {
-    public_id: "v1756775074/Blacklands_R3_fija7f",
-    kind: "image" as const,
-    alt: "BLACKLANDS exhibition view 9"
+    alt: "NYCAM exhibition view 4"
   }
 
   // Video
-  const videoPublicId = "BLACKLANDS_reel"
+  const videoPublicId = "v1756689624/NYCAM_reel_qpkje9"
 
   // Project info
-  const projectTitle = "Black Lands"
-  const projectDescription = "Produced by Kinfolk, Black Lands was an award-winning immersive AR exhibition recognized at the Tribeca Film Festival. The project explored early Black communities in New York history, featuring digital monuments to Sojourner Truth, Manuel de Gerrit de Reus, and Samuel Anderson. Each figure was co-created with nonprofit partners who rooted the stories in authentic community memory. By weaving art, technology, and liberation, Kinfolk ensured these legacies continue to inform and empower the present."
+  const projectTitle = "New York City AIDS Memorial"
+  const projectDescription = "Portals of Remembrance was an exhibition produced by Kinfolk, reimagining the New York City AIDS Memorial through the work of celebrated contemporary artists. Presented at St. Vincent's Triangle, the project honored underrepresented figures within the HIV and AIDS movement, from Black horse jockeys to disco icon Sylvester. Guided by Kinfolk's vision, the exhibition bridged timelines and communities, transforming the memorial into a living archive of resilience, joy, and collective memory."
 
   // Layout calculations - PRIORITY ORDER:
   // 1. Text at bottom (with bottom margin matching top margin = 52px)
@@ -222,13 +205,40 @@ export default function Blacklands2Page() {
   const textBottomY = viewportHeight - bottomMargin
   const dividerY = textBottomY - textHeight - paddingBelowLine
 
+  // Calculate flex values for hero images based on hover state
+  // When middle (index 1) is hovered: it gets 70%, others split 30% (15% each)
+  // When top (index 0) is hovered: top gets 70%, middle gets 20%, bottom gets 10%
+  // When bottom (index 2) is hovered: bottom gets 70%, middle gets 20%, top gets 10%
+  // When no hover: all equal at 33.33% each
+  const getHeroImageFlex = (index: number): number => {
+    if (hoveredHeroImage === null) {
+      return 1 // Equal distribution when no hover
+    }
+
+    if (hoveredHeroImage === index) {
+      return 7 // 70% for hovered image
+    }
+
+    if (hoveredHeroImage === 1) {
+      // Middle is hovered, other two split 30% equally
+      return 1.5 // 15% each
+    }
+
+    // Top or bottom is hovered - create gradient
+    const distance = Math.abs(hoveredHeroImage - index)
+    if (distance === 1) {
+      return 2 // 20% for adjacent image
+    }
+    return 1 // 10% for furthest image
+  }
+
   return (
     <div className="min-h-screen bg-[#D1D5DB]">
       {/* Fixed Header - full width, z-index 2, always taller than State 3 (130px) */}
       <div
         className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
         style={{
-          height: '135px',
+          height: '110px',
           zIndex: 2
         }}
       />
@@ -315,25 +325,74 @@ export default function Blacklands2Page() {
             zIndex: 3,
             transform: `translateY(-${photoScrollOffset}px)`,
             transition: 'transform 0ms linear',
-            gap: '15px' // Fixed 15px margin between photo and video
+            gap: '25px' // Fixed 25px margin between photos and video
           }}
         >
-          {/* Photo - fills remaining space */}
+          {/* Three stacked photos - fills remaining space with vertical carousel behavior */}
           <div
-            className="flex-1 overflow-hidden"
+            className="flex-1 flex flex-col"
             style={{
-              borderRadius: '24px'
+              gap: '25px' // Gap between stacked photos
             }}
           >
-            <Media
-              media={heroImage}
-              className="w-full h-full object-cover"
+            {/* Photo 1 - Top */}
+            <div
+              className="overflow-hidden transition-all duration-500 ease-out"
               style={{
-                objectFit: 'cover',
-                objectPosition: '35% 25%'
+                borderRadius: '24px',
+                flex: getHeroImageFlex(0)
               }}
-              alt={heroImage.alt || 'BLACKLANDS Header'}
-            />
+              onMouseEnter={() => setHoveredHeroImage(0)}
+              onMouseLeave={() => setHoveredHeroImage(null)}
+            >
+              <Media
+                media={heroImage1}
+                className="w-full h-full object-cover"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: '50% 15%'
+                }}
+                alt={heroImage1.alt || 'NYCAM Header 1'}
+              />
+            </div>
+
+            {/* Photo 2 - Middle */}
+            <div
+              className="overflow-hidden transition-all duration-500 ease-out"
+              style={{
+                borderRadius: '24px',
+                flex: getHeroImageFlex(1)
+              }}
+              onMouseEnter={() => setHoveredHeroImage(1)}
+              onMouseLeave={() => setHoveredHeroImage(null)}
+            >
+              <Media
+                media={heroImage2}
+                className="w-full h-full object-cover"
+                alt={heroImage2.alt || 'NYCAM Header 2'}
+              />
+            </div>
+
+            {/* Photo 3 - Bottom */}
+            <div
+              className="overflow-hidden transition-all duration-500 ease-out"
+              style={{
+                borderRadius: '24px',
+                flex: getHeroImageFlex(2)
+              }}
+              onMouseEnter={() => setHoveredHeroImage(2)}
+              onMouseLeave={() => setHoveredHeroImage(null)}
+            >
+              <Media
+                media={heroImage3}
+                className="w-full h-full object-cover"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: '50% 35%'
+                }}
+                alt={heroImage3.alt || 'NYCAM Header 3'}
+              />
+            </div>
           </div>
 
           {/* Video - fixed aspect ratio */}
@@ -366,10 +425,12 @@ export default function Blacklands2Page() {
 
       {/* Exhibition photos section - all rows */}
       <div
-        className="fixed bg-[#D1D5DB] px-20 xl:px-[100px] pb-12 space-y-12 left-0 right-0"
+        className="fixed bg-[#D1D5DB] pb-12 space-y-12 left-0 right-0"
         style={{
           top: '100vh',
           paddingTop: '52px',
+          paddingLeft: '80px',
+          paddingRight: '80px',
           transform: `translateY(-${contentScrollOffset}px)`,
           transition: 'transform 0ms linear'
         }}
@@ -439,94 +500,10 @@ export default function Blacklands2Page() {
             />
           </div>
         </div>
-
-        {/* Row 3 */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div
-            className="overflow-hidden"
-            style={{
-              flexBasis: '50%',
-              borderRadius: '24px',
-              height: '600px'
-            }}
-          >
-            <Media
-              media={exhibitionPhoto5}
-              className="w-full h-full object-cover"
-              alt={exhibitionPhoto5.alt}
-            />
-          </div>
-
-          <div
-            className="overflow-hidden"
-            style={{
-              flexBasis: '50%',
-              borderRadius: '24px',
-              height: '600px'
-            }}
-          >
-            <Media
-              media={exhibitionPhoto6}
-              className="w-full h-full object-cover"
-              alt={exhibitionPhoto6.alt}
-            />
-          </div>
-        </div>
-
-        {/* Row 4 */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div
-            className="overflow-hidden"
-            style={{
-              flexBasis: '50%',
-              borderRadius: '24px',
-              height: '600px'
-            }}
-          >
-            <Media
-              media={exhibitionPhoto7}
-              className="w-full h-full object-cover"
-              alt={exhibitionPhoto7.alt}
-            />
-          </div>
-
-          <div
-            className="overflow-hidden"
-            style={{
-              flexBasis: '50%',
-              borderRadius: '24px',
-              height: '600px'
-            }}
-          >
-            <Media
-              media={exhibitionPhoto8}
-              className="w-full h-full object-cover"
-              alt={exhibitionPhoto8.alt}
-            />
-          </div>
-        </div>
-
-        {/* Row 5 - Single photo */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div
-            className="overflow-hidden"
-            style={{
-              flexBasis: '100%',
-              borderRadius: '24px',
-              height: '600px'
-            }}
-          >
-            <Media
-              media={exhibitionPhoto9}
-              className="w-full h-full object-cover"
-              alt={exhibitionPhoto9.alt}
-            />
-          </div>
-        </div>
       </div>
 
       {/* Spacer to enable scrolling - creates document height */}
-      <div style={{ height: '4600px' }} aria-hidden="true" />
+      <div style={{ height: '2598px' }} aria-hidden="true" />
     </div>
   )
 }

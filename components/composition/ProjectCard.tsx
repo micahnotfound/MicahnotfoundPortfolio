@@ -12,7 +12,7 @@ interface ProjectCardProps {
   someoneIsHovered?: boolean
   distanceFromHovered?: number
   totalCards?: number
-  hoverArea?: 'card' | 'textbox' | null
+  hoverArea?: 'header' | 'card' | 'textbox' | null
   onMouseEnter?: () => void
   onMouseLeave?: () => void
   onTextboxAreaEnter?: () => void
@@ -415,7 +415,12 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
                   overflowWrap: 'break-word',
                   width: '100%',
                   opacity: showDescription ? 1 : 0,
-                  transition: 'opacity 1500ms ease-out' // Slower fade-in for description (1.5 seconds)
+                  transition: 'opacity 1500ms ease-out', // Slower fade-in for description (1.5 seconds)
+                  overflow: 'hidden',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 5,
+                  WebkitBoxOrient: 'vertical',
+                  textOverflow: 'ellipsis'
                 }}
               >
                 {project.description}

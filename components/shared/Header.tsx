@@ -11,11 +11,12 @@ export function Header() {
   const pathname = usePathname()
   const isAboutPage = pathname === '/about'
   const isHomePage = pathname === '/'
+  const isHomepagePage = pathname === '/homepage'
   const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
 
-  // Don't render this header on project detail pages - they use ProjectHeader instead
-  if (isProjectPage) {
+  // Don't render this header on project detail pages or /homepage page
+  if (isProjectPage || isHomepagePage) {
     return null
   }
 
@@ -32,7 +33,7 @@ export function Header() {
   // Get header max-height based on logo state to physically shrink header
   const getHeaderMaxHeight = () => {
     const logoState = getLogoState()
-    if (logoState === 1) return '280px' // Extra tall for state 1
+    if (logoState === 1) return '380px' // Extra tall for state 1 (100px taller than before)
     return '100px' // Compact for state 3
   }
 
@@ -63,7 +64,8 @@ export function Header() {
             }}
           >
             {/* Left Side: Logo, Separator, About/Contact */}
-            <div className="flex items-center gap-12 lg:gap-20">
+            {/* Use items-start to anchor logo to top, then center separator/buttons relative to logo */}
+            <div className="flex items-start gap-12 lg:gap-20">
               {/* Morphing Logo - anchored to top */}
               <Link href="/" className="flex-shrink-0">
                 <MorphingHeaderLogo
@@ -76,8 +78,15 @@ export function Header() {
                 />
               </Link>
 
-              {/* Vertical separator and buttons container */}
-              <div className="flex items-center gap-8 lg:gap-16">
+              {/* Vertical separator and buttons container - centered vertically with M */}
+              <div
+                className="flex items-center gap-8 lg:gap-16 transition-all duration-500 ease-out"
+                style={{
+                  // Center vertically relative to logo height
+                  // State 1 logo is now ~454px tall (100px taller), State 3 is ~130px tall
+                  marginTop: getLogoState() === 1 ? '165px' : '43px' // Centers in middle of logo
+                }}
+              >
                 {/* 5px thick vertical separator - visible only in home state */}
                 <div
                   className="flex-shrink-0 transition-all duration-500 ease-out overflow-hidden"

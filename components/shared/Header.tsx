@@ -12,11 +12,13 @@ export function Header() {
   const isAboutPage = pathname === '/about'
   const isHomePage = pathname === '/'
   const isHomepagePage = pathname === '/homepage'
+  const isHeaderPage = pathname === '/header'
+  const isSliderPage = pathname === '/slider'
   const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
 
-  // Don't render this header on project detail pages or /homepage page
-  if (isProjectPage || isHomepagePage) {
+  // Don't render this header on project detail pages, /homepage, /header, or /slider pages
+  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage) {
     return null
   }
 

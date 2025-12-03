@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 
-export default function HomepagePage() {
+export default function HeaderPage() {
   const [logoState, setLogoState] = useState<1 | 2 | 3>(1)
   const [touchStart, setTouchStart] = useState<{ y: number; time: number } | null>(null)
   const [scrollY, setScrollY] = useState(0)

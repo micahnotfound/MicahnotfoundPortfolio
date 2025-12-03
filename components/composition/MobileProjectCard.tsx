@@ -10,12 +10,17 @@ interface MobileProjectCardProps {
   selectedIndex: number
   totalCards: number
   onSelect: (index: number) => void
+  scrollPosition?: number // Optional fractional scroll position for smooth text bubble transitions
+  expansionProgress?: number // Optional expansion progress (0-1) to control when text bubbles appear
 }
 
-export function MobileProjectCard({ project, index, selectedIndex, totalCards, onSelect }: MobileProjectCardProps) {
+export function MobileProjectCard({ project, index, selectedIndex, totalCards, onSelect, scrollPosition, expansionProgress }: MobileProjectCardProps) {
   const router = useRouter()
   const isSelected = index === selectedIndex
-  const relativePosition = index - selectedIndex // Negative = above, Positive = below, 0 = selected
+
+  // Use fractional scroll position if provided (for slider page), otherwise use selectedIndex
+  const effectiveScrollPos = scrollPosition !== undefined ? scrollPosition : selectedIndex
+  const relativePosition = index - effectiveScrollPos // Negative = above, Positive = below, 0 = selected
 
   // Use thumbnail if available, otherwise fall back to cover image
   const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
@@ -79,9 +84,9 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
 
   return (
     <div
-      className="flex-shrink-0 w-full transition-all duration-500 ease-out mb-2"
+      className="flex-shrink-0 w-full transition-all duration-500 ease-out"
       style={{
-        height: getCardHeight(),
+        height: '100%',
         opacity: getOpacity()
       }}
     >
@@ -104,22 +109,66 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
           />
         </div>
 
-        {/* Title box - Only show on selected card, below the image */}
-        {isSelected && (
-          <div
-            onClick={handleClick}
-            className="bg-black text-white font-ui font-bold px-6 py-3 mt-2 cursor-pointer"
-            style={{
-              fontSize: '1.2rem',
-              borderTopLeftRadius: '24px',
-              borderBottomLeftRadius: '24px',
-              borderTopRightRadius: '0px',
-              borderBottomRightRadius: '0px'
-            }}
-          >
-            {project.title}
-          </div>
-        )}
+        {/* Title box - Grows and shrinks based on proximity to scroll position */}
+        {(() => {
+          // Hide text bubbles completely when carousel is collapsed (expansionProgress < 0.3)
+          if (expansionProgress !== undefined && expansionProgress < 0.3) {
+            return null
+          }
+
+          // Calculate text bubble visibility based on distance from scroll position
+          const distance = Math.abs(relativePosition)
+
+          // Text bubble is ONLY visible when within 1.0 unit of the scroll position
+          // This ensures only 1 bubble when selected, or 2 bubbles during transition
+          let heightMultiplier = 0
+          if (distance < 0.15) {
+            heightMultiplier = 1 // Full height when centered (fully selected)
+          } else if (distance < 1.0) {
+            // Smooth transition from full to zero over a tight range
+            heightMultiplier = 1 - ((distance - 0.15) / 0.85)
+          }
+          // If distance >= 1.0, heightMultiplier stays 0 (no bubble visible)
+
+          // Factor in expansion progress if provided (for slider page)
+          if (expansionProgress !== undefined && expansionProgress < 0.95) {
+            // During expansion (0.3 to 0.95), gradually fade in text bubbles
+            const expansionFactor = (expansionProgress - 0.3) / 0.65 // 0 at 0.3, 1 at 0.95
+            heightMultiplier *= expansionFactor
+          }
+
+          // Don't render at all if multiplier is too small
+          if (heightMultiplier < 0.05) return null
+
+          const maxHeight = 48 // Full height in pixels
+          const currentHeight = maxHeight * heightMultiplier
+
+          return (
+            <div
+              onClick={handleClick}
+              className="bg-black text-white font-ui font-bold cursor-pointer flex-shrink-0 overflow-hidden transition-all duration-200"
+              style={{
+                fontSize: '1.2rem',
+                paddingLeft: '24px',
+                paddingRight: '24px',
+                paddingTop: currentHeight > 24 ? '12px' : '0px',
+                paddingBottom: currentHeight > 24 ? '12px' : '0px',
+                marginTop: '8px',
+                height: `${currentHeight}px`,
+                maxHeight: `${currentHeight}px`,
+                borderTopLeftRadius: '24px',
+                borderBottomLeftRadius: '24px',
+                borderTopRightRadius: '0px',
+                borderBottomRightRadius: '0px',
+                display: 'flex',
+                alignItems: 'center',
+                opacity: heightMultiplier
+              }}
+            >
+              {project.title}
+            </div>
+          )
+        })()}
       </div>
     </div>
   )

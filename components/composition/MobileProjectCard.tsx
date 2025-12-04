@@ -62,22 +62,17 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
     return '4.25vh' // Fallback
   }
 
-  // Calculate opacity - all cards fully visible
-  const getOpacity = () => {
-    if (isSelected) return 1
-    if (Math.abs(relativePosition) === 1) return 0.9
-    if (Math.abs(relativePosition) === 2) return 0.8
-    return 0.7 // Minimum opacity for visibility
-  }
-
-  // Handle click: first tap selects, second tap navigates
+  // Handle click: first tap selects (expands carousel), second tap navigates
   const handleClick = (e: React.MouseEvent) => {
-    if (!isSelected) {
-      // First tap: select this card
+    // Check if we're using expansionProgress (slider page with collapsed state)
+    const isCollapsed = expansionProgress !== undefined && expansionProgress < 0.5
+
+    if (isCollapsed || !isSelected) {
+      // First tap: select this card (expand carousel if collapsed)
       e.preventDefault()
       onSelect(index)
     } else {
-      // Second tap: navigate to project page
+      // Second tap on already selected card: navigate to project page
       router.push(`/work/${project.slug}`)
     }
   }
@@ -87,7 +82,7 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
       className="flex-shrink-0 w-full transition-all duration-500 ease-out"
       style={{
         height: '100%',
-        opacity: getOpacity()
+        opacity: 1 // All cards at 100% opacity - only size changes
       }}
     >
       <div className="h-full w-full flex flex-col">

@@ -10,11 +10,25 @@ interface CursorPosition {
 export function MagneticCursor() {
   const [cursorPos, setCursorPos] = useState<CursorPosition>({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const cursorDotRef = useRef<HTMLDivElement>(null)
   const cursorRingRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>()
   const currentPosRef = useRef<CursorPosition>({ x: 0, y: 0 })
   const targetPosRef = useRef<CursorPosition>({ x: 0, y: 0 })
+
+  // Detect if mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      setIsMobile(isTouchDevice)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     // Smooth animation loop using RAF
@@ -64,6 +78,11 @@ export function MagneticCursor() {
       }
     }
   }, [])
+
+  // Don't render cursor on mobile devices
+  if (isMobile) {
+    return null
+  }
 
   return (
     <>

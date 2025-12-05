@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { siteSettings } from '@/config/siteSettings'
@@ -17,9 +18,24 @@ export function Header() {
   const isCompletePage = pathname === '/complete'
   const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Don't render this header on project detail pages, /homepage, /header, /slider, or /complete pages
-  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage) {
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Don't render this header on:
+  // - Project detail pages
+  // - /homepage, /header, /slider, or /complete pages
+  // - Homepage when on mobile (mobile carousel handles its own header)
+  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || (isHomePage && isMobile)) {
     return null
   }
 

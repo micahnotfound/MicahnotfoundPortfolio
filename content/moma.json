@@ -193,5 +193,11 @@
     "kind": "image",
     "alt": "MoMA project cover",
     "caption": "MoMA project cover image"
+  },
+  "reel": {
+    "public_id": "Nested_Sequence_02_lwwymc",
+    "kind": "video",
+    "alt": "MoMA project reel",
+    "caption": "MoMA project reel video"
   }
 }

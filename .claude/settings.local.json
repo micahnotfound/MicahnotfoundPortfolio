@@ -21,7 +21,9 @@
       "Bash(timeout:*)",
       "Bash(find:*)",
       "Bash(wc:*)",
-      "Bash(git show:*)"
+      "Bash(git show:*)",
+      "Bash(node -e:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

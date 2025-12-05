@@ -46,6 +46,12 @@ export function buildThumbnailUrl(mediaItem: MediaItem, width: number = 600): st
  * Build a full-size URL for a MediaItem
  */
 export function buildFullSizeUrl(mediaItem: MediaItem, width: number = 1600): string {
+  // For videos, use video/upload path with standard video transformations
+  if (mediaItem.kind === 'video') {
+    const baseUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload`
+    return `${baseUrl}/q_auto,f_auto/${mediaItem.public_id}`
+  }
+
   return buildCloudinaryUrl(
     mediaItem.public_id,
     `w_${width},q_auto,f_auto`

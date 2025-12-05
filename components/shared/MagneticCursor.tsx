@@ -17,11 +17,12 @@ export function MagneticCursor() {
   const currentPosRef = useRef<CursorPosition>({ x: 0, y: 0 })
   const targetPosRef = useRef<CursorPosition>({ x: 0, y: 0 })
 
-  // Detect if mobile device
+  // Detect if mobile device (touch support or small viewport)
   useEffect(() => {
     const checkMobile = () => {
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-      setIsMobile(isTouchDevice)
+      const isSmallViewport = window.innerWidth < 768
+      setIsMobile(isTouchDevice || isSmallViewport)
     }
 
     checkMobile()

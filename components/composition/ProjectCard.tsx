@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
 import { Media } from '@/components/shared/Media'
+import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import type { Project } from '@/types/content'
 
 interface ProjectCardProps {
@@ -35,8 +36,14 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   const textFadeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const descriptionFadeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Use thumbnail if available, otherwise fall back to cover image
-  const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
+  // Use reel if available, otherwise thumbnail, otherwise cover image
+  const hasReel = !!project.reel
+  const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
+    ? project.thumbnails[0]
+    : project.cover)
+
+  // Fallback image for when video is loading
+  const fallbackImage = project.thumbnails && project.thumbnails.length > 0
     ? project.thumbnails[0]
     : project.cover
 
@@ -326,10 +333,14 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
               : 'clip-path 1400ms ease-out', // Slow shrink (2x slower)
           }}
         >
-          <Media
-            media={thumbnailMedia}
-            className="w-full h-full object-cover object-center"
+          <CarouselMedia
+            media={displayMedia}
+            fallbackImage={hasReel ? fallbackImage : undefined}
+            isVisible={isHovered}
+            isAdjacent={someoneIsHovered && !isHovered && distanceFromHovered === 1}
+            className="object-cover object-center"
             alt={`${project.title} thumbnail`}
+            priority={index === 0}
           />
         </div>
       </Link>

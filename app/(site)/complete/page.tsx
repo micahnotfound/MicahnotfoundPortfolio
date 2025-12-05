@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
-import { Media } from '@/components/shared/Media'
+import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { getProjects } from '@/lib/content'
 import type { Project } from '@/types/content'
 
@@ -400,7 +400,14 @@ export default function CompletePage() {
           }}
         >
             {projects.map((project, index) => {
-              const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
+              // Determine what to show: reel video or static image
+              const hasReel = !!project.reel
+              const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
+                ? project.thumbnails[0]
+                : project.cover)
+
+              // Fallback image for videos (always show image while video loads)
+              const fallbackImage = project.thumbnails && project.thumbnails.length > 0
                 ? project.thumbnails[0]
                 : project.cover
 
@@ -466,10 +473,14 @@ export default function CompletePage() {
                     }}
                   >
                     {imageHeight !== '0px' && (
-                      <Media
-                        media={thumbnailMedia}
-                        className="w-full h-full object-cover"
+                      <CarouselMedia
+                        media={displayMedia}
+                        fallbackImage={hasReel ? fallbackImage : undefined}
+                        isVisible={index === selectedIndex}
+                        isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
+                        className="object-cover"
                         alt={project.title}
+                        priority={index === 0}
                       />
                     )}
                   </div>

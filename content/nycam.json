@@ -74,5 +74,6 @@
   "thumbnails": [
     { "public_id": "v1756782105/H1_idij9u.png", "kind": "image", "alt": "NYCAM project thumbnail", "caption": "NYCAM project thumbnail" }
   ],
-  "cover": { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM project cover", "caption": "NYCAM project cover image" }
+  "cover": { "public_id": "v1756680418/NYCAM_0002_Background_c2dfan", "kind": "image", "alt": "NYCAM project cover", "caption": "NYCAM project cover image" },
+  "reel": { "public_id": "NYCAM_reel_qpkje9", "kind": "video", "alt": "NYCAM project reel", "caption": "NYCAM project reel video" }
 }

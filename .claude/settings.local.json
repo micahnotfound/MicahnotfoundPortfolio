@@ -20,7 +20,8 @@
       "Bash(rm:*)",
       "Bash(timeout:*)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(git show:*)"
     ],
     "deny": [],
     "ask": []

@@ -23,6 +23,8 @@ export function BlacklandsLayout({
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0) // Lagged scroll for smooth morphing
   const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null)
+  const [swipeStartY, setSwipeStartY] = useState(0)
+  const [swipeOffset, setSwipeOffset] = useState(0)
 
   // Smooth scroll tracking with requestAnimationFrame
   useEffect(() => {
@@ -112,6 +114,32 @@ export function BlacklandsLayout({
     if (fullscreenIndex !== null) {
       setFullscreenIndex(fullscreenIndex < allPhotos.length - 1 ? fullscreenIndex + 1 : 0)
     }
+  }
+
+  // Swipe-to-close handlers
+  const handleSwipeStart = (e: React.TouchEvent) => {
+    setSwipeStartY(e.touches[0].clientY)
+    setSwipeOffset(0)
+  }
+
+  const handleSwipeMove = (e: React.TouchEvent) => {
+    if (fullscreenIndex === null) return
+    const currentY = e.touches[0].clientY
+    const deltaY = currentY - swipeStartY
+    // Only allow downward swipes (positive deltaY)
+    if (deltaY > 0) {
+      setSwipeOffset(deltaY)
+    }
+  }
+
+  const handleSwipeEnd = () => {
+    if (fullscreenIndex === null) return
+    // Close if swiped down more than 100px
+    if (swipeOffset > 100) {
+      handleFullscreenClose()
+    }
+    setSwipeOffset(0)
+    setSwipeStartY(0)
   }
 
   // Scroll calculations
@@ -266,7 +294,10 @@ export function BlacklandsLayout({
               className="overflow-hidden h-full cursor-pointer"
               style={{
                 flexBasis: '65%',
-                borderRadius: '24px'
+                borderTopLeftRadius: '48px',
+                borderBottomLeftRadius: '48px',
+                borderTopRightRadius: '0px',
+                borderBottomRightRadius: '0px'
               }}
               onClick={() => handleImageClick(0)}
             >
@@ -286,7 +317,10 @@ export function BlacklandsLayout({
               className="overflow-hidden h-full"
               style={{
                 flexBasis: '35%',
-                borderRadius: '24px'
+                borderTopLeftRadius: '48px',
+                borderBottomLeftRadius: '48px',
+                borderTopRightRadius: '0px',
+                borderBottomRightRadius: '0px'
               }}
             >
               <VideoPlayer
@@ -311,7 +345,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(1)}
@@ -327,7 +364,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(2)}
@@ -346,7 +386,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(3)}
@@ -362,7 +405,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(4)}
@@ -381,7 +427,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(5)}
@@ -397,7 +446,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(6)}
@@ -416,7 +468,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(7)}
@@ -432,7 +487,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(8)}
@@ -451,7 +509,10 @@ export function BlacklandsLayout({
             className="overflow-hidden cursor-pointer"
             style={{
               flexBasis: '100%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
             onClick={() => handleImageClick(9)}
@@ -470,6 +531,14 @@ export function BlacklandsLayout({
         <div
           className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
           onClick={handleFullscreenClose}
+          onTouchStart={handleSwipeStart}
+          onTouchMove={handleSwipeMove}
+          onTouchEnd={handleSwipeEnd}
+          style={{
+            transform: swipeOffset > 0 ? `translateY(${swipeOffset}px)` : 'none',
+            transition: swipeOffset === 0 ? 'transform 0.3s ease-out' : 'none',
+            opacity: swipeOffset > 0 ? 1 - (swipeOffset / 300) : 1
+          }}
         >
           {/* Close button - top right */}
           <button

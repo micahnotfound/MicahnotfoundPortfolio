@@ -322,7 +322,10 @@ export default function BlacklandsPage() {
           <div
             className="flex-1 overflow-hidden"
             style={{
-              borderRadius: '24px'
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px'
             }}
           >
             <Media
@@ -340,7 +343,10 @@ export default function BlacklandsPage() {
           <div
             className="h-full overflow-hidden flex items-center justify-center"
             style={{
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               backgroundColor: '#D1D5DB',
               width: 'auto',
               flexShrink: 0
@@ -382,7 +388,10 @@ export default function BlacklandsPage() {
             className="overflow-hidden"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
           >
@@ -401,7 +410,10 @@ export default function BlacklandsPage() {
             className="overflow-hidden"
             style={{
               flexBasis: '50%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
           >
@@ -423,7 +435,10 @@ export default function BlacklandsPage() {
             className="overflow-hidden"
             style={{
               flexBasis: '100%',
-              borderRadius: '24px',
+              borderTopLeftRadius: '48px',
+              borderBottomLeftRadius: '48px',
+              borderTopRightRadius: '0px',
+              borderBottomRightRadius: '0px',
               height: '600px'
             }}
           >

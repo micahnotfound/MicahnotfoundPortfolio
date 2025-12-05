@@ -14,11 +14,12 @@ export function Header() {
   const isHomepagePage = pathname === '/homepage'
   const isHeaderPage = pathname === '/header'
   const isSliderPage = pathname === '/slider'
+  const isCompletePage = pathname === '/complete'
   const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
 
-  // Don't render this header on project detail pages, /homepage, /header, or /slider pages
-  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage) {
+  // Don't render this header on project detail pages, /homepage, /header, /slider, or /complete pages
+  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage) {
     return null
   }
 

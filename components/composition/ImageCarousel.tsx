@@ -15,8 +15,11 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [dragStartX, setDragStartX] = useState(0)
+  const [dragStartY, setDragStartY] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
+  const [isHorizontalDrag, setIsHorizontalDrag] = useState(false)
   const carouselRef = useRef<HTMLDivElement>(null)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
   // Auto-advance carousel every 5 seconds (only when not dragging)
   useEffect(() => {
@@ -52,21 +55,40 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
     setIsDragging(true)
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
     setDragStartX(clientX)
+    setDragStartY(clientY)
+    setIsHorizontalDrag(false)
+    if ('touches' in e) {
+      touchStartRef.current = { x: clientX, y: clientY }
+    }
   }
 
   const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging) return
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-    const dragDistance = clientX - dragStartX
-    setDragOffset(dragDistance)
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+    const dragDistanceX = clientX - dragStartX
+    const dragDistanceY = clientY - dragStartY
+    
+    // Determine if this is a horizontal or vertical drag
+    // Only treat as horizontal if horizontal movement is greater than vertical
+    if (!isHorizontalDrag && Math.abs(dragDistanceX) > Math.abs(dragDistanceY) && Math.abs(dragDistanceX) > 10) {
+      setIsHorizontalDrag(true)
+    }
+    
+    // Only update drag offset for horizontal drags
+    if (isHorizontalDrag || Math.abs(dragDistanceX) > Math.abs(dragDistanceY)) {
+      setDragOffset(dragDistanceX)
+    }
   }
 
   const handleDragEnd = () => {
     if (!isDragging) return
     setIsDragging(false)
     
-    if (Math.abs(dragOffset) > 100) {
+    // Only trigger slide change for horizontal drags
+    if (isHorizontalDrag && Math.abs(dragOffset) > 100) {
       if (dragOffset > 0) {
         prevSlide()
       } else {
@@ -74,10 +96,25 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
       }
     }
     setDragOffset(0)
+    setIsHorizontalDrag(false)
   }
 
-  const preventDefault = (e: React.TouchEvent) => {
-    e.preventDefault()
+  // Only prevent default for horizontal touch events
+  const handleTouchStartCapture = (e: React.TouchEvent) => {
+    // Don't prevent default initially - let vertical scrolls pass through
+    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+
+  const handleTouchMoveCapture = (e: React.TouchEvent) => {
+    // Only prevent default if we're doing a horizontal drag
+    if (touchStartRef.current && isDragging) {
+      const deltaX = Math.abs(e.touches[0].clientX - touchStartRef.current.x)
+      const deltaY = Math.abs(e.touches[0].clientY - touchStartRef.current.y)
+      // If horizontal movement is greater than vertical, prevent default to allow horizontal swipe
+      if (deltaX > deltaY && deltaX > 10) {
+        e.preventDefault()
+      }
+    }
   }
 
   const getTypeLabel = (type: string) => {
@@ -103,8 +140,8 @@ export function ImageCarousel({ images, title, type, className = '' }: ImageCaro
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
         onTouchCancel={handleDragEnd}
-        onTouchStartCapture={preventDefault}
-        onTouchMoveCapture={preventDefault}
+        onTouchStartCapture={handleTouchStartCapture}
+        onTouchMoveCapture={handleTouchMoveCapture}
       >
         <div
           ref={carouselRef}

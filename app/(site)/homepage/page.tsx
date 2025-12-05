@@ -6,7 +6,7 @@ import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 
 export default function HomepagePage() {
-  const [logoState, setLogoState] = useState<1 | 2 | 3>(1)
+  const [logoState, setLogoState] = useState<0 | 1 | 2 | 3>(0)
   const [touchStart, setTouchStart] = useState<{ y: number; time: number } | null>(null)
   const [scrollY, setScrollY] = useState(0)
   const [manualControl, setManualControl] = useState(false) // Track if user manually swiped
@@ -30,8 +30,10 @@ export default function HomepagePage() {
 
     // Start shrinking immediately from first scroll pixel
     if (scrollY <= 1) {
+      setLogoState(0)
+    } else if (scrollProgress < 0.33) {
       setLogoState(1)
-    } else if (scrollProgress < 0.5) {
+    } else if (scrollProgress < 0.66) {
       setLogoState(2)
     } else {
       setLogoState(3)
@@ -54,12 +56,15 @@ export default function HomepagePage() {
       const distance = touchStart.y - currentY
 
       // Calculate logo state based on touch distance in real-time
-      // Map distance to logo states: 0-50px = state 1, 50-100px = state 2, 100px+ = state 3
+      // Map distance to logo states: <-50px = state 0, -50-0 = state 1, 0-50px = state 2, 50px+ = state 3
       if (distance <= -50) {
-        // Dragging down - expand to state 1
+        // Dragging down - expand to state 0
+        setLogoState(0)
+      } else if (distance < 0) {
+        // Slightly down - state 1
         setLogoState(1)
       } else if (distance < 50) {
-        // In middle range - state 2
+        // Dragging up slightly - state 2
         setLogoState(2)
       } else {
         // Dragged up 50px or more - shrink to state 3
@@ -86,24 +91,28 @@ export default function HomepagePage() {
 
   // Calculate button positioning and sizing based on logo state
   const getButtonsMarginTop = () => {
+    if (logoState === 0) return '0px' // Centered with super tall M
     if (logoState === 1) return '0px' // Centered with tall M
     if (logoState === 3) return '-150px' // Move up when M shrinks
     return '-75px' // Transition state
   }
 
   const getButtonHeight = () => {
+    if (logoState === 0) return '36px' // Full height for state 0
     if (logoState === 1) return '36px' // Full height
     if (logoState === 3) return '0px' // Completely collapsed
     return '18px' // Transition state
   }
 
   const getButtonGap = () => {
+    if (logoState === 0) return '16px' // Full gap for state 0
     if (logoState === 1) return '16px' // Full gap (gap-4)
     if (logoState === 3) return '0px' // No gap
     return '8px' // Transition state
   }
 
   const getButtonOpacity = () => {
+    if (logoState === 0) return 1
     if (logoState === 1) return 1
     if (logoState === 3) return 0
     return 0.5
@@ -112,18 +121,24 @@ export default function HomepagePage() {
   // Calculate header height based on logo state
   const getHeaderHeight = () => {
     // Logo heights for each state
+    const logoState0Height = 534 // Super tall state 0 (20% taller than state 1)
     const logoState1Height = 454
     const logoState2Height = 292
     const logoState3Height = 130
 
     let currentLogoHeight = logoState1Height
+    if (logoState === 0) currentLogoHeight = logoState0Height
+    if (logoState === 1) currentLogoHeight = logoState1Height
     if (logoState === 2) currentLogoHeight = logoState2Height
     if (logoState === 3) currentLogoHeight = logoState3Height
 
+    // State 0: -100px (same padding as state 1)
     // State 1: -100px
     // State 2: -40px
     // State 3: -20px (5px shorter than previous, so 110px instead of 115px)
-    if (logoState === 1) {
+    if (logoState === 0) {
+      return currentLogoHeight - 100
+    } else if (logoState === 1) {
       return currentLogoHeight - 100
     } else if (logoState === 2) {
       return currentLogoHeight - 40
@@ -141,20 +156,19 @@ export default function HomepagePage() {
           height: `${getHeaderHeight()}px`,
           paddingTop: '12px',
           paddingBottom: '8px',
-          paddingLeft: '32px',
+          paddingLeft: '16px',
           paddingRight: '32px'
         }}
       >
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center justify-start gap-8">
           <div className="flex items-center gap-8 max-w-full">
             {/* M Logo - shrinks from state 1 to state 3 on scroll */}
-            <Link href="/" className="flex-shrink-1 min-w-0">
+            <Link href="/" className="flex-shrink-0">
               <MorphingHeaderLogo
                 state={logoState}
                 className="transition-all duration-500 ease-out"
                 style={{
-                  width: '100%',
-                  maxWidth: '250px',
+                  width: '178px',
                   height: 'auto'
                 }}
               />
@@ -170,15 +184,15 @@ export default function HomepagePage() {
             >
               <Link
                 href="/about"
-                className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden"
+                className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
                 style={{
                   border: 'none',
-                  padding: '0.25rem 1rem',
+                  padding: '0 1rem',
                   borderRadius: '39px',
                   height: getButtonHeight(),
                   opacity: getButtonOpacity(),
-                  maskImage: logoState === 1 ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                  WebkitMaskImage: logoState === 1 ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
+                  maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                  WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
                 }}
               >
                 about
@@ -186,15 +200,15 @@ export default function HomepagePage() {
 
               <Link
                 href="/contact"
-                className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden"
+                className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
                 style={{
                   border: 'none',
-                  padding: '0.25rem 1rem',
+                  padding: '0 1rem',
                   borderRadius: '39px',
                   height: getButtonHeight(),
                   opacity: getButtonOpacity(),
-                  maskImage: logoState === 1 ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                  WebkitMaskImage: logoState === 1 ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
+                  maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                  WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
                 }}
               >
                 contact

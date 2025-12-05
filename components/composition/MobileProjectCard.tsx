@@ -29,37 +29,38 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
 
   // Pie chart distribution: Selected = 66%, First below = 17%, others get progressively smaller
   // All cards always visible (no card goes to 0%)
+  // All heights reduced by 10% to create more space at top
   const getCardHeight = () => {
     if (isSelected) {
-      return '66vh' // Selected card: 66% of viewport
+      return '58vh' // Selected card: 58% of viewport (was 64.5vh, reduced by 10%)
     }
 
     // Cards below the selected one
     if (relativePosition === 1) {
-      return '17vh' // First card below: 17%
+      return '15.3vh' // First card below: 15.3% (was 17vh, reduced by 10%)
     }
     if (relativePosition === 2) {
-      return '8.5vh' // Second card below: 8.5% (half of 17)
+      return '7.65vh' // Second card below: 7.65% (was 8.5vh, reduced by 10%)
     }
     if (relativePosition === 3) {
-      return '4.25vh' // Third card below: 4.25%
+      return '3.83vh' // Third card below: 3.83% (was 4.25vh, reduced by 10%)
     }
     if (relativePosition >= 4) {
-      return '4.25vh' // Remaining cards below: 4.25% (minimum visible sliver)
+      return '3.83vh' // Remaining cards below: 3.83% (minimum visible sliver)
     }
 
     // Cards above the selected one (shouldn't happen with selectedIndex=0, but just in case)
     if (relativePosition === -1) {
-      return '17vh' // First card above: 17%
+      return '15.3vh' // First card above: 15.3% (was 17vh, reduced by 10%)
     }
     if (relativePosition === -2) {
-      return '8.5vh' // Second card above: 8.5%
+      return '7.65vh' // Second card above: 7.65% (was 8.5vh, reduced by 10%)
     }
     if (relativePosition <= -3) {
-      return '4.25vh' // Remaining cards above: minimum sliver
+      return '3.83vh' // Remaining cards above: minimum sliver
     }
 
-    return '4.25vh' // Fallback
+    return '3.83vh' // Fallback
   }
 
   // Handle click: first tap selects (expands carousel), second tap navigates
@@ -135,7 +136,7 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
           // Don't render at all if multiplier is too small
           if (heightMultiplier < 0.05) return null
 
-          const maxHeight = 48 // Full height in pixels
+          const maxHeight = 43 // Full height in pixels
           const currentHeight = maxHeight * heightMultiplier
 
           return (
@@ -143,8 +144,8 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
               onClick={handleClick}
               className="bg-black text-white font-ui font-bold cursor-pointer flex-shrink-0 overflow-hidden transition-all duration-200"
               style={{
-                fontSize: '1.2rem',
-                paddingLeft: '24px',
+                fontSize: '1.14rem',
+                paddingLeft: '29px',
                 paddingRight: '24px',
                 paddingTop: currentHeight > 24 ? '12px' : '0px',
                 paddingBottom: currentHeight > 24 ? '12px' : '0px',

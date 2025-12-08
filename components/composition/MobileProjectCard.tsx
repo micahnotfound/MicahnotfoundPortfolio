@@ -22,10 +22,11 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
   const effectiveScrollPos = scrollPosition !== undefined ? scrollPosition : selectedIndex
   const relativePosition = index - effectiveScrollPos // Negative = above, Positive = below, 0 = selected
 
-  // Use thumbnail if available, otherwise fall back to cover image
-  const thumbnailMedia = project.thumbnails && project.thumbnails.length > 0
+  // Use reel if available, otherwise thumbnail, otherwise cover image
+  const hasReel = !!project.reel
+  const thumbnailMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
     ? project.thumbnails[0]
-    : project.cover
+    : project.cover)
 
   // Pie chart distribution: Selected = 66%, First below = 17%, others get progressively smaller
   // All cards always visible (no card goes to 0%)

@@ -12,6 +12,11 @@
       "name": "Gallery",
       "gallery": [
         {
+          "public_id": "ThereGoesNikki_Reel_tz0tm2",
+          "kind": "video",
+          "alt": "There Goes Nikki video reel"
+        },
+        {
           "public_id": "v1756781737/R1_A_ddfamw",
           "kind": "image",
           "alt": "There Goes Nikki Render 2"
@@ -76,6 +81,11 @@
       "alt": "There Goes Nikki thumbnail"
     }
   ],
+  "reel": {
+    "public_id": "ThereGoesNikki_Reel_tz0tm2",
+    "kind": "video",
+    "alt": "There Goes Nikki video reel"
+  },
   "cover": {
     "public_id": "v1756571816/BL_horizontal_0001_Layer-Comp-2_jm4kqp",
     "kind": "image",

@@ -49,7 +49,9 @@ export function buildFullSizeUrl(mediaItem: MediaItem, width: number = 1600): st
   // For videos, use video/upload path with standard video transformations
   if (mediaItem.kind === 'video') {
     const baseUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload`
-    return `${baseUrl}/q_auto,f_auto/${mediaItem.public_id}`
+    // Add .mp4 extension if not already present
+    const publicId = mediaItem.public_id.endsWith('.mp4') ? mediaItem.public_id : `${mediaItem.public_id}.mp4`
+    return `${baseUrl}/q_auto/${publicId}`
   }
 
   return buildCloudinaryUrl(

@@ -10,19 +10,19 @@ interface CursorPosition {
 export function MagneticCursor() {
   const [cursorPos, setCursorPos] = useState<CursorPosition>({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState<boolean | null>(null) // null = checking, true = mobile, false = desktop
+  const [isVisible, setIsVisible] = useState(false)
   const cursorDotRef = useRef<HTMLDivElement>(null)
   const cursorRingRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>()
   const currentPosRef = useRef<CursorPosition>({ x: 0, y: 0 })
   const targetPosRef = useRef<CursorPosition>({ x: 0, y: 0 })
 
-  // Detect if mobile device (touch support or small viewport)
+  // Detect if mobile device (small viewport only - don't check touch since desktops can have touchscreens)
   useEffect(() => {
     const checkMobile = () => {
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
       const isSmallViewport = window.innerWidth < 768
-      setIsMobile(isTouchDevice || isSmallViewport)
+      setIsMobile(isSmallViewport)
     }
 
     checkMobile()
@@ -32,6 +32,8 @@ export function MagneticCursor() {
   }, [])
 
   useEffect(() => {
+    if (isMobile) return // Don't run on mobile
+
     // Smooth animation loop using RAF
     const animateCursor = () => {
       const dx = targetPosRef.current.x - currentPosRef.current.x
@@ -57,6 +59,9 @@ export function MagneticCursor() {
     const handleMouseMove = (e: MouseEvent) => {
       targetPosRef.current = { x: e.clientX, y: e.clientY }
 
+      // Make cursor visible on first mouse move
+      setIsVisible(true)
+
       // Check if hovering over a hoverable element
       const target = e.target as HTMLElement
       const hoverableElement = target.closest('[data-cursor-hover]')
@@ -78,24 +83,26 @@ export function MagneticCursor() {
         cancelAnimationFrame(rafRef.current)
       }
     }
-  }, [])
+  }, [isMobile])
 
-  // Don't render cursor on mobile devices
-  if (isMobile) {
+  // Don't render cursor while checking or on mobile devices
+  if (isMobile === null || isMobile === true) {
     return null
   }
 
   return (
     <>
-      {/* Cursor dot - small circular dot */}
+      {/* Cursor dot - larger circular dot with color inversion */}
       <div
         ref={cursorDotRef}
         className="pointer-events-none fixed top-0 left-0 z-[9999] mix-blend-difference"
         style={{
-          width: '8px',
-          height: '8px',
-          marginLeft: '-4px',
-          marginTop: '-4px',
+          width: '12px',
+          height: '12px',
+          marginLeft: '-6px',
+          marginTop: '-6px',
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 0.3s ease-in-out'
         }}
       >
         <div className="w-full h-full bg-white rounded-full" />

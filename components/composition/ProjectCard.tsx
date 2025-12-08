@@ -78,7 +78,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
 
       textFadeTimeoutRef.current = setTimeout(() => {
         setShowText(true)
-      }, 50) // Small delay before starting title fade
+      }, 400) // Longer delay for smoother, more deliberate title fade
 
       // Description fades in slower and later (after textbox is hovered)
     } else {
@@ -115,7 +115,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
       setShowDescription(false)
       descriptionFadeTimeoutRef.current = setTimeout(() => {
         setShowDescription(true)
-      }, 200) // Delay before description starts fading
+      }, 700) // Longer delay for smoother, more deliberate description fade
     } else {
       // Hide description when textbox not hovered
       if (descriptionFadeTimeoutRef.current) {
@@ -209,15 +209,30 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     return `10px ${rightPadding} 10px ${leftPadding}`
   }
 
-  // Calculate flex-grow with progressive falloff - targeting ~550px for active card
+  // Calculate width - fixed width for hovered card, flex for others
+  const getCardWidth = () => {
+    if (isHovered) {
+      return '650px' // Fixed consistent width for active card (wider than before)
+    }
+    return 'auto' // Flex width for non-active cards
+  }
+
+  const getFlexShrink = () => {
+    if (isHovered) {
+      return 0 // Don't shrink the active card
+    }
+    return 1 // Allow other cards to shrink
+  }
+
+  // Calculate flex-grow with progressive falloff
   const getFlexGrow = () => {
     if (!someoneIsHovered) {
       return 1.2 // Wider default - more breathing room for all cards
     }
 
-    // Active card: Use smaller flex-grow to target ~550px width
+    // Active card: No flex-grow, uses fixed width instead
     if (isHovered) {
-      return 2.0 // Reduced from 3.5 to make active card thinner (~550px)
+      return 0
     }
 
     // On screens < 500px, shrink non-active cards more aggressively
@@ -294,9 +309,10 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
       className="animate-fadeIn flex flex-col h-full transition-all duration-500 ease-out"
       style={{
         animationDelay: `${index * 100}ms`,
+        width: getCardWidth(),
         flexGrow: getFlexGrow(),
-        flexShrink: 1,
-        flexBasis: 0,
+        flexShrink: getFlexShrink(),
+        flexBasis: isHovered ? 'auto' : 0,
         minWidth: 0
       }}
     >
@@ -329,8 +345,8 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
               ? getFullCard()  // Expand to full circle
               : getCircleAtEntry(entryPoint.x, entryPoint.y),  // Small circle at entry point
             transition: isHovered
-              ? 'clip-path 700ms ease-out' // Fast expand
-              : 'clip-path 1400ms ease-out', // Slow shrink (2x slower)
+              ? 'clip-path 1400ms ease-out' // Slower, more deliberate expand
+              : 'clip-path 2400ms ease-out', // Even slower shrink for smooth exit
           }}
         >
           <CarouselMedia
@@ -341,6 +357,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
             className="object-cover object-center"
             alt={`${project.title} thumbnail`}
             priority={index === 0}
+            delayVideoTransition={1000}
           />
         </div>
       </Link>
@@ -394,7 +411,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
             style={{
               width: '100%',
               opacity: showText ? 1 : 0,
-              transition: 'opacity 1000ms ease-out' // 1 second fade-in
+              transition: 'opacity 1600ms ease-out' // Slower, more deliberate fade-in
             }}
           >
             {/* Title */}
@@ -426,7 +443,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
                   overflowWrap: 'break-word',
                   width: '100%',
                   opacity: showDescription ? 1 : 0,
-                  transition: 'opacity 1500ms ease-out', // Slower fade-in for description (1.5 seconds)
+                  transition: 'opacity 2000ms ease-out', // Even slower, more deliberate fade-in for description
                   overflow: 'hidden',
                   display: '-webkit-box',
                   WebkitLineClamp: 5,

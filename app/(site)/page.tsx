@@ -589,9 +589,9 @@ export default function HomePage() {
                 <ProjectCardSkeleton key={`skeleton-${index}`} index={index} />
               ))
             ) : (
-              // Show actual project cards with fade-in animation, plus two placeholder projects
-              [...projects, ...projects.slice(0, 2)].map((project, index) => {
-                const totalCards = projects.length + 2
+              // Show actual project cards with fade-in animation
+              projects.map((project, index) => {
+                const totalCards = projects.length
                 const isHovered = hoveredIndex === index
                 const someoneIsHovered = hoveredIndex !== null
                 const distance = hoveredIndex !== null ? Math.abs(index - hoveredIndex) : 0

@@ -516,46 +516,49 @@ export default function HomePage() {
               })}
             </div>
 
-          {/* Text bubbles container - at bottom of screen */}
+          {/* Text bubbles - vertical circles on right side, 50px from edge, anchored to bottom */}
           <div
-            className="absolute bottom-0 left-0 w-full flex flex-col overflow-hidden transition-all duration-500 ease-out"
+            className="absolute flex flex-col-reverse overflow-visible transition-all duration-1000 ease-out z-30"
             style={{
-              gap: '7px',
-              paddingBottom: '54.4px',
-              marginBottom: '-40px',
-              paddingLeft: '12px',
-              paddingRight: '12px'
+              bottom: '54.4px', // Match the bottom padding from original design
+              right: '50px',
+              gap: '16px'
             }}
           >
-            {projects.map((project, index) => (
-              <div
-                key={`${project.slug}-${index}`}
-                className="w-full cursor-pointer flex-shrink-0 flex justify-end"
-                onClick={() => handleThumbnailClick(index, project)}
-              >
+            {projects.map((project, index) => {
+              const isSelected = selectedIndex === index
+              const circleSize = 36 // Match About/Contact button height
+
+              return (
                 <div
-                  className="font-ui flex items-center"
+                  key={`${project.slug}-${index}`}
+                  className="cursor-pointer flex-shrink-0 flex justify-end items-center transition-all duration-1000 ease-out"
+                  onClick={() => handleThumbnailClick(index, project)}
                   style={{
-                    height: `${getTextBarHeight()}px`,
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
-                    fontSize: '0.95em',
-                    fontWeight: selectedIndex === index ? 'bold' : 'normal',
-                    borderTopLeftRadius: '39px',
-                    borderBottomLeftRadius: '39px',
-                    borderTopRightRadius: '0px',
-                    borderBottomRightRadius: '0px',
-                    width: 'fit-content',
-                    textAlign: 'right',
-                    marginRight: '0px',
-                    backgroundColor: selectedIndex === index ? '#D1D5DB' : 'black',
-                    color: selectedIndex === index ? 'black' : 'white'
+                    height: `${circleSize}px`
                   }}
                 >
-                  {project.title}
+                  <div
+                    className="font-ui flex items-center justify-end transition-all duration-1000 ease-out"
+                    style={{
+                      height: `${circleSize}px`,
+                      width: isSelected ? 'auto' : `${circleSize}px`, // Auto width to fit text, else circle
+                      paddingLeft: isSelected ? '16px' : '0px',
+                      paddingRight: isSelected ? '29px' : '0px', // 25px buffer + 4px original padding
+                      fontSize: '0.85em',
+                      fontWeight: 'normal',
+                      borderRadius: '39px', // Full circle
+                      backgroundColor: isSelected ? 'white' : 'black',
+                      color: isSelected ? 'black' : 'white',
+                      overflow: 'visible',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    {isSelected && <span style={{ paddingRight: '12px' }}>{project.title}</span>}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>

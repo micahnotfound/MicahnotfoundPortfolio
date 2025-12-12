@@ -23,7 +23,9 @@
       "Bash(wc:*)",
       "Bash(git show:*)",
       "Bash(node -e:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git diff:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

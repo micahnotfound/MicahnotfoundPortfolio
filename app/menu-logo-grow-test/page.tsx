@@ -167,7 +167,7 @@ export default function MenuLogoGrowTestPage() {
 
             <div className="bg-yellow-100 p-4 rounded-lg space-y-2">
               <h3 className="font-bold">1. Parent Container Overflow</h3>
-              <p>If any parent has overflow: hidden/auto/scroll, sticky won't work. This page has no such parent.</p>
+              <p>If any parent has overflow: hidden/auto/scroll, sticky won&apos;t work. This page has no such parent.</p>
             </div>
 
             <div className="bg-yellow-100 p-4 rounded-lg space-y-2">

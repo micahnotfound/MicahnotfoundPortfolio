@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { Media } from '@/components/shared/Media'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
+import { ProjectPageClient } from '@/app/(site)/work/[slug]/ProjectPageClient'
 import type { Project } from '@/types/content'
 
 export default function MomaMobilePage() {
@@ -14,6 +16,17 @@ export default function MomaMobilePage() {
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
   const lastTouchY = useRef<number>(0)
+  const [isMobile, setIsMobile] = useState(true) // Default to mobile (this IS a mobile page)
+
+  // Detect if actually desktop
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     // Load MoMA project data
@@ -76,6 +89,7 @@ export default function MomaMobilePage() {
     }
   }, [swipeProgress])
 
+  // If project not loaded yet, show loading (for both mobile and desktop)
   if (!project) {
     return (
       <div className="h-screen w-full bg-[#D1D5DB] flex items-center justify-center">
@@ -84,6 +98,25 @@ export default function MomaMobilePage() {
     )
   }
 
+  // If desktop, use the same desktop design as /work/moma
+  if (isMobile === false) {
+    // Build allMedia for ProjectPageClient
+    const allMedia = project.elements.flatMap(element => [
+      ...(element.detail || []),
+      ...(element.profile || [])
+    ])
+
+    return <ProjectPageClient project={project} allMedia={allMedia} />
+  }
+
+  // Get gallery images for mobile
+  const galleryImages = project.elements?.reduce((acc, element) => {
+    if (element.gallery) return [...acc, ...element.gallery]
+    if (element.profile) return [...acc, ...element.profile]
+    if (element.hero) return [...acc, ...element.hero]
+    return acc
+  }, [] as any[]) || []
+
   const hasReel = !!project.reel
   const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
     ? project.thumbnails[0]
@@ -91,9 +124,6 @@ export default function MomaMobilePage() {
   const fallbackImage = project.thumbnails && project.thumbnails.length > 0
     ? project.thumbnails[0]
     : project.cover
-
-  // Get gallery images from elements
-  const galleryImages = project.elements?.find(el => el.gallery)?.gallery || []
 
   return (
     <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
@@ -133,15 +163,17 @@ export default function MomaMobilePage() {
         }}
       >
         <div className="w-full h-full bg-black">
-          <CarouselMedia
-            media={displayMedia}
-            fallbackImage={hasReel ? fallbackImage : undefined}
-            isVisible={true}
-            isAdjacent={false}
-            className="object-cover w-full h-full"
-            alt={project.title}
-            priority={true}
-          />
+          {displayMedia && (
+            <CarouselMedia
+              media={displayMedia}
+              fallbackImage={hasReel ? fallbackImage : undefined}
+              isVisible={true}
+              isAdjacent={false}
+              className="object-cover w-full h-full"
+              alt={project.title}
+              priority={true}
+            />
+          )}
         </div>
 
         {/* Swipe up indicator */}

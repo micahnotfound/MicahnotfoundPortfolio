@@ -8,28 +8,37 @@ import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import type { Project } from '@/types/content'
 
 interface MobileProjectPageProps {
-  projectSlug: string
+  projectSlug?: string
+  project?: Project
 }
 
-export function MobileProjectPage({ projectSlug }: MobileProjectPageProps) {
+export function MobileProjectPage({ projectSlug, project: projectProp }: MobileProjectPageProps) {
   const router = useRouter()
-  const [project, setProject] = useState<Project | null>(null)
+  const [project, setProject] = useState<Project | null>(projectProp || null)
   const [swipeProgress, setSwipeProgress] = useState(0) // 0 = video view, 1 = fully swiped to content
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
   const lastTouchY = useRef<number>(0)
 
   useEffect(() => {
-    // Load project data
-    const loadProject = async () => {
-      const response = await fetch(`/api/projects/${projectSlug}`)
-      if (response.ok) {
-        const data = await response.json()
-        setProject(data)
-      }
+    // If project already provided as prop, don't fetch
+    if (projectProp) {
+      setProject(projectProp)
+      return
     }
-    loadProject()
-  }, [projectSlug])
+
+    // Otherwise load project data from API
+    if (projectSlug) {
+      const loadProject = async () => {
+        const response = await fetch(`/api/projects/${projectSlug}`)
+        if (response.ok) {
+          const data = await response.json()
+          setProject(data)
+        }
+      }
+      loadProject()
+    }
+  }, [projectSlug, projectProp])
 
   // Handle touch events for swipe - bidirectional (up to content, down to video)
   useEffect(() => {
@@ -96,8 +105,13 @@ export function MobileProjectPage({ projectSlug }: MobileProjectPageProps) {
     ? project.thumbnails[0]
     : project.cover
 
-  // Get gallery images from elements
-  const galleryImages = project.elements?.find(el => el.gallery)?.gallery || []
+  // Get all images from elements (gallery, profile, hero)
+  const galleryImages = project.elements?.reduce((acc, element) => {
+    if (element.gallery) return [...acc, ...element.gallery]
+    if (element.profile) return [...acc, ...element.profile]
+    if (element.hero) return [...acc, ...element.hero]
+    return acc
+  }, [] as any[]) || []
 
   return (
     <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
@@ -137,15 +151,17 @@ export function MobileProjectPage({ projectSlug }: MobileProjectPageProps) {
         }}
       >
         <div className="w-full h-full bg-black">
-          <CarouselMedia
-            media={displayMedia}
-            fallbackImage={hasReel ? fallbackImage : undefined}
-            isVisible={true}
-            isAdjacent={false}
-            className="object-cover w-full h-full"
-            alt={project.title}
-            priority={true}
-          />
+          {displayMedia && (
+            <CarouselMedia
+              media={displayMedia}
+              fallbackImage={hasReel ? fallbackImage : undefined}
+              isVisible={true}
+              isAdjacent={false}
+              className="object-cover w-full h-full"
+              alt={project.title}
+              priority={true}
+            />
+          )}
         </div>
 
         {/* Swipe up indicator */}

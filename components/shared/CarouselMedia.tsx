@@ -157,7 +157,6 @@ export function CarouselMedia({
     <Image
       src={buildFullSizeUrl(media)}
       alt={alt || media.alt || 'Media content'}
-      srcSet={buildSrcSet(media.public_id)}
       sizes="100vw"
       fill
       className={className}

@@ -80,7 +80,7 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
     return (
       <BlacklandsLayout
         projectTitle={project.title}
-        projectDescription={project.description}
+        projectDescription={project.description || ''}
         heroImage={heroImage}
         videoPublicId={videoPublicId}
       />

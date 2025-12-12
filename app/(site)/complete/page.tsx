@@ -472,7 +472,7 @@ export default function CompletePage() {
                       transition: isDragging.current ? 'none' : 'height 0.5s ease-out'
                     }}
                   >
-                    {imageHeight !== '0px' && (
+                    {imageHeight !== '0px' && displayMedia && (
                       <CarouselMedia
                         media={displayMedia}
                         fallbackImage={hasReel ? fallbackImage : undefined}

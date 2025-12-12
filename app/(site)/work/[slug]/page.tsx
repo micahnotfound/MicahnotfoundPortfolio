@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { getProjectBySlug, getProjects } from '@/lib/content'
-import { ProjectPageClient } from './ProjectPageClient'
+import { ProjectPageWrapper } from '@/components/composition/ProjectPageWrapper'
 import { notFound } from 'next/navigation'
 
 interface ProjectPageProps {
@@ -85,5 +85,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     ...(element.profile || [])
   ])
 
-  return <ProjectPageClient project={project} allMedia={allMedia} />
+  return <ProjectPageWrapper project={project} allMedia={allMedia} />
 }

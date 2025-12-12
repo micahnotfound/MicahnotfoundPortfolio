@@ -99,11 +99,13 @@ export function MobileProjectCard({ project, index, selectedIndex, totalCards, o
           }}
         >
           {/* Project Image - No mask, fully visible */}
-          <Media
-            media={thumbnailMedia}
-            className="w-full h-full object-cover"
-            alt={`${project.title} thumbnail`}
-          />
+          {thumbnailMedia && (
+            <Media
+              media={thumbnailMedia}
+              className="w-full h-full object-cover"
+              alt={`${project.title} thumbnail`}
+            />
+          )}
         </div>
 
         {/* Title box - Grows and shrinks based on proximity to scroll position */}

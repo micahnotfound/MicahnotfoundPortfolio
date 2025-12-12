@@ -69,12 +69,13 @@ export default function TestPage() {
       const distanceFromTop = e.clientY
       const distanceFromLeft = e.clientX
 
-      // M logo is at paddingLeft: 100px, width ~295px, top position 80px (when expanded)
-      // About/Contact buttons are stacked vertically next to M, total height ~100px
-      // Extended area:
-      // - Top: 300px from top (to include M logo at 80px + buttons below + margin)
-      // - Left: 600px from left (M logo + buttons + 200px extension to the right)
-      const isNear = distanceFromTop < 300 && distanceFromLeft < 600
+      // M logo is at paddingLeft: 100px, width ~325px, top position 80px (when expanded)
+      // M logo height is approximately 195px (60% of width), so bottom is around 275px
+      // About/Contact buttons are stacked vertically next to M (each 36px tall, 16px gap)
+      // Extended area covers the entire upper-left quadrant for easy roving:
+      // - Top: 0 to 600px from top (covers entire M logo area + large space below)
+      // - Left: 0 to 1000px from left (M logo + buttons + large extension to the right)
+      const isNear = distanceFromTop < 600 && distanceFromLeft < 1000
 
       // Debug logging
       if (isNear !== isMouseNearLogo) {
@@ -134,6 +135,29 @@ export default function TestPage() {
 
   return (
     <div className="h-screen w-full bg-[#D1D5DB] relative overflow-hidden">
+      {/* CSS for swaying animation - only active before first video */}
+      <style jsx>{`
+        @keyframes sway {
+          0% {
+            transform: translateX(calc(var(--sway-distance) * -1)) scaleX(1);
+          }
+          20% {
+            transform: translateX(calc(var(--sway-distance) * -0.5)) scaleX(0.95);
+          }
+          50% {
+            transform: translateX(var(--sway-distance)) scaleX(1);
+          }
+          80% {
+            transform: translateX(calc(var(--sway-distance) * -0.5)) scaleX(0.95);
+          }
+          100% {
+            transform: translateX(calc(var(--sway-distance) * -1)) scaleX(1);
+          }
+        }
+        .sway-button {
+          animation: sway 4s ease-in-out infinite;
+        }
+      `}</style>
       {/* Background video container - full screen - horizontal carousel */}
       {/* Only show videos if something has been hovered, otherwise stay gray */}
       {currentVideoIndex !== null && (
@@ -165,7 +189,7 @@ export default function TestPage() {
                   className="w-screen h-full flex-shrink-0"
                   style={{ width: '100vw' }}
                 >
-                  {shouldRender && (
+                  {shouldRender && displayMedia && (
                     <CarouselMedia
                       media={displayMedia}
                       fallbackImage={hasReel ? fallbackImage : undefined}
@@ -231,11 +255,11 @@ export default function TestPage() {
         </div>
       </div>
 
-      {/* Text bubbles - horizontal arrangement two-thirds down the page */}
+      {/* Text bubbles - horizontal arrangement - moved down 100px from two-thirds */}
       <div
         className="fixed left-0 z-40 flex flex-row"
         style={{
-          top: '66.67%',
+          top: 'calc(66.67% + 100px)',
           transform: 'translateY(-50%)',
           left: '80px',
           right: '80px',
@@ -254,7 +278,7 @@ export default function TestPage() {
                 <div
                   key={`skeleton-${index}`}
                   className="flex-shrink-0 animate-pulse"
-                  style={{ width: '200px', height: '60px' }}
+                  style={{ width: '200px', height: '36px' }}
                 >
                   <div className="bg-gray-300 rounded-full h-full w-full" />
                 </div>
@@ -309,12 +333,23 @@ export default function TestPage() {
                   }, 50)
                 }
 
+                // Calculate sway distance - buttons further from center sway more
+                // Projects are typically 5-6, so middle index is around 2-3
+                // Movement from left to right with squish animation to prevent touching
+                const middleIndex = Math.floor(projects.length / 2)
+                const distanceFromMiddle = Math.abs(index - middleIndex)
+                const swayDistance = (distanceFromMiddle + 1) * 12 // 12px, 24px, 36px - smooth flow with safe spacing
+
                 return (
                   <div
                     key={`${project.slug}-${index}`}
-                    className="flex-shrink-0 relative"
+                    className={`flex-shrink-0 relative ${currentVideoIndex === null ? 'sway-button' : ''}`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
+                    style={{
+                      '--sway-distance': `${swayDistance}px`,
+                      animationDelay: `${index * 0.1}s`
+                    } as React.CSSProperties}
                   >
                     {/* Title bubble - only changes width, not height - STAYS AT FIXED POSITION */}
                     <Link
@@ -322,7 +357,7 @@ export default function TestPage() {
                       className="relative block transition-all duration-[900ms] ease-out"
                       style={{
                         width: isHovered ? getExpandedWidth() : '200px',
-                        height: '60px'
+                        height: '36px'
                       }}
                     >
                       <div
@@ -333,7 +368,10 @@ export default function TestPage() {
                           opacity: someoneIsHovered && !isHovered ? 0.3 : 1
                         }}
                       >
-                        <span className="px-4 text-base">{getDisplayTitle()}</span>
+                        {/* Hide text until first video appears */}
+                        {currentVideoIndex !== null && (
+                          <span className="px-4 text-base">{getDisplayTitle()}</span>
+                        )}
                       </div>
                     </Link>
                   </div>
@@ -345,3 +383,4 @@ export default function TestPage() {
     </div>
   )
 }
+ 

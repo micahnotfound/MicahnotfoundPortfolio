@@ -29,7 +29,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   const [isTextboxHovered, setIsTextboxHovered] = useState(false) // LOCAL state for textbox hover
   const [showText, setShowText] = useState(false) // Control text fade-in with delay
   const [showDescription, setShowDescription] = useState(false) // Control description fade separately
-  const cardRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLAnchorElement>(null)
   const buttonTextRef = useRef<HTMLDivElement>(null)
   const lastMousePosRef = useRef({ x: 0, y: 0, time: 0 })
   const velocityRef = useRef({ x: 0, y: 0, speed: 0 })
@@ -262,7 +262,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   }
 
   // Track mouse position and calculate velocity
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!cardRef.current) return
 
     const rect = cardRef.current.getBoundingClientRect()
@@ -286,7 +286,7 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
   }
 
   // Handle mouse enter - store entry point
-  const handleEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!cardRef.current) return
 
     const rect = cardRef.current.getBoundingClientRect()
@@ -349,16 +349,18 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
               : 'clip-path 2400ms ease-out', // Even slower shrink for smooth exit
           }}
         >
-          <CarouselMedia
-            media={displayMedia}
-            fallbackImage={hasReel ? fallbackImage : undefined}
-            isVisible={isHovered}
-            isAdjacent={someoneIsHovered && !isHovered && distanceFromHovered === 1}
-            className="object-cover object-center"
-            alt={`${project.title} thumbnail`}
-            priority={index === 0}
-            delayVideoTransition={1000}
-          />
+          {displayMedia && (
+            <CarouselMedia
+              media={displayMedia}
+              fallbackImage={hasReel ? fallbackImage : undefined}
+              isVisible={isHovered}
+              isAdjacent={someoneIsHovered && !isHovered && distanceFromHovered === 1}
+              className="object-cover object-center"
+              alt={`${project.title} thumbnail`}
+              priority={index === 0}
+              delayVideoTransition={1000}
+            />
+          )}
         </div>
       </Link>
 

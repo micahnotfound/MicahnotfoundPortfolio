@@ -1,31 +1,51 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 
 export default function BlacklandsPage() {
+  const router = useRouter()
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200) // Better initial estimate for text height
   const [isMounted, setIsMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [swipeProgress, setSwipeProgress] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const touchStartRef = useRef<{ y: number; time: number } | null>(null)
+  const lastTouchY = useRef<number>(0)
   const textRef = useRef<HTMLDivElement>(null)
 
-  // Track viewport height
+  // Detect mobile
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Track viewport height (only for desktop)
+  useEffect(() => {
+    if (isMobile) return
     const updateHeight = () => {
       setViewportHeight(window.innerHeight)
     }
     updateHeight()
     window.addEventListener('resize', updateHeight)
     return () => window.removeEventListener('resize', updateHeight)
-  }, [])
+  }, [isMobile])
 
-  // Measure text height (remeasure on viewport resize)
+  // Measure text height (remeasure on viewport resize) - only for desktop
   useEffect(() => {
+    if (isMobile) return
     const measureText = () => {
       if (textRef.current) {
         setTextHeight(textRef.current.offsetHeight)
@@ -37,10 +57,11 @@ export default function BlacklandsPage() {
     measureText()
     window.addEventListener('resize', measureText)
     return () => window.removeEventListener('resize', measureText)
-  }, [])
+  }, [isMobile])
 
-  // Smooth scroll tracking
+  // Smooth scroll tracking (only for desktop)
   useEffect(() => {
+    if (isMobile) return
     let ticking = false
     let currentScroll = 0
 
@@ -58,10 +79,11 @@ export default function BlacklandsPage() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isMobile])
 
-  // Apply lag to scroll for smoother morphing
+  // Apply lag to scroll for smoother morphing (only for desktop)
   useEffect(() => {
+    if (isMobile) return
     const lagAmount = 0.15
     let animationFrame: number
 
@@ -75,7 +97,55 @@ export default function BlacklandsPage() {
 
     animationFrame = requestAnimationFrame(updateLaggedScroll)
     return () => cancelAnimationFrame(animationFrame)
-  }, [scrollY])
+  }, [scrollY, isMobile])
+
+  // Handle touch events for swipe - mobile only
+  useEffect(() => {
+    if (!isMobile) return
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0]
+      touchStartRef.current = { y: touch.clientY, time: Date.now() }
+      lastTouchY.current = touch.clientY
+      setIsDragging(true)
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchStartRef.current) return
+
+      const touch = e.touches[0]
+      const deltaY = touchStartRef.current.y - touch.clientY
+      lastTouchY.current = touch.clientY
+
+      const maxSwipe = window.innerHeight
+      const progress = Math.max(0, Math.min(1, swipeProgress + (deltaY / maxSwipe)))
+      setSwipeProgress(progress)
+
+      touchStartRef.current.y = touch.clientY
+    }
+
+    const handleTouchEnd = () => {
+      setIsDragging(false)
+
+      if (swipeProgress > 0.5) {
+        setSwipeProgress(1)
+      } else {
+        setSwipeProgress(0)
+      }
+
+      touchStartRef.current = null
+    }
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+    document.addEventListener('touchmove', handleTouchMove, { passive: true })
+    document.addEventListener('touchend', handleTouchEnd, { passive: true })
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart)
+      document.removeEventListener('touchmove', handleTouchMove)
+      document.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [swipeProgress, isMobile])
 
   // Header image - using Cloudinary face detection and custom focal point
   const heroImage = {
@@ -222,6 +292,137 @@ export default function BlacklandsPage() {
   const textBottomY = viewportHeight - bottomMargin
   const dividerY = textBottomY - textHeight - paddingBelowLine
 
+  // Mobile view
+  if (isMobile) {
+    const galleryImages = [
+      exhibitionPhoto1,
+      exhibitionPhoto2,
+      exhibitionPhoto3,
+      heroImage
+    ]
+
+    const displayMedia = {
+      public_id: videoPublicId,
+      kind: "video" as const,
+      alt: "Black Lands video"
+    }
+
+    const fallbackImage = heroImage
+
+    return (
+      <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
+        {/* Fixed M Logo at top - white, small */}
+        <div
+          className="fixed left-0 w-full z-50 pointer-events-none"
+          style={{
+            top: '20px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
+          }}
+        >
+          <div className="flex items-center justify-start pointer-events-auto">
+            <div
+              className="flex-shrink-0 cursor-pointer"
+              onClick={() => router.push('/')}
+            >
+              <MorphingHeaderLogo
+                state={3}
+                className="transition-all duration-500 ease-out"
+                style={{
+                  width: '205px',
+                  height: 'auto',
+                  filter: 'invert(1) brightness(2)'
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Video section - slides up, full screen */}
+        <div
+          className="absolute top-0 left-0 w-full h-screen transition-transform z-10"
+          style={{
+            transform: `translateY(-${swipeProgress * 100}vh)`,
+            transition: isDragging ? 'none' : 'transform 0.5s ease-out'
+          }}
+        >
+          <div className="w-full h-full bg-black">
+            {displayMedia && (
+              <CarouselMedia
+                media={displayMedia}
+                fallbackImage={fallbackImage}
+                isVisible={true}
+                isAdjacent={false}
+                className="object-cover w-full h-full"
+                alt={projectTitle}
+                priority={true}
+              />
+            )}
+          </div>
+
+          {/* Swipe up indicator */}
+          {swipeProgress < 0.1 && (
+            <div
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-sm opacity-70"
+            >
+              Swipe up for more
+            </div>
+          )}
+        </div>
+
+        {/* Content section - slides up from below */}
+        <div
+          className="absolute left-0 w-full bg-[#D1D5DB] transition-transform"
+          style={{
+            top: '100vh',
+            transform: `translateY(-${swipeProgress * 100}vh)`,
+            transition: isDragging ? 'none' : 'transform 0.5s ease-out',
+            height: 'auto',
+            minHeight: '100vh',
+            paddingTop: '115px',
+            overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
+            overflowX: 'hidden'
+          }}
+        >
+          <div className="pb-12">
+            {/* Text content - right aligned with padding */}
+            <div className="px-6 mb-8 text-right">
+              {/* Project title */}
+              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
+
+              {/* Description */}
+              <div className="text-black leading-relaxed font-ui text-sm">
+                {projectDescription}
+              </div>
+            </div>
+
+            {/* Full width gallery */}
+            {galleryImages.length > 0 && (
+              <div className="flex flex-col gap-4 px-3">
+                {galleryImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="w-full overflow-hidden"
+                    style={{
+                      borderRadius: '24px'
+                    }}
+                  >
+                    <Media
+                      media={image}
+                      className="w-full h-auto"
+                      alt={image.alt || `${projectTitle} gallery image`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Desktop view
   return (
     <div className="min-h-screen bg-[#D1D5DB]">
       {/* Fixed Header - full width, z-index 2, always taller than State 3 (130px) */}
@@ -356,11 +557,6 @@ export default function BlacklandsPage() {
               publicId={videoPublicId}
               portrait={true}
               className="h-full"
-              style={{
-                objectFit: 'contain',
-                width: 'auto',
-                height: '100%'
-              }}
               controls={true}
               autoPlay={false}
               muted={true}

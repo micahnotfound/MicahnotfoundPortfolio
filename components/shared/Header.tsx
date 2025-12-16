@@ -35,8 +35,8 @@ export function Header() {
   // Don't render this header on:
   // - Project detail pages
   // - /homepage, /header, /slider, /complete, or /test pages
-  // - Homepage when on mobile (mobile carousel handles its own header)
-  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || isTestPage || (isHomePage && isMobile)) {
+  // - Homepage (mobile and desktop - homepage handles its own header)
+  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || isTestPage || isHomePage) {
     return null
   }
 

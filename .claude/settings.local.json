@@ -25,7 +25,10 @@
       "Bash(node -e:*)",
       "Bash(curl:*)",
       "Bash(git diff:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(grep:*)",
+      "Bash(tail:*)",
+      "Bash(git status:*)"
     ],
     "deny": [],
     "ask": []

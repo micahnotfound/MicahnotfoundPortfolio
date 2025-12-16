@@ -7,29 +7,28 @@ import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
+import { useMobile } from '@/contexts/MobileContext'
 
 export default function BlacklandsPage() {
   const router = useRouter()
+  const { isMobile } = useMobile() // Use global mobile detection
+  const [isReady, setIsReady] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200) // Better initial estimate for text height
   const [isMounted, setIsMounted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [swipeProgress, setSwipeProgress] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
   const lastTouchY = useRef<number>(0)
   const textRef = useRef<HTMLDivElement>(null)
 
-  // Detect mobile
+  // Mobile detection now handled by global MobileContext
+
+  // Set ready state after mount
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    setIsReady(true)
   }, [])
 
   // Track viewport height (only for desktop)
@@ -310,34 +309,9 @@ export default function BlacklandsPage() {
     const fallbackImage = heroImage
 
     return (
-      <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
-        {/* Fixed M Logo at top - white, small */}
-        <div
-          className="fixed left-0 w-full z-50 pointer-events-none"
-          style={{
-            top: '20px',
-            paddingLeft: '30px',
-            paddingRight: '30px'
-          }}
-        >
-          <div className="flex items-center justify-start pointer-events-auto">
-            <div
-              className="flex-shrink-0 cursor-pointer"
-              onClick={() => router.push('/')}
-            >
-              <MorphingHeaderLogo
-                state={3}
-                className="transition-all duration-500 ease-out"
-                style={{
-                  width: '205px',
-                  height: 'auto',
-                  filter: 'invert(1) brightness(2)'
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
+      <>
+        {!isReady && (<div className="fixed inset-0 bg-black z-[9999]" />)}
+        <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
         {/* Video section - slides up, full screen */}
         <div
           className="absolute top-0 left-0 w-full h-screen transition-transform z-10"
@@ -346,6 +320,32 @@ export default function BlacklandsPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out'
           }}
         >
+          {/* M Logo - transitions from fixed to absolute */}
+          <div
+            className={swipeProgress >= 1 ? "absolute left-0 w-full z-50 pointer-events-none" : "fixed left-0 w-full z-50 pointer-events-none"}
+            style={{
+              top: '20px',
+              paddingLeft: '30px',
+              paddingRight: '30px'
+            }}
+          >
+            <div className="flex items-center justify-start pointer-events-auto">
+              <div
+                className="flex-shrink-0 cursor-pointer"
+                onClick={() => router.push('/')}
+              >
+                <MorphingHeaderLogo
+                  state={3}
+                  className="transition-all duration-500 ease-out"
+                  style={{
+                    width: '205px',
+                    height: 'auto',
+                    filter: 'none'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           <div className="w-full h-full bg-black">
             {displayMedia && (
               <CarouselMedia
@@ -404,7 +404,7 @@ export default function BlacklandsPage() {
                     key={index}
                     className="w-full overflow-hidden"
                     style={{
-                      borderRadius: '24px'
+                      borderRadius: '0px'
                     }}
                   >
                     <Media
@@ -419,12 +419,15 @@ export default function BlacklandsPage() {
           </div>
         </div>
       </div>
+      </>
     )
   }
 
   // Desktop view
   return (
-    <div className="min-h-screen bg-[#D1D5DB]">
+    <>
+      {!isReady && (<div className="fixed inset-0 bg-black z-[9999]" />)}
+      <div className="min-h-screen bg-[#D1D5DB]">
       {/* Fixed Header - full width, z-index 2, always taller than State 3 (130px) */}
       <div
         className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
@@ -523,8 +526,8 @@ export default function BlacklandsPage() {
           <div
             className="flex-1 overflow-hidden"
             style={{
-              borderTopLeftRadius: '48px',
-              borderBottomLeftRadius: '48px',
+              borderTopLeftRadius: '0px',
+              borderBottomLeftRadius: '0px',
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px'
             }}
@@ -544,8 +547,8 @@ export default function BlacklandsPage() {
           <div
             className="h-full overflow-hidden flex items-center justify-center"
             style={{
-              borderTopLeftRadius: '48px',
-              borderBottomLeftRadius: '48px',
+              borderTopLeftRadius: '0px',
+              borderBottomLeftRadius: '0px',
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px',
               backgroundColor: '#D1D5DB',
@@ -584,11 +587,11 @@ export default function BlacklandsPage() {
             className="overflow-hidden"
             style={{
               flexBasis: '50%',
-              borderTopLeftRadius: '48px',
-              borderBottomLeftRadius: '48px',
+              borderTopLeftRadius: '0px',
+              borderBottomLeftRadius: '0px',
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px',
-              height: '600px'
+              aspectRatio: '1/1'
             }}
           >
             <Media
@@ -606,11 +609,11 @@ export default function BlacklandsPage() {
             className="overflow-hidden"
             style={{
               flexBasis: '50%',
-              borderTopLeftRadius: '48px',
-              borderBottomLeftRadius: '48px',
+              borderTopLeftRadius: '0px',
+              borderBottomLeftRadius: '0px',
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px',
-              height: '600px'
+              aspectRatio: '1/1'
             }}
           >
             <Media
@@ -631,11 +634,11 @@ export default function BlacklandsPage() {
             className="overflow-hidden"
             style={{
               flexBasis: '100%',
-              borderTopLeftRadius: '48px',
-              borderBottomLeftRadius: '48px',
+              borderTopLeftRadius: '0px',
+              borderBottomLeftRadius: '0px',
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px',
-              height: '600px'
+              aspectRatio: '1/1'
             }}
           >
             <Media
@@ -654,5 +657,6 @@ export default function BlacklandsPage() {
       {/* Spacer to enable scrolling - creates document height */}
       <div style={{ height: '1948px' }} aria-hidden="true" />
     </div>
+    </>
   )
 }

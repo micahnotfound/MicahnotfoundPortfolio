@@ -8,13 +8,13 @@ import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 
-export default function MomaPage() {
+export default function KinPage() {
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
-  const [isReady, setIsReady] = useState(false) // Track when page is ready to show
+  const [isReady, setIsReady] = useState(false)
 
   // Mobile-specific states
-  const [swipeProgress, setSwipeProgress] = useState(0) // 0 = video view, 1 = fully swiped to content
+  const [swipeProgress, setSwipeProgress] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
   const lastTouchY = useRef<number>(0)
@@ -34,8 +34,6 @@ export default function MomaPage() {
       setIsMobile(window.innerWidth < 768)
     }
     checkMobile()
-
-    // Mark as ready after mobile detection is complete
     setIsReady(true)
 
     window.addEventListener('resize', checkMobile)
@@ -156,80 +154,53 @@ export default function MomaPage() {
     }
   }, [swipeProgress, isMobile])
 
-  // Project images and data
+  // Kin Festival images and data
   const heroImage1 = {
-    public_id: "v1756571817/BL_horizontal_0002_Layer-Comp-3_zfyhau",
+    public_id: "v1765922612/PreservationPark_Mocks_fp2i3e",
     kind: "image" as const,
-    alt: "MoMA header image 1"
+    alt: "Kin Festival header image 1"
   }
 
   const heroImage2 = {
-    public_id: "v1756779854/H2_r0fekk",
+    public_id: "v1765920441/DSC_1445_ecalzy",
     kind: "image" as const,
-    alt: "MoMA header image 2"
+    alt: "Kin Festival header image 2"
   }
 
   const heroImage3 = {
-    public_id: "v1756571818/BL_horizontal_0000_Layer-Comp-1_wolars",
+    public_id: "v1765922612/PreservationPark_Mocks_fp2i3e",
     kind: "image" as const,
-    alt: "MoMA header image 3"
+    alt: "Kin Festival header image 3"
   }
 
-  const exhibitionPhoto1 = { public_id: "v1756780128/R1_A_awyxgz.png", kind: "image" as const, alt: "MoMA exhibition view 1" }
-  const exhibitionPhoto2 = { public_id: "v1756780152/R1_B_tqtykc.png", kind: "image" as const, alt: "MoMA exhibition view 2" }
-  const exhibitionPhoto3 = { public_id: "v1756780124/R2_pad3q3.jpg", kind: "image" as const, alt: "MoMA exhibition view 3" }
-  const exhibitionPhoto4 = { public_id: "v1756780144/R3_A_iztwci.png", kind: "image" as const, alt: "MoMA exhibition view 4" }
-  const exhibitionPhoto5 = { public_id: "v1756780140/R3_B_dbzhsf.png", kind: "image" as const, alt: "MoMA exhibition view 5" }
-  const exhibitionPhoto6 = { public_id: "v1756780136/R3_C_qfosmh.png", kind: "image" as const, alt: "MoMA exhibition view 6" }
-  const exhibitionPhoto7 = { public_id: "v1756780132/R_4_vdy042.png", kind: "image" as const, alt: "MoMA exhibition view 7" }
+  // Exhibition photos - using placeholder from Exhibit folder
+  const exhibitionPhoto1 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 1" }
+  const exhibitionPhoto2 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 2" }
+  const exhibitionPhoto3 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 3" }
+  const exhibitionPhoto4 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 4" }
 
-  const senecaVillageImages = [
-    { public_id: "v1756680394/Image_Sequence_003_0076_gxagjf", kind: "image" as const, alt: "Seneca Village profile 1" },
-    { public_id: "v1756680394/Image_Sequence_003_0027_ruews2", kind: "image" as const, alt: "Seneca Village profile 2" },
-    { public_id: "v1756680391/Image_Sequence_003_0104_auxzwe", kind: "image" as const, alt: "Seneca Village profile 4" },
-    { public_id: "v1756571810/Image_Sequence_003_0046_mxoejx", kind: "image" as const, alt: "Seneca Village profile 8" }
-  ]
-
-  const youngLordsImages = [
-    { public_id: "v1756680396/image_017_0000_0003_Layer-1_xbqhk2", kind: "image" as const, alt: "Young Lords profile 2" },
-    { public_id: "v1756680395/image_017_0000_0002_image_017_0217_ujaosr", kind: "image" as const, alt: "Young Lords profile 1" },
-    { public_id: "v1756680389/image_017_0000_0001_image_017_0318_ml64zv", kind: "image" as const, alt: "Young Lords profile 3" },
-    { public_id: "v1756680389/image_017_0000_0000_image_017_0114_fjblhc", kind: "image" as const, alt: "Young Lords profile 4" }
-  ]
-
-  const davidRugglesImages = [
-    { public_id: "v1756680387/Image_Sequence_5_egk7kq", kind: "image" as const, alt: "David Ruggles profile 1" },
-    { public_id: "v1756680387/Image_Sequence_6_xbutyf", kind: "image" as const, alt: "David Ruggles profile 2" },
-    { public_id: "v1756680387/Image_Sequence_7_mfi5mc", kind: "image" as const, alt: "David Ruggles profile 3" },
-    { public_id: "v1756680387/Image_Sequence_8_lscign", kind: "image" as const, alt: "David Ruggles profile 4" }
-  ]
-
-  const videoPublicId = "BLACKLANDS_reel_vpw5br"
-  const projectTitle = "MoMA"
-  const projectDescription = "Created by Kinfolk for MoMA's New York, New Publics (2023), The Monuments Project was a five-part installation reimagining the role of monuments in public space. The work centered on Black and Brown enclaves across New York City, honoring communities who cultivated safety, resistance, and belonging. Figures such as Seneca Village, the Young Lords, Toussaint Louverture, and David Ruggles were brought to life through archival research and contemporary storytelling. Anchored on raw red maple pedestals, the sculptures invited viewers to reconsider which histories are remembered and how they endure."
+  const videoPublicId = "v1765922400/KIN_Reel_tfv4qr"
+  const projectTitle = "Kin Festival"
+  const projectDescription = "Kin Festival is a celebration of community, connection, and culture. Through immersive experiences and artistic expression, the festival brings people together to explore themes of identity, belonging, and shared humanity."
 
   // Mobile gallery images
   const mobileGalleryImages = [
-    exhibitionPhoto1, exhibitionPhoto2, exhibitionPhoto3,
-    exhibitionPhoto4, exhibitionPhoto5, exhibitionPhoto6, exhibitionPhoto7,
-    ...senecaVillageImages, ...youngLordsImages, ...davidRugglesImages
+    exhibitionPhoto1, exhibitionPhoto2, exhibitionPhoto3, exhibitionPhoto4
   ]
 
-  const momaReel = { public_id: videoPublicId, kind: "video" as const, alt: "MoMA reel" }
-  const displayMedia = momaReel
+  const kinReel = { public_id: videoPublicId, kind: "video" as const, alt: "Kin Festival reel" }
+  const displayMedia = kinReel
   const fallbackImage = heroImage1
 
   // MOBILE RENDER
   if (isMobile) {
     return (
       <>
-        {/* Black loading overlay - fades out once ready */}
         {!isReady && (
           <div className="fixed inset-0 bg-black z-[9999]" />
         )}
 
         <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
-        {/* Fixed M Logo at top - white, small */}
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
           style={{
@@ -253,7 +224,6 @@ export default function MomaPage() {
           </div>
         </div>
 
-        {/* Video section - slides up */}
         <div
           className="absolute top-0 left-0 w-full h-screen transition-transform z-10"
           style={{
@@ -275,7 +245,6 @@ export default function MomaPage() {
             )}
           </div>
 
-          {/* Swipe up indicator */}
           {swipeProgress < 0.1 && (
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-sm opacity-70">
               Swipe up for more
@@ -283,7 +252,6 @@ export default function MomaPage() {
           )}
         </div>
 
-        {/* Content section - slides up from below */}
         <div
           className="absolute left-0 w-full bg-[#D1D5DB] transition-transform"
           style={{
@@ -298,20 +266,18 @@ export default function MomaPage() {
           }}
         >
           <div className="pb-12">
-            {/* Text content */}
             <div className="px-6 mb-8 text-right">
               <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
               <div className="mb-4 text-black font-ui text-sm">
-                <p><strong>Year:</strong> 2023</p>
-                <p><strong>Role:</strong> Designer</p>
-                <p><strong>Client:</strong> MoMA</p>
+                <p><strong>Year:</strong> 2025</p>
+                <p><strong>Role:</strong> Art Director & Exhibition Lead</p>
+                <p><strong>Client:</strong> Kinfolk</p>
               </div>
               <div className="text-black leading-relaxed font-ui text-sm">
                 {projectDescription}
               </div>
             </div>
 
-            {/* Gallery */}
             {mobileGalleryImages.length > 0 && (
               <div className="flex flex-col gap-4 px-3">
                 {mobileGalleryImages.map((image, index) => (
@@ -336,7 +302,7 @@ export default function MomaPage() {
     )
   }
 
-  // DESKTOP RENDER (unchanged from original)
+  // DESKTOP RENDER
   const topMargin = 52
   const bottomMargin = 52
   const paddingBelowLine = 50
@@ -392,13 +358,11 @@ export default function MomaPage() {
 
   return (
     <>
-      {/* Black loading overlay - fades out once ready */}
       {!isReady && (
         <div className="fixed inset-0 bg-black z-[9999]" />
       )}
 
       <div className="min-h-screen bg-[#D1D5DB]">
-      {/* Fixed Header */}
       <div
         className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
         style={{
@@ -407,7 +371,6 @@ export default function MomaPage() {
         }}
       />
 
-      {/* M Logo */}
       <div
         className="fixed left-0"
         style={{
@@ -429,9 +392,7 @@ export default function MomaPage() {
         </Link>
       </div>
 
-      {/* Content Container */}
       <div className="h-screen relative">
-        {/* Left column */}
         <div
           className="fixed left-0"
           style={{
@@ -442,7 +403,6 @@ export default function MomaPage() {
             transition: 'transform 0ms linear'
           }}
         >
-          {/* Dividing line */}
           <div
             style={{
               position: 'absolute',
@@ -455,7 +415,6 @@ export default function MomaPage() {
             }}
           />
 
-          {/* Text */}
           <div
             ref={textRef}
             style={{
@@ -478,7 +437,6 @@ export default function MomaPage() {
           </div>
         </div>
 
-        {/* Photo and Video container */}
         <div
           className="fixed flex"
           style={{
@@ -492,20 +450,18 @@ export default function MomaPage() {
             gap: '25px'
           }}
         >
-          {/* Three stacked photos */}
           <div className="flex-1 flex flex-col" style={{ gap: '25px' }}>
             <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage1} className="w-full h-full object-cover" alt={heroImage1.alt || 'MoMA Header 1'} />
+              <Media media={heroImage1} className="w-full h-full object-cover" alt={heroImage1.alt || 'Kin Header 1'} />
             </div>
             <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage2} className="w-full h-full object-cover" alt={heroImage2.alt || 'MoMA Header 2'} />
+              <Media media={heroImage2} className="w-full h-full object-cover" alt={heroImage2.alt || 'Kin Header 2'} />
             </div>
             <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage3} className="w-full h-full object-cover" alt={heroImage3.alt || 'MoMA Header 3'} />
+              <Media media={heroImage3} className="w-full h-full object-cover" alt={heroImage3.alt || 'Kin Header 3'} />
             </div>
           </div>
 
-          {/* Video */}
           <div
             className="h-full overflow-hidden flex items-center justify-center"
             style={{
@@ -528,7 +484,6 @@ export default function MomaPage() {
         </div>
       </div>
 
-      {/* Exhibition photos section */}
       <div
         className="fixed bg-[#D1D5DB] pb-12 space-y-12 left-0 right-0"
         style={{
@@ -540,7 +495,6 @@ export default function MomaPage() {
           transition: 'transform 0ms linear'
         }}
       >
-        {/* Row 1 */}
         <div className="flex" style={{ gap: '25px' }}>
           <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto1} className="w-full h-full object-cover" alt={exhibitionPhoto1.alt} />
@@ -550,96 +504,17 @@ export default function MomaPage() {
           </div>
         </div>
 
-        {/* Row 2 */}
         <div className="flex" style={{ gap: '25px' }}>
-          <div className="overflow-hidden" style={{ flexBasis: '100%', borderRadius: '24px', height: '600px' }}>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto3} className="w-full h-full object-cover" alt={exhibitionPhoto3.alt} />
           </div>
-        </div>
-
-        {/* Row 3 */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div className="overflow-hidden" style={{ flexBasis: '33.333%', borderRadius: '24px', height: '600px' }}>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto4} className="w-full h-full object-cover" alt={exhibitionPhoto4.alt} />
           </div>
-          <div className="overflow-hidden" style={{ flexBasis: '33.333%', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto5} className="w-full h-full object-cover" alt={exhibitionPhoto5.alt} />
-          </div>
-          <div className="overflow-hidden" style={{ flexBasis: '33.333%', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto6} className="w-full h-full object-cover" alt={exhibitionPhoto6.alt} />
-          </div>
-        </div>
-
-        {/* Row 4 */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div className="overflow-hidden" style={{ flexBasis: '100%', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto7} className="w-full h-full object-cover" alt={exhibitionPhoto7.alt} />
-          </div>
         </div>
       </div>
 
-      {/* Spacer */}
-      <div style={{ height: '3244px' }} aria-hidden="true" />
-
-      {/* Carousel Section */}
-      <div className="w-full" style={{ paddingLeft: '80px', paddingRight: '80px' }}>
-        {/* Seneca Village */}
-        <div className="flex" style={{ gap: '25px', marginBottom: '48px', height: '600px' }}>
-          {senecaVillageImages.map((image, idx) => (
-            <div
-              key={idx}
-              className="overflow-hidden transition-all duration-500"
-              style={{
-                borderRadius: '24px',
-                height: '600px',
-                flex: hoveredCarousel === 0 && idx === hoveredCarousel ? '3' : '1'
-              }}
-              onMouseEnter={() => setHoveredCarousel(idx)}
-              onMouseLeave={() => setHoveredCarousel(null)}
-            >
-              <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
-            </div>
-          ))}
-        </div>
-
-        {/* Young Lords */}
-        <div className="flex" style={{ gap: '25px', marginBottom: '48px', height: '600px' }}>
-          {youngLordsImages.map((image, idx) => (
-            <div
-              key={idx}
-              className="overflow-hidden transition-all duration-500"
-              style={{
-                borderRadius: '24px',
-                height: '600px',
-                flex: hoveredCarousel === 100 + idx ? '3' : '1'
-              }}
-              onMouseEnter={() => setHoveredCarousel(100 + idx)}
-              onMouseLeave={() => setHoveredCarousel(null)}
-            >
-              <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
-            </div>
-          ))}
-        </div>
-
-        {/* David Ruggles */}
-        <div className="flex" style={{ gap: '25px', marginBottom: '48px', height: '600px' }}>
-          {davidRugglesImages.map((image, idx) => (
-            <div
-              key={idx}
-              className="overflow-hidden transition-all duration-500"
-              style={{
-                borderRadius: '24px',
-                height: '600px',
-                flex: hoveredCarousel === 200 + idx ? '3' : '1'
-              }}
-              onMouseEnter={() => setHoveredCarousel(200 + idx)}
-              onMouseLeave={() => setHoveredCarousel(null)}
-            >
-              <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
-            </div>
-          ))}
-        </div>
-      </div>
+      <div style={{ height: '2000px' }} aria-hidden="true" />
     </div>
     </>
   )

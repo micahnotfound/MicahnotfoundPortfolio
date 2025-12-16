@@ -7,15 +7,16 @@ import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
+import { useMobile } from '@/contexts/MobileContext'
 
 export default function NYCAMPage() {
   const router = useRouter()
+  const { isMobile } = useMobile() // Use global mobile detection
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200) // Better initial estimate for text height
   const [isMounted, setIsMounted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [swipeProgress, setSwipeProgress] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
@@ -23,15 +24,7 @@ export default function NYCAMPage() {
   const [hoveredHeroImage, setHoveredHeroImage] = useState<number | null>(null) // Track which hero image is hovered (0, 1, or 2)
   const textRef = useRef<HTMLDivElement>(null)
 
-  // Detect mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  // Mobile detection now handled by global MobileContext
 
   // Track viewport height (only for desktop)
   useEffect(() => {
@@ -317,7 +310,7 @@ export default function NYCAMPage() {
                 style={{
                   width: '205px',
                   height: 'auto',
-                  filter: 'invert(1) brightness(2)'
+                  filter: 'none'
                 }}
               />
             </div>

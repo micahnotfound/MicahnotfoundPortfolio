@@ -1,5 +1,14 @@
 [
   {
+    "slug": "kin",
+    "title": "Kin Festival",
+    "year": "2025",
+    "role": "Art Director & Exhibition Lead",
+    "client": "Kinfolk",
+    "summary": "Festival celebration capturing community and connection",
+    "file": "kin.json"
+  },
+  {
     "slug": "moma",
     "title": "MoMA",
     "year": "2/21",

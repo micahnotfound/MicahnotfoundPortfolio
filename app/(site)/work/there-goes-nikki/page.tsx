@@ -15,7 +15,6 @@ export default function ThereGoesNikkiPage() {
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200) // Better initial estimate for text height
   const [isMounted, setIsMounted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [swipeProgress, setSwipeProgress] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
@@ -23,30 +22,18 @@ export default function ThereGoesNikkiPage() {
   const [hoveredHeroImage, setHoveredHeroImage] = useState<number | null>(null) // Track which hero image is hovered (0, 1, or 2)
   const textRef = useRef<HTMLDivElement>(null)
 
-  // Detect mobile
+  // Track viewport height
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  // Track viewport height (only for desktop)
-  useEffect(() => {
-    if (isMobile) return
     const updateHeight = () => {
       setViewportHeight(window.innerHeight)
     }
     updateHeight()
     window.addEventListener('resize', updateHeight)
     return () => window.removeEventListener('resize', updateHeight)
-  }, [isMobile])
+  }, [])
 
-  // Measure text height (remeasure on viewport resize) - only for desktop
+  // Measure text height (remeasure on viewport resize)
   useEffect(() => {
-    if (isMobile) return
     const measureText = () => {
       if (textRef.current) {
         setTextHeight(textRef.current.offsetHeight)
@@ -58,11 +45,10 @@ export default function ThereGoesNikkiPage() {
     measureText()
     window.addEventListener('resize', measureText)
     return () => window.removeEventListener('resize', measureText)
-  }, [isMobile])
+  }, [])
 
-  // Smooth scroll tracking (only for desktop)
+  // Smooth scroll tracking
   useEffect(() => {
-    if (isMobile) return
     let ticking = false
     let currentScroll = 0
 
@@ -80,11 +66,10 @@ export default function ThereGoesNikkiPage() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isMobile])
+  }, [])
 
-  // Apply lag to scroll for smoother morphing (only for desktop)
+  // Apply lag to scroll for smoother morphing
   useEffect(() => {
-    if (isMobile) return
     const lagAmount = 0.15
     let animationFrame: number
 
@@ -98,11 +83,10 @@ export default function ThereGoesNikkiPage() {
 
     animationFrame = requestAnimationFrame(updateLaggedScroll)
     return () => cancelAnimationFrame(animationFrame)
-  }, [scrollY, isMobile])
+  }, [scrollY])
 
-  // Handle touch events for swipe - mobile only
+  // Handle touch events for swipe
   useEffect(() => {
-    if (!isMobile) return
 
     const handleTouchStart = (e: TouchEvent) => {
       const touch = e.touches[0]
@@ -146,7 +130,7 @@ export default function ThereGoesNikkiPage() {
       document.removeEventListener('touchmove', handleTouchMove)
       document.removeEventListener('touchend', handleTouchEnd)
     }
-  }, [swipeProgress, isMobile])
+  }, [swipeProgress])
 
   // Header images - three stacked images (using first 3 gallery images)
   const heroImage1 = {
@@ -162,7 +146,7 @@ export default function ThereGoesNikkiPage() {
   }
 
   const heroImage3 = {
-    public_id: "v1756781721/R2_kapahy",
+    public_id: "v1756781726/R4_whegdf",
     kind: "image" as const,
     alt: "There Goes Nikki header image 3"
   }
@@ -187,13 +171,13 @@ export default function ThereGoesNikkiPage() {
   }
 
   const exhibitionPhoto4 = {
-    public_id: "v1756781726/R4_whegdf",
+    public_id: "v1756781721/R2_kapahy",
     kind: "image" as const,
     alt: "There Goes Nikki exhibition view 4"
   }
 
-  // Video - using placeholder for now
-  const videoPublicId = "ThereGoesNikki_reel"
+  // Video - using actual reel
+  const videoPublicId = "ThereGoesNikki_Reel_tz0tm2"
 
   // Project info
   const projectTitle = "There Goes Nikki"
@@ -275,28 +259,56 @@ export default function ThereGoesNikkiPage() {
   const textBottomY = viewportHeight - bottomMargin
   const dividerY = textBottomY - textHeight - paddingBelowLine
 
-  // Mobile view
-  if (isMobile) {
-    const galleryImages = [
-      heroImage1,
-      heroImage2,
-      heroImage3,
-      exhibitionPhoto1,
-      exhibitionPhoto2,
-      exhibitionPhoto3,
-      exhibitionPhoto4
-    ]
+  // Prepare mobile data
+  const galleryImages = [
+    heroImage1,
+    heroImage2,
+    heroImage3,
+    exhibitionPhoto1,
+    exhibitionPhoto2,
+    exhibitionPhoto3,
+    exhibitionPhoto4
+  ]
 
-    const displayMedia = {
-      public_id: videoPublicId,
-      kind: "video" as const,
-      alt: "There Goes Nikki video"
+  const displayMedia = {
+    public_id: videoPublicId,
+    kind: "video" as const,
+    alt: "There Goes Nikki video"
+  }
+
+  const fallbackImage = heroImage1
+
+  // Calculate flex values for hero images based on hover state
+  // When middle (index 1) is hovered: it gets 70%, others split 30% (15% each)
+  // When top (index 0) is hovered: top gets 70%, middle gets 20%, bottom gets 10%
+  // When bottom (index 2) is hovered: bottom gets 70%, middle gets 20%, top gets 10%
+  // When no hover: all equal at 33.33% each
+  const getHeroImageFlex = (index: number): number => {
+    if (hoveredHeroImage === null) {
+      return 1 // Equal distribution when no hover
     }
 
-    const fallbackImage = heroImage1
+    if (hoveredHeroImage === index) {
+      return 7 // 70% for hovered image
+    }
 
-    return (
-      <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
+    if (hoveredHeroImage === 1) {
+      // Middle is hovered, other two split 30% equally
+      return 1.5 // 15% each
+    }
+
+    // Top or bottom is hovered - create gradient
+    const distance = Math.abs(hoveredHeroImage - index)
+    if (distance === 1) {
+      return 2 // 20% for adjacent image
+    }
+    return 1 // 10% for furthest image
+  }
+
+  return (
+    <div>
+      {/* Mobile View - hidden on md and above */}
+      <div className="block md:hidden h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
         {/* Fixed M Logo at top - white, small */}
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
@@ -317,7 +329,7 @@ export default function ThereGoesNikkiPage() {
                 style={{
                   width: '205px',
                   height: 'auto',
-                  filter: 'invert(1) brightness(2)'
+                  filter: 'none'
                 }}
               />
             </div>
@@ -405,38 +417,9 @@ export default function ThereGoesNikkiPage() {
           </div>
         </div>
       </div>
-    )
-  }
 
-  // Calculate flex values for hero images based on hover state
-  // When middle (index 1) is hovered: it gets 70%, others split 30% (15% each)
-  // When top (index 0) is hovered: top gets 70%, middle gets 20%, bottom gets 10%
-  // When bottom (index 2) is hovered: bottom gets 70%, middle gets 20%, top gets 10%
-  // When no hover: all equal at 33.33% each
-  const getHeroImageFlex = (index: number): number => {
-    if (hoveredHeroImage === null) {
-      return 1 // Equal distribution when no hover
-    }
-
-    if (hoveredHeroImage === index) {
-      return 7 // 70% for hovered image
-    }
-
-    if (hoveredHeroImage === 1) {
-      // Middle is hovered, other two split 30% equally
-      return 1.5 // 15% each
-    }
-
-    // Top or bottom is hovered - create gradient
-    const distance = Math.abs(hoveredHeroImage - index)
-    if (distance === 1) {
-      return 2 // 20% for adjacent image
-    }
-    return 1 // 10% for furthest image
-  }
-
-  return (
-    <div className="min-h-screen bg-[#D1D5DB]">
+      {/* Desktop View - hidden below md */}
+      <div className="hidden md:block min-h-screen bg-[#D1D5DB]">
       {/* Fixed Header - full width, z-index 2, always taller than State 3 (130px) */}
       <div
         className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
@@ -553,7 +536,7 @@ export default function ThereGoesNikkiPage() {
                 className="w-full h-full object-cover"
                 style={{
                   objectFit: 'cover',
-                  objectPosition: '5% 50%'
+                  objectPosition: '70% 0%'
                 }}
                 alt={heroImage1.alt || 'There Goes Nikki Header 1'}
               />
@@ -613,9 +596,9 @@ export default function ThereGoesNikkiPage() {
               portrait={true}
               className="h-full"
               controls={true}
-              autoPlay={false}
+              autoPlay={true}
               muted={true}
-              loop={false}
+              loop={true}
             />
           </div>
         </div>
@@ -702,6 +685,7 @@ export default function ThereGoesNikkiPage() {
 
       {/* Spacer to enable scrolling - creates document height */}
       <div style={{ height: '2598px' }} aria-hidden="true" />
+      </div>
     </div>
   )
 }

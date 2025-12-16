@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   // Define Open Graph images for each project
   const getProjectOGImage = (slug: string) => {
     switch (slug) {
+      case 'kin':
+        return 'https://res.cloudinary.com/dxmq5ewnv/image/upload/v1765922612/PreservationPark_Mocks_fp2i3e.png'
       case 'nycam':
         return 'https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680418/NYCAM_0002_Background_c2dfan.png'
       case 'dreaming-with-the-archives':

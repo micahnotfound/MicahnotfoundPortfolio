@@ -2,29 +2,28 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { ProjectCard } from '@/components/composition/ProjectCard'
-import { MobileProjectCard } from '@/components/composition/MobileProjectCard'
-import { ProjectCardSkeleton } from '@/components/composition/ProjectCardSkeleton'
+import { useRouter } from 'next/navigation'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { getProjects } from '@/lib/content'
-import { siteSettings } from '@/config/siteSettings'
 import type { Project } from '@/types/content'
 import { useHover } from '@/contexts/HoverContext'
 
 export default function HomePage() {
+  const router = useRouter()
   const [projects, setProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const { hoverArea, setHoverArea } = useHover() // Use context for hoverArea
+  const { hoverArea, setHoverArea } = useHover()
   const carouselRef = useRef<HTMLDivElement>(null)
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(-1) // -1 = collapsed, 0+ = expanded for mobile carousel
+
+  // Mobile states
+  const [selectedIndex, setSelectedIndex] = useState(-1)
   const [dragProgress, setDragProgress] = useState(0)
-  const [headerTopPosition, setHeaderTopPosition] = useState(71) // Track header vertical position in real-time (moved up 4px from 75)
-  const [isAnimating, setIsAnimating] = useState(false) // Track if in momentum animation
-  const [viewportHeight, setViewportHeight] = useState(0) // Track viewport height for dynamic calculations
+  const [headerTopPosition, setHeaderTopPosition] = useState(71)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [viewportHeight, setViewportHeight] = useState(0)
   const [logoState, setLogoState] = useState<0 | 1 | 2 | 3>(0)
   const mobileCarouselTouchStart = useRef<{ y: number; time: number; startIndex: number } | null>(null)
   const isDragging = useRef(false)
@@ -32,71 +31,52 @@ export default function HomePage() {
   const lastTouchY = useRef<number>(0)
   const lastTouchTime = useRef<number>(0)
 
-  useEffect(() => {
-    // Reset hover state to home state when component mounts
-    setHoverArea(null)
+  // Desktop states
+  const [currentVideoIndex, setCurrentVideoIndex] = useState<number | null>(null)
+  const [previousVideoIndex, setPreviousVideoIndex] = useState<number | null>(null)
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null)
+  const [logoTopPosition, setLogoTopPosition] = useState(80)
+  const [isMouseNearLogo, setIsMouseNearLogo] = useState(false)
+  const [hasEverHovered, setHasEverHovered] = useState(false)
 
-    // Simulate loading time for the cool skeleton effect
+  useEffect(() => {
+    setHoverArea(null)
     const loadProjects = async () => {
       const projectsData = getProjects()
-
-      // Add a minimum loading time to show the skeleton animation
       await new Promise(resolve => setTimeout(resolve, 2000))
-
       setProjects(projectsData)
       setIsLoading(false)
     }
-
     loadProjects()
   }, [setHoverArea])
 
-  // Detect mobile viewport
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768) // Standard mobile breakpoint
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  // Track viewport height for dynamic image sizing
+  // Track viewport height for mobile
   useEffect(() => {
     const updateViewportHeight = () => {
       setViewportHeight(window.innerHeight)
     }
-
     updateViewportHeight()
     window.addEventListener('resize', updateViewportHeight)
     return () => window.removeEventListener('resize', updateViewportHeight)
   }, [])
 
-  // Handle wheel events for horizontal scrolling - Desktop only
+  // Desktop: Handle wheel events for horizontal scrolling
   useEffect(() => {
-    if (isMobile) return // Skip on mobile
+    if (window.innerWidth < 768) return
 
     const handleWheel = (e: WheelEvent) => {
-      // Always prevent default to stop vertical scrolling on homepage
       e.preventDefault()
       e.stopPropagation()
-
-      // Check if carousel ref exists
       if (!carouselRef.current) return
 
-      // Convert vertical scroll to horizontal scroll
       const scrollAmount = e.deltaY * 2
       carouselRef.current.scrollLeft += scrollAmount
     }
 
-    // Add wheel listener to both carousel and document for full page coverage
     const carouselElement = carouselRef.current
-
     if (carouselElement) {
       carouselElement.addEventListener('wheel', handleWheel, { passive: false })
     }
-
-    // Always add document listener for page-wide scrolling
     document.addEventListener('wheel', handleWheel, { passive: false })
 
     return () => {
@@ -105,11 +85,55 @@ export default function HomePage() {
       }
       document.removeEventListener('wheel', handleWheel)
     }
-  }, [isLoading, projects, isMobile]) // Re-run when data is loaded
+  }, [isLoading, projects])
 
-  // Unified touch handling for mobile carousel (only on mobile)
+  // Desktop: Track mouse position to detect if near M logo
   useEffect(() => {
-    if (!isMobile) return
+    const handleMouseMove = (e: MouseEvent) => {
+      const distanceFromTop = e.clientY
+      const distanceFromLeft = e.clientX
+      const isNear = distanceFromTop < 600 && distanceFromLeft < 1000
+      setIsMouseNearLogo(isNear)
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    return () => document.removeEventListener('mousemove', handleMouseMove)
+  }, [isMouseNearLogo])
+
+  // Desktop: M logo animation based on video state and mouse position
+  useEffect(() => {
+    if (currentVideoIndex === null) {
+      setLogoState(0)
+      setLogoTopPosition(80)
+    } else {
+      if (isMouseNearLogo) {
+        setLogoState(0)
+        setLogoTopPosition(80)
+      } else {
+        setLogoState(3)
+        setLogoTopPosition(20)
+      }
+    }
+  }, [currentVideoIndex, isMouseNearLogo])
+
+  // Desktop: Update video index when hovering
+  useEffect(() => {
+    if (hoveredIndex !== null) {
+      if (currentVideoIndex !== null) {
+        if (hoveredIndex > currentVideoIndex) {
+          setSlideDirection('left')
+        } else if (hoveredIndex < currentVideoIndex) {
+          setSlideDirection('right')
+        }
+        setPreviousVideoIndex(currentVideoIndex)
+      }
+      setCurrentVideoIndex(hoveredIndex)
+    }
+  }, [hoveredIndex, currentVideoIndex])
+
+  // Mobile: Touch handling
+  useEffect(() => {
+    if (window.innerWidth >= 768) return
 
     const handleTouchStart = (e: TouchEvent) => {
       setIsAnimating(false)
@@ -256,18 +280,13 @@ export default function HomePage() {
       document.removeEventListener('touchmove', handleTouchMove)
       document.removeEventListener('touchend', handleTouchEnd)
     }
-  }, [isMobile, selectedIndex, projects.length])
+  }, [selectedIndex, projects.length])
 
-  // Generate skeleton placeholders
-  const skeletonCount = 6 // Show 6 skeleton cards while loading
-
-  // Carousel helper functions (for mobile carousel)
+  // Mobile helper functions
   const handleThumbnailClick = (index: number, project: Project) => {
     if (selectedIndex === index) {
-      // Second tap on already selected card: navigate to project page
       window.location.href = `/work/${project.slug}`
     } else {
-      // First tap: select this card and shrink header
       setSelectedIndex(index)
       setLogoState(3)
       setHeaderTopPosition(20)
@@ -325,28 +344,43 @@ export default function HomePage() {
     }
   }
 
-  const getTextBarHeight = () => {
-    return 36 // pixels - match About/Contact button height
-  }
-
   const getImageHeight = () => {
-    if (viewportHeight === 0) return '0px' // Wait for viewport height to be set
+    if (viewportHeight === 0) return '0px'
 
     const textBubbleHeight = 36
     const gapBetweenImageAndBubble = 7
-    const topMargin = 12 // Match left/right margins
+    const topMargin = 12
     const maxHeightPx = viewportHeight - textBubbleHeight - gapBetweenImageAndBubble - topMargin
 
-    // Images are always at full height when visible
     return `${maxHeightPx}px`
   }
 
+  const getTextBubblesBottom = () => {
+    if (viewportHeight === 0) return '54.4px'
 
-  // Mobile carousel rendering (complete carousel from /complete)
-  if (isMobile) {
-    return (
-      <div className="h-screen w-full relative overflow-hidden bg-[#D1D5DB]">
-        {/* Header with M Logo and Buttons - floating on top, no background */}
+    if (logoState === 0) {
+      return '54.4px'
+    } else if (logoState === 3) {
+      const bubbleHeight = 36
+      const bubbleGap = 16
+      const totalBubblesHeight = projects.length * (bubbleHeight + bubbleGap)
+      const middleOfScreen = viewportHeight / 2
+      return `${middleOfScreen - totalBubblesHeight / 2}px`
+    } else {
+      const bottomPos = 54.4
+      const middlePos = (viewportHeight / 2) - ((projects.length * 52) / 2)
+      const progress = logoState / 3
+      return `${bottomPos + (middlePos - bottomPos) * progress}px`
+    }
+  }
+
+  const skeletonCount = 6
+
+  return (
+    <>
+      {/* Mobile View - visible on mobile only */}
+      <div className="block md:hidden h-screen w-full relative overflow-hidden bg-[#D1D5DB]">
+        {/* Mobile Header */}
         <div
           className="absolute left-0 w-full z-20 pointer-events-none"
           style={{
@@ -361,7 +395,6 @@ export default function HomePage() {
         >
           <div className="flex items-center justify-start gap-8 pointer-events-auto">
             <div className="flex items-center gap-8 max-w-full">
-              {/* M Logo - white when over image, black when over gray, click to collapse */}
               <div
                 className="flex-shrink-0 cursor-pointer"
                 onClick={() => {
@@ -375,13 +408,11 @@ export default function HomePage() {
                   className="transition-all duration-500 ease-out"
                   style={{
                     width: '205px',
-                    height: 'auto',
-                    filter: selectedIndex !== -1 ? 'invert(1) brightness(2)' : 'none'
+                    height: 'auto'
                   }}
                 />
               </div>
 
-              {/* About/Contact buttons */}
               <div
                 className="flex flex-col flex-shrink-0 transition-all duration-500 ease-out"
                 style={{
@@ -395,7 +426,7 @@ export default function HomePage() {
                   style={{
                     border: 'none',
                     padding: '0 1rem',
-                    borderRadius: '39px',
+                    borderRadius: '0px',
                     height: getButtonHeight(),
                     opacity: getButtonOpacity(),
                     maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
@@ -411,7 +442,7 @@ export default function HomePage() {
                   style={{
                     border: 'none',
                     padding: '0 1rem',
-                    borderRadius: '39px',
+                    borderRadius: '0px',
                     height: getButtonHeight(),
                     opacity: getButtonOpacity(),
                     maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
@@ -425,9 +456,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Carousel - takes full screen height */}
+        {/* Mobile Carousel */}
         <div className="h-full w-full relative overflow-hidden">
-          {/* Swipeable image container */}
           <div
             className="absolute left-0 w-full"
             style={{
@@ -436,98 +466,99 @@ export default function HomePage() {
               paddingRight: '12px'
             }}
           >
-              {projects.map((project, index) => {
-                const hasReel = !!project.reel
-                const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
-                  ? project.thumbnails[0]
-                  : project.cover)
+            {projects.map((project, index) => {
+              const hasReel = !!project.reel
+              const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
+                ? project.thumbnails[0]
+                : project.cover)
 
-                const fallbackImage = project.thumbnails && project.thumbnails.length > 0
-                  ? project.thumbnails[0]
-                  : project.cover
+              const fallbackImage = project.thumbnails && project.thumbnails.length > 0
+                ? project.thumbnails[0]
+                : project.cover
 
-                const imageHeight = getImageHeight()
+              const imageHeight = getImageHeight()
 
-                let translateYPx = 0
+              let translateYPx = 0
 
-                if (selectedIndex === -1) {
-                  if (index === 0) {
-                    translateYPx = viewportHeight
-                    if (isDragging.current && dragDirection.current === 'up' && dragProgress > 0) {
-                      translateYPx = viewportHeight * (1 - dragProgress)
-                    }
-                  } else {
-                    return null
+              if (selectedIndex === -1) {
+                if (index === 0) {
+                  translateYPx = viewportHeight
+                  if (isDragging.current && dragDirection.current === 'up' && dragProgress > 0) {
+                    translateYPx = viewportHeight * (1 - dragProgress)
                   }
                 } else {
-                  const cardSpacing = viewportHeight > 0 ? viewportHeight + 50 : 1000
-                  translateYPx = (index - selectedIndex) * cardSpacing
+                  return null
+                }
+              } else {
+                const cardSpacing = viewportHeight > 0 ? viewportHeight + 50 : 1000
+                translateYPx = (index - selectedIndex) * cardSpacing
 
-                  if (isDragging.current && dragProgress > 0 && dragDirection.current) {
-                    if (dragDirection.current === 'up') {
-                      translateYPx -= dragProgress * cardSpacing
-                    } else if (dragDirection.current === 'down') {
-                      translateYPx += dragProgress * cardSpacing
-                    }
+                if (isDragging.current && dragProgress > 0 && dragDirection.current) {
+                  if (dragDirection.current === 'up') {
+                    translateYPx -= dragProgress * cardSpacing
+                  } else if (dragDirection.current === 'down') {
+                    translateYPx += dragProgress * cardSpacing
                   }
-
-                  const isNearVisible = Math.abs(index - selectedIndex) <= 1
-                  if (!isNearVisible) return null
                 }
 
-                return (
-                  <div
-                    key={`${project.slug}-${index}`}
-                    className="absolute top-0 left-0 w-full cursor-pointer"
-                    style={{
-                      transform: `translateY(${translateYPx}px)`,
-                      transition: isDragging.current ? 'none' : 'transform 0.5s ease-out',
-                      paddingLeft: '12px',
-                      paddingRight: '12px'
-                    }}
-                    onClick={() => handleThumbnailClick(index, project)}
-                  >
-                    <div
-                      className="relative overflow-hidden"
-                      style={{
-                        height: imageHeight,
-                        borderTopLeftRadius: '24px',
-                        borderBottomLeftRadius: '24px',
-                        borderTopRightRadius: '0px',
-                        borderBottomRightRadius: '0px',
-                        width: '100%',
-                        transition: isDragging.current ? 'none' : 'height 0.5s ease-out'
-                      }}
-                    >
-                      {imageHeight !== '0px' && displayMedia && (
-                        <CarouselMedia
-                          media={displayMedia}
-                          fallbackImage={hasReel ? fallbackImage : undefined}
-                          isVisible={index === selectedIndex}
-                          isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
-                          className="object-cover"
-                          alt={project.title}
-                          priority={index === 0}
-                        />
-                      )}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+                const isNearVisible = Math.abs(index - selectedIndex) <= 1
+                if (!isNearVisible) return null
+              }
 
-          {/* Text bubbles - vertical circles on right side, 50px from edge, anchored to bottom */}
+              return (
+                <div
+                  key={`${project.slug}-${index}`}
+                  className="absolute top-0 left-0 w-full cursor-pointer"
+                  style={{
+                    transform: `translateY(${translateYPx}px)`,
+                    transition: isDragging.current ? 'none' : 'transform 0.5s ease-out',
+                    paddingLeft: '12px',
+                    paddingRight: '12px'
+                  }}
+                  onClick={() => handleThumbnailClick(index, project)}
+                >
+                  <div
+                    className="relative overflow-hidden"
+                    style={{
+                      height: imageHeight,
+                      borderTopLeftRadius: '24px',
+                      borderBottomLeftRadius: '24px',
+                      borderTopRightRadius: '0px',
+                      borderBottomRightRadius: '0px',
+                      width: '100%',
+                      transition: isDragging.current ? 'none' : 'height 0.5s ease-out'
+                    }}
+                  >
+                    {imageHeight !== '0px' && displayMedia && (
+                      <CarouselMedia
+                        media={displayMedia}
+                        fallbackImage={hasReel ? fallbackImage : undefined}
+                        isVisible={index === selectedIndex}
+                        isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
+                        className="object-cover"
+                        alt={project.title}
+                        priority={index === 0}
+                      />
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Mobile Text bubbles */}
           <div
-            className="absolute flex flex-col-reverse overflow-visible transition-all duration-1000 ease-out z-30"
+            className="absolute flex flex-col-reverse overflow-visible transition-all duration-500 ease-out z-30"
             style={{
-              bottom: '54.4px', // Match the bottom padding from original design
+              bottom: getTextBubblesBottom(),
               right: '50px',
               gap: '16px'
             }}
           >
             {projects.map((project, index) => {
               const isSelected = selectedIndex === index
-              const circleSize = 36 // Match About/Contact button height
+              const circleSize = 36
+              const rectangleWidth = 24
 
               return (
                 <div
@@ -542,12 +573,12 @@ export default function HomePage() {
                     className="font-ui flex items-center justify-end transition-all duration-1000 ease-out"
                     style={{
                       height: `${circleSize}px`,
-                      width: isSelected ? 'auto' : `${circleSize}px`, // Auto width to fit text, else circle
+                      width: isSelected ? 'auto' : `${rectangleWidth}px`,
                       paddingLeft: isSelected ? '16px' : '0px',
-                      paddingRight: isSelected ? '29px' : '0px', // 25px buffer + 4px original padding
+                      paddingRight: isSelected ? '29px' : '0px',
                       fontSize: '0.85em',
                       fontWeight: 'normal',
-                      borderRadius: '39px', // Full circle
+                      borderRadius: '0px',
                       backgroundColor: isSelected ? 'white' : 'black',
                       color: isSelected ? 'black' : 'white',
                       overflow: 'visible',
@@ -562,49 +593,204 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-    )
-  }
 
-  // Desktop rendering
-  return (
-    <div className="h-full flex flex-col">
-      {/* Projects Horizontal Row Section - Takes remaining space between header and footer */}
-      <section
-        className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative transition-all duration-500 ease-out"
-        style={{
-          marginTop: (hoverArea === 'card' || hoverArea === 'textbox') ? '40px' : '0px',
-          marginBottom: '10px' // Small bottom margin matching top border
-        }}
-      >
-        <div className="w-full max-w-[2000px] flex-1 flex flex-col justify-start min-h-0">
-          {/* Single row with horizontal scroll - shows about 4 projects at once */}
+      {/* Desktop View - visible on desktop only */}
+      <div className="hidden md:block h-screen w-full bg-[#D1D5DB] relative overflow-hidden">
+        {/* CSS for swaying animation */}
+        <style jsx>{`
+          @keyframes sway-left {
+            0% { transform: translateX(0px); width: 200px; transform-origin: left center; }
+            20% { transform: translateX(calc(var(--sway-distance) * -1)); width: calc(200px + var(--stretch-amount)); transform-origin: left center; }
+            25% { transform: translateX(calc(var(--sway-distance) * -1)); width: calc(200px + var(--stretch-amount) * 0.5); transform-origin: right center; }
+            50% { transform: translateX(var(--sway-distance)); width: 200px; transform-origin: center center; }
+            70% { transform: translateX(var(--sway-distance) * 0.5); width: calc(200px + var(--stretch-amount) * 0.3); transform-origin: right center; }
+            100% { transform: translateX(0px); width: 200px; transform-origin: left center; }
+          }
+
+          @keyframes sway-right {
+            0% { transform: translateX(0px); width: 200px; transform-origin: right center; }
+            20% { transform: translateX(calc(var(--sway-distance) * -0.5)); width: calc(200px + var(--stretch-amount) * 0.3); transform-origin: left center; }
+            50% { transform: translateX(var(--sway-distance)); width: 200px; transform-origin: center center; }
+            70% { transform: translateX(var(--sway-distance)); width: calc(200px + var(--stretch-amount)); transform-origin: right center; }
+            75% { transform: translateX(var(--sway-distance)); width: calc(200px + var(--stretch-amount) * 0.5); transform-origin: left center; }
+            100% { transform: translateX(0px); width: 200px; transform-origin: right center; }
+          }
+
+          @keyframes sway-middle {
+            0%, 100% { transform: translateX(0px); width: 200px; }
+            25% { transform: translateX(calc(var(--sway-distance) * -1)); width: calc(200px + var(--stretch-amount) * 0.6); }
+            50% { transform: translateX(0px); width: 200px; }
+            75% { transform: translateX(var(--sway-distance)); width: calc(200px + var(--stretch-amount) * 0.6); }
+          }
+
+          .sway-button-left { animation: sway-left 6s ease-in-out infinite; }
+          .sway-button-right { animation: sway-right 6s ease-in-out infinite; }
+          .sway-button-middle { animation: sway-middle 6s ease-in-out infinite; }
+        `}</style>
+
+        {/* Background video carousel */}
+        {currentVideoIndex !== null && (
+          <div className="absolute inset-0 w-full h-full z-10 overflow-hidden">
+            <div
+              className="absolute top-0 left-0 h-full flex transition-transform duration-[900ms] ease-out"
+              style={{
+                transform: `translateX(-${currentVideoIndex * 100}vw)`,
+                width: `${projects.length * 100}vw`
+              }}
+            >
+              {!isLoading && projects.map((project, index) => {
+                const hasReel = !!project.reel
+                const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
+                  ? project.thumbnails[0]
+                  : project.cover)
+
+                const fallbackImage = project.thumbnails && project.thumbnails.length > 0
+                  ? project.thumbnails[0]
+                  : project.cover
+
+                const shouldRender = Math.abs(index - currentVideoIndex) <= 1
+
+                return (
+                  <div
+                    key={`video-${index}`}
+                    className="w-screen h-full flex-shrink-0"
+                    style={{
+                      width: '100vw',
+                      padding: '40px'
+                    }}
+                  >
+                    <div
+                      className="w-full h-full overflow-hidden"
+                      style={{
+                        borderRadius: '32px'
+                      }}
+                    >
+                      {shouldRender && displayMedia && (
+                        <CarouselMedia
+                          media={displayMedia}
+                          fallbackImage={hasReel ? fallbackImage : undefined}
+                          isVisible={index === currentVideoIndex}
+                          isAdjacent={Math.abs(index - currentVideoIndex) === 1}
+                          className="object-cover"
+                          alt={project.title}
+                          priority={index === 0}
+                        />
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Desktop Header with M Logo and Buttons */}
+        <div
+          className="fixed left-0 w-full z-50 transition-all duration-[900ms] ease-out"
+          style={{
+            top: `${logoTopPosition}px`,
+            paddingLeft: '100px',
+            paddingRight: '30px'
+          }}
+        >
+          <div className="flex items-center justify-start gap-8">
+            <div className="flex-shrink-0 cursor-pointer" onClick={() => router.push('/')}>
+              <MorphingHeaderLogo
+                state={logoState}
+                className="transition-all duration-[900ms] ease-out"
+                style={{
+                  width: '325px',
+                  height: 'auto'
+                }}
+              />
+            </div>
+
+            <div
+              className="flex flex-col gap-4 transition-opacity duration-[900ms] ease-out"
+              style={{
+                opacity: logoState === 3 ? 0 : 1,
+                pointerEvents: logoState === 3 ? 'none' : 'auto'
+              }}
+            >
+              <Link
+                href="/about"
+                className="text-center font-ui bg-core-dark text-white text-base whitespace-nowrap px-4 h-9 flex items-center justify-center"
+                style={{ borderRadius: '0px' }}
+              >
+                about
+              </Link>
+
+              <Link
+                href="/contact"
+                className="text-center font-ui bg-core-dark text-white text-base whitespace-nowrap px-4 h-9 flex items-center justify-center"
+                style={{ borderRadius: '0px' }}
+              >
+                contact
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Text bubbles - horizontal */}
+        <div
+          className="fixed left-0 z-40 flex flex-row"
+          style={{
+            top: 'calc(66.67% + 100px)',
+            transform: 'translateY(-50%)',
+            left: '80px',
+            right: '80px',
+            gap: '0.6rem'
+          }}
+        >
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto flex-1 items-end min-h-0 scrollbar-hide"
+            className="flex flex-row overflow-x-visible scrollbar-hide w-full"
             style={{
-              gap: '0.6rem', // 4x wider: 0.15rem * 4 = 0.6rem
-              paddingBottom: '10px' // Small bottom padding matching top border
+              gap: '0.6rem'
             }}
           >
             {isLoading ? (
-              // Show skeleton loading animation
               Array.from({ length: skeletonCount }).map((_, index) => (
-                <ProjectCardSkeleton key={`skeleton-${index}`} index={index} />
+                <div
+                  key={`skeleton-${index}`}
+                  className="flex-shrink-0 animate-pulse"
+                  style={{ width: '200px', height: '36px' }}
+                >
+                  <div className="bg-gray-300 h-full w-full" style={{ borderRadius: '0px' }} />
+                </div>
               ))
             ) : (
-              // Show actual project cards with fade-in animation
               projects.map((project, index) => {
-                const totalCards = projects.length
                 const isHovered = hoveredIndex === index
                 const someoneIsHovered = hoveredIndex !== null
-                const distance = hoveredIndex !== null ? Math.abs(index - hoveredIndex) : 0
+
+                const getDisplayTitle = () => {
+                  if (isHovered) return project.title
+
+                  const acronymMap: { [key: string]: string } = {
+                    'Dreaming With The Archives': 'DWTA',
+                    'NYC AIDS Memorial': 'NYCAM'
+                  }
+
+                  return acronymMap[project.title] || project.title
+                }
+
+                const getExpandedWidth = () => {
+                  if (typeof window === 'undefined') return 800
+                  const viewportWidth = window.innerWidth
+                  const availableWidth = viewportWidth - 160 - 40
+                  const otherBubblesWidth = (projects.length - 1) * 200 + (projects.length - 1) * 10
+                  const maxExpandedWidth = availableWidth - otherBubblesWidth
+                  return Math.max(200, Math.min(800, maxExpandedWidth))
+                }
 
                 const handleMouseEnter = () => {
                   if (hoverTimeoutRef.current) {
                     clearTimeout(hoverTimeoutRef.current)
                   }
+                  setHasEverHovered(true)
                   setHoveredIndex(index)
-                  setHoverArea('card') // Card state: hovering over photo card
+                  setHoverArea('textbox')
                 }
 
                 const handleMouseLeave = () => {
@@ -613,49 +799,71 @@ export default function HomePage() {
                   }
                   hoverTimeoutRef.current = setTimeout(() => {
                     setHoveredIndex(null)
-                    setHoverArea(null) // Return to home state
+                    setHoverArea(null)
                   }, 50)
                 }
 
-                const handleTextboxAreaEnter = () => {
-                  if (hoverTimeoutRef.current) {
-                    clearTimeout(hoverTimeoutRef.current)
-                  }
-                  setHoveredIndex(index)
-                  setHoverArea('textbox') // Textbox state: hovering over text box
-                }
+                const totalButtons = projects.length
+                const leftThird = Math.floor(totalButtons / 3)
+                const rightThird = totalButtons - Math.floor(totalButtons / 3)
 
-                const handleTextboxAreaLeave = () => {
-                  if (hoverTimeoutRef.current) {
-                    clearTimeout(hoverTimeoutRef.current)
-                  }
-                  hoverTimeoutRef.current = setTimeout(() => {
-                    setHoveredIndex(null)
-                    setHoverArea(null) // Return to home state
-                  }, 50)
+                let animationClass = ''
+                let swayDistance = 20
+                let stretchAmount = 0
+
+                if (index < leftThird) {
+                  animationClass = 'sway-button-left'
+                  swayDistance = 30 + (leftThird - index) * 10
+                  stretchAmount = 40 + (leftThird - index) * 20
+                } else if (index >= rightThird) {
+                  animationClass = 'sway-button-right'
+                  swayDistance = 30 + (index - rightThird) * 10
+                  stretchAmount = 40 + (index - rightThird) * 20
+                } else {
+                  animationClass = 'sway-button-middle'
+                  swayDistance = 20
+                  stretchAmount = 30
                 }
 
                 return (
-                  <ProjectCard
+                  <div
                     key={`${project.slug}-${index}`}
-                    project={project}
-                    index={index}
-                    isHovered={isHovered}
-                    someoneIsHovered={someoneIsHovered}
-                    distanceFromHovered={distance}
-                    totalCards={totalCards}
-                    hoverArea={hoverArea}
+                    className={`flex-shrink-0 relative ${currentVideoIndex === null && hasEverHovered ? animationClass : ''}`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    onTextboxAreaEnter={handleTextboxAreaEnter}
-                    onTextboxAreaLeave={handleTextboxAreaLeave}
-                  />
+                    style={{
+                      '--sway-distance': `${swayDistance}px`,
+                      '--stretch-amount': `${stretchAmount}px`,
+                      animationDelay: `${index * 0.15}s`
+                    } as React.CSSProperties}
+                  >
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className="relative block transition-all duration-[900ms] ease-out"
+                      style={{
+                        width: isHovered ? getExpandedWidth() : '200px',
+                        height: '36px'
+                      }}
+                    >
+                      <div
+                        className="w-full h-full flex items-center justify-center font-ui font-medium transition-all duration-[900ms] ease-out"
+                        style={{
+                          backgroundColor: someoneIsHovered && !isHovered ? '#D1D5DB' : '#000000',
+                          color: someoneIsHovered && !isHovered ? '#000000' : '#FFFFFF',
+                          opacity: someoneIsHovered && !isHovered ? 0.3 : 1,
+                          borderRadius: '0px'
+                        }}
+                      >
+                        <span className="px-4 text-base">{getDisplayTitle()}</span>
+                      </div>
+                    </Link>
+                  </div>
                 )
               })
             )}
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </>
   )
 }

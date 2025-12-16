@@ -137,25 +137,112 @@ export default function TestPage() {
     <div className="h-screen w-full bg-[#D1D5DB] relative overflow-hidden">
       {/* CSS for swaying animation - only active before first video */}
       <style jsx>{`
-        @keyframes sway {
+        /* Leftmost buttons - stretch when moving left, compress when hitting left boundary */
+        @keyframes sway-left {
           0% {
-            transform: translateX(calc(var(--sway-distance) * -1)) scaleX(1);
+            transform: translateX(0px);
+            width: 200px;
+            transform-origin: left center;
           }
+          /* Moving left - stretch */
           20% {
-            transform: translateX(calc(var(--sway-distance) * -0.5)) scaleX(0.95);
+            transform: translateX(calc(var(--sway-distance) * -1));
+            width: calc(200px + var(--stretch-amount));
+            transform-origin: left center;
           }
+          /* Hit left boundary - compress from right */
+          25% {
+            transform: translateX(calc(var(--sway-distance) * -1));
+            width: calc(200px + var(--stretch-amount) * 0.5);
+            transform-origin: right center;
+          }
+          /* Moving right - normal */
           50% {
-            transform: translateX(var(--sway-distance)) scaleX(1);
+            transform: translateX(var(--sway-distance));
+            width: 200px;
+            transform-origin: center center;
           }
-          80% {
-            transform: translateX(calc(var(--sway-distance) * -0.5)) scaleX(0.95);
+          /* Moving right - slight stretch */
+          70% {
+            transform: translateX(var(--sway-distance) * 0.5);
+            width: calc(200px + var(--stretch-amount) * 0.3);
+            transform-origin: right center;
           }
+          /* Back to center */
           100% {
-            transform: translateX(calc(var(--sway-distance) * -1)) scaleX(1);
+            transform: translateX(0px);
+            width: 200px;
+            transform-origin: left center;
           }
         }
-        .sway-button {
-          animation: sway 4s ease-in-out infinite;
+
+        /* Rightmost buttons - stretch when moving right, compress when hitting right boundary */
+        @keyframes sway-right {
+          0% {
+            transform: translateX(0px);
+            width: 200px;
+            transform-origin: right center;
+          }
+          /* Moving left - slight stretch */
+          20% {
+            transform: translateX(calc(var(--sway-distance) * -0.5));
+            width: calc(200px + var(--stretch-amount) * 0.3);
+            transform-origin: left center;
+          }
+          /* Moving right - normal */
+          50% {
+            transform: translateX(var(--sway-distance));
+            width: 200px;
+            transform-origin: center center;
+          }
+          /* Moving right - stretch */
+          70% {
+            transform: translateX(var(--sway-distance));
+            width: calc(200px + var(--stretch-amount));
+            transform-origin: right center;
+          }
+          /* Hit right boundary - compress from left */
+          75% {
+            transform: translateX(var(--sway-distance));
+            width: calc(200px + var(--stretch-amount) * 0.5);
+            transform-origin: left center;
+          }
+          /* Back to center */
+          100% {
+            transform: translateX(0px);
+            width: 200px;
+            transform-origin: right center;
+          }
+        }
+
+        /* Middle buttons - balanced sway */
+        @keyframes sway-middle {
+          0%, 100% {
+            transform: translateX(0px);
+            width: 200px;
+          }
+          25% {
+            transform: translateX(calc(var(--sway-distance) * -1));
+            width: calc(200px + var(--stretch-amount) * 0.6);
+          }
+          50% {
+            transform: translateX(0px);
+            width: 200px;
+          }
+          75% {
+            transform: translateX(var(--sway-distance));
+            width: calc(200px + var(--stretch-amount) * 0.6);
+          }
+        }
+
+        .sway-button-left {
+          animation: sway-left 6s ease-in-out infinite;
+        }
+        .sway-button-right {
+          animation: sway-right 6s ease-in-out infinite;
+        }
+        .sway-button-middle {
+          animation: sway-middle 6s ease-in-out infinite;
         }
       `}</style>
       {/* Background video container - full screen - horizontal carousel */}
@@ -209,7 +296,7 @@ export default function TestPage() {
 
       {/* Header with M Logo and Buttons */}
       <div
-        className="absolute left-0 w-full z-50 transition-all duration-[900ms] ease-out"
+        className="fixed left-0 w-full z-50 transition-all duration-[900ms] ease-out"
         style={{
           top: `${logoTopPosition}px`,
           paddingLeft: '100px', // Align with text bubbles (80px padding + 20px offset)
@@ -333,22 +420,43 @@ export default function TestPage() {
                   }, 50)
                 }
 
-                // Calculate sway distance - buttons further from center sway more
-                // Projects are typically 5-6, so middle index is around 2-3
-                // Movement from left to right with squish animation to prevent touching
-                const middleIndex = Math.floor(projects.length / 2)
-                const distanceFromMiddle = Math.abs(index - middleIndex)
-                const swayDistance = (distanceFromMiddle + 1) * 12 // 12px, 24px, 36px - smooth flow with safe spacing
+                // Determine button position and animation behavior
+                const totalButtons = projects.length
+                const leftThird = Math.floor(totalButtons / 3)
+                const rightThird = totalButtons - Math.floor(totalButtons / 3)
+
+                // Determine which animation to use based on position
+                let animationClass = ''
+                let swayDistance = 20
+                let stretchAmount = 0
+
+                if (index < leftThird) {
+                  // Leftmost buttons - stretch more when moving left
+                  animationClass = 'sway-button-left'
+                  swayDistance = 30 + (leftThird - index) * 10
+                  stretchAmount = 40 + (leftThird - index) * 20
+                } else if (index >= rightThird) {
+                  // Rightmost buttons - stretch more when moving right
+                  animationClass = 'sway-button-right'
+                  swayDistance = 30 + (index - rightThird) * 10
+                  stretchAmount = 40 + (index - rightThird) * 20
+                } else {
+                  // Middle buttons - balanced
+                  animationClass = 'sway-button-middle'
+                  swayDistance = 20
+                  stretchAmount = 30
+                }
 
                 return (
                   <div
                     key={`${project.slug}-${index}`}
-                    className={`flex-shrink-0 relative ${currentVideoIndex === null ? 'sway-button' : ''}`}
+                    className={`flex-shrink-0 relative ${currentVideoIndex === null ? animationClass : ''}`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                     style={{
                       '--sway-distance': `${swayDistance}px`,
-                      animationDelay: `${index * 0.1}s`
+                      '--stretch-amount': `${stretchAmount}px`,
+                      animationDelay: `${index * 0.15}s`
                     } as React.CSSProperties}
                   >
                     {/* Title bubble - only changes width, not height - STAYS AT FIXED POSITION */}
@@ -368,10 +476,8 @@ export default function TestPage() {
                           opacity: someoneIsHovered && !isHovered ? 0.3 : 1
                         }}
                       >
-                        {/* Hide text until first video appears */}
-                        {currentVideoIndex !== null && (
-                          <span className="px-4 text-base">{getDisplayTitle()}</span>
-                        )}
+                        {/* Show text always */}
+                        <span className="px-4 text-base">{getDisplayTitle()}</span>
                       </div>
                     </Link>
                   </div>

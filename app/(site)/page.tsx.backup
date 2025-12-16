@@ -1,0 +1,661 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+import { ProjectCard } from '@/components/composition/ProjectCard'
+import { MobileProjectCard } from '@/components/composition/MobileProjectCard'
+import { ProjectCardSkeleton } from '@/components/composition/ProjectCardSkeleton'
+import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
+import { CarouselMedia } from '@/components/shared/CarouselMedia'
+import { getProjects } from '@/lib/content'
+import { siteSettings } from '@/config/siteSettings'
+import type { Project } from '@/types/content'
+import { useHover } from '@/contexts/HoverContext'
+
+export default function HomePage() {
+  const [projects, setProjects] = useState<Project[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const { hoverArea, setHoverArea } = useHover() // Use context for hoverArea
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(-1) // -1 = collapsed, 0+ = expanded for mobile carousel
+  const [dragProgress, setDragProgress] = useState(0)
+  const [headerTopPosition, setHeaderTopPosition] = useState(71) // Track header vertical position in real-time (moved up 4px from 75)
+  const [isAnimating, setIsAnimating] = useState(false) // Track if in momentum animation
+  const [viewportHeight, setViewportHeight] = useState(0) // Track viewport height for dynamic calculations
+  const [logoState, setLogoState] = useState<0 | 1 | 2 | 3>(0)
+  const mobileCarouselTouchStart = useRef<{ y: number; time: number; startIndex: number } | null>(null)
+  const isDragging = useRef(false)
+  const dragDirection = useRef<'up' | 'down' | null>(null)
+  const lastTouchY = useRef<number>(0)
+  const lastTouchTime = useRef<number>(0)
+
+  useEffect(() => {
+    // Reset hover state to home state when component mounts
+    setHoverArea(null)
+
+    // Simulate loading time for the cool skeleton effect
+    const loadProjects = async () => {
+      const projectsData = getProjects()
+
+      // Add a minimum loading time to show the skeleton animation
+      await new Promise(resolve => setTimeout(resolve, 2000))
+
+      setProjects(projectsData)
+      setIsLoading(false)
+    }
+
+    loadProjects()
+  }, [setHoverArea])
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768) // Standard mobile breakpoint
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Track viewport height for dynamic image sizing
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      setViewportHeight(window.innerHeight)
+    }
+
+    updateViewportHeight()
+    window.addEventListener('resize', updateViewportHeight)
+    return () => window.removeEventListener('resize', updateViewportHeight)
+  }, [])
+
+  // Handle wheel events for horizontal scrolling - Desktop only
+  useEffect(() => {
+    if (isMobile) return // Skip on mobile
+
+    const handleWheel = (e: WheelEvent) => {
+      // Always prevent default to stop vertical scrolling on homepage
+      e.preventDefault()
+      e.stopPropagation()
+
+      // Check if carousel ref exists
+      if (!carouselRef.current) return
+
+      // Convert vertical scroll to horizontal scroll
+      const scrollAmount = e.deltaY * 2
+      carouselRef.current.scrollLeft += scrollAmount
+    }
+
+    // Add wheel listener to both carousel and document for full page coverage
+    const carouselElement = carouselRef.current
+
+    if (carouselElement) {
+      carouselElement.addEventListener('wheel', handleWheel, { passive: false })
+    }
+
+    // Always add document listener for page-wide scrolling
+    document.addEventListener('wheel', handleWheel, { passive: false })
+
+    return () => {
+      if (carouselElement) {
+        carouselElement.removeEventListener('wheel', handleWheel)
+      }
+      document.removeEventListener('wheel', handleWheel)
+    }
+  }, [isLoading, projects, isMobile]) // Re-run when data is loaded
+
+  // Unified touch handling for mobile carousel (only on mobile)
+  useEffect(() => {
+    if (!isMobile) return
+
+    const handleTouchStart = (e: TouchEvent) => {
+      setIsAnimating(false)
+      mobileCarouselTouchStart.current = {
+        y: e.touches[0].clientY,
+        time: Date.now(),
+        startIndex: selectedIndex
+      }
+      isDragging.current = true
+      dragDirection.current = null
+      setDragProgress(0)
+      lastTouchY.current = e.touches[0].clientY
+      lastTouchTime.current = Date.now()
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!mobileCarouselTouchStart.current || !isDragging.current) return
+
+      const currentY = e.touches[0].clientY
+      const dragDistance = mobileCarouselTouchStart.current.y - currentY
+      const dragThreshold = 150
+
+      lastTouchY.current = currentY
+      lastTouchTime.current = Date.now()
+
+      if (Math.abs(dragDistance) > 10) {
+        dragDirection.current = dragDistance > 0 ? 'up' : 'down'
+      }
+
+      const progress = Math.max(0, Math.min(1, Math.abs(dragDistance) / dragThreshold))
+      setDragProgress(progress)
+
+      if (selectedIndex === -1) {
+        if (dragDistance > 0) {
+          if (dragDistance < 50) {
+            const mixProgress = dragDistance / 50
+            setLogoState(mixProgress > 0.5 ? 1 : 0)
+          } else if (dragDistance < 100) {
+            const mixProgress = (dragDistance - 50) / 50
+            setLogoState(mixProgress > 0.5 ? 2 : 1)
+          } else {
+            setLogoState(3)
+          }
+          const newTop = Math.max(15, 71 - (dragDistance / 150) * 56)
+          setHeaderTopPosition(newTop)
+        } else {
+          setLogoState(0)
+          setHeaderTopPosition(71)
+        }
+      } else if (selectedIndex === 0) {
+        if (dragDistance < 0) {
+          const absDist = Math.abs(dragDistance)
+          if (absDist < 50) {
+            const mixProgress = absDist / 50
+            setLogoState(mixProgress > 0.5 ? 2 : 3)
+          } else if (absDist < 100) {
+            const mixProgress = (absDist - 50) / 50
+            setLogoState(mixProgress > 0.5 ? 1 : 2)
+          } else {
+            setLogoState(0)
+          }
+          const newTop = Math.min(71, 15 + (absDist / 150) * 56)
+          setHeaderTopPosition(newTop)
+        } else {
+          setLogoState(3)
+          setHeaderTopPosition(15)
+        }
+      } else {
+        setLogoState(3)
+        setHeaderTopPosition(15)
+      }
+    }
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!mobileCarouselTouchStart.current) return
+
+      isDragging.current = false
+      const touchEnd = e.changedTouches[0].clientY
+      const distance = mobileCarouselTouchStart.current.y - touchEnd
+      const timeDiff = Date.now() - mobileCarouselTouchStart.current.time
+      const velocity = distance / timeDiff
+      const swipeThreshold = 50
+      const velocityThreshold = 0.3
+      const isSwipe = Math.abs(distance) > swipeThreshold || Math.abs(velocity) > velocityThreshold
+
+      setIsAnimating(true)
+
+      if (isSwipe && distance > 0) {
+        if (selectedIndex === -1) {
+          setDragProgress(0)
+          requestAnimationFrame(() => {
+            setSelectedIndex(0)
+            setLogoState(3)
+            setHeaderTopPosition(15)
+            setTimeout(() => setIsAnimating(false), 500)
+          })
+        } else if (selectedIndex < projects.length - 1) {
+          setDragProgress(0)
+          requestAnimationFrame(() => {
+            setSelectedIndex(prev => prev + 1)
+            setTimeout(() => setIsAnimating(false), 500)
+          })
+        } else {
+          setDragProgress(0)
+          setIsAnimating(false)
+        }
+      } else if (isSwipe && distance < 0) {
+        if (selectedIndex > 0) {
+          setDragProgress(0)
+          requestAnimationFrame(() => {
+            setSelectedIndex(prev => prev - 1)
+            setTimeout(() => setIsAnimating(false), 500)
+          })
+        } else if (selectedIndex === 0) {
+          setDragProgress(0)
+          requestAnimationFrame(() => {
+            setSelectedIndex(-1)
+            setLogoState(0)
+            setHeaderTopPosition(71)
+            setTimeout(() => setIsAnimating(false), 500)
+          })
+        }
+      } else {
+        if (selectedIndex === -1) {
+          setLogoState(0)
+          setHeaderTopPosition(71)
+        } else {
+          setLogoState(3)
+          setHeaderTopPosition(15)
+        }
+        setDragProgress(0)
+        setIsAnimating(false)
+      }
+
+      mobileCarouselTouchStart.current = null
+    }
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+    document.addEventListener('touchmove', handleTouchMove, { passive: true })
+    document.addEventListener('touchend', handleTouchEnd, { passive: true })
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart)
+      document.removeEventListener('touchmove', handleTouchMove)
+      document.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [isMobile, selectedIndex, projects.length])
+
+  // Generate skeleton placeholders
+  const skeletonCount = 6 // Show 6 skeleton cards while loading
+
+  // Carousel helper functions (for mobile carousel)
+  const handleThumbnailClick = (index: number, project: Project) => {
+    if (selectedIndex === index) {
+      // Second tap on already selected card: navigate to project page
+      window.location.href = `/work/${project.slug}`
+    } else {
+      // First tap: select this card and shrink header
+      setSelectedIndex(index)
+      setLogoState(3)
+      setHeaderTopPosition(20)
+    }
+  }
+
+  const getButtonsMarginTop = () => {
+    if (logoState === 0) return '0px'
+    if (logoState === 1) return '0px'
+    if (logoState === 3) return '-150px'
+    return '-75px'
+  }
+
+  const getButtonHeight = () => {
+    if (logoState === 0) return '36px'
+    if (logoState === 1) return '36px'
+    if (logoState === 3) return '0px'
+    return '18px'
+  }
+
+  const getButtonGap = () => {
+    if (logoState === 0) return '16px'
+    if (logoState === 1) return '16px'
+    if (logoState === 3) return '0px'
+    return '8px'
+  }
+
+  const getButtonOpacity = () => {
+    if (logoState === 0) return 1
+    if (logoState === 1) return 1
+    if (logoState === 3) return 0
+    return 0.5
+  }
+
+  const getHeaderHeight = () => {
+    const logoState0Height = 534
+    const logoState1Height = 454
+    const logoState2Height = 292
+    const logoState3Height = 130
+
+    let currentLogoHeight = logoState1Height
+    if (logoState === 0) currentLogoHeight = logoState0Height
+    if (logoState === 1) currentLogoHeight = logoState1Height
+    if (logoState === 2) currentLogoHeight = logoState2Height
+    if (logoState === 3) currentLogoHeight = logoState3Height
+
+    if (logoState === 0) {
+      return currentLogoHeight - 100
+    } else if (logoState === 1) {
+      return currentLogoHeight - 100
+    } else if (logoState === 2) {
+      return currentLogoHeight - 40
+    } else {
+      return currentLogoHeight - 20
+    }
+  }
+
+  const getTextBarHeight = () => {
+    return 36 // pixels - match About/Contact button height
+  }
+
+  const getImageHeight = () => {
+    if (viewportHeight === 0) return '0px' // Wait for viewport height to be set
+
+    const textBubbleHeight = 36
+    const gapBetweenImageAndBubble = 7
+    const topMargin = 12 // Match left/right margins
+    const maxHeightPx = viewportHeight - textBubbleHeight - gapBetweenImageAndBubble - topMargin
+
+    // Images are always at full height when visible
+    return `${maxHeightPx}px`
+  }
+
+
+  // Mobile carousel rendering (complete carousel from /complete)
+  if (isMobile) {
+    return (
+      <div className="h-screen w-full relative overflow-hidden bg-[#D1D5DB]">
+        {/* Header with M Logo and Buttons - floating on top, no background */}
+        <div
+          className="absolute left-0 w-full z-20 pointer-events-none"
+          style={{
+            top: `${headerTopPosition}px`,
+            height: `${getHeaderHeight()}px`,
+            paddingTop: '12px',
+            paddingBottom: '8px',
+            paddingLeft: '30px',
+            paddingRight: '32px',
+            transition: isDragging.current ? 'none' : 'top 500ms ease-out'
+          }}
+        >
+          <div className="flex items-center justify-start gap-8 pointer-events-auto">
+            <div className="flex items-center gap-8 max-w-full">
+              {/* M Logo - white when over image, black when over gray, click to collapse */}
+              <div
+                className="flex-shrink-0 cursor-pointer"
+                onClick={() => {
+                  setSelectedIndex(-1)
+                  setLogoState(0)
+                  setHeaderTopPosition(71)
+                }}
+              >
+                <MorphingHeaderLogo
+                  state={logoState}
+                  className="transition-all duration-500 ease-out"
+                  style={{
+                    width: '205px',
+                    height: 'auto',
+                    filter: selectedIndex !== -1 ? 'invert(1) brightness(2)' : 'none'
+                  }}
+                />
+              </div>
+
+              {/* About/Contact buttons */}
+              <div
+                className="flex flex-col flex-shrink-0 transition-all duration-500 ease-out"
+                style={{
+                  marginTop: getButtonsMarginTop(),
+                  gap: getButtonGap()
+                }}
+              >
+                <Link
+                  href="/about"
+                  className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
+                  style={{
+                    border: 'none',
+                    padding: '0 1rem',
+                    borderRadius: '0px',
+                    height: getButtonHeight(),
+                    opacity: getButtonOpacity(),
+                    maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                    WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
+                  }}
+                >
+                  about
+                </Link>
+
+                <Link
+                  href="/contact"
+                  className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
+                  style={{
+                    border: 'none',
+                    padding: '0 1rem',
+                    borderRadius: '0px',
+                    height: getButtonHeight(),
+                    opacity: getButtonOpacity(),
+                    maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                    WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
+                  }}
+                >
+                  contact
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Carousel - takes full screen height */}
+        <div className="h-full w-full relative overflow-hidden">
+          {/* Swipeable image container */}
+          <div
+            className="absolute left-0 w-full"
+            style={{
+              top: '12px',
+              paddingLeft: '12px',
+              paddingRight: '12px'
+            }}
+          >
+              {projects.map((project, index) => {
+                const hasReel = !!project.reel
+                const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
+                  ? project.thumbnails[0]
+                  : project.cover)
+
+                const fallbackImage = project.thumbnails && project.thumbnails.length > 0
+                  ? project.thumbnails[0]
+                  : project.cover
+
+                const imageHeight = getImageHeight()
+
+                let translateYPx = 0
+
+                if (selectedIndex === -1) {
+                  if (index === 0) {
+                    translateYPx = viewportHeight
+                    if (isDragging.current && dragDirection.current === 'up' && dragProgress > 0) {
+                      translateYPx = viewportHeight * (1 - dragProgress)
+                    }
+                  } else {
+                    return null
+                  }
+                } else {
+                  const cardSpacing = viewportHeight > 0 ? viewportHeight + 50 : 1000
+                  translateYPx = (index - selectedIndex) * cardSpacing
+
+                  if (isDragging.current && dragProgress > 0 && dragDirection.current) {
+                    if (dragDirection.current === 'up') {
+                      translateYPx -= dragProgress * cardSpacing
+                    } else if (dragDirection.current === 'down') {
+                      translateYPx += dragProgress * cardSpacing
+                    }
+                  }
+
+                  const isNearVisible = Math.abs(index - selectedIndex) <= 1
+                  if (!isNearVisible) return null
+                }
+
+                return (
+                  <div
+                    key={`${project.slug}-${index}`}
+                    className="absolute top-0 left-0 w-full cursor-pointer"
+                    style={{
+                      transform: `translateY(${translateYPx}px)`,
+                      transition: isDragging.current ? 'none' : 'transform 0.5s ease-out',
+                      paddingLeft: '12px',
+                      paddingRight: '12px'
+                    }}
+                    onClick={() => handleThumbnailClick(index, project)}
+                  >
+                    <div
+                      className="relative overflow-hidden"
+                      style={{
+                        height: imageHeight,
+                        borderTopLeftRadius: '24px',
+                        borderBottomLeftRadius: '24px',
+                        borderTopRightRadius: '0px',
+                        borderBottomRightRadius: '0px',
+                        width: '100%',
+                        transition: isDragging.current ? 'none' : 'height 0.5s ease-out'
+                      }}
+                    >
+                      {imageHeight !== '0px' && displayMedia && (
+                        <CarouselMedia
+                          media={displayMedia}
+                          fallbackImage={hasReel ? fallbackImage : undefined}
+                          isVisible={index === selectedIndex}
+                          isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
+                          className="object-cover"
+                          alt={project.title}
+                          priority={index === 0}
+                        />
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+          {/* Text bubbles - vertical circles on right side, 50px from edge, anchored to bottom */}
+          <div
+            className="absolute flex flex-col-reverse overflow-visible transition-all duration-1000 ease-out z-30"
+            style={{
+              bottom: '54.4px', // Match the bottom padding from original design
+              right: '50px',
+              gap: '16px'
+            }}
+          >
+            {projects.map((project, index) => {
+              const isSelected = selectedIndex === index
+              const circleSize = 36 // Match About/Contact button height
+
+              return (
+                <div
+                  key={`${project.slug}-${index}`}
+                  className="cursor-pointer flex-shrink-0 flex justify-end items-center transition-all duration-1000 ease-out"
+                  onClick={() => handleThumbnailClick(index, project)}
+                  style={{
+                    height: `${circleSize}px`
+                  }}
+                >
+                  <div
+                    className="font-ui flex items-center justify-end transition-all duration-1000 ease-out"
+                    style={{
+                      height: `${circleSize}px`,
+                      width: isSelected ? 'auto' : `${circleSize}px`, // Auto width to fit text, else square
+                      paddingLeft: isSelected ? '16px' : '0px',
+                      paddingRight: isSelected ? '29px' : '0px', // 25px buffer + 4px original padding
+                      fontSize: '0.85em',
+                      fontWeight: 'normal',
+                      borderRadius: '0px', // Sharp corners
+                      backgroundColor: isSelected ? 'white' : 'black',
+                      color: isSelected ? 'black' : 'white',
+                      overflow: 'visible',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    {isSelected && <span style={{ paddingRight: '12px' }}>{project.title}</span>}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Desktop rendering
+  return (
+    <div className="h-full flex flex-col">
+      {/* Projects Horizontal Row Section - Takes remaining space between header and footer */}
+      <section
+        className="flex-1 flex flex-col overflow-hidden min-h-0 px-20 xl:px-[100px] relative transition-all duration-500 ease-out"
+        style={{
+          marginTop: (hoverArea === 'card' || hoverArea === 'textbox') ? '40px' : '0px',
+          marginBottom: '10px' // Small bottom margin matching top border
+        }}
+      >
+        <div className="w-full max-w-[2000px] flex-1 flex flex-col justify-start min-h-0">
+          {/* Single row with horizontal scroll - shows about 4 projects at once */}
+          <div
+            ref={carouselRef}
+            className="flex overflow-x-auto flex-1 items-end min-h-0 scrollbar-hide"
+            style={{
+              gap: '0.6rem', // 4x wider: 0.15rem * 4 = 0.6rem
+              paddingBottom: '10px' // Small bottom padding matching top border
+            }}
+          >
+            {isLoading ? (
+              // Show skeleton loading animation
+              Array.from({ length: skeletonCount }).map((_, index) => (
+                <ProjectCardSkeleton key={`skeleton-${index}`} index={index} />
+              ))
+            ) : (
+              // Show actual project cards with fade-in animation
+              projects.map((project, index) => {
+                const totalCards = projects.length
+                const isHovered = hoveredIndex === index
+                const someoneIsHovered = hoveredIndex !== null
+                const distance = hoveredIndex !== null ? Math.abs(index - hoveredIndex) : 0
+
+                const handleMouseEnter = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  setHoveredIndex(index)
+                  setHoverArea('card') // Card state: hovering over photo card
+                }
+
+                const handleMouseLeave = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  hoverTimeoutRef.current = setTimeout(() => {
+                    setHoveredIndex(null)
+                    setHoverArea(null) // Return to home state
+                  }, 50)
+                }
+
+                const handleTextboxAreaEnter = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  setHoveredIndex(index)
+                  setHoverArea('textbox') // Textbox state: hovering over text box
+                }
+
+                const handleTextboxAreaLeave = () => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current)
+                  }
+                  hoverTimeoutRef.current = setTimeout(() => {
+                    setHoveredIndex(null)
+                    setHoverArea(null) // Return to home state
+                  }, 50)
+                }
+
+                return (
+                  <ProjectCard
+                    key={`${project.slug}-${index}`}
+                    project={project}
+                    index={index}
+                    isHovered={isHovered}
+                    someoneIsHovered={someoneIsHovered}
+                    distanceFromHovered={distance}
+                    totalCards={totalCards}
+                    hoverArea={hoverArea}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onTextboxAreaEnter={handleTextboxAreaEnter}
+                    onTextboxAreaLeave={handleTextboxAreaLeave}
+                  />
+                )
+              })
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}

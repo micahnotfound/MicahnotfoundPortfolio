@@ -7,15 +7,16 @@ import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
+import { useMobile } from '@/contexts/MobileContext'
 
 export default function DreamingWithTheArchivesPage() {
   const router = useRouter()
+  const { isMobile } = useMobile() // Use global mobile detection
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200) // Better initial estimate for text height
   const [isMounted, setIsMounted] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [swipeProgress, setSwipeProgress] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const touchStartRef = useRef<{ y: number; time: number } | null>(null)
@@ -23,15 +24,7 @@ export default function DreamingWithTheArchivesPage() {
   const [hoveredHeroImage, setHoveredHeroImage] = useState<number | null>(null) // Track which hero image is hovered (0, 1, or 2)
   const textRef = useRef<HTMLDivElement>(null)
 
-  // Detect mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  // Mobile detection now handled by global MobileContext
 
   // Track viewport height (only for desktop)
   useEffect(() => {
@@ -310,7 +303,7 @@ export default function DreamingWithTheArchivesPage() {
                 style={{
                   width: '205px',
                   height: 'auto',
-                  filter: 'invert(1) brightness(2)'
+                  filter: 'none'
                 }}
               />
             </div>
@@ -408,7 +401,9 @@ export default function DreamingWithTheArchivesPage() {
   // When no hover: all equal at 33.33% each
   const getHeroImageFlex = (index: number): number => {
     if (hoveredHeroImage === null) {
-      return 1 // Equal distribution when no hover
+      // Bottom photo (index 2) is twice as tall as others
+      if (index === 2) return 2
+      return 1 // Top and middle photos equal size
     }
 
     if (hoveredHeroImage === index) {
@@ -658,7 +653,7 @@ export default function DreamingWithTheArchivesPage() {
             style={{
               flexBasis: '100%',
               borderRadius: '24px',
-              height: '600px'
+              height: '1200px'
             }}
           >
             <Media
@@ -671,7 +666,7 @@ export default function DreamingWithTheArchivesPage() {
       </div>
 
       {/* Spacer to enable scrolling - creates document height */}
-      <div style={{ height: '1948px' }} aria-hidden="true" />
+      <div style={{ height: '2548px' }} aria-hidden="true" />
     </div>
   )
 }

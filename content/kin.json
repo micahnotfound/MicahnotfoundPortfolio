@@ -1,0 +1,49 @@
+{
+  "slug": "kin",
+  "title": "Kin Festival",
+  "year": "2025",
+  "role": "Art Director & Exhibition Lead",
+  "client": "Kinfolk",
+  "summary": "Festival celebration capturing community and connection",
+  "description": "Kin Festival is a celebration of community, connection, and culture. Through immersive experiences and artistic expression, the festival brings people together to explore themes of identity, belonging, and shared humanity.",
+  "technologies": ["Photography", "Event Production", "Community Engagement"],
+  "elements": [
+    {
+      "name": "Gallery",
+      "gallery": [
+        {
+          "public_id": "v1765922400/KIN_Reel_tfv4qr",
+          "kind": "video",
+          "alt": "Kin Festival video reel"
+        },
+        {
+          "public_id": "v1765922612/PreservationPark_Mocks_fp2i3e",
+          "kind": "image",
+          "alt": "Kin Festival Preservation Park"
+        },
+        {
+          "public_id": "v1765920441/DSC_1445_ecalzy",
+          "kind": "image",
+          "alt": "Kin Festival"
+        }
+      ]
+    }
+  ],
+  "thumbnails": [
+    {
+      "public_id": "v1765922612/PreservationPark_Mocks_fp2i3e",
+      "kind": "image",
+      "alt": "Kin Festival thumbnail"
+    }
+  ],
+  "reel": {
+    "public_id": "v1765922400/KIN_Reel_tfv4qr",
+    "kind": "video",
+    "alt": "Kin Festival video reel"
+  },
+  "cover": {
+    "public_id": "v1765922612/PreservationPark_Mocks_fp2i3e",
+    "kind": "image",
+    "alt": "Kin Festival cover"
+  }
+}

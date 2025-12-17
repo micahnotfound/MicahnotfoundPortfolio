@@ -441,7 +441,7 @@ export default function NYCAMPage() {
 
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="fixed left-0"
+        className="absolute left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',

@@ -398,18 +398,9 @@ export default function MomaPage() {
       )}
 
       <div className="min-h-screen bg-[#D1D5DB]">
-      {/* Fixed Header */}
-      <div
-        className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
-        style={{
-          height: '110px',
-          zIndex: 2
-        }}
-      />
-
       {/* M Logo */}
       <div
-        className="fixed left-0"
+        className="absolute left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',

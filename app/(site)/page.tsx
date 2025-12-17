@@ -35,7 +35,7 @@ export default function HomePage() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number | null>(null)
   const [previousVideoIndex, setPreviousVideoIndex] = useState<number | null>(null)
   const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null)
-  const [logoTopPosition, setLogoTopPosition] = useState(80)
+  const [logoTopPosition, setLogoTopPosition] = useState(145)
   const [isMouseNearLogo, setIsMouseNearLogo] = useState(false)
   const [hasEverHovered, setHasEverHovered] = useState(false)
 
@@ -104,14 +104,14 @@ export default function HomePage() {
   useEffect(() => {
     if (currentVideoIndex === null) {
       setLogoState(0)
-      setLogoTopPosition(80)
+      setLogoTopPosition(145)
     } else {
       if (isMouseNearLogo) {
         setLogoState(0)
-        setLogoTopPosition(80)
+        setLogoTopPosition(100)
       } else {
         setLogoState(3)
-        setLogoTopPosition(20)
+        setLogoTopPosition(60)
       }
     }
   }, [currentVideoIndex, isMouseNearLogo])
@@ -521,10 +521,7 @@ export default function HomePage() {
                     className="relative overflow-hidden"
                     style={{
                       height: imageHeight,
-                      borderTopLeftRadius: '24px',
-                      borderBottomLeftRadius: '24px',
-                      borderTopRightRadius: '0px',
-                      borderBottomRightRadius: '0px',
+                      borderRadius: '24px',
                       width: '100%',
                       transition: isDragging.current ? 'none' : 'height 0.5s ease-out'
                     }}
@@ -650,6 +647,13 @@ export default function HomePage() {
 
                 const shouldRender = Math.abs(index - currentVideoIndex) <= 1
 
+                // Set custom focal point for specific projects
+                const getObjectPosition = () => {
+                  if (project.slug === 'moma') return 'center 30%'
+                  // All other videos use 20% from top
+                  return 'center 20%'
+                }
+
                 return (
                   <div
                     key={`video-${index}`}
@@ -674,6 +678,7 @@ export default function HomePage() {
                           className="object-cover"
                           alt={project.title}
                           priority={index === 0}
+                          objectPosition={getObjectPosition()}
                         />
                       )}
                     </div>

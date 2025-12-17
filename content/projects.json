@@ -1,14 +1,5 @@
 [
   {
-    "slug": "kin",
-    "title": "Kin Festival",
-    "year": "2025",
-    "role": "Art Director & Exhibition Lead",
-    "client": "Kinfolk",
-    "summary": "Festival celebration capturing community and connection",
-    "file": "kin.json"
-  },
-  {
     "slug": "moma",
     "title": "MoMA",
     "year": "2/21",
@@ -16,6 +7,15 @@
     "client": "Museum of Modern Art",
     "summary": "Five-part installation reimagining the role of monuments in public space",
     "file": "moma.json"
+  },
+  {
+    "slug": "kin",
+    "title": "KIN Festival",
+    "year": "2025",
+    "role": "Art Director & Exhibition Lead",
+    "client": "Kinfolk",
+    "summary": "Festival celebration capturing community and connection",
+    "file": "kin.json"
   },
   {
     "slug": "blacklands",

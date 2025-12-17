@@ -180,8 +180,8 @@ export default function KinPage() {
   const exhibitionPhoto4 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 4" }
 
   const videoPublicId = "v1765922400/KIN_Reel_tfv4qr"
-  const projectTitle = "Kin Festival"
-  const projectDescription = "Kin Festival is a celebration of community, connection, and culture. Through immersive experiences and artistic expression, the festival brings people together to explore themes of identity, belonging, and shared humanity."
+  const projectTitle = "KIN Festival"
+  const projectDescription = "KIN Festival is a celebration of community, connection, and culture. Through immersive experiences and artistic expression, the festival brings people together to explore themes of identity, belonging, and shared humanity."
 
   // Mobile gallery images
   const mobileGalleryImages = [
@@ -364,15 +364,7 @@ export default function KinPage() {
 
       <div className="min-h-screen bg-[#D1D5DB]">
       <div
-        className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
-        style={{
-          height: '110px',
-          zIndex: 2
-        }}
-      />
-
-      <div
-        className="fixed left-0"
+        className="absolute left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',

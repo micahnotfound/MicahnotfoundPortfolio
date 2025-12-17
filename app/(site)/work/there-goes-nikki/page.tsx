@@ -420,18 +420,9 @@ export default function ThereGoesNikkiPage() {
 
       {/* Desktop View - hidden below md */}
       <div className="hidden md:block min-h-screen bg-[#D1D5DB]">
-      {/* Fixed Header - full width, z-index 2, always taller than State 3 (130px) */}
-      <div
-        className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
-        style={{
-          height: '110px',
-          zIndex: 2
-        }}
-      />
-
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="fixed left-0"
+        className="absolute left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',
@@ -451,17 +442,15 @@ export default function ThereGoesNikkiPage() {
         </Link>
       </div>
 
-      {/* Content Container - scrolls under header */}
-      <div className="h-screen relative">
+      {/* Content Container - scrolls naturally */}
+      <div className="relative">
         {/* Left column: M width (250px constant) for dividing line and text */}
         <div
-          className="fixed left-0"
+          className="absolute left-0"
           style={{
             paddingLeft: '80px',
             width: '330px', // 80px padding + 250px content
-            height: '100vh',
-            transform: `translateY(-${textScrollOffset}px)`,
-            transition: 'transform 0ms linear'
+            top: `${topMargin}px`
           }}
         >
           {/* Dividing line - z-index 1, aligned to right of M, same width as M */}
@@ -502,15 +491,13 @@ export default function ThereGoesNikkiPage() {
 
         {/* Photo and Video container - flex row layout */}
         <div
-          className="fixed flex"
+          className="absolute flex"
           style={{
             left: '370px', // Starts right after M (80px padding + 250px M width + 40px gap)
             top: `${topMargin}px`,
             right: '80px',
             height: `calc(100vh - ${topMargin + bottomMargin}px)`,
             zIndex: 3,
-            transform: `translateY(-${photoScrollOffset}px)`,
-            transition: 'transform 0ms linear',
             gap: '25px' // Fixed 25px margin between photos and video
           }}
         >
@@ -606,14 +593,12 @@ export default function ThereGoesNikkiPage() {
 
       {/* Exhibition photos section - all rows */}
       <div
-        className="fixed bg-[#D1D5DB] pb-12 space-y-12 left-0 right-0"
+        className="bg-[#D1D5DB] pb-12 space-y-12"
         style={{
-          top: '100vh',
           paddingTop: '52px',
           paddingLeft: '80px',
           paddingRight: '80px',
-          transform: `translateY(-${contentScrollOffset}px)`,
-          transition: 'transform 0ms linear'
+          marginTop: '100vh'
         }}
       >
         {/* Row 1 */}
@@ -682,9 +667,6 @@ export default function ThereGoesNikkiPage() {
           </div>
         </div>
       </div>
-
-      {/* Spacer to enable scrolling - creates document height */}
-      <div style={{ height: '2598px' }} aria-hidden="true" />
       </div>
     </div>
   )

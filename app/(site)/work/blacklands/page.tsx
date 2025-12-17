@@ -428,18 +428,9 @@ export default function BlacklandsPage() {
     <>
       {!isReady && (<div className="fixed inset-0 bg-black z-[9999]" />)}
       <div className="min-h-screen bg-[#D1D5DB]">
-      {/* Fixed Header - full width, z-index 2, always taller than State 3 (130px) */}
-      <div
-        className="fixed top-0 left-0 right-0 bg-[#D1D5DB]"
-        style={{
-          height: '110px',
-          zIndex: 2
-        }}
-      />
-
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="fixed left-0"
+        className="absolute left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',

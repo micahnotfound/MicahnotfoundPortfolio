@@ -28,7 +28,10 @@
       "Bash(npm run build:*)",
       "Bash(grep:*)",
       "Bash(tail:*)",
-      "Bash(git status:*)"
+      "Bash(git status:*)",
+      "Bash(for file in blacklands/page.tsx moma/page.tsx kin/page.tsx nycam/page.tsx dreaming-with-the-archives/page.tsx)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

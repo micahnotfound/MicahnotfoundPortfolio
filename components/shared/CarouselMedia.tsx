@@ -14,6 +14,7 @@ interface CarouselMediaProps {
   className?: string
   alt?: string
   delayVideoTransition?: number // Delay in ms before showing video after becoming visible (desktop homepage only)
+  objectPosition?: string // Custom object-position for focal point (e.g., "center 20%")
 }
 
 export function CarouselMedia({
@@ -24,7 +25,8 @@ export function CarouselMedia({
   priority = false,
   className = '',
   alt,
-  delayVideoTransition = 0
+  delayVideoTransition = 0,
+  objectPosition = 'center center'
 }: CarouselMediaProps) {
   const [videoError, setVideoError] = useState(false)
   const [videoReady, setVideoReady] = useState(false)
@@ -129,7 +131,8 @@ export function CarouselMedia({
           preload={isVisible || isAdjacent ? 'auto' : 'none'}
           style={{
             opacity: shouldShowVideo ? 1 : 0,
-            transition: 'opacity 0.3s ease-in-out'
+            transition: 'opacity 0.3s ease-in-out',
+            objectPosition: objectPosition
           }}
         >
           <source src={buildFullSizeUrl(media)} type="video/mp4" />

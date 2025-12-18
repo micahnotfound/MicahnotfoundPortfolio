@@ -430,7 +430,7 @@ export default function BlacklandsPage() {
       <div className="min-h-screen bg-[#D1D5DB]">
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="absolute left-0"
+        className="fixed left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',
@@ -562,14 +562,17 @@ export default function BlacklandsPage() {
 
       {/* Exhibition photos section - all rows */}
       <div
-        className="fixed bg-[#D1D5DB] pb-12 space-y-12 left-0 right-0"
+        className="fixed bg-[#D1D5DB] pb-12 left-0 right-0"
         style={{
           top: '100vh',
           paddingTop: '52px',
           paddingLeft: '80px',
           paddingRight: '80px',
           transform: `translateY(-${contentScrollOffset}px)`,
-          transition: 'transform 0ms linear'
+          transition: 'transform 0ms linear',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '25px'
         }}
       >
         {/* Row 1 */}
@@ -628,17 +631,12 @@ export default function BlacklandsPage() {
               borderTopLeftRadius: '0px',
               borderBottomLeftRadius: '0px',
               borderTopRightRadius: '0px',
-              borderBottomRightRadius: '0px',
-              aspectRatio: '1/1'
+              borderBottomRightRadius: '0px'
             }}
           >
             <Media
               media={exhibitionPhoto3}
-              className="w-full h-full object-cover"
-              style={{
-                objectFit: 'cover',
-                objectPosition: '15% 50%'
-              }}
+              className="w-full h-auto"
               alt={exhibitionPhoto3.alt}
             />
           </div>
@@ -646,7 +644,7 @@ export default function BlacklandsPage() {
       </div>
 
       {/* Spacer to enable scrolling - creates document height */}
-      <div style={{ height: '1948px' }} aria-hidden="true" />
+      <div style={{ height: '3000px' }} aria-hidden="true" />
     </div>
     </>
   )

@@ -31,7 +31,8 @@
       "Bash(git status:*)",
       "Bash(for file in blacklands/page.tsx moma/page.tsx kin/page.tsx nycam/page.tsx dreaming-with-the-archives/page.tsx)",
       "Bash(do echo \"=== $file ===\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(npx next dev:*)"
     ],
     "deny": [],
     "ask": []

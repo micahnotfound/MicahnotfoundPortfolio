@@ -7,11 +7,12 @@ import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { CarouselMedia } from '@/components/shared/CarouselMedia'
 import { Media } from '@/components/shared/Media'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
+import { useMobile } from '@/contexts/MobileContext'
 
 export default function MomaPage() {
   const router = useRouter()
-  const [isMobile, setIsMobile] = useState(false)
-  const [isReady, setIsReady] = useState(false) // Track when page is ready to show
+  const { isMobile, isLoading } = useMobile() // Use global mobile detection
+  const [isReady, setIsReady] = useState(false)
 
   // Mobile-specific states
   const [swipeProgress, setSwipeProgress] = useState(0) // 0 = video view, 1 = fully swiped to content
@@ -28,18 +29,9 @@ export default function MomaPage() {
   const [isMounted, setIsMounted] = useState(false)
   const textRef = useRef<HTMLDivElement>(null)
 
-  // Detect mobile/desktop
+  // Set ready state after mount
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-
-    // Mark as ready after mobile detection is complete
     setIsReady(true)
-
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   // Desktop: Track viewport height
@@ -204,7 +196,7 @@ export default function MomaPage() {
     { public_id: "v1756680387/Image_Sequence_8_lscign", kind: "image" as const, alt: "David Ruggles profile 4" }
   ]
 
-  const videoPublicId = "BLACKLANDS_reel_vpw5br"
+  const videoPublicId = "v1756685191/Nested_Sequence_02_lwwymc"
   const projectTitle = "MoMA"
   const projectDescription = "Created by Kinfolk for MoMA's New York, New Publics (2023), The Monuments Project was a five-part installation reimagining the role of monuments in public space. The work centered on Black and Brown enclaves across New York City, honoring communities who cultivated safety, resistance, and belonging. Figures such as Seneca Village, the Young Lords, Toussaint Louverture, and David Ruggles were brought to life through archival research and contemporary storytelling. Anchored on raw red maple pedestals, the sculptures invited viewers to reconsider which histories are remembered and how they endure."
 
@@ -218,6 +210,11 @@ export default function MomaPage() {
   const momaReel = { public_id: videoPublicId, kind: "video" as const, alt: "MoMA reel" }
   const displayMedia = momaReel
   const fallbackImage = heroImage1
+
+  // Show loading screen while detecting mobile
+  if (isLoading) {
+    return <div className="fixed inset-0 bg-black z-[9999]" />
+  }
 
   // MOBILE RENDER
   if (isMobile) {
@@ -424,13 +421,11 @@ export default function MomaPage() {
       <div className="h-screen relative">
         {/* Left column */}
         <div
-          className="fixed left-0"
+          className="absolute left-0"
           style={{
             paddingLeft: '80px',
             width: '330px',
-            height: '100vh',
-            transform: `translateY(-${textScrollOffset}px)`,
-            transition: 'transform 0ms linear'
+            height: '100vh'
           }}
         >
           {/* Dividing line */}
@@ -471,15 +466,13 @@ export default function MomaPage() {
 
         {/* Photo and Video container */}
         <div
-          className="fixed flex"
+          className="absolute flex"
           style={{
             left: '370px',
             top: `${topMargin}px`,
             right: '80px',
             height: `calc(100vh - ${topMargin + bottomMargin}px)`,
             zIndex: 3,
-            transform: `translateY(-${photoScrollOffset}px)`,
-            transition: 'transform 0ms linear',
             gap: '25px'
           }}
         >
@@ -521,14 +514,12 @@ export default function MomaPage() {
 
       {/* Exhibition photos section */}
       <div
-        className="fixed bg-[#D1D5DB] pb-12 space-y-12 left-0 right-0"
+        className="bg-[#D1D5DB] pb-12 space-y-12"
         style={{
-          top: '100vh',
           paddingTop: '52px',
           paddingLeft: '80px',
           paddingRight: '80px',
-          transform: `translateY(-${contentScrollOffset}px)`,
-          transition: 'transform 0ms linear'
+          marginTop: '100vh'
         }}
       >
         {/* Row 1 */}
@@ -568,9 +559,6 @@ export default function MomaPage() {
           </div>
         </div>
       </div>
-
-      {/* Spacer */}
-      <div style={{ height: '3244px' }} aria-hidden="true" />
 
       {/* Carousel Section */}
       <div className="w-full" style={{ paddingLeft: '80px', paddingRight: '80px' }}>

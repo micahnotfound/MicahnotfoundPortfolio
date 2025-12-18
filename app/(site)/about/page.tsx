@@ -1,86 +1,80 @@
-import { Metadata } from 'next'
-import { siteSettings } from '@/config/siteSettings'
+'use client'
 
-export const metadata: Metadata = {
-  title: `About - ${siteSettings.siteTitle}`,
-  description: 'Creative strategist specializing in immersive media and XR storytelling, with success in bringing complex cultural and environmental narratives to life.',
-  keywords: ['about', 'creative strategist', 'AR', 'XR', 'immersive', 'storytelling', 'Kinfolk Tech', 'portfolio'],
-  openGraph: {
-    title: `About - ${siteSettings.siteTitle}`,
-    description: 'Creative strategist specializing in immersive media and XR storytelling.',
-    type: 'website',
-  },
-}
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 
 export default function AboutPage() {
-  return (
-    <main className="pt-32">
-      {/* Main Content */}
-      <section className="py-16 px-8">
-        <div className="container-custom max-w-4xl mx-auto">
-          {/* Mobile Layout: Image on top, description below */}
-          <div className="md:hidden space-y-8">
-            {/* Image - Full width on mobile, portrait mode */}
-            <div className="w-full animate-fade-in">
-              <div className="aspect-[3/4] bg-gray-200 overflow-hidden">
-                <img
-                  src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
-                  alt="Micah Milner"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+  const [logoScale, setLogoScale] = useState(1) // Start at normal homepage scale
 
-            {/* Description - Below image on mobile */}
-            <div className="space-y-6">
-              {/* Kinfolk Tech Description */}
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 mb-4 animate-text-reveal" style={{ animationDelay: '0.4s' }}>
-                    Kinfolk Tech leverages over six years of leadership in AR and XR innovation to design award-winning educational and cultural experiences. As Chief Strategy Officer, the focus centers on directing creative vision and strategy for public exhibitions and immersive educational tools. Collaborating with schools, cultural institutions, and global brands, the team curates dynamic digital narratives, extending the reach of underrepresented stories in impactful ways.
-                  </p>
-                  <p className="text-gray-700 animate-text-reveal" style={{ animationDelay: '0.6s' }}>
-                    By managing multidisciplinary teams and fostering cross-sector partnerships, Kinfolk Tech creates engaging digital monuments and exhibitions featured in prestigious spaces like MoMA and Tribeca Festival. The mission is to integrate art, equity, and technology into transformative experiences, reimagining how audiences connect with history and culture. Values of inclusion and collaboration drive efforts to amplify diverse narratives in public and educational contexts.
-                  </p>
-                </div>
-              </div>
-            </div>
+  const aboutText = "Kinfolk Tech leverages over six years of leadership in AR and XR innovation to design award-winning educational and cultural experiences. As Chief Strategy Officer, the focus centers on directing creative vision and strategy for public exhibitions and immersive educational tools. Collaborating with schools, cultural institutions, and global brands, the team curates dynamic digital narratives, extending the reach of underrepresented stories in impactful ways.\n\nBy managing multidisciplinary teams and fostering cross-sector partnerships, Kinfolk Tech creates engaging digital monuments and exhibitions featured in prestigious spaces like MoMA and Tribeca Festival. The mission is to integrate art, equity, and technology into transformative experiences, reimagining how audiences connect with history and culture. Values of inclusion and collaboration drive efforts to amplify diverse narratives in public and educational contexts."
+
+  // Trigger grow animation on mount
+  useEffect(() => {
+    // Small delay to ensure component is mounted before animating
+    const timer = setTimeout(() => {
+      setLogoScale(1.136) // Scale to grow 80px longer (80px / 587px base height ≈ 0.136 additional scale)
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-[#D1D5DB]">
+      {/* M Logo - positioned absolutely like homepage */}
+      <div className="absolute left-0" style={{ top: '145px', paddingLeft: '100px', zIndex: 10 }}>
+        <Link href="/">
+          <div
+            style={{
+              transformOrigin: 'top center',
+              transform: `scaleY(${logoScale})`,
+              transition: 'transform 800ms ease-out'
+            }}
+          >
+            <MorphingHeaderLogo
+              state={0}
+              style={{
+                width: '325px',
+                height: 'auto'
+              }}
+            />
+          </div>
+        </Link>
+      </div>
+
+      <div style={{ paddingTop: '52px', paddingLeft: '100px', paddingRight: '80px' }}>
+        <div className="flex" style={{ gap: '40px' }}>
+          {/* Left side: M logo space */}
+          <div className="flex-shrink-0" style={{ width: '325px' }}>
+            {/* Empty space for M logo */}
           </div>
 
-          {/* Desktop Layout: Side by side with text aligned to bottom */}
-          <div className="hidden md:grid md:grid-cols-3 gap-8">
-            {/* Image Column */}
-            <div className="md:col-span-1 animate-fade-in">
-              <div className="sticky top-24">
-                <div className="aspect-[3/4] bg-gray-200 overflow-hidden">
-                  <img
-                    src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
-                    alt="Micah Milner"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+          {/* Right side: Title, Text, and Photo */}
+          <div className="flex" style={{ gap: '40px', paddingTop: '101px', paddingLeft: '20px' }}>
+            {/* Text column */}
+            <div className="flex flex-col" style={{ width: '615px' }}>
+              {/* About Title */}
+              <h1 className="text-5xl font-body font-bold text-core-dark leading-none" style={{ fontSize: '3.45rem', marginBottom: '37px' }}>
+                About
+              </h1>
+
+              {/* About Text */}
+              <p className="font-ui text-gray-700 leading-relaxed" style={{ fontSize: '18.4px' }}>
+                {aboutText}
+              </p>
             </div>
 
-            {/* Main Content - Aligned to bottom */}
-            <div className="md:col-span-2 flex flex-col justify-end animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="space-y-6">
-                {/* Kinfolk Tech Description */}
-                <div>
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-gray-700 mb-4 animate-text-reveal" style={{ animationDelay: '0.5s' }}>
-                      Kinfolk Tech leverages over six years of leadership in AR and XR innovation to design award-winning educational and cultural experiences. As Chief Strategy Officer, the focus centers on directing creative vision and strategy for public exhibitions and immersive educational tools. Collaborating with schools, cultural institutions, and global brands, the team curates dynamic digital narratives, extending the reach of underrepresented stories in impactful ways.
-                    </p>
-                    <p className="text-gray-700 animate-text-reveal" style={{ animationDelay: '0.7s' }}>
-                      By managing multidisciplinary teams and fostering cross-sector partnerships, Kinfolk Tech creates engaging digital monuments and exhibitions featured in prestigious spaces like MoMA and Tribeca Festival. The mission is to integrate art, equity, and technology into transformative experiences, reimagining how audiences connect with history and culture. Values of inclusion and collaboration drive efforts to amplify diverse narratives in public and educational contexts.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {/* Photo - aligned to bottom of M (grown by 80px: 637 + 80 = 717px) */}
+            <div className="flex items-end" style={{ height: '717px' }}>
+              <img
+                src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
+                alt="Micah Milner"
+                style={{ maxWidth: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+              />
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }

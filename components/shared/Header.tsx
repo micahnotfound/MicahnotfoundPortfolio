@@ -20,6 +20,7 @@ export function Header() {
   const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
   const [isMobile, setIsMobile] = useState(false)
+  const [isContactExpanded, setIsContactExpanded] = useState(false)
 
   // Detect mobile viewport
   useEffect(() => {
@@ -34,9 +35,9 @@ export function Header() {
 
   // Don't render this header on:
   // - Project detail pages
-  // - /homepage, /header, /slider, /complete, or /test pages
+  // - /homepage, /header, /slider, /complete, /test, or /about pages
   // - Homepage (mobile and desktop - homepage handles its own header)
-  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || isTestPage || isHomePage) {
+  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || isTestPage || isHomePage || isAboutPage) {
     return null
   }
 
@@ -120,7 +121,7 @@ export function Header() {
                 </div>
 
                 {/* About/Contact buttons - visible only in home state */}
-                <div className="flex items-center gap-[57px]">
+                <div className="flex items-center gap-[57px]" style={{ marginLeft: '20px' }}>
                   {/* About/Work button */}
                   <Link
                     href={isAboutPage ? "/" : "/about"}
@@ -138,22 +139,50 @@ export function Header() {
                     {isAboutPage ? "work" : "about"}
                   </Link>
 
-                  {/* Contact button */}
-                  <Link
-                    href="/contact"
-                    className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] overflow-hidden whitespace-nowrap"
+                  {/* Contact button - expandable */}
+                  <div
+                    className="relative font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] cursor-pointer"
                     style={{
                       border: 'none',
-                      padding: getLogoState() === 1 ? '0.25rem 1rem' : '0',
-                      borderRadius: '39px',
-                      height: getLogoState() === 1 ? 'auto' : '0px',
+                      padding: getLogoState() === 1 ? (isContactExpanded ? '1rem' : '0.25rem 1rem') : '0',
+                      borderRadius: '12px',
+                      height: getLogoState() === 1 ? (isContactExpanded ? 'auto' : 'auto') : '0px',
+                      width: isContactExpanded ? '250px' : 'auto',
                       transform: getLogoState() === 1 ? 'translateY(0)' : 'translateY(-20px)',
-                      pointerEvents: getLogoState() === 1 ? 'auto' : 'none'
+                      pointerEvents: getLogoState() === 1 ? 'auto' : 'none',
+                      overflow: 'visible'
                     }}
+                    onClick={() => setIsContactExpanded(!isContactExpanded)}
                     data-cursor-hover
                   >
-                    contact
-                  </Link>
+                    {!isContactExpanded ? (
+                      <div className="whitespace-nowrap text-center">contact</div>
+                    ) : (
+                      <div className="space-y-2 text-left text-sm">
+                        <div className="font-bold mb-3 text-center">contact</div>
+                        <a href="mailto:Micah@art404.com" className="block hover:underline">
+                          Micah@art404.com
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/micah-milner-5bb13729/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:underline"
+                        >
+                          LinkedIn
+                        </a>
+                        <a
+                          href="https://www.instagram.com/micahnotfound/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:underline"
+                        >
+                          Instagram
+                        </a>
+                        <div>8636024715</div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

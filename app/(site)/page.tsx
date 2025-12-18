@@ -38,6 +38,8 @@ export default function HomePage() {
   const [logoTopPosition, setLogoTopPosition] = useState(145)
   const [isMouseNearLogo, setIsMouseNearLogo] = useState(false)
   const [hasEverHovered, setHasEverHovered] = useState(false)
+  const [isContactExpandedMobile, setIsContactExpandedMobile] = useState(false)
+  const [isContactExpandedDesktop, setIsContactExpandedDesktop] = useState(false)
 
   useEffect(() => {
     setHoverArea(null)
@@ -49,6 +51,14 @@ export default function HomePage() {
     }
     loadProjects()
   }, [setHoverArea])
+
+  // Auto-close contact buttons when logo state changes (desktop: when logoState becomes 3, mobile: when logoState becomes 3)
+  useEffect(() => {
+    if (logoState === 3) {
+      setIsContactExpandedMobile(false)
+      setIsContactExpandedDesktop(false)
+    }
+  }, [logoState])
 
   // Track viewport height for mobile
   useEffect(() => {
@@ -436,21 +446,72 @@ export default function HomePage() {
                   about
                 </Link>
 
-                <Link
-                  href="/contact"
-                  className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
+                <div
+                  className="relative font-ui bg-core-dark text-white cursor-pointer flex-shrink-0"
                   style={{
                     border: 'none',
                     padding: '0 1rem',
                     borderRadius: '0px',
-                    height: getButtonHeight(),
+                    height: isContactExpandedMobile ? '160px' : getButtonHeight(),
+                    width: isContactExpandedMobile ? '250px' : 'auto',
                     opacity: getButtonOpacity(),
                     maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                    WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
+                    WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                    overflow: 'hidden',
+                    transition: 'width 600ms ease-out, height 600ms ease-out'
                   }}
+                  onClick={() => setIsContactExpandedMobile(!isContactExpandedMobile)}
                 >
-                  contact
-                </Link>
+                  {/* Button content container */}
+                  <div className="relative w-full h-full">
+                    {/* Contact label - always visible at top */}
+                    <div
+                      className="absolute top-0 left-0 w-full text-[0.95em]"
+                      style={{
+                        height: getButtonHeight(),
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: isContactExpandedMobile ? 'flex-start' : 'center'
+                      }}
+                    >
+                      contact
+                    </div>
+
+                    {/* Expanded content - fades in below */}
+                    <div
+                      className="absolute left-0 w-full text-left"
+                      style={{
+                        top: getButtonHeight(),
+                        opacity: isContactExpandedMobile ? 1 : 0,
+                        transition: 'opacity 600ms ease-out',
+                        pointerEvents: isContactExpandedMobile ? 'auto' : 'none'
+                      }}
+                    >
+                      <div className="space-y-1 text-[0.95em] pt-2">
+                        <a href="mailto:Micah@art404.com" className="block hover:underline text-sm">
+                          Micah@art404.com
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/micah-milner-5bb13729/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:underline text-sm"
+                        >
+                          LinkedIn
+                        </a>
+                        <a
+                          href="https://www.instagram.com/micahnotfound/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:underline text-sm"
+                        >
+                          Instagram
+                        </a>
+                        <div className="text-sm">8636024715</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -711,9 +772,10 @@ export default function HomePage() {
             </div>
 
             <div
-              className="flex flex-col gap-4 transition-opacity duration-[900ms] ease-out"
+              className="flex flex-col gap-4 transition-all duration-[900ms] ease-out"
               style={{
                 opacity: logoState === 3 ? 0 : 1,
+                transform: logoState === 3 ? 'translateY(-20px)' : 'translateY(0)',
                 pointerEvents: logoState === 3 ? 'none' : 'auto'
               }}
             >
@@ -721,17 +783,75 @@ export default function HomePage() {
                 href="/about"
                 className="text-center font-ui bg-core-dark text-white text-base whitespace-nowrap px-4 h-9 flex items-center justify-center"
                 style={{ borderRadius: '0px' }}
+                data-cursor-hover
               >
                 about
               </Link>
 
-              <Link
-                href="/contact"
-                className="text-center font-ui bg-core-dark text-white text-base whitespace-nowrap px-4 h-9 flex items-center justify-center"
-                style={{ borderRadius: '0px' }}
+              <div
+                className="relative font-ui bg-core-dark text-white cursor-pointer flex-shrink-0"
+                style={{
+                  border: 'none',
+                  padding: '0.25rem 1rem',
+                  borderRadius: '0px',
+                  height: isContactExpandedDesktop ? '160px' : '36px',
+                  width: isContactExpandedDesktop ? '250px' : 'auto',
+                  overflow: 'hidden',
+                  transition: 'width 600ms ease-out, height 600ms ease-out'
+                }}
+                onClick={() => setIsContactExpandedDesktop(!isContactExpandedDesktop)}
+                data-cursor-hover
               >
-                contact
-              </Link>
+                {/* Button content container */}
+                <div className="relative w-full h-full">
+                  {/* Contact label - always visible at top */}
+                  <div
+                    className="absolute top-0 left-0 w-full text-base"
+                    style={{
+                      height: '36px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: isContactExpandedDesktop ? 'flex-start' : 'center'
+                    }}
+                  >
+                    contact
+                  </div>
+
+                  {/* Expanded content - fades in below */}
+                  <div
+                    className="absolute left-0 w-full text-left"
+                    style={{
+                      top: '36px',
+                      opacity: isContactExpandedDesktop ? 1 : 0,
+                      transition: 'opacity 600ms ease-out',
+                      pointerEvents: isContactExpandedDesktop ? 'auto' : 'none'
+                    }}
+                  >
+                    <div className="space-y-1 text-base pt-2">
+                      <a href="mailto:Micah@art404.com" className="block hover:underline text-sm">
+                        Micah@art404.com
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/micah-milner-5bb13729/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline text-sm"
+                      >
+                        LinkedIn
+                      </a>
+                      <a
+                        href="https://www.instagram.com/micahnotfound/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline text-sm"
+                      >
+                        Instagram
+                      </a>
+                      <div className="text-sm">8636024715</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -766,7 +886,8 @@ export default function HomePage() {
               ))
             ) : (
               projects.map((project, index) => {
-                const isHovered = hoveredIndex === index
+                // Button should be expanded if: hovering OR video is playing for this project
+                const isHovered = hoveredIndex === index || currentVideoIndex === index
                 const someoneIsHovered = hoveredIndex !== null
 
                 const getDisplayTitle = () => {

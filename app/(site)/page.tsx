@@ -590,7 +590,6 @@ export default function HomePage() {
                     {imageHeight !== '0px' && displayMedia && (
                       <CarouselMedia
                         media={displayMedia}
-                        fallbackImage={hasReel ? fallbackImage : undefined}
                         isVisible={index === selectedIndex}
                         isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
                         className="object-cover"
@@ -733,7 +732,6 @@ export default function HomePage() {
                       {shouldRender && displayMedia && (
                         <CarouselMedia
                           media={displayMedia}
-                          fallbackImage={hasReel ? fallbackImage : undefined}
                           isVisible={index === currentVideoIndex}
                           isAdjacent={Math.abs(index - currentVideoIndex) === 1}
                           className="object-cover"

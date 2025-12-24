@@ -199,6 +199,9 @@ export default function MomaPage() {
   const videoPublicId = "v1756685191/Nested_Sequence_02_lwwymc"
   const projectTitle = "MoMA"
   const projectDescription = "Created by Kinfolk for MoMA's New York, New Publics (2023), The Monuments Project was a five-part installation reimagining the role of monuments in public space. The work centered on Black and Brown enclaves across New York City, honoring communities who cultivated safety, resistance, and belonging. Figures such as Seneca Village, the Young Lords, Toussaint Louverture, and David Ruggles were brought to life through archival research and contemporary storytelling. Anchored on raw red maple pedestals, the sculptures invited viewers to reconsider which histories are remembered and how they endure."
+  const projectRole = "Principle Artist and Exhibition Lead"
+  const projectCollaborators = "Kinfolk Team"
+  const projectDate = "February 2023"
 
   // Mobile gallery images
   const mobileGalleryImages = [
@@ -209,7 +212,6 @@ export default function MomaPage() {
 
   const momaReel = { public_id: videoPublicId, kind: "video" as const, alt: "MoMA reel" }
   const displayMedia = momaReel
-  const fallbackImage = heroImage1
 
   // Show loading screen while detecting mobile
   if (isLoading) {
@@ -230,7 +232,7 @@ export default function MomaPage() {
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
           style={{
-            top: '20px',
+            top: '45px',
             paddingLeft: '30px',
             paddingRight: '30px'
           }}
@@ -242,8 +244,7 @@ export default function MomaPage() {
                 className="transition-all duration-500 ease-out"
                 style={{
                   width: '205px',
-                  height: 'auto',
-                  filter: 'invert(1) brightness(2)'
+                  height: 'auto'
                 }}
               />
             </div>
@@ -262,7 +263,6 @@ export default function MomaPage() {
             {displayMedia && (
               <CarouselMedia
                 media={displayMedia}
-                fallbackImage={fallbackImage}
                 isVisible={true}
                 isAdjacent={false}
                 className="object-cover w-full h-full"
@@ -299,9 +299,9 @@ export default function MomaPage() {
             <div className="px-6 mb-8 text-right">
               <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
               <div className="mb-4 text-black font-ui text-sm">
-                <p><strong>Year:</strong> 2023</p>
-                <p><strong>Role:</strong> Designer</p>
-                <p><strong>Client:</strong> MoMA</p>
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
               </div>
               <div className="text-black leading-relaxed font-ui text-sm">
                 {projectDescription}
@@ -350,8 +350,9 @@ export default function MomaPage() {
   const phase1End = 200
   const phase2End = 600
 
+  // Phase 1: M moves from 52px to 12px
   const phase1Progress = Math.min(1, scrollY / phase1End)
-  const mLogoTop = 52 - (40 * phase1Progress)
+  const phase1Top = 52 - (40 * phase1Progress)
 
   const phase2Scroll = Math.max(0, scrollY - phase1End)
   const shrinkDistance = mHeight - minMHeight
@@ -361,6 +362,9 @@ export default function MomaPage() {
   const currentMWidth = mWidth
 
   const phase3Scroll = Math.max(0, scrollY - phase2End)
+
+  // Phase 3: M continues scrolling up and off the screen
+  const mLogoTop = phase1Top - (phase3Scroll * 0.5) // Continues scrolling up in phase 3
   const photoScrollOffset = phase3Scroll
   const textScrollOffset = phase3Scroll
   const contentScrollOffset = phase3Scroll
@@ -397,7 +401,7 @@ export default function MomaPage() {
       <div className="min-h-screen bg-[#D1D5DB]">
       {/* M Logo */}
       <div
-        className="absolute left-0"
+        className="fixed left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',
@@ -456,6 +460,12 @@ export default function MomaPage() {
               <h1 className="text-5xl font-body font-bold text-core-dark leading-none">
                 {projectTitle}
               </h1>
+
+              <div className="text-sm font-ui text-gray-700 space-y-1">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
 
               <p className="text-base font-ui text-gray-700 leading-relaxed">
                 {projectDescription}

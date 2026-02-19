@@ -42,10 +42,15 @@ export default function MomaMobilePage() {
 
   // Handle touch events for swipe - bidirectional (up to content, down to video)
   useEffect(() => {
+    let lastMoveTime = Date.now()
+    let velocity = 0
+
     const handleTouchStart = (e: TouchEvent) => {
       const touch = e.touches[0]
       touchStartRef.current = { y: touch.clientY, time: Date.now() }
       lastTouchY.current = touch.clientY
+      lastMoveTime = Date.now()
+      velocity = 0
       setIsDragging(true)
     }
 
@@ -53,26 +58,54 @@ export default function MomaMobilePage() {
       if (!touchStartRef.current) return
 
       const touch = e.touches[0]
-      const deltaY = touchStartRef.current.y - touch.clientY // Positive = swipe up, negative = swipe down
+      const currentTime = Date.now()
+      const timeDiff = currentTime - lastMoveTime
+      const deltaY = lastTouchY.current - touch.clientY // Positive = swipe up, negative = swipe down
+
+      // Calculate velocity (pixels per millisecond)
+      if (timeDiff > 0) {
+        velocity = deltaY / timeDiff
+      }
+
       lastTouchY.current = touch.clientY
+      lastMoveTime = currentTime
 
       // Calculate progress (0 to 1)
       const maxSwipe = window.innerHeight
-      const progress = Math.max(0, Math.min(1, swipeProgress + (deltaY / maxSwipe)))
-      setSwipeProgress(progress)
-
-      // Update touch start for continuous dragging
-      touchStartRef.current.y = touch.clientY
+      const newProgress = Math.max(0, Math.min(1, swipeProgress + (deltaY / maxSwipe)))
+      setSwipeProgress(newProgress)
     }
 
     const handleTouchEnd = () => {
+      if (!touchStartRef.current) return
+
       setIsDragging(false)
 
-      // Auto-snap: if past 50% (1/2 way), snap all the way up. Otherwise snap back down
-      if (swipeProgress > 0.5) {
+      // Calculate total distance and time from start
+      const totalDistance = touchStartRef.current.y - lastTouchY.current
+      const totalTime = Date.now() - touchStartRef.current.time
+
+      // Velocity threshold for a "swipe" gesture
+      const velocityThreshold = 0.3 // pixels per millisecond
+      const isSwipeUp = velocity > velocityThreshold
+      const isSwipeDown = velocity < -velocityThreshold
+
+      // Distance threshold
+      const distanceThreshold = 50
+      const movedEnough = Math.abs(totalDistance) > distanceThreshold
+
+      // Decision logic: Follow the swipe direction with velocity
+      if (isSwipeUp || (movedEnough && totalDistance > 0)) {
         setSwipeProgress(1) // Snap to content view
-      } else {
+      } else if (isSwipeDown || (movedEnough && totalDistance < 0)) {
         setSwipeProgress(0) // Snap back to video view
+      } else {
+        // No clear direction: snap to nearest
+        if (swipeProgress > 0.5) {
+          setSwipeProgress(1)
+        } else {
+          setSwipeProgress(0)
+        }
       }
 
       touchStartRef.current = null
@@ -121,9 +154,6 @@ export default function MomaMobilePage() {
   const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
     ? project.thumbnails[0]
     : project.cover)
-  const fallbackImage = project.thumbnails && project.thumbnails.length > 0
-    ? project.thumbnails[0]
-    : project.cover
 
   return (
     <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
@@ -131,7 +161,7 @@ export default function MomaMobilePage() {
       <div
         className="fixed left-0 w-full z-50 pointer-events-none"
         style={{
-          top: '20px',
+          top: '45px',
           paddingLeft: '30px',
           paddingRight: '30px'
         }}
@@ -146,8 +176,7 @@ export default function MomaMobilePage() {
               className="transition-all duration-500 ease-out"
               style={{
                 width: '205px',
-                height: 'auto',
-                filter: 'invert(1) brightness(2)' // White logo stays white on all backgrounds
+                height: 'auto'
               }}
             />
           </div>
@@ -166,7 +195,6 @@ export default function MomaMobilePage() {
           {displayMedia && (
             <CarouselMedia
               media={displayMedia}
-              fallbackImage={hasReel ? fallbackImage : undefined}
               isVisible={true}
               isAdjacent={false}
               className="object-cover w-full h-full"
@@ -195,14 +223,14 @@ export default function MomaMobilePage() {
           transition: isDragging ? 'none' : 'transform 0.5s ease-out',
           height: 'auto',
           minHeight: '100vh',
-          paddingTop: '115px', // Space for M logo at top (reduced by 25px from 140px)
+          paddingTop: '150px', // Space for M logo at top plus extra margin
           overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
           overflowX: 'hidden'
         }}
       >
         <div className="pb-12">
-          {/* Text content - right aligned with padding */}
-          <div className="px-6 mb-8 text-right">
+          {/* Text content - left aligned with padding */}
+          <div className="px-6 mb-8 text-left">
             {/* Project title */}
             <h1 className="font-ui text-2xl font-bold mb-3 text-black">{project.title}</h1>
 

@@ -213,6 +213,9 @@ export default function BlacklandsPage() {
 
   // Project info
   const projectTitle = "Black Lands"
+  const projectRole = "Art Director and Exhibition Lead"
+  const projectCollaborators = "Kinfolk Team, TransArt, Black Gotham, Growhouse"
+  const projectDate = "June 2023"
   const projectDescription = "Produced by Kinfolk, Black Lands was an award-winning immersive AR exhibition recognized at the Tribeca Film Festival. The project explored early Black communities in New York history, featuring digital monuments to Sojourner Truth, Manuel de Gerrit de Reus, and Samuel Anderson. Each figure was co-created with nonprofit partners who rooted the stories in authentic community memory. By weaving art, technology, and liberation, Kinfolk ensured these legacies continue to inform and empower the present."
 
   // Layout calculations - PRIORITY ORDER:
@@ -306,12 +309,37 @@ export default function BlacklandsPage() {
       alt: "Black Lands video"
     }
 
-    const fallbackImage = heroImage
-
     return (
       <>
         {!isReady && (<div className="fixed inset-0 bg-black z-[9999]" />)}
         <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
+        {/* Fixed M Logo at top - white, small */}
+        <div
+          className="fixed left-0 w-full z-50 pointer-events-none"
+          style={{
+            top: '45px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
+          }}
+        >
+          <div className="flex items-center justify-start pointer-events-auto">
+            <div
+              className="flex-shrink-0 cursor-pointer"
+              onClick={() => router.push('/')}
+            >
+              <MorphingHeaderLogo
+                state={3}
+                className="transition-all duration-500 ease-out"
+                style={{
+                  width: '205px',
+                  height: 'auto',
+                  filter: 'none'
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Video section - slides up, full screen */}
         <div
           className="absolute top-0 left-0 w-full h-screen transition-transform z-10"
@@ -320,37 +348,10 @@ export default function BlacklandsPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out'
           }}
         >
-          {/* M Logo - transitions from fixed to absolute */}
-          <div
-            className={swipeProgress >= 1 ? "absolute left-0 w-full z-50 pointer-events-none" : "fixed left-0 w-full z-50 pointer-events-none"}
-            style={{
-              top: '20px',
-              paddingLeft: '30px',
-              paddingRight: '30px'
-            }}
-          >
-            <div className="flex items-center justify-start pointer-events-auto">
-              <div
-                className="flex-shrink-0 cursor-pointer"
-                onClick={() => router.push('/')}
-              >
-                <MorphingHeaderLogo
-                  state={3}
-                  className="transition-all duration-500 ease-out"
-                  style={{
-                    width: '205px',
-                    height: 'auto',
-                    filter: 'none'
-                  }}
-                />
-              </div>
-            </div>
-          </div>
           <div className="w-full h-full bg-black">
             {displayMedia && (
               <CarouselMedia
                 media={displayMedia}
-                fallbackImage={fallbackImage}
                 isVisible={true}
                 isAdjacent={false}
                 className="object-cover w-full h-full"
@@ -379,16 +380,23 @@ export default function BlacklandsPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             height: 'auto',
             minHeight: '100vh',
-            paddingTop: '115px',
+            paddingTop: '150px',
             overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
             overflowX: 'hidden'
           }}
         >
           <div className="pb-12">
-            {/* Text content - right aligned with padding */}
-            <div className="px-6 mb-8 text-right">
+            {/* Text content - left aligned with padding */}
+            <div className="px-6 mb-8 text-left">
               {/* Project title */}
-              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
+              <h1 className="font-ui text-5xl font-bold mb-3 text-black">{projectTitle}</h1>
+
+              {/* Project metadata */}
+              <div className="mb-4 text-black font-ui text-lg">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
 
               {/* Description */}
               <div className="text-black leading-relaxed font-ui text-sm">

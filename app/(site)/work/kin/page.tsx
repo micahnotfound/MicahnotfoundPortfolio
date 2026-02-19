@@ -22,6 +22,7 @@ export default function KinPage() {
   // Desktop-specific states
   const [scrollY, setScrollY] = useState(0)
   const [hoveredCarousel, setHoveredCarousel] = useState<number | null>(null)
+  const [hoveredHeader, setHoveredHeader] = useState<number | null>(null)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200)
@@ -156,41 +157,47 @@ export default function KinPage() {
 
   // Kin Festival images and data
   const heroImage1 = {
-    public_id: "v1765922612/PreservationPark_Mocks_fp2i3e",
+    public_id: "v1765922611/wsa_mocks_0001_Layer-Comp-2_slyvyk",
     kind: "image" as const,
     alt: "Kin Festival header image 1"
   }
 
   const heroImage2 = {
-    public_id: "v1765920441/DSC_1445_ecalzy",
+    public_id: "v1765922612/PreservationPark_Mocks_fp2i3e",
     kind: "image" as const,
     alt: "Kin Festival header image 2"
   }
 
   const heroImage3 = {
-    public_id: "v1765922612/PreservationPark_Mocks_fp2i3e",
+    public_id: "v1765922609/wsa_mocks_0000_Layer-Comp-1_ljdnqe",
     kind: "image" as const,
     alt: "Kin Festival header image 3"
   }
 
-  // Exhibition photos - using placeholder from Exhibit folder
+  // Exhibition photos - KIN Festival gallery
   const exhibitionPhoto1 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 1" }
-  const exhibitionPhoto2 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 2" }
-  const exhibitionPhoto3 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 3" }
-  const exhibitionPhoto4 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 4" }
+  const exhibitionPhoto2 = { public_id: "v1765920440/DSC_1604_stxb9f", kind: "image" as const, alt: "Kin Festival exhibition view 2" }
+  const exhibitionPhoto3 = { public_id: "v1765920439/DSC_0843_psxcyc", kind: "image" as const, alt: "Kin Festival exhibition view 3" }
+  const exhibitionPhoto4 = { public_id: "v1765920434/DSC_0819_nz2bv7", kind: "image" as const, alt: "Kin Festival exhibition view 4" }
+  const exhibitionPhoto5 = { public_id: "v1765920413/DSC_1678_us5bsb", kind: "image" as const, alt: "Kin Festival exhibition view 5" }
+  const exhibitionPhoto6 = { public_id: "v1765920407/DSC_0032_tfzu5p", kind: "image" as const, alt: "Kin Festival exhibition view 6" }
+  const exhibitionPhoto7 = { public_id: "v1765920376/DSC_1611_i0591m", kind: "image" as const, alt: "Kin Festival exhibition view 7" }
+  const exhibitionPhoto8 = { public_id: "v1765920360/DSC_1735_y8ivv0", kind: "image" as const, alt: "Kin Festival exhibition view 8" }
 
   const videoPublicId = "v1765922400/KIN_Reel_tfv4qr"
   const projectTitle = "KIN Festival"
+  const projectRole = "Immersive Art Director and Preservation Park Exhibition Lead"
+  const projectCollaborators = "Kinfolk Team"
+  const projectDate = "October 2025"
   const projectDescription = "KIN Festival is a celebration of community, connection, and culture. Through immersive experiences and artistic expression, the festival brings people together to explore themes of identity, belonging, and shared humanity."
 
   // Mobile gallery images
   const mobileGalleryImages = [
-    exhibitionPhoto1, exhibitionPhoto2, exhibitionPhoto3, exhibitionPhoto4
+    exhibitionPhoto1, exhibitionPhoto2, exhibitionPhoto3, exhibitionPhoto4, exhibitionPhoto5, exhibitionPhoto6, exhibitionPhoto7, exhibitionPhoto8
   ]
 
   const kinReel = { public_id: videoPublicId, kind: "video" as const, alt: "Kin Festival reel" }
   const displayMedia = kinReel
-  const fallbackImage = heroImage1
 
   // MOBILE RENDER
   if (isMobile) {
@@ -204,7 +211,7 @@ export default function KinPage() {
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
           style={{
-            top: '20px',
+            top: '45px',
             paddingLeft: '30px',
             paddingRight: '30px'
           }}
@@ -216,8 +223,7 @@ export default function KinPage() {
                 className="transition-all duration-500 ease-out"
                 style={{
                   width: '205px',
-                  height: 'auto',
-                  filter: 'invert(1) brightness(2)'
+                  height: 'auto'
                 }}
               />
             </div>
@@ -235,7 +241,6 @@ export default function KinPage() {
             {displayMedia && (
               <CarouselMedia
                 media={displayMedia}
-                fallbackImage={fallbackImage}
                 isVisible={true}
                 isAdjacent={false}
                 className="object-cover w-full h-full"
@@ -260,18 +265,18 @@ export default function KinPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             height: 'auto',
             minHeight: '100vh',
-            paddingTop: '115px',
+            paddingTop: '150px',
             overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
             overflowX: 'hidden'
           }}
         >
           <div className="pb-12">
             <div className="px-6 mb-8 text-right">
-              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
-              <div className="mb-4 text-black font-ui text-sm">
-                <p><strong>Year:</strong> 2025</p>
-                <p><strong>Role:</strong> Art Director & Exhibition Lead</p>
-                <p><strong>Client:</strong> Kinfolk</p>
+              <h1 className="font-ui text-5xl font-bold mb-3 text-black">{projectTitle}</h1>
+              <div className="mb-4 text-black font-ui text-lg">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
               </div>
               <div className="text-black leading-relaxed font-ui text-sm">
                 {projectDescription}
@@ -364,7 +369,7 @@ export default function KinPage() {
 
       <div className="min-h-screen bg-[#D1D5DB]">
       <div
-        className="absolute left-0"
+        className="fixed left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',
@@ -443,14 +448,41 @@ export default function KinPage() {
           }}
         >
           <div className="flex-1 flex flex-col" style={{ gap: '25px' }}>
-            <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage1} className="w-full h-full object-cover" alt={heroImage1.alt || 'Kin Header 1'} />
+            <div
+              className="overflow-hidden"
+              style={{
+                borderRadius: '24px',
+                flex: hoveredHeader === 0 ? '6' : hoveredHeader !== null ? '0.5' : '1',
+                transition: 'flex 0.3s ease-out'
+              }}
+              onMouseEnter={() => setHoveredHeader(0)}
+              onMouseLeave={() => setHoveredHeader(null)}
+            >
+              <Media media={heroImage1} className="w-full h-full object-cover object-center" alt={heroImage1.alt || 'Kin Header 1'} />
             </div>
-            <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage2} className="w-full h-full object-cover" alt={heroImage2.alt || 'Kin Header 2'} />
+            <div
+              className="overflow-hidden"
+              style={{
+                borderRadius: '24px',
+                flex: hoveredHeader === 1 ? '6' : hoveredHeader !== null ? '0.5' : '1',
+                transition: 'flex 0.3s ease-out'
+              }}
+              onMouseEnter={() => setHoveredHeader(1)}
+              onMouseLeave={() => setHoveredHeader(null)}
+            >
+              <Media media={heroImage2} className="w-full h-full object-cover" alt={heroImage2.alt || 'Kin Header 2'} style={{ objectPosition: '50% 80%' }} />
             </div>
-            <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage3} className="w-full h-full object-cover" alt={heroImage3.alt || 'Kin Header 3'} />
+            <div
+              className="overflow-hidden"
+              style={{
+                borderRadius: '24px',
+                flex: hoveredHeader === 2 ? '6' : hoveredHeader !== null ? '0.5' : '1',
+                transition: 'flex 0.3s ease-out'
+              }}
+              onMouseEnter={() => setHoveredHeader(2)}
+              onMouseLeave={() => setHoveredHeader(null)}
+            >
+              <Media media={heroImage3} className="w-full h-full object-cover" alt={heroImage3.alt || 'Kin Header 3'} style={{ objectPosition: '50% 17%' }} />
             </div>
           </div>
 
@@ -487,26 +519,51 @@ export default function KinPage() {
           transition: 'transform 0ms linear'
         }}
       >
+        {/* Full-width photo 1 */}
+        <div className="overflow-hidden" style={{ borderRadius: '24px', height: '600px', width: '100%' }}>
+          <Media media={exhibitionPhoto1} className="w-full h-full object-cover" alt={exhibitionPhoto1.alt} />
+        </div>
+
+        {/* Two photo row */}
         <div className="flex" style={{ gap: '25px' }}>
-          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto1} className="w-full h-full object-cover" alt={exhibitionPhoto1.alt} />
-          </div>
           <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto2} className="w-full h-full object-cover" alt={exhibitionPhoto2.alt} />
           </div>
-        </div>
-
-        <div className="flex" style={{ gap: '25px' }}>
           <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto3} className="w-full h-full object-cover" alt={exhibitionPhoto3.alt} />
           </div>
+        </div>
+
+        {/* Two photo row */}
+        <div className="flex" style={{ gap: '25px' }}>
           <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto8} className="w-full h-full object-cover" alt={exhibitionPhoto8.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto3} className="w-full h-full object-cover" alt={exhibitionPhoto3.alt} />
+          </div>
+        </div>
+
+        {/* Full-width photo 6 */}
+        <div className="overflow-hidden" style={{ borderRadius: '24px', height: '600px', width: '100%' }}>
+          <Media media={exhibitionPhoto6} className="w-full h-full object-cover" alt={exhibitionPhoto6.alt} />
+        </div>
+
+        {/* Three photo row at bottom */}
+        <div className="flex" style={{ gap: '25px' }}>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto5} className="w-full h-full object-cover" alt={exhibitionPhoto5.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto7} className="w-full h-full object-cover" alt={exhibitionPhoto7.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto4} className="w-full h-full object-cover" alt={exhibitionPhoto4.alt} />
           </div>
         </div>
       </div>
 
-      <div style={{ height: '2000px' }} aria-hidden="true" />
+      <div style={{ height: '3500px' }} aria-hidden="true" />
     </div>
     </>
   )

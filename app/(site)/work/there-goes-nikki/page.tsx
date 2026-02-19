@@ -181,6 +181,9 @@ export default function ThereGoesNikkiPage() {
 
   // Project info
   const projectTitle = "There Goes Nikki"
+  const projectRole = "Art Director and Concept Artist"
+  const projectCollaborators = "Rada Studio"
+  const projectDate = "June 2025"
   const projectDescription = "Brought to life by Kinfolk, There Goes Nikki is an augmented reality ode to the late poet Nikki Giovanni. Her voice, reciting Quilting the Black-Eyed Pea (We're Going to Mars), carries viewers through a cosmic expanse into a lush spiral landscape. The spiral embodies infinity and the life journey, entwined with florals that evoke mourning, memory, and return to earth. Here, the celestial and terrestrial mirror one another, and poetry becomes the vessel that opens into the universe Giovanni envisioned—for herself, and for all of us."
 
   // Layout calculations - PRIORITY ORDER:
@@ -276,8 +279,6 @@ export default function ThereGoesNikkiPage() {
     alt: "There Goes Nikki video"
   }
 
-  const fallbackImage = heroImage1
-
   // Calculate flex values for hero images based on hover state
   // When middle (index 1) is hovered: it gets 70%, others split 30% (15% each)
   // When top (index 0) is hovered: top gets 70%, middle gets 20%, bottom gets 10%
@@ -313,7 +314,7 @@ export default function ThereGoesNikkiPage() {
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
           style={{
-            top: '20px',
+            top: '45px',
             paddingLeft: '30px',
             paddingRight: '30px'
           }}
@@ -348,7 +349,6 @@ export default function ThereGoesNikkiPage() {
             {displayMedia && (
               <CarouselMedia
                 media={displayMedia}
-                fallbackImage={fallbackImage}
                 isVisible={true}
                 isAdjacent={false}
                 className="object-cover w-full h-full"
@@ -377,16 +377,23 @@ export default function ThereGoesNikkiPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             height: 'auto',
             minHeight: '100vh',
-            paddingTop: '115px',
+            paddingTop: '150px',
             overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
             overflowX: 'hidden'
           }}
         >
           <div className="pb-12">
-            {/* Text content - right aligned with padding */}
-            <div className="px-6 mb-8 text-right">
+            {/* Text content - left aligned with padding */}
+            <div className="px-6 mb-8 text-left">
               {/* Project title */}
-              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
+              <h1 className="font-ui text-5xl font-bold mb-3 text-black">{projectTitle}</h1>
+
+              {/* Project metadata */}
+              <div className="mb-4 text-black font-ui text-lg">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
 
               {/* Description */}
               <div className="text-black leading-relaxed font-ui text-sm">
@@ -422,7 +429,7 @@ export default function ThereGoesNikkiPage() {
       <div className="hidden md:block min-h-screen bg-[#D1D5DB]">
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="absolute left-0"
+        className="fixed left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',
@@ -442,18 +449,18 @@ export default function ThereGoesNikkiPage() {
         </Link>
       </div>
 
-      {/* Content Container - scrolls naturally */}
-      <div className="relative">
-        {/* Left column: M width (250px constant) for dividing line and text */}
+      {/* Content Container */}
+      <div className="h-screen relative">
+        {/* Left column */}
         <div
           className="absolute left-0"
           style={{
             paddingLeft: '80px',
-            width: '330px', // 80px padding + 250px content
-            top: `${topMargin}px`
+            width: '330px',
+            height: '100vh'
           }}
         >
-          {/* Dividing line - z-index 1, aligned to right of M, same width as M */}
+          {/* Dividing line */}
           <div
             style={{
               position: 'absolute',
@@ -466,7 +473,7 @@ export default function ThereGoesNikkiPage() {
             }}
           />
 
-          {/* Text - z-index 0, bottom-anchored, ragged right */}
+          {/* Text */}
           <div
             ref={textRef}
             style={{
@@ -481,6 +488,12 @@ export default function ThereGoesNikkiPage() {
               <h1 className="text-5xl font-body font-bold text-core-dark leading-none">
                 {projectTitle}
               </h1>
+
+              <div className="text-sm font-ui text-gray-700 space-y-1">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
 
               <p className="text-base font-ui text-gray-700 leading-relaxed">
                 {projectDescription}
@@ -597,8 +610,7 @@ export default function ThereGoesNikkiPage() {
         style={{
           paddingTop: '52px',
           paddingLeft: '80px',
-          paddingRight: '80px',
-          marginTop: '100vh'
+          paddingRight: '80px'
         }}
       >
         {/* Row 1 */}

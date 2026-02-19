@@ -23,6 +23,7 @@ export default function MomaPage() {
   // Desktop-specific states
   const [scrollY, setScrollY] = useState(0)
   const [hoveredCarousel, setHoveredCarousel] = useState<number | null>(null)
+  const [hoveredHeader, setHoveredHeader] = useState<number | null>(null)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
   const [textHeight, setTextHeight] = useState(200)
@@ -104,10 +105,15 @@ export default function MomaPage() {
   useEffect(() => {
     if (!isMobile) return
 
+    let lastMoveTime = Date.now()
+    let velocity = 0
+
     const handleTouchStart = (e: TouchEvent) => {
       const touch = e.touches[0]
       touchStartRef.current = { y: touch.clientY, time: Date.now() }
       lastTouchY.current = touch.clientY
+      lastMoveTime = Date.now()
+      velocity = 0
       setIsDragging(true)
     }
 
@@ -115,23 +121,54 @@ export default function MomaPage() {
       if (!touchStartRef.current) return
 
       const touch = e.touches[0]
-      const deltaY = touchStartRef.current.y - touch.clientY
+      const currentTime = Date.now()
+      const timeDiff = currentTime - lastMoveTime
+      const deltaY = lastTouchY.current - touch.clientY // Positive = swipe up, negative = swipe down
+
+      // Calculate velocity (pixels per millisecond)
+      if (timeDiff > 0) {
+        velocity = deltaY / timeDiff
+      }
+
       lastTouchY.current = touch.clientY
+      lastMoveTime = currentTime
 
+      // Calculate progress (0 to 1)
       const maxSwipe = window.innerHeight
-      const progress = Math.max(0, Math.min(1, swipeProgress + (deltaY / maxSwipe)))
-      setSwipeProgress(progress)
-
-      touchStartRef.current.y = touch.clientY
+      const newProgress = Math.max(0, Math.min(1, swipeProgress + (deltaY / maxSwipe)))
+      setSwipeProgress(newProgress)
     }
 
     const handleTouchEnd = () => {
+      if (!touchStartRef.current) return
+
       setIsDragging(false)
 
-      if (swipeProgress > 0.5) {
-        setSwipeProgress(1)
+      // Calculate total distance and time from start
+      const totalDistance = touchStartRef.current.y - lastTouchY.current
+      const totalTime = Date.now() - touchStartRef.current.time
+
+      // Velocity threshold for a "swipe" gesture
+      const velocityThreshold = 0.3 // pixels per millisecond
+      const isSwipeUp = velocity > velocityThreshold
+      const isSwipeDown = velocity < -velocityThreshold
+
+      // Distance threshold
+      const distanceThreshold = 50
+      const movedEnough = Math.abs(totalDistance) > distanceThreshold
+
+      // Decision logic: Follow the swipe direction with velocity
+      if (isSwipeUp || (movedEnough && totalDistance > 0)) {
+        setSwipeProgress(1) // Snap to content view
+      } else if (isSwipeDown || (movedEnough && totalDistance < 0)) {
+        setSwipeProgress(0) // Snap back to video view
       } else {
-        setSwipeProgress(0)
+        // No clear direction: snap to nearest
+        if (swipeProgress > 0.5) {
+          setSwipeProgress(1)
+        } else {
+          setSwipeProgress(0)
+        }
       }
 
       touchStartRef.current = null
@@ -289,16 +326,16 @@ export default function MomaPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             height: 'auto',
             minHeight: '100vh',
-            paddingTop: '115px',
+            paddingTop: '150px',
             overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
             overflowX: 'hidden'
           }}
         >
           <div className="pb-12">
             {/* Text content */}
-            <div className="px-6 mb-8 text-right">
-              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
-              <div className="mb-4 text-black font-ui text-sm">
+            <div className="px-6 mb-8 text-left">
+              <h1 className="font-ui text-5xl font-bold mb-3 text-black">{projectTitle}</h1>
+              <div className="mb-4 text-black font-ui text-lg">
                 <p><strong>Role:</strong> {projectRole}</p>
                 <p><strong>Collaborators:</strong> {projectCollaborators}</p>
                 <p><strong>Date:</strong> {projectDate}</p>
@@ -488,14 +525,38 @@ export default function MomaPage() {
         >
           {/* Three stacked photos */}
           <div className="flex-1 flex flex-col" style={{ gap: '25px' }}>
-            <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage1} className="w-full h-full object-cover" alt={heroImage1.alt || 'MoMA Header 1'} />
+            <div
+              className="overflow-hidden transition-all duration-500"
+              style={{
+                borderRadius: '24px',
+                flex: hoveredHeader === 0 ? '6' : hoveredHeader !== null ? '0.5' : '1'
+              }}
+              onMouseEnter={() => setHoveredHeader(0)}
+              onMouseLeave={() => setHoveredHeader(null)}
+            >
+              <Media media={heroImage1} className="w-full h-full object-cover object-center" alt={heroImage1.alt || 'MoMA Header 1'} />
             </div>
-            <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage2} className="w-full h-full object-cover" alt={heroImage2.alt || 'MoMA Header 2'} />
+            <div
+              className="overflow-hidden transition-all duration-500"
+              style={{
+                borderRadius: '24px',
+                flex: hoveredHeader === 1 ? '6' : hoveredHeader !== null ? '0.5' : '1'
+              }}
+              onMouseEnter={() => setHoveredHeader(1)}
+              onMouseLeave={() => setHoveredHeader(null)}
+            >
+              <Media media={heroImage2} className="w-full h-full object-cover object-top" alt={heroImage2.alt || 'MoMA Header 2'} />
             </div>
-            <div className="flex-1 overflow-hidden" style={{ borderRadius: '24px' }}>
-              <Media media={heroImage3} className="w-full h-full object-cover" alt={heroImage3.alt || 'MoMA Header 3'} />
+            <div
+              className="overflow-hidden transition-all duration-500"
+              style={{
+                borderRadius: '24px',
+                flex: hoveredHeader === 2 ? '6' : hoveredHeader !== null ? '0.5' : '1'
+              }}
+              onMouseEnter={() => setHoveredHeader(2)}
+              onMouseLeave={() => setHoveredHeader(null)}
+            >
+              <Media media={heroImage3} className="w-full h-full object-cover object-center" alt={heroImage3.alt || 'MoMA Header 3'} />
             </div>
           </div>
 
@@ -528,8 +589,7 @@ export default function MomaPage() {
         style={{
           paddingTop: '52px',
           paddingLeft: '80px',
-          paddingRight: '80px',
-          marginTop: '100vh'
+          paddingRight: '80px'
         }}
       >
         {/* Row 1 */}
@@ -577,14 +637,12 @@ export default function MomaPage() {
           {senecaVillageImages.map((image, idx) => (
             <div
               key={idx}
-              className="overflow-hidden transition-all duration-500"
+              className="overflow-hidden"
               style={{
                 borderRadius: '24px',
                 height: '600px',
-                flex: hoveredCarousel === 0 && idx === hoveredCarousel ? '3' : '1'
+                flex: '1'
               }}
-              onMouseEnter={() => setHoveredCarousel(idx)}
-              onMouseLeave={() => setHoveredCarousel(null)}
             >
               <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
             </div>
@@ -596,14 +654,12 @@ export default function MomaPage() {
           {youngLordsImages.map((image, idx) => (
             <div
               key={idx}
-              className="overflow-hidden transition-all duration-500"
+              className="overflow-hidden"
               style={{
                 borderRadius: '24px',
                 height: '600px',
-                flex: hoveredCarousel === 100 + idx ? '3' : '1'
+                flex: '1'
               }}
-              onMouseEnter={() => setHoveredCarousel(100 + idx)}
-              onMouseLeave={() => setHoveredCarousel(null)}
             >
               <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
             </div>
@@ -615,14 +671,12 @@ export default function MomaPage() {
           {davidRugglesImages.map((image, idx) => (
             <div
               key={idx}
-              className="overflow-hidden transition-all duration-500"
+              className="overflow-hidden"
               style={{
                 borderRadius: '24px',
                 height: '600px',
-                flex: hoveredCarousel === 200 + idx ? '3' : '1'
+                flex: '1'
               }}
-              onMouseEnter={() => setHoveredCarousel(200 + idx)}
-              onMouseLeave={() => setHoveredCarousel(null)}
             >
               <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
             </div>

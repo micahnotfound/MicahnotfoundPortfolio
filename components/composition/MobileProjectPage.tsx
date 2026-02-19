@@ -101,9 +101,6 @@ export function MobileProjectPage({ projectSlug, project: projectProp }: MobileP
   const displayMedia = hasReel ? project.reel : (project.thumbnails && project.thumbnails.length > 0
     ? project.thumbnails[0]
     : project.cover)
-  const fallbackImage = project.thumbnails && project.thumbnails.length > 0
-    ? project.thumbnails[0]
-    : project.cover
 
   // Get all images from elements (gallery, profile, hero)
   const galleryImages = project.elements?.reduce((acc, element) => {
@@ -119,7 +116,7 @@ export function MobileProjectPage({ projectSlug, project: projectProp }: MobileP
       <div
         className="fixed left-0 w-full z-50 pointer-events-none"
         style={{
-          top: '20px',
+          top: '45px',
           paddingLeft: '30px',
           paddingRight: '30px'
         }}
@@ -134,8 +131,7 @@ export function MobileProjectPage({ projectSlug, project: projectProp }: MobileP
               className="transition-all duration-500 ease-out"
               style={{
                 width: '205px',
-                height: 'auto',
-                filter: 'invert(1) brightness(2)' // White logo stays white on all backgrounds
+                height: 'auto'
               }}
             />
           </div>
@@ -154,7 +150,6 @@ export function MobileProjectPage({ projectSlug, project: projectProp }: MobileP
           {displayMedia && (
             <CarouselMedia
               media={displayMedia}
-              fallbackImage={hasReel ? fallbackImage : undefined}
               isVisible={true}
               isAdjacent={false}
               className="object-cover w-full h-full"

@@ -311,6 +311,8 @@ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud
 ```bash
 pnpm i   # or npm i / yarn
 pnpm dev # http://localhost:3000
+# or use the shortcut:
+pnpm lh3k # http://localhost:3000
 ```
 
 ## Content: Seeding & Updating

@@ -7,7 +7,6 @@ import type { MediaItem } from '@/types/content'
 
 interface CarouselMediaProps {
   media: MediaItem
-  fallbackImage?: MediaItem // Fallback image to show while video loads
   isVisible: boolean // Is this the currently selected item
   isAdjacent: boolean // Is this next or previous (for preloading)
   priority?: boolean
@@ -19,7 +18,6 @@ interface CarouselMediaProps {
 
 export function CarouselMedia({
   media,
-  fallbackImage,
   isVisible,
   isAdjacent,
   priority = false,
@@ -114,43 +112,24 @@ export function CarouselMedia({
     }
   }, [isVisible, videoReady, videoError, showVideo, media.kind])
 
-  // For videos: always render video (so it can load), show fallback image on top until ready and delay passed
+  // For videos: always render video (so it can load), show first frame immediately
   if (media.kind === 'video') {
-    // Determine if we should show the video (both ready AND delay passed)
-    const shouldShowVideo = videoReady && !videoError && showVideo
-
     return (
       <div className={`relative w-full h-full ${className}`}>
-        {/* Video element - always present so it can load in background */}
+        {/* Video element - shows first frame immediately via preload="metadata" */}
         <video
           ref={videoRef}
           className="w-full h-full object-cover absolute inset-0"
           loop
           muted
           playsInline
-          preload={isVisible || isAdjacent ? 'auto' : 'none'}
+          preload="metadata"
           style={{
-            opacity: shouldShowVideo ? 1 : 0,
-            transition: 'opacity 0.3s ease-in-out',
             objectPosition: objectPosition
           }}
         >
           <source src={buildFullSizeUrl(media)} type="video/mp4" />
         </video>
-
-        {/* Fallback image - shows while video loads OR before delay passes */}
-        {!shouldShowVideo && fallbackImage && (
-          <div className="absolute inset-0 w-full h-full">
-            <Image
-              src={buildFullSizeUrl(fallbackImage)}
-              alt={alt || media.alt || 'Media content'}
-              fill
-              className={className}
-              style={{ objectFit: 'cover' }}
-              priority={priority}
-            />
-          </div>
-        )}
       </div>
     )
   }

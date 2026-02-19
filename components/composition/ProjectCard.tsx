@@ -42,11 +42,6 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
     ? project.thumbnails[0]
     : project.cover)
 
-  // Fallback image for when video is loading
-  const fallbackImage = project.thumbnails && project.thumbnails.length > 0
-    ? project.thumbnails[0]
-    : project.cover
-
   const handleClick = () => {
     setIsLoading(true)
   }
@@ -352,7 +347,6 @@ export function ProjectCard({ project, index = 0, isHovered = false, someoneIsHo
           {displayMedia && (
             <CarouselMedia
               media={displayMedia}
-              fallbackImage={hasReel ? fallbackImage : undefined}
               isVisible={isHovered}
               isAdjacent={someoneIsHovered && !isHovered && distanceFromHovered === 1}
               className="object-cover object-center"

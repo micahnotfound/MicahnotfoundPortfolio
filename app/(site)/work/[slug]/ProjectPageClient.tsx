@@ -8,6 +8,7 @@ import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { TabSelector } from '@/components/composition/TabSelector'
 import { VerticalCarousel } from '@/components/composition/VerticalCarousel'
 import { BlacklandsLayout } from '@/components/composition/BlacklandsLayout'
+import { KinfolkLayout } from '@/components/composition/KinfolkLayout'
 import type { Project, MediaItem } from '@/types/content'
 
 interface ProjectPageClientProps {
@@ -27,6 +28,8 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
         return 'Nested_Sequence_02_lwwymc'
       case 'nycam':
         return 'NYCAM_reel_qpkje9'
+      case 'kinfolk':
+        return 'v1766161331/Kinfolk_Reel_famm9n'
       default:
         return null
     }
@@ -79,6 +82,25 @@ export function ProjectPageClient({ project, allMedia }: ProjectPageClientProps)
 
     return (
       <BlacklandsLayout
+        projectTitle={project.title}
+        projectDescription={project.description || ''}
+        heroImage={heroImage}
+        videoPublicId={videoPublicId}
+      />
+    )
+  }
+
+  // Render simplified layout for Kinfolk project
+  if (project.slug === 'kinfolk') {
+    const mainContent = project.elements.find(el => el.name === 'Main Content')
+    const heroImage = mainContent?.hero?.[0]
+
+    if (!heroImage || !videoPublicId) {
+      return <div>Missing required content</div>
+    }
+
+    return (
+      <KinfolkLayout
         projectTitle={project.title}
         projectDescription={project.description || ''}
         heroImage={heroImage}

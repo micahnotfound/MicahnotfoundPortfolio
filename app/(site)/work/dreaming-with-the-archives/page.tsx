@@ -279,15 +279,13 @@ export default function DreamingWithTheArchivesPage() {
       alt: "Dreaming with the Archives video"
     }
 
-    const fallbackImage = heroImage1
-
     return (
       <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
         {/* Fixed M Logo at top - white, small */}
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
           style={{
-            top: '20px',
+            top: '45px',
             paddingLeft: '30px',
             paddingRight: '30px'
           }}
@@ -322,7 +320,6 @@ export default function DreamingWithTheArchivesPage() {
             {displayMedia && (
               <CarouselMedia
                 media={displayMedia}
-                fallbackImage={fallbackImage}
                 isVisible={true}
                 isAdjacent={false}
                 className="object-cover w-full h-full"
@@ -351,19 +348,19 @@ export default function DreamingWithTheArchivesPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             height: 'auto',
             minHeight: '100vh',
-            paddingTop: '115px',
+            paddingTop: '150px',
             overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
             overflowX: 'hidden'
           }}
         >
           <div className="pb-12">
-            {/* Text content - right aligned with padding */}
-            <div className="px-6 mb-8 text-right">
+            {/* Text content - left aligned with padding */}
+            <div className="px-6 mb-8 text-left">
               {/* Project title */}
-              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
+              <h1 className="font-ui text-5xl font-bold mb-3 text-black">{projectTitle}</h1>
 
               {/* Description */}
-              <div className="text-black leading-relaxed font-ui text-sm">
+              <div className="text-black leading-relaxed font-ui text-lg">
                 {projectDescription}
               </div>
             </div>
@@ -436,7 +433,7 @@ export default function DreamingWithTheArchivesPage() {
 
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="absolute left-0"
+        className="fixed left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',

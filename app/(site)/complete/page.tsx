@@ -406,11 +406,6 @@ export default function CompletePage() {
                 ? project.thumbnails[0]
                 : project.cover)
 
-              // Fallback image for videos (always show image while video loads)
-              const fallbackImage = project.thumbnails && project.thumbnails.length > 0
-                ? project.thumbnails[0]
-                : project.cover
-
               const imageHeight = getImageHeight()
 
               // Calculate vertical position
@@ -475,7 +470,6 @@ export default function CompletePage() {
                     {imageHeight !== '0px' && displayMedia && (
                       <CarouselMedia
                         media={displayMedia}
-                        fallbackImage={hasReel ? fallbackImage : undefined}
                         isVisible={index === selectedIndex}
                         isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
                         className="object-cover"

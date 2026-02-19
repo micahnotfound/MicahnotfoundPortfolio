@@ -1,0 +1,46 @@
+{
+  "slug": "kinfolk",
+  "title": "Kinfolk",
+  "year": "2025",
+  "role": "Creative Strategist",
+  "client": "Kinfolk Tech",
+  "summary": "AR/XR storytelling and immersive exhibitions",
+  "description": "Kinfolk Tech leverages over six years of leadership in AR and XR innovation to design award-winning educational and cultural experiences. As Chief Strategy Officer, the focus centers on directing creative vision and strategy for public exhibitions and immersive educational tools.",
+  "technologies": ["AR", "XR", "Immersive Exhibitions", "Educational Tools", "Public Art"],
+  "elements": [
+    {
+      "name": "Main Content",
+      "hero": [
+        {
+          "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
+          "kind": "image",
+          "alt": "Kinfolk header image",
+          "caption": "Kinfolk project header"
+        }
+      ]
+    }
+  ],
+  "thumbnails": [
+    {
+      "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
+      "kind": "image",
+      "alt": "Kinfolk project thumbnail",
+      "caption": "Kinfolk project thumbnail"
+    }
+  ],
+  "cover": {
+    "public_id": "v1756571812/AF_0001s_0002_horizon-line_r3bpir",
+    "kind": "image",
+    "alt": "Kinfolk project cover",
+    "caption": "Kinfolk project cover image"
+  },
+  "reel": {
+    "public_id": "v1766161331/Kinfolk_Reel_famm9n",
+    "kind": "video",
+    "alt": "Kinfolk project reel",
+    "caption": "Kinfolk project reel video"
+  }
+}
+
+
+

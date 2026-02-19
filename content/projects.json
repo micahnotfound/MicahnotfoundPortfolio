@@ -1,5 +1,14 @@
 [
   {
+    "slug": "kinfolk",
+    "title": "Kinfolk",
+    "year": "2025",
+    "role": "Creative Strategist",
+    "client": "Kinfolk Tech",
+    "summary": "AR/XR storytelling and immersive exhibitions",
+    "file": "kinfolk.json"
+  },
+  {
     "slug": "moma",
     "title": "MoMA",
     "year": "2/21",

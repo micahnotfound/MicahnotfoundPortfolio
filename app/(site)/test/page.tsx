@@ -263,10 +263,6 @@ export default function TestPage() {
                 ? project.thumbnails[0]
                 : project.cover)
 
-              const fallbackImage = project.thumbnails && project.thumbnails.length > 0
-                ? project.thumbnails[0]
-                : project.cover
-
               // Only render videos that are current or adjacent (for performance)
               const shouldRender = Math.abs(index - currentVideoIndex) <= 1
 
@@ -279,7 +275,6 @@ export default function TestPage() {
                   {shouldRender && displayMedia && (
                     <CarouselMedia
                       media={displayMedia}
-                      fallbackImage={hasReel ? fallbackImage : undefined}
                       isVisible={index === currentVideoIndex}
                       isAdjacent={Math.abs(index - currentVideoIndex) === 1}
                       className="object-cover"

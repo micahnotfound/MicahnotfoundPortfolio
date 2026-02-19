@@ -187,7 +187,7 @@ export default function HomePage() {
           } else {
             setLogoState(3)
           }
-          const newTop = Math.max(15, 71 - (dragDistance / 150) * 56)
+          const newTop = Math.max(52, 71 - (dragDistance / 150) * 56)
           setHeaderTopPosition(newTop)
         } else {
           setLogoState(0)
@@ -205,15 +205,15 @@ export default function HomePage() {
           } else {
             setLogoState(0)
           }
-          const newTop = Math.min(71, 15 + (absDist / 150) * 56)
+          const newTop = Math.min(71, 52 + (absDist / 150) * 56)
           setHeaderTopPosition(newTop)
         } else {
           setLogoState(3)
-          setHeaderTopPosition(15)
+          setHeaderTopPosition(52)
         }
       } else {
         setLogoState(3)
-        setHeaderTopPosition(15)
+        setHeaderTopPosition(52)
       }
     }
 
@@ -237,7 +237,7 @@ export default function HomePage() {
           requestAnimationFrame(() => {
             setSelectedIndex(0)
             setLogoState(3)
-            setHeaderTopPosition(15)
+            setHeaderTopPosition(52)
             setTimeout(() => setIsAnimating(false), 500)
           })
         } else if (selectedIndex < projects.length - 1) {
@@ -272,7 +272,7 @@ export default function HomePage() {
           setHeaderTopPosition(71)
         } else {
           setLogoState(3)
-          setHeaderTopPosition(15)
+          setHeaderTopPosition(52)
         }
         setDragProgress(0)
         setIsAnimating(false)
@@ -297,15 +297,19 @@ export default function HomePage() {
     if (selectedIndex === index) {
       window.location.href = `/work/${project.slug}`
     } else {
-      setSelectedIndex(index)
-      setLogoState(3)
-      setHeaderTopPosition(20)
+      setIsAnimating(true)
+      requestAnimationFrame(() => {
+        setSelectedIndex(index)
+        setLogoState(3)
+        setHeaderTopPosition(52)
+        setTimeout(() => setIsAnimating(false), 500)
+      })
     }
   }
 
   const getButtonsMarginTop = () => {
-    if (logoState === 0) return '0px'
-    if (logoState === 1) return '0px'
+    if (logoState === 0) return '15px'
+    if (logoState === 1) return '15px'
     if (logoState === 3) return '-150px'
     return '-75px'
   }
@@ -390,6 +394,17 @@ export default function HomePage() {
     <>
       {/* Mobile View - visible on mobile only */}
       <div className="block md:hidden h-screen w-full relative overflow-hidden bg-[#D1D5DB]">
+        {/* CSS for wave animation on text bubble indicators */}
+        <style jsx>{`
+          @keyframes bubbleWave {
+            0%, 100% {
+              width: 12px;
+            }
+            50% {
+              width: 30px;
+            }
+          }
+        `}</style>
         {/* Mobile Header */}
         <div
           className="absolute left-0 w-full z-20 pointer-events-none"
@@ -403,41 +418,43 @@ export default function HomePage() {
             transition: isDragging.current ? 'none' : 'top 500ms ease-out'
           }}
         >
-          <div className="flex items-center justify-start gap-8 pointer-events-auto">
-            <div className="flex items-center gap-8 max-w-full">
-              <div
-                className="flex-shrink-0 cursor-pointer"
-                onClick={() => {
-                  setSelectedIndex(-1)
-                  setLogoState(0)
-                  setHeaderTopPosition(71)
-                }}
-              >
-                <MorphingHeaderLogo
-                  state={logoState}
-                  className="transition-all duration-500 ease-out"
-                  style={{
-                    width: '205px',
-                    height: 'auto'
-                  }}
-                />
-              </div>
-
-              <div
-                className="flex flex-col flex-shrink-0 transition-all duration-500 ease-out"
+          <div className="flex flex-col items-start pointer-events-auto">
+            <div
+              className="flex-shrink-0 cursor-pointer"
+              onClick={() => {
+                setSelectedIndex(-1)
+                setLogoState(0)
+                setHeaderTopPosition(71)
+              }}
+            >
+              <MorphingHeaderLogo
+                state={logoState}
+                className="transition-all duration-500 ease-out"
                 style={{
-                  marginTop: getButtonsMarginTop(),
-                  gap: getButtonGap()
+                  width: '205px',
+                  height: 'auto'
                 }}
-              >
+              />
+            </div>
+
+            {/* Buttons container - positioned underneath M SVG */}
+            <div
+              className="flex flex-row transition-all duration-500 ease-out"
+              style={{
+                marginTop: getButtonsMarginTop(),
+                gap: getButtonGap(),
+                alignItems: 'flex-start'
+              }}
+            >
                 <Link
                   href="/about"
-                  className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
+                  className="text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center flex-shrink-0"
                   style={{
                     border: 'none',
                     padding: '0 1rem',
                     borderRadius: '0px',
                     height: getButtonHeight(),
+                    width: 'auto',
                     opacity: getButtonOpacity(),
                     maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
                     WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
@@ -451,14 +468,17 @@ export default function HomePage() {
                   style={{
                     border: 'none',
                     padding: '0 1rem',
+                    paddingBottom: isContactExpandedMobile ? '1rem' : '0',
                     borderRadius: '0px',
-                    height: isContactExpandedMobile ? '160px' : getButtonHeight(),
-                    width: isContactExpandedMobile ? '250px' : 'auto',
+                    height: isContactExpandedMobile ? '140px' : getButtonHeight(),
+                    minWidth: '85px',
+                    width: isContactExpandedMobile ? 'calc(100vw - 30px - 32px - 85px - 16px)' : 'auto',
+                    maxWidth: isContactExpandedMobile ? '250px' : 'auto',
                     opacity: getButtonOpacity(),
                     maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
                     WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
                     overflow: 'hidden',
-                    transition: 'width 600ms ease-out, height 600ms ease-out'
+                    transition: 'width 600ms ease-out, height 600ms ease-out, max-width 600ms ease-out, opacity 500ms ease-out, padding-bottom 600ms ease-out'
                   }}
                   onClick={() => setIsContactExpandedMobile(!isContactExpandedMobile)}
                 >
@@ -512,7 +532,6 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -614,8 +633,9 @@ export default function HomePage() {
           >
             {projects.map((project, index) => {
               const isSelected = selectedIndex === index
-              const circleSize = 36
-              const rectangleWidth = 24
+              const collapsedHeight = 18
+              const collapsedWidth = 12
+              const expandedHeight = 36
 
               return (
                 <div
@@ -623,14 +643,14 @@ export default function HomePage() {
                   className="cursor-pointer flex-shrink-0 flex justify-end items-center transition-all duration-1000 ease-out"
                   onClick={() => handleThumbnailClick(index, project)}
                   style={{
-                    height: `${circleSize}px`
+                    height: isSelected ? `${expandedHeight}px` : `${collapsedHeight}px`
                   }}
                 >
                   <div
                     className="font-ui flex items-center justify-end transition-all duration-1000 ease-out"
                     style={{
-                      height: `${circleSize}px`,
-                      width: isSelected ? 'auto' : `${rectangleWidth}px`,
+                      height: isSelected ? `${expandedHeight}px` : `${collapsedHeight}px`,
+                      width: isSelected ? 'auto' : `${collapsedWidth}px`,
                       paddingLeft: isSelected ? '16px' : '0px',
                       paddingRight: isSelected ? '29px' : '0px',
                       fontSize: '0.85em',
@@ -639,7 +659,9 @@ export default function HomePage() {
                       backgroundColor: isSelected ? 'white' : 'black',
                       color: isSelected ? 'black' : 'white',
                       overflow: 'visible',
-                      whiteSpace: 'nowrap'
+                      whiteSpace: 'nowrap',
+                      animation: !isSelected && selectedIndex === -1 ? `bubbleWave 2s ease-in-out infinite` : 'none',
+                      animationDelay: `${index * 0.15}s`
                     }}
                   >
                     {isSelected && <span style={{ paddingRight: '12px' }}>{project.title}</span>}
@@ -774,13 +796,14 @@ export default function HomePage() {
               style={{
                 opacity: logoState === 3 ? 0 : 1,
                 transform: logoState === 3 ? 'translateY(-20px)' : 'translateY(0)',
-                pointerEvents: logoState === 3 ? 'none' : 'auto'
+                pointerEvents: logoState === 3 ? 'none' : 'auto',
+                alignItems: 'flex-start'
               }}
             >
               <Link
                 href="/about"
-                className="text-center font-ui bg-core-dark text-white text-base whitespace-nowrap px-4 h-9 flex items-center justify-center"
-                style={{ borderRadius: '0px' }}
+                className="text-center font-ui bg-core-dark text-white text-base whitespace-nowrap px-4 h-9 flex items-center justify-center flex-shrink-0"
+                style={{ borderRadius: '0px', width: 'auto' }}
                 data-cursor-hover
               >
                 about
@@ -790,26 +813,29 @@ export default function HomePage() {
                 className="relative font-ui bg-core-dark text-white cursor-pointer flex-shrink-0"
                 style={{
                   border: 'none',
-                  padding: '0.25rem 1rem',
                   borderRadius: '0px',
                   height: isContactExpandedDesktop ? '160px' : '36px',
-                  width: isContactExpandedDesktop ? '250px' : 'auto',
+                  width: isContactExpandedDesktop ? '250px' : '96px',
                   overflow: 'hidden',
-                  transition: 'width 600ms ease-out, height 600ms ease-out'
+                  transition: 'width 450ms ease-out, height 450ms ease-out',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  paddingLeft: '1rem',
+                  paddingRight: '1rem'
                 }}
                 onClick={() => setIsContactExpandedDesktop(!isContactExpandedDesktop)}
                 data-cursor-hover
               >
                 {/* Button content container */}
                 <div className="relative w-full h-full">
-                  {/* Contact label - always visible at top */}
+                  {/* Contact label - always visible at top, always left-aligned */}
                   <div
-                    className="absolute top-0 left-0 w-full text-base"
+                    className="text-base"
                     style={{
                       height: '36px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: isContactExpandedDesktop ? 'flex-start' : 'center'
+                      justifyContent: 'flex-start'
                     }}
                   >
                     contact
@@ -821,8 +847,9 @@ export default function HomePage() {
                     style={{
                       top: '36px',
                       opacity: isContactExpandedDesktop ? 1 : 0,
-                      transition: 'opacity 600ms ease-out',
-                      pointerEvents: isContactExpandedDesktop ? 'auto' : 'none'
+                      transition: 'opacity 450ms ease-out',
+                      pointerEvents: isContactExpandedDesktop ? 'auto' : 'none',
+                      paddingBottom: '1rem'
                     }}
                   >
                     <div className="space-y-1 text-base pt-2">

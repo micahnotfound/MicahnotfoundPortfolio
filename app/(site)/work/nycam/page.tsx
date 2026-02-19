@@ -191,6 +191,9 @@ export default function NYCAMPage() {
   // Project info
   const projectTitle = "New York City AIDS Memorial"
   const projectDescription = "Portals of Remembrance was an exhibition produced by Kinfolk, reimagining the New York City AIDS Memorial through the work of celebrated contemporary artists. Presented at St. Vincent's Triangle, the project honored underrepresented figures within the HIV and AIDS movement, from Black horse jockeys to disco icon Sylvester. Guided by Kinfolk's vision, the exhibition bridged timelines and communities, transforming the memorial into a living archive of resilience, joy, and collective memory."
+  const projectRole = "Art Director"
+  const projectCollaborators = "Derek Fordjour, Jacolby Satterwhite, Tourmaline & Egyptt Labeija"
+  const projectDate = "June 2025"
 
   // Layout calculations - PRIORITY ORDER:
   // 1. Text at bottom (with bottom margin matching top margin = 52px)
@@ -286,15 +289,13 @@ export default function NYCAMPage() {
       alt: "NYCAM video"
     }
 
-    const fallbackImage = heroImage1
-
     return (
       <div className="h-screen w-full relative bg-black" style={{ overflow: swipeProgress < 1 ? 'hidden' : 'visible' }}>
         {/* Fixed M Logo at top - white, small */}
         <div
           className="fixed left-0 w-full z-50 pointer-events-none"
           style={{
-            top: '20px',
+            top: '45px',
             paddingLeft: '30px',
             paddingRight: '30px'
           }}
@@ -329,7 +330,6 @@ export default function NYCAMPage() {
             {displayMedia && (
               <CarouselMedia
                 media={displayMedia}
-                fallbackImage={fallbackImage}
                 isVisible={true}
                 isAdjacent={false}
                 className="object-cover w-full h-full"
@@ -358,16 +358,23 @@ export default function NYCAMPage() {
             transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             height: 'auto',
             minHeight: '100vh',
-            paddingTop: '115px',
+            paddingTop: '150px',
             overflowY: swipeProgress >= 1 ? 'auto' : 'hidden',
             overflowX: 'hidden'
           }}
         >
           <div className="pb-12">
-            {/* Text content - right aligned with padding */}
-            <div className="px-6 mb-8 text-right">
+            {/* Text content - left aligned with padding */}
+            <div className="px-6 mb-8 text-left">
               {/* Project title */}
-              <h1 className="font-ui text-2xl font-bold mb-3 text-black">{projectTitle}</h1>
+              <h1 className="font-ui text-5xl font-bold mb-3 text-black">{projectTitle}</h1>
+
+              {/* Project metadata */}
+              <div className="mb-4 text-black font-ui text-lg">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
 
               {/* Description */}
               <div className="text-black leading-relaxed font-ui text-sm">
@@ -441,7 +448,7 @@ export default function NYCAMPage() {
 
       {/* M Logo - z-index 4, width 250px constant */}
       <div
-        className="absolute left-0"
+        className="fixed left-0"
         style={{
           top: `${mLogoTop}px`,
           paddingLeft: '80px',
@@ -502,6 +509,12 @@ export default function NYCAMPage() {
               <h1 className="text-5xl font-body font-bold text-core-dark leading-none">
                 {projectTitle}
               </h1>
+
+              <div className="text-sm font-ui text-gray-700 space-y-1">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
 
               <p className="text-base font-ui text-gray-700 leading-relaxed">
                 {projectDescription}

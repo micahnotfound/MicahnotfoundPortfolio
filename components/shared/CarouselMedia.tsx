@@ -120,6 +120,7 @@ export function CarouselMedia({
         <video
           ref={videoRef}
           className="w-full h-full object-cover absolute inset-0"
+          autoPlay
           loop
           muted
           playsInline

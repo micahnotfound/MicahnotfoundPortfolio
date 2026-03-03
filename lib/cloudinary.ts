@@ -6,13 +6,13 @@ import type { MediaItem } from '@/types/content'
  */
 export function buildCloudinaryUrl(
   publicId: string,
-  transforms: string = 'q_auto,f_auto',
+  transforms: string = 'q_auto:good,f_auto',
   format?: string
 ): string {
   const baseUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/image/upload`
   const transformString = transforms ? `/${transforms}` : ''
   const formatString = format ? `/${format}` : ''
-  
+
   return `${baseUrl}${transformString}${formatString}/${publicId}`
 }
 
@@ -22,7 +22,7 @@ export function buildCloudinaryUrl(
 export function buildSrcSet(
   publicId: string,
   widths: number[] = [400, 800, 1200, 1600],
-  transforms: string = 'q_auto,f_auto'
+  transforms: string = 'q_auto:good,f_auto'
 ): string {
   return widths
     .map(width => {
@@ -38,7 +38,7 @@ export function buildSrcSet(
 export function buildThumbnailUrl(mediaItem: MediaItem, width: number = 600): string {
   return buildCloudinaryUrl(
     mediaItem.public_id,
-    `w_${width},h_${Math.round(width * 0.75)},c_fill,q_auto,f_auto`
+    `w_${width},h_${Math.round(width * 0.75)},c_fill,q_auto:good,f_auto`
   )
 }
 
@@ -51,13 +51,18 @@ export function buildFullSizeUrl(mediaItem: MediaItem, width: number = 1600): st
     const baseUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload`
     // Add .mp4 extension if not already present
     const publicId = mediaItem.public_id.endsWith('.mp4') ? mediaItem.public_id : `${mediaItem.public_id}.mp4`
-    // Use f_auto for automatic format detection, q_auto for quality, and vc_auto for codec optimization
-    return `${baseUrl}/f_auto,q_auto,vc_auto/${publicId}`
+    // Optimizations for fast loading:
+    // - w_1920: Max width 1920px (enough for most screens, reduces file size significantly)
+    // - q_auto:good: Good quality with smaller file size
+    // - f_auto: Automatic format (WebM for Chrome, MP4 for Safari)
+    // - vc_auto: Automatic codec selection
+    // - br_2m: Limit bitrate to 2Mbps for faster loading on mobile
+    return `${baseUrl}/w_1920,q_auto:good,f_auto,vc_auto,br_2m/${publicId}`
   }
 
   return buildCloudinaryUrl(
     mediaItem.public_id,
-    `w_${width},q_auto,f_auto`
+    `w_${width},q_auto:good,f_auto`
   )
 }
 

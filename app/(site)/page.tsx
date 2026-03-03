@@ -45,7 +45,6 @@ export default function HomePage() {
     setHoverArea(null)
     const loadProjects = async () => {
       const projectsData = getProjects()
-      await new Promise(resolve => setTimeout(resolve, 2000))
       setProjects(projectsData)
       setIsLoading(false)
     }
@@ -99,16 +98,28 @@ export default function HomePage() {
 
   // Desktop: Track mouse position to detect if near M logo
   useEffect(() => {
+    if (window.innerWidth < 768) return
+
+    let rafId: number | null = null
+
     const handleMouseMove = (e: MouseEvent) => {
-      const distanceFromTop = e.clientY
-      const distanceFromLeft = e.clientX
-      const isNear = distanceFromTop < 600 && distanceFromLeft < 1000
-      setIsMouseNearLogo(isNear)
+      if (rafId !== null) return // Throttle to animation frame
+
+      rafId = requestAnimationFrame(() => {
+        const distanceFromTop = e.clientY
+        const distanceFromLeft = e.clientX
+        const isNear = distanceFromTop < 600 && distanceFromLeft < 1000
+        setIsMouseNearLogo(isNear)
+        rafId = null
+      })
     }
 
-    document.addEventListener('mousemove', handleMouseMove)
-    return () => document.removeEventListener('mousemove', handleMouseMove)
-  }, [isMouseNearLogo])
+    document.addEventListener('mousemove', handleMouseMove, { passive: true })
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      if (rafId !== null) cancelAnimationFrame(rafId)
+    }
+  }, [])
 
   // Desktop: M logo animation based on video state and mouse position
   useEffect(() => {

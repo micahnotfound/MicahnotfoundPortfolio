@@ -142,11 +142,14 @@ export function Media({
     srcSet: buildSrcSet(media.public_id),
     sizes,
     priority,
+    quality: 85,
     ...(priority ? {} : { loading }), // Apply loading only if not priority
     ...(fill ? { fill } : { width, height }),
     className,
     style,
-    onError: () => setImageError(true)
+    onError: () => setImageError(true),
+    placeholder: 'blur' as const,
+    blurDataURL: `data:image/svg+xml;base64,${Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="#f3f4f6"/></svg>').toString('base64')}`
   }
 
   return <Image {...imageProps} />

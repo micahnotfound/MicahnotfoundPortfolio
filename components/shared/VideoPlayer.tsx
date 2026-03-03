@@ -30,8 +30,8 @@ export function VideoPlayer({
   const [isPlaying, setIsPlaying] = useState(false)
   const [showPlayButton, setShowPlayButton] = useState(true)
 
-  // Build Cloudinary video URL
-  const videoUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload/q_auto,f_auto/${publicId}`
+  // Build Cloudinary video URL with optimizations
+  const videoUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload/q_auto:good,f_auto,vc_auto,br_2m/${publicId}`
 
   // Use portrait mode (9:16) if specified, otherwise use the provided dimensions
   const aspectRatio = portrait ? '9/16' : `${width}/${height}`

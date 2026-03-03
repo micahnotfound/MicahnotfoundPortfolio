@@ -25,11 +25,13 @@ export default function HomePage() {
   const [isAnimating, setIsAnimating] = useState(false)
   const [viewportHeight, setViewportHeight] = useState(0)
   const [logoState, setLogoState] = useState<0 | 1 | 2 | 3>(0)
+  const [showSwipeIndicator, setShowSwipeIndicator] = useState(false)
   const mobileCarouselTouchStart = useRef<{ y: number; time: number; startIndex: number } | null>(null)
   const isDragging = useRef(false)
   const dragDirection = useRef<'up' | 'down' | null>(null)
   const lastTouchY = useRef<number>(0)
   const lastTouchTime = useRef<number>(0)
+  const swipeIndicatorTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   // Desktop states
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number | null>(null)
@@ -69,8 +71,47 @@ export default function HomePage() {
     return () => window.removeEventListener('resize', updateViewportHeight)
   }, [])
 
+  // Mobile: Show swipe indicator after 5 seconds with video bob animation
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (window.innerWidth >= 768) return // Exit on desktop
+    if (isLoading || projects.length === 0) return // Wait for projects to load
+
+    console.log('Starting swipe indicator timer...')
+
+    // Start timer to show indicator after 5 seconds
+    swipeIndicatorTimerRef.current = setTimeout(() => {
+      console.log('Showing swipe indicator')
+      setShowSwipeIndicator(true)
+      // Hide after animation completes (5 seconds)
+      setTimeout(() => {
+        console.log('Hiding swipe indicator')
+        setShowSwipeIndicator(false)
+      }, 5000)
+    }, 5000)
+
+    // Hide indicator on any touch interaction
+    const hideIndicator = () => {
+      console.log('Touch detected, hiding indicator')
+      setShowSwipeIndicator(false)
+      if (swipeIndicatorTimerRef.current) {
+        clearTimeout(swipeIndicatorTimerRef.current)
+      }
+    }
+
+    document.addEventListener('touchstart', hideIndicator, { once: true })
+
+    return () => {
+      if (swipeIndicatorTimerRef.current) {
+        clearTimeout(swipeIndicatorTimerRef.current)
+      }
+      document.removeEventListener('touchstart', hideIndicator)
+    }
+  }, [isLoading, projects])
+
   // Desktop: Handle wheel events for horizontal scrolling
   useEffect(() => {
+    if (typeof window === 'undefined') return
     if (window.innerWidth < 768) return
 
     const handleWheel = (e: WheelEvent) => {
@@ -98,6 +139,7 @@ export default function HomePage() {
 
   // Desktop: Track mouse position to detect if near M logo
   useEffect(() => {
+    if (typeof window === 'undefined') return
     if (window.innerWidth < 768) return
 
     let rafId: number | null = null
@@ -154,9 +196,11 @@ export default function HomePage() {
 
   // Mobile: Touch handling
   useEffect(() => {
+    if (typeof window === 'undefined') return
     if (window.innerWidth >= 768) return
 
     const handleTouchStart = (e: TouchEvent) => {
+      console.log('🔵 Touch Start - Y position:', e.touches[0].clientY)
       setIsAnimating(false)
       mobileCarouselTouchStart.current = {
         y: e.touches[0].clientY,
@@ -182,6 +226,7 @@ export default function HomePage() {
 
       if (Math.abs(dragDistance) > 10) {
         dragDirection.current = dragDistance > 0 ? 'up' : 'down'
+        console.log(`🔼 Swipe ${dragDirection.current} detected - Distance: ${Math.round(dragDistance)}px`)
       }
 
       const progress = Math.max(0, Math.min(1, Math.abs(dragDistance) / dragThreshold))
@@ -682,6 +727,74 @@ export default function HomePage() {
             })}
           </div>
         </div>
+
+        {/* Subtle Card Peek - appears after 5 seconds to hint swipeability */}
+        {showSwipeIndicator && viewportHeight > 0 && (
+          <div
+            className="fixed left-0 right-0 bottom-0 z-30 pointer-events-none"
+            style={{
+              height: `${viewportHeight * 0.1}px`, // Show 10% of the card
+              animation: 'cardPeek 3s ease-in-out forwards',
+              transformOrigin: 'bottom'
+            }}
+          >
+            {projects.length > 0 && projects[0] && (
+              <div className="w-full h-full px-3">
+                <div
+                  className="w-full h-full overflow-hidden"
+                  style={{
+                    borderTopLeftRadius: '24px',
+                    borderTopRightRadius: '24px'
+                  }}
+                >
+                  <div style={{
+                    width: '100%',
+                    height: `${viewportHeight}px`,
+                    transform: 'translateY(-90%)' // Show only top 10%
+                  }}>
+                    <CarouselMedia
+                      media={projects[0].reel || projects[0].cover}
+                      isVisible={true}
+                      isAdjacent={false}
+                      priority={false}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* CSS for card peek animation */}
+        <style jsx>{`
+          @keyframes cardPeek {
+            0% {
+              transform: translateY(100%);
+              opacity: 0;
+            }
+            20% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+            40% {
+              transform: translateY(10%);
+              opacity: 1;
+            }
+            60% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+            80% {
+              transform: translateY(10%);
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(100%);
+              opacity: 0;
+            }
+          }
+        `}</style>
       </div>
 
       {/* Desktop View - visible on desktop only */}

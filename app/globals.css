@@ -164,10 +164,24 @@
   /* Text utilities */
   .text-balance {
     text-wrap: balance;
+    -webkit-text-wrap: balance; /* Safari */
+  }
+
+  @supports not (text-wrap: balance) {
+    .text-balance {
+      text-align: left;
+    }
   }
 
   .text-pretty {
     text-wrap: pretty;
+    -webkit-text-wrap: pretty; /* Safari */
+  }
+
+  @supports not (text-wrap: pretty) {
+    .text-pretty {
+      text-align: left;
+    }
   }
 
   /* Accessibility utilities */

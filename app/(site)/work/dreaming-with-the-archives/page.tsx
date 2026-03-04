@@ -11,7 +11,7 @@ import { useMobile } from '@/contexts/MobileContext'
 
 export default function DreamingWithTheArchivesPage() {
   const router = useRouter()
-  const { isMobile } = useMobile() // Use global mobile detection
+  const { isMobile, isLoading: isMobileLoading } = useMobile() // Use global mobile detection
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
@@ -261,6 +261,15 @@ export default function DreamingWithTheArchivesPage() {
   // Positions for dividing line and text (from bottom up)
   const textBottomY = viewportHeight - bottomMargin
   const dividerY = textBottomY - textHeight - paddingBelowLine
+
+  // Show loading screen while mobile detection is in progress
+  if (isMobileLoading) {
+    return (
+      <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
+        {/* Loading screen prevents FOUC */}
+      </div>
+    )
+  }
 
   // Mobile view
   if (isMobile) {

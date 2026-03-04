@@ -11,7 +11,7 @@ import { useMobile } from '@/contexts/MobileContext'
 
 export default function NYCAMPage() {
   const router = useRouter()
-  const { isMobile } = useMobile() // Use global mobile detection
+  const { isMobile, isLoading: isMobileLoading } = useMobile() // Use global mobile detection
   const [scrollY, setScrollY] = useState(0)
   const [laggedScrollY, setLaggedScrollY] = useState(0)
   const [viewportHeight, setViewportHeight] = useState(1000)
@@ -24,12 +24,47 @@ export default function NYCAMPage() {
   const [hoveredHeroImage, setHoveredHeroImage] = useState<number | null>(null) // Track which hero image is hovered (0, 1, or 2)
   const textRef = useRef<HTMLDivElement>(null)
 
+  // ===== LOADING DIAGNOSTICS =====
+  console.log('🔄 [NYCAM] Component render cycle', {
+    timestamp: new Date().toISOString(),
+    isMobile,
+    isMounted,
+    viewportHeight,
+    textHeight,
+    swipeProgress
+  })
+
+  // Track initial mount
+  useEffect(() => {
+    console.log('✅ [NYCAM] Component mounted', {
+      timestamp: new Date().toISOString(),
+      isMobile,
+      userAgent: typeof window !== 'undefined' ? navigator.userAgent : 'SSR'
+    })
+  }, [])
+
+  // Track when isMobile changes
+  useEffect(() => {
+    console.log('📱 [NYCAM] isMobile changed', {
+      timestamp: new Date().toISOString(),
+      isMobile,
+      windowWidth: typeof window !== 'undefined' ? window.innerWidth : 'SSR'
+    })
+  }, [isMobile])
+
   // Mobile detection now handled by global MobileContext
 
   // Track viewport height (only for desktop)
   useEffect(() => {
-    if (isMobile) return
+    if (isMobile) {
+      console.log('⏭️ [NYCAM] Skipping viewport height tracking (mobile mode)')
+      return
+    }
     const updateHeight = () => {
+      console.log('📏 [NYCAM] Viewport height updated', {
+        timestamp: new Date().toISOString(),
+        height: window.innerHeight
+      })
       setViewportHeight(window.innerHeight)
     }
     updateHeight()
@@ -39,19 +74,31 @@ export default function NYCAMPage() {
 
   // Measure text height (remeasure on viewport resize) - only for desktop
   useEffect(() => {
-    if (isMobile) return
+    if (isMobile) {
+      console.log('⏭️ [NYCAM] Skipping text measurement (mobile mode)')
+      return
+    }
     const measureText = () => {
       if (textRef.current) {
-        setTextHeight(textRef.current.offsetHeight)
+        const height = textRef.current.offsetHeight
+        console.log('📐 [NYCAM] Text height measured', {
+          timestamp: new Date().toISOString(),
+          height,
+          wasMounted: isMounted
+        })
+        setTextHeight(height)
         // Mark as mounted after first measurement
-        setIsMounted(true)
+        if (!isMounted) {
+          console.log('✨ [NYCAM] Marking as mounted')
+          setIsMounted(true)
+        }
       }
     }
 
     measureText()
     window.addEventListener('resize', measureText)
     return () => window.removeEventListener('resize', measureText)
-  }, [isMobile])
+  }, [isMobile, isMounted])
 
   // Smooth scroll tracking (only for desktop)
   useEffect(() => {
@@ -273,6 +320,13 @@ export default function NYCAMPage() {
 
   // Mobile view
   if (isMobile) {
+    console.log('📱 [NYCAM] Rendering MOBILE view', {
+      timestamp: new Date().toISOString(),
+      swipeProgress,
+      isDragging,
+      videoPublicId
+    })
+
     const galleryImages = [
       heroImage1,
       heroImage2,
@@ -434,6 +488,26 @@ export default function NYCAMPage() {
     }
     return 1 // 10% for furthest image
   }
+
+  // Show loading screen while mobile detection is in progress
+  if (isMobileLoading) {
+    console.log('⏳ [NYCAM] Showing loading screen (mobile detection in progress)')
+    return (
+      <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
+        {/* Optional: Add a subtle loading indicator */}
+      </div>
+    )
+  }
+
+  console.log('🖥️ [NYCAM] Rendering DESKTOP view', {
+    timestamp: new Date().toISOString(),
+    isMounted,
+    viewportHeight,
+    textHeight,
+    mHeight,
+    scrollY,
+    logoState: getLogoState()
+  })
 
   return (
     <div className="min-h-screen bg-[#D1D5DB]">

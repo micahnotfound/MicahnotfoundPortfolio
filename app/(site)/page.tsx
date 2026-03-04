@@ -1139,27 +1139,52 @@ export default function HomePage() {
                   return acronymMap[project.title] || project.title
                 }
 
-                // Calculate collapsed button width based on viewport
-                const getCollapsedWidth = () => {
-                  if (typeof window === 'undefined') return 200
+                // Calculate button widths based on viewport and hover state
+                const getButtonWidth = () => {
+                  if (typeof window === 'undefined') {
+                    return isHovered ? 800 : 200
+                  }
+
                   const currentViewportWidth = viewportWidth || window.innerWidth
                   const totalPadding = 160 // 80px left + 80px right
-                  const expansionBuffer = 100 // room for selected button to grow
                   const gapSpace = (projects.length - 1) * 10 // 0.6rem gaps (~10px)
+
+                  // When someone is hovered, calculate expanded and collapsed widths
+                  if (someoneIsHovered) {
+                    if (isHovered) {
+                      // This button is expanded - determine collapsed width first
+                      let collapsedWidth: number
+                      if (currentViewportWidth < 1000) {
+                        collapsedWidth = 60 // Very small - text will be cut off
+                      } else if (currentViewportWidth < 1300) {
+                        collapsedWidth = 80 // Small - text will be cut off
+                      } else {
+                        collapsedWidth = 120 // Reasonably small
+                      }
+
+                      // Calculate how much space the collapsed buttons take
+                      const otherButtonsWidth = (projects.length - 1) * collapsedWidth
+
+                      // This expanded button gets all remaining space
+                      const expandedWidth = currentViewportWidth - totalPadding - gapSpace - otherButtonsWidth
+                      return Math.max(200, Math.min(800, expandedWidth))
+                    } else {
+                      // This button is collapsed - make it small
+                      if (currentViewportWidth < 1000) {
+                        return 60 // Very small - text will be cut off
+                      } else if (currentViewportWidth < 1300) {
+                        return 80 // Small - text will be cut off
+                      } else {
+                        return 120 // Reasonably small
+                      }
+                    }
+                  }
+
+                  // When nothing is hovered, distribute space evenly
+                  const expansionBuffer = 100 // leave room for future expansion
                   const availableWidth = currentViewportWidth - totalPadding - expansionBuffer - gapSpace
                   const buttonWidth = availableWidth / projects.length
-                  // Clamp between 100px minimum and 200px maximum
                   return Math.max(100, Math.min(200, buttonWidth))
-                }
-
-                const getExpandedWidth = () => {
-                  if (typeof window === 'undefined') return 800
-                  const currentViewportWidth = viewportWidth || window.innerWidth
-                  const collapsedWidth = getCollapsedWidth()
-                  const availableWidth = currentViewportWidth - 160 - 40
-                  const otherBubblesWidth = (projects.length - 1) * collapsedWidth + (projects.length - 1) * 10
-                  const maxExpandedWidth = availableWidth - otherBubblesWidth
-                  return Math.max(collapsedWidth, Math.min(800, maxExpandedWidth))
                 }
 
                 const handleMouseEnter = () => {
@@ -1219,7 +1244,7 @@ export default function HomePage() {
                       href={`/work/${project.slug}`}
                       className="relative block transition-all duration-[900ms] ease-out"
                       style={{
-                        width: isHovered ? `${getExpandedWidth()}px` : `${getCollapsedWidth()}px`,
+                        width: `${getButtonWidth()}px`,
                         height: '36px'
                       }}
                     >
@@ -1229,10 +1254,23 @@ export default function HomePage() {
                           backgroundColor: someoneIsHovered && !isHovered ? '#D1D5DB' : '#000000',
                           color: someoneIsHovered && !isHovered ? '#000000' : '#FFFFFF',
                           opacity: someoneIsHovered && !isHovered ? 0.3 : 1,
-                          borderRadius: '0px'
+                          borderRadius: '0px',
+                          overflow: 'hidden'
                         }}
                       >
-                        <span className="px-4 text-base">{getDisplayTitle()}</span>
+                        <span
+                          className="px-4 text-base"
+                          style={{
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: 'block',
+                            width: '100%',
+                            textAlign: 'center'
+                          }}
+                        >
+                          {getDisplayTitle()}
+                        </span>
                       </div>
                     </Link>
                   </div>

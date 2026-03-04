@@ -42,6 +42,7 @@ export default function HomePage() {
   const [hasEverHovered, setHasEverHovered] = useState(false)
   const [isContactExpandedMobile, setIsContactExpandedMobile] = useState(false)
   const [isContactExpandedDesktop, setIsContactExpandedDesktop] = useState(false)
+  const [viewportWidth, setViewportWidth] = useState(0)
 
   useEffect(() => {
     setHoverArea(null)
@@ -69,6 +70,16 @@ export default function HomePage() {
     updateViewportHeight()
     window.addEventListener('resize', updateViewportHeight)
     return () => window.removeEventListener('resize', updateViewportHeight)
+  }, [])
+
+  // Track viewport width for desktop button sizing
+  useEffect(() => {
+    const updateViewportWidth = () => {
+      setViewportWidth(window.innerWidth)
+    }
+    updateViewportWidth()
+    window.addEventListener('resize', updateViewportWidth)
+    return () => window.removeEventListener('resize', updateViewportWidth)
   }, [])
 
   // Mobile: Show swipe indicator after 5 seconds with video bob animation
@@ -445,6 +456,18 @@ export default function HomePage() {
   }
 
   const skeletonCount = 6
+
+  // Calculate skeleton button width based on viewport
+  const getSkeletonWidth = () => {
+    if (typeof window === 'undefined') return 200
+    const currentViewportWidth = viewportWidth || window.innerWidth
+    const totalPadding = 160 // 80px left + 80px right
+    const expansionBuffer = 100 // room for expansion
+    const gapSpace = (skeletonCount - 1) * 10 // 0.6rem gaps
+    const availableWidth = currentViewportWidth - totalPadding - expansionBuffer - gapSpace
+    const buttonWidth = availableWidth / skeletonCount
+    return Math.max(100, Math.min(200, buttonWidth))
+  }
 
   return (
     <>
@@ -1028,7 +1051,7 @@ export default function HomePage() {
                 <div
                   key={`skeleton-${index}`}
                   className="flex-shrink-0 animate-pulse"
-                  style={{ width: '200px', height: '36px' }}
+                  style={{ width: `${getSkeletonWidth()}px`, height: '36px' }}
                 >
                   <div className="bg-gray-300 h-full w-full" style={{ borderRadius: '0px' }} />
                 </div>
@@ -1050,13 +1073,27 @@ export default function HomePage() {
                   return acronymMap[project.title] || project.title
                 }
 
+                // Calculate collapsed button width based on viewport
+                const getCollapsedWidth = () => {
+                  if (typeof window === 'undefined') return 200
+                  const currentViewportWidth = viewportWidth || window.innerWidth
+                  const totalPadding = 160 // 80px left + 80px right
+                  const expansionBuffer = 100 // room for selected button to grow
+                  const gapSpace = (projects.length - 1) * 10 // 0.6rem gaps (~10px)
+                  const availableWidth = currentViewportWidth - totalPadding - expansionBuffer - gapSpace
+                  const buttonWidth = availableWidth / projects.length
+                  // Clamp between 100px minimum and 200px maximum
+                  return Math.max(100, Math.min(200, buttonWidth))
+                }
+
                 const getExpandedWidth = () => {
                   if (typeof window === 'undefined') return 800
-                  const viewportWidth = window.innerWidth
-                  const availableWidth = viewportWidth - 160 - 40
-                  const otherBubblesWidth = (projects.length - 1) * 200 + (projects.length - 1) * 10
+                  const currentViewportWidth = viewportWidth || window.innerWidth
+                  const collapsedWidth = getCollapsedWidth()
+                  const availableWidth = currentViewportWidth - 160 - 40
+                  const otherBubblesWidth = (projects.length - 1) * collapsedWidth + (projects.length - 1) * 10
                   const maxExpandedWidth = availableWidth - otherBubblesWidth
-                  return Math.max(200, Math.min(800, maxExpandedWidth))
+                  return Math.max(collapsedWidth, Math.min(800, maxExpandedWidth))
                 }
 
                 const handleMouseEnter = () => {
@@ -1116,7 +1153,7 @@ export default function HomePage() {
                       href={`/work/${project.slug}`}
                       className="relative block transition-all duration-[900ms] ease-out"
                       style={{
-                        width: isHovered ? getExpandedWidth() : '200px',
+                        width: isHovered ? `${getExpandedWidth()}px` : `${getCollapsedWidth()}px`,
                         height: '36px'
                       }}
                     >

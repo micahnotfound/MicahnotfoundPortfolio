@@ -82,7 +82,8 @@ export const supportsTouchEvents = (): boolean => {
   return (
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
-    (window.DocumentTouch && document instanceof window.DocumentTouch)
+    (typeof (window as any).DocumentTouch !== 'undefined' &&
+     document instanceof (window as any).DocumentTouch)
   )
 }
 
@@ -95,15 +96,15 @@ export const supportsPassiveEvents = (): boolean => {
   let passiveSupported = false
 
   try {
-    const options = {
+    const options: any = {
       get passive() {
         passiveSupported = true
         return false
       }
     }
 
-    window.addEventListener('test', null as any, options)
-    window.removeEventListener('test', null as any, options)
+    window.addEventListener('test' as any, null as any, options)
+    window.removeEventListener('test' as any, null as any, options)
   } catch (err) {
     passiveSupported = false
   }

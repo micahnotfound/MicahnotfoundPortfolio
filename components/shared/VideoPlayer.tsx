@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { siteSettings } from '@/config/siteSettings'
+import { useVideoPlayback } from '@/contexts/VideoPlaybackContext'
 
 interface VideoPlayerProps {
   publicId: string
@@ -29,12 +30,51 @@ export function VideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showPlayButton, setShowPlayButton] = useState(true)
+  const { getPlaybackTime, setPlaybackTime } = useVideoPlayback()
 
   // Build Cloudinary video URL with optimizations
   const videoUrl = `https://res.cloudinary.com/${siteSettings.cloudName}/video/upload/q_auto:good,f_auto,vc_auto,br_2m/${publicId}`
 
   // Use portrait mode (9:16) if specified, otherwise use the provided dimensions
   const aspectRatio = portrait ? '9/16' : `${width}/${height}`
+
+  // Restore playback position when metadata is available
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleLoadedMetadata = () => {
+      const savedTime = getPlaybackTime(publicId)
+      if (savedTime > 0 && savedTime < video.duration) {
+        video.currentTime = savedTime
+      }
+    }
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata)
+    return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+    }
+  }, [getPlaybackTime, publicId])
+
+  // Persist playback time while the video is playing (throttled)
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    let lastSaved = 0
+
+    const handleTimeUpdate = () => {
+      const now = Date.now()
+      if (now - lastSaved < 500) return
+      lastSaved = now
+      setPlaybackTime(publicId, video.currentTime)
+    }
+
+    video.addEventListener('timeupdate', handleTimeUpdate)
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate)
+    }
+  }, [publicId, setPlaybackTime])
 
   const handlePlay = () => {
     if (videoRef.current) {

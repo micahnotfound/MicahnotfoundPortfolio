@@ -114,8 +114,8 @@ export function CarouselMedia({
 
   // For videos: always render video (so it can load), show first frame immediately
   if (media.kind === 'video') {
-    // Use aggressive preloading only for visible, metadata for adjacent, none for others
-    const preloadStrategy = isVisible ? 'auto' : isAdjacent ? 'metadata' : 'none'
+    // Use aggressive preloading for visible and adjacent videos so they are ready before you see them
+    const preloadStrategy = isVisible || isAdjacent ? 'auto' : 'none'
 
     return (
       <div className={`relative w-full h-full ${className}`}>

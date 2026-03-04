@@ -6,6 +6,7 @@ import { ConditionalLayout } from '@/components/shared/ConditionalLayout'
 import { MagneticCursor } from '@/components/shared/MagneticCursor'
 import { HoverProvider } from '@/contexts/HoverContext'
 import { MobileProvider } from '@/contexts/MobileContext'
+import { VideoPlaybackProvider } from '@/contexts/VideoPlaybackContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -68,13 +69,15 @@ export default function RootLayout({
         <MagneticCursor />
         <MobileProvider>
           <HoverProvider>
-            <ConditionalLayout>
-              {/* Header is now conditionally rendered inside Header component */}
-              <Header />
-              <main id="main-content" className="flex-1">
-                {children}
-              </main>
-            </ConditionalLayout>
+            <VideoPlaybackProvider>
+              <ConditionalLayout>
+                {/* Header is now conditionally rendered inside Header component */}
+                <Header />
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
+              </ConditionalLayout>
+            </VideoPlaybackProvider>
           </HoverProvider>
         </MobileProvider>
       </body>

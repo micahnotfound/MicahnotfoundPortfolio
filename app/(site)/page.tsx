@@ -688,8 +688,13 @@ export default function HomePage() {
                     {imageHeight !== '0px' && displayMedia && (
                       <CarouselMedia
                         media={displayMedia}
+                        // When no project is selected yet (selectedIndex === -1), treat the first card
+                        // as "adjacent" so its video fully preloads before the user swipes up.
                         isVisible={index === selectedIndex}
-                        isAdjacent={Math.abs(index - selectedIndex) === 1 || (selectedIndex === -1 && index === 0)}
+                        isAdjacent={
+                          Math.abs(index - selectedIndex) === 1 ||
+                          (selectedIndex === -1 && index === 0)
+                        }
                         className="object-cover"
                         alt={project.title}
                         priority={index === 0}
@@ -751,13 +756,37 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Swipe Up Icon and Text - centered above card peek */}
+        {showSwipeIndicator && viewportHeight > 0 && (
+          <div
+            className="fixed z-40 pointer-events-none flex flex-col items-center"
+            style={{
+              left: '50%',
+              transform: 'translateX(-50%)',
+              bottom: `${viewportHeight * 0.1 + 50 + 49}px`, // Position above the card peek + 49px up
+              animation: 'iconBobAndFade 5s ease-in-out forwards'
+            }}
+          >
+            <img
+              src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1772578707/swipeUp_bxdyww.svg"
+              alt="Swipe up"
+              style={{
+                width: '52px',
+                height: '52px',
+                marginBottom: '8px'
+              }}
+            />
+            <span className="font-ui text-white text-sm">swipe up</span>
+          </div>
+        )}
+
         {/* Subtle Card Peek - appears after 5 seconds to hint swipeability */}
         {showSwipeIndicator && viewportHeight > 0 && (
           <div
             className="fixed left-0 right-0 bottom-0 z-30 pointer-events-none"
             style={{
-              height: `${viewportHeight * 0.1}px`, // Show 10% of the card
-              animation: 'cardPeek 3s ease-in-out forwards',
+              height: `${viewportHeight * 0.06}px`, // Show 6% of the card (reduced from 10%)
+              animation: 'cardPeek 5s ease-in-out forwards',
               transformOrigin: 'bottom'
             }}
           >
@@ -773,7 +802,7 @@ export default function HomePage() {
                   <div style={{
                     width: '100%',
                     height: `${viewportHeight}px`,
-                    transform: 'translateY(-90%)' // Show only top 10%
+                    transform: 'translateY(-94%)' // Show only top 6%
                   }}>
                     <CarouselMedia
                       media={projects[0].reel || projects[0].cover}
@@ -789,32 +818,66 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* CSS for card peek animation */}
+        {/* CSS for card peek and swipe indicator animations */}
         <style jsx>{`
           @keyframes cardPeek {
             0% {
               transform: translateY(100%);
               opacity: 0;
             }
-            20% {
+            15% {
               transform: translateY(0);
               opacity: 1;
             }
-            40% {
-              transform: translateY(10%);
+            35% {
+              transform: translateY(8%);
               opacity: 1;
             }
-            60% {
+            55% {
               transform: translateY(0);
               opacity: 1;
             }
-            80% {
-              transform: translateY(10%);
+            75% {
+              transform: translateY(8%);
+              opacity: 1;
+            }
+            90% {
+              transform: translateY(0);
               opacity: 1;
             }
             100% {
               transform: translateY(100%);
               opacity: 0;
+            }
+          }
+          @keyframes iconBobAndFade {
+            0% {
+              opacity: 0;
+              transform: translateX(-50%) translateY(0px);
+            }
+            15% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(0px);
+            }
+            35% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(-15px);
+            }
+            55% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(0px);
+            }
+            75% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(-15px);
+            }
+            90% {
+              opacity: 1;
+              transform: translateX(-50%) translateY(0px);
+            }
+            100% {
+              opacity: 0;
+              transform: translateX(-50%) translateY(0px);
             }
           }
         `}</style>
@@ -874,7 +937,9 @@ export default function HomePage() {
                   ? project.thumbnails[0]
                   : project.cover
 
-                const shouldRender = Math.abs(index - currentVideoIndex) <= 1
+                // Render a slightly wider band of videos so we can preload ahead of the current one
+                const distanceFromCurrent = Math.abs(index - currentVideoIndex)
+                const shouldRender = distanceFromCurrent <= 2
 
                 // Set custom focal point for specific projects
                 const getObjectPosition = () => {
@@ -902,7 +967,8 @@ export default function HomePage() {
                         <CarouselMedia
                           media={displayMedia}
                           isVisible={index === currentVideoIndex}
-                          isAdjacent={Math.abs(index - currentVideoIndex) === 1}
+                          // Treat nearby videos as adjacent so they fully preload in the background
+                          isAdjacent={distanceFromCurrent > 0 && distanceFromCurrent <= 2}
                           className="object-cover"
                           alt={project.title}
                           priority={index === 0}

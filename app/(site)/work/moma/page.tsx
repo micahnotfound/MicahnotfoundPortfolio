@@ -206,7 +206,7 @@ export default function MomaPage() {
 
   const exhibitionPhoto1 = { public_id: "v1756780128/R1_A_awyxgz.png", kind: "image" as const, alt: "MoMA exhibition view 1" }
   const exhibitionPhoto2 = { public_id: "v1756780152/R1_B_tqtykc.png", kind: "image" as const, alt: "MoMA exhibition view 2" }
-  const exhibitionPhoto3 = { public_id: "v1756780124/R2_pad3q3.jpg", kind: "image" as const, alt: "MoMA exhibition view 3" }
+  const exhibitionPhoto3 = { public_id: "v1772655002/ToussaintCircle_nqwap5", kind: "image" as const, alt: "Toussaint Louverture" }
   const exhibitionPhoto4 = { public_id: "v1756780144/R3_A_iztwci.png", kind: "image" as const, alt: "MoMA exhibition view 4" }
   const exhibitionPhoto5 = { public_id: "v1756780140/R3_B_dbzhsf.png", kind: "image" as const, alt: "MoMA exhibition view 5" }
   const exhibitionPhoto6 = { public_id: "v1756780136/R3_C_qfosmh.png", kind: "image" as const, alt: "MoMA exhibition view 6" }
@@ -233,6 +233,10 @@ export default function MomaPage() {
     { public_id: "v1756680387/Image_Sequence_8_lscign", kind: "image" as const, alt: "David Ruggles profile 4" }
   ]
 
+  const toussaintLouvertureImages = [
+    { public_id: "v1772653853/ToussaintCircle_rtaqpi", kind: "image" as const, alt: "Toussaint Louverture profile 1" }
+  ]
+
   const videoPublicId = "v1756685191/Nested_Sequence_02_lwwymc"
   const projectTitle = "MoMA"
   const projectDescription = "Created by Kinfolk for MoMA's New York, New Publics (2023), The Monuments Project was a five-part installation reimagining the role of monuments in public space. The work centered on Black and Brown enclaves across New York City, honoring communities who cultivated safety, resistance, and belonging. Figures such as Seneca Village, the Young Lords, Toussaint Louverture, and David Ruggles were brought to life through archival research and contemporary storytelling. Anchored on raw red maple pedestals, the sculptures invited viewers to reconsider which histories are remembered and how they endure."
@@ -244,7 +248,7 @@ export default function MomaPage() {
   const mobileGalleryImages = [
     exhibitionPhoto1, exhibitionPhoto2, exhibitionPhoto3,
     exhibitionPhoto4, exhibitionPhoto5, exhibitionPhoto6, exhibitionPhoto7,
-    ...senecaVillageImages, ...youngLordsImages, ...davidRugglesImages
+    ...senecaVillageImages, ...youngLordsImages, ...toussaintLouvertureImages, ...davidRugglesImages
   ]
 
   const momaReel = { public_id: videoPublicId, kind: "video" as const, alt: "MoMA reel" }
@@ -669,6 +673,23 @@ export default function MomaPage() {
         {/* David Ruggles */}
         <div className="flex" style={{ gap: '25px', marginBottom: '48px', height: '600px' }}>
           {davidRugglesImages.map((image, idx) => (
+            <div
+              key={idx}
+              className="overflow-hidden"
+              style={{
+                borderRadius: '24px',
+                height: '600px',
+                flex: '1'
+              }}
+            >
+              <Media media={image} className="w-full h-full object-cover" alt={image.alt} />
+            </div>
+          ))}
+        </div>
+
+        {/* Toussaint Louverture */}
+        <div className="flex" style={{ gap: '25px', marginBottom: '48px', height: '600px' }}>
+          {toussaintLouvertureImages.map((image, idx) => (
             <div
               key={idx}
               className="overflow-hidden"

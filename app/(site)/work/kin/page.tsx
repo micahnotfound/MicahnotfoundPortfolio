@@ -509,10 +509,11 @@ export default function KinPage() {
       </div>
 
       <div
-        className="fixed bg-[#D1D5DB] pb-12 space-y-12 left-0 right-0"
+        className="fixed bg-[#D1D5DB] space-y-12 left-0 right-0"
         style={{
           top: '100vh',
           paddingTop: '52px',
+          paddingBottom: '80px',
           paddingLeft: '80px',
           paddingRight: '80px',
           transform: `translateY(-${contentScrollOffset}px)`,
@@ -563,7 +564,7 @@ export default function KinPage() {
         </div>
       </div>
 
-      <div style={{ height: '3500px' }} aria-hidden="true" />
+      <div style={{ height: '3924px' }} aria-hidden="true" />
     </div>
     </>
   )

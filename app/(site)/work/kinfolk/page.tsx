@@ -406,7 +406,6 @@ export default function KinfolkPage() {
                 media={heroImage3}
                 className="w-full h-full object-cover"
                 alt={heroImage3.alt}
-                focalPoint={{ x: 85, y: 85 }}
               />
             </div>
           </div>

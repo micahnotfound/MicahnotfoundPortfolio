@@ -1133,7 +1133,8 @@ export default function HomePage() {
 
                   const acronymMap: { [key: string]: string } = {
                     'Dreaming With The Archives': 'DWTA',
-                    'NYC AIDS Memorial': 'NYCAM'
+                    'NYC AIDS Memorial': 'NYCAM',
+                    'KIN Festival': 'KIN'
                   }
 
                   return acronymMap[project.title] || project.title

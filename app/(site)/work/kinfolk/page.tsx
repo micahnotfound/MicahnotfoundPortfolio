@@ -150,7 +150,7 @@ export default function KinfolkPage() {
   }
 
   const heroImage2 = {
-    public_id: "v1772841772/image_2_fmj8v0",
+    public_id: "v1773112323/image_21_ihz34v",
     kind: "image" as const,
     alt: "Kinfolk header image 2"
   }
@@ -499,20 +499,7 @@ export default function KinfolkPage() {
           </div>
         </div>
 
-        {/* Row 5: Three photo row */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto14} className="w-full h-full object-cover" alt={exhibitionPhoto14.alt} />
-          </div>
-          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto15} className="w-full h-full object-cover" alt={exhibitionPhoto15.alt} />
-          </div>
-          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto16} className="w-full h-full object-cover" alt={exhibitionPhoto16.alt} />
-          </div>
-        </div>
-
-        {/* Row 6: Two photo row */}
+        {/* Row 5: Two photo row */}
         <div className="flex" style={{ gap: '25px' }}>
           <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto17} className="w-full h-full object-cover" alt={exhibitionPhoto17.alt} />
@@ -521,15 +508,10 @@ export default function KinfolkPage() {
             <Media media={exhibitionPhoto18} className="w-full h-full object-cover" alt={exhibitionPhoto18.alt} />
           </div>
         </div>
-
-        {/* Row 7: Single full-width photo */}
-        <div className="overflow-hidden" style={{ borderRadius: '24px', height: '600px', width: '100%' }}>
-          <Media media={exhibitionPhoto19} className="w-full h-full object-cover" alt={exhibitionPhoto19.alt} />
-        </div>
       </div>
 
       {/* Spacer to create scroll space for gallery */}
-      <div style={{ height: '500vh' }} />
+      <div style={{ height: '4080px' }} />
       </div>
     )
   }

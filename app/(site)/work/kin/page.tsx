@@ -163,7 +163,7 @@ export default function KinPage() {
   }
 
   const heroImage2 = {
-    public_id: "v1765922612/PreservationPark_Mocks_fp2i3e",
+    public_id: "v1772683226/kin_0001s_0000_Layer-6_rcj8ez",
     kind: "image" as const,
     alt: "Kin Festival header image 2"
   }
@@ -175,21 +175,33 @@ export default function KinPage() {
   }
 
   // Exhibition photos - KIN Festival gallery
-  const exhibitionPhoto1 = { public_id: "v1765920441/DSC_1445_ecalzy", kind: "image" as const, alt: "Kin Festival exhibition view 1" }
-  const exhibitionPhoto2 = { public_id: "v1765920440/DSC_1604_stxb9f", kind: "image" as const, alt: "Kin Festival exhibition view 2" }
+  const exhibitionPhoto1 = { public_id: "v1773100428/kin_0001s_0001_Layer-71_kfmjiu", kind: "image" as const, alt: "Kin Festival exhibition view 1" }
+  const exhibitionPhoto2 = { public_id: "v1773101410/DSC_0816_1_1_oxq7ww", kind: "image" as const, alt: "Kin Festival exhibition view 2" }
   const exhibitionPhoto3 = { public_id: "v1765920439/DSC_0843_psxcyc", kind: "image" as const, alt: "Kin Festival exhibition view 3" }
-  const exhibitionPhoto4 = { public_id: "v1765920434/DSC_0819_nz2bv7", kind: "image" as const, alt: "Kin Festival exhibition view 4" }
-  const exhibitionPhoto5 = { public_id: "v1765920413/DSC_1678_us5bsb", kind: "image" as const, alt: "Kin Festival exhibition view 5" }
+  const exhibitionPhoto4 = { public_id: "v1772683227/5_jbimdn", kind: "image" as const, alt: "Kin Festival exhibition view 4" }
+  const exhibitionPhoto5 = { public_id: "v1772683222/3_lck7xf", kind: "image" as const, alt: "Kin Festival exhibition view 5" }
   const exhibitionPhoto6 = { public_id: "v1765920407/DSC_0032_tfzu5p", kind: "image" as const, alt: "Kin Festival exhibition view 6" }
-  const exhibitionPhoto7 = { public_id: "v1765920376/DSC_1611_i0591m", kind: "image" as const, alt: "Kin Festival exhibition view 7" }
+  const exhibitionPhoto7 = { public_id: "v1765920434/DSC_0819_nz2bv7", kind: "image" as const, alt: "Kin Festival exhibition view 7" }
   const exhibitionPhoto8 = { public_id: "v1765920360/DSC_1735_y8ivv0", kind: "image" as const, alt: "Kin Festival exhibition view 8" }
+  const exhibitionPhoto9 = { public_id: "v1772683226/kin_0001s_0003_Layer-11_w9dcbj", kind: "image" as const, alt: "Kin Festival exhibition view 9" }
+  const exhibitionPhoto10 = { public_id: "v1765922612/PreservationPark_Mocks_fp2i3e", kind: "image" as const, alt: "Kin Festival exhibition view 10" }
+  const exhibitionPhoto11 = { public_id: "v1772683226/kin_0001s_0000_Layer-6_rcj8ez", kind: "image" as const, alt: "Kin Festival exhibition view 11" }
+  const exhibitionPhoto12 = { public_id: "v1772656504/wsa_mocks_0002_Layer-Comp-3_rhdmrn", kind: "image" as const, alt: "Kin Festival exhibition view 12" }
+  const exhibitionPhoto13 = { public_id: "v1772683221/kin_0001s_0005_Layer-13_k1i3i3", kind: "image" as const, alt: "Kin Festival exhibition view 13" }
+  const exhibitionPhoto14 = { public_id: "v1772683224/kin_0001s_0019_Layer-27_vmyyfy", kind: "image" as const, alt: "Kin Festival exhibition view 14" }
+  const exhibitionPhoto15 = { public_id: "v1772683222/kin_0001s_0015_Layer-23_bpyhr7", kind: "image" as const, alt: "Kin Festival exhibition view 15" }
+  const exhibitionPhoto16 = { public_id: "v1772683226/kin_0001s_0006_Layer-14_oiidge", kind: "image" as const, alt: "Kin Festival exhibition view 16" }
+  const exhibitionPhoto17 = { public_id: "v1772683221/kin_0001s_0012_Layer-20_duugwf", kind: "image" as const, alt: "Kin Festival exhibition view 17" }
+  const exhibitionPhoto18 = { public_id: "v1773101412/DSC_0259_1_vaesyz", kind: "image" as const, alt: "Kin Festival exhibition view 18" }
+  const exhibitionPhoto19 = { public_id: "v1765920376/DSC_1611_i0591m", kind: "image" as const, alt: "Kin Festival exhibition view 19" }
+  const exhibitionPhoto20 = { public_id: "v1772683226/kin_0001s_0011_Layer-19_nhgas4", kind: "image" as const, alt: "Kin Festival exhibition view 20" }
 
   const videoPublicId = "v1765922400/KIN_Reel_tfv4qr"
   const projectTitle = "KIN Festival"
-  const projectRole = "Immersive Art Director and Preservation Park Exhibition Lead"
+  const projectRole = "Exhibition Lead"
   const projectCollaborators = "Kinfolk Team"
   const projectDate = "October 2025"
-  const projectDescription = "KIN Festival is a celebration of community, connection, and culture. Through immersive experiences and artistic expression, the festival brings people together to explore themes of identity, belonging, and shared humanity."
+  const projectDescription = "A month-long festival that transformed two floors of WSA into a living archive exploring cultural preservation, and community storytelling. At the center was Preservation Park, an exhibition of Kinfolk's digital monuments co-created with various artists and grassroots organizations. Designed as a landscape of portals into underrepresented histories, the exhibition combined physical installations with AR experiences allowing visitors to encounter archival narratives in new ways. Surrounding the installation were gathering spaces including a reading room, performance stage, and café that supported workshops, conversations, and performances that turned the exhibition into an active site of cultural memory."
 
   // Mobile gallery images
   const mobileGalleryImages = [
@@ -427,6 +439,12 @@ export default function KinPage() {
                 {projectTitle}
               </h1>
 
+              <div className="text-sm font-ui text-gray-700 space-y-1">
+                <p><strong>Role:</strong> {projectRole}</p>
+                <p><strong>Collaborators:</strong> {projectCollaborators}</p>
+                <p><strong>Date:</strong> {projectDate}</p>
+              </div>
+
               <p className="text-base font-ui text-gray-700 leading-relaxed">
                 {projectDescription}
               </p>
@@ -535,22 +553,7 @@ export default function KinPage() {
           </div>
         </div>
 
-        {/* Two photo row */}
-        <div className="flex" style={{ gap: '25px' }}>
-          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto8} className="w-full h-full object-cover" alt={exhibitionPhoto8.alt} />
-          </div>
-          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
-            <Media media={exhibitionPhoto3} className="w-full h-full object-cover" alt={exhibitionPhoto3.alt} />
-          </div>
-        </div>
-
-        {/* Full-width photo 6 */}
-        <div className="overflow-hidden" style={{ borderRadius: '24px', height: '600px', width: '100%' }}>
-          <Media media={exhibitionPhoto6} className="w-full h-full object-cover" alt={exhibitionPhoto6.alt} />
-        </div>
-
-        {/* Three photo row at bottom */}
+        {/* Three photo row */}
         <div className="flex" style={{ gap: '25px' }}>
           <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
             <Media media={exhibitionPhoto5} className="w-full h-full object-cover" alt={exhibitionPhoto5.alt} />
@@ -562,9 +565,65 @@ export default function KinPage() {
             <Media media={exhibitionPhoto4} className="w-full h-full object-cover" alt={exhibitionPhoto4.alt} />
           </div>
         </div>
+
+        {/* Full-width photo 6 */}
+        <div className="overflow-hidden" style={{ borderRadius: '24px', height: '600px', width: '100%' }}>
+          <Media media={exhibitionPhoto6} className="w-full h-full object-cover" alt={exhibitionPhoto6.alt} />
+        </div>
+
+        {/* Row 5: Three photo row - NEW */}
+        <div className="flex" style={{ gap: '25px' }}>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto14} className="w-full h-full object-cover" alt={exhibitionPhoto14.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto15} className="w-full h-full object-cover" alt={exhibitionPhoto15.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto16} className="w-full h-full object-cover" alt={exhibitionPhoto16.alt} />
+          </div>
+        </div>
+
+        {/* Row 6: Two photo row */}
+        <div className="flex" style={{ gap: '25px' }}>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto9} className="w-full h-full object-cover" alt={exhibitionPhoto9.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto10} className="w-full h-full object-cover" alt={exhibitionPhoto10.alt} />
+          </div>
+        </div>
+
+        {/* Row 7: Three photo row */}
+        <div className="flex" style={{ gap: '25px' }}>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto17} className="w-full h-full object-cover" alt={exhibitionPhoto17.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto18} className="w-full h-full object-cover" alt={exhibitionPhoto18.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flex: '1', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto19} className="w-full h-full object-cover" alt={exhibitionPhoto19.alt} />
+          </div>
+        </div>
+
+        {/* Row 8: Two photos */}
+        <div className="flex" style={{ gap: '25px' }}>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto12} className="w-full h-full object-cover" alt={exhibitionPhoto12.alt} />
+          </div>
+          <div className="overflow-hidden" style={{ flexBasis: '50%', borderRadius: '24px', height: '600px' }}>
+            <Media media={exhibitionPhoto13} className="w-full h-full object-cover" alt={exhibitionPhoto13.alt} />
+          </div>
+        </div>
+
+        {/* Row 9: Single full-width photo */}
+        <div className="overflow-hidden" style={{ borderRadius: '24px', height: '600px', width: '100%' }}>
+          <Media media={exhibitionPhoto20} className="w-full h-full object-cover" alt={exhibitionPhoto20.alt} />
+        </div>
       </div>
 
-      <div style={{ height: '3924px' }} aria-hidden="true" />
+      <div style={{ height: '6560px' }} aria-hidden="true" />
     </div>
     </>
   )

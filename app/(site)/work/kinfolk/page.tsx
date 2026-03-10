@@ -424,9 +424,8 @@ export default function KinfolkPage() {
               media={displayMedia}
               isVisible={true}
               isAdjacent={false}
-              className="w-full h-full"
+              className="w-full h-full object-contain"
               alt={projectTitle}
-              style={{ objectFit: 'contain' }}
             />
           </div>
         </div>

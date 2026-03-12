@@ -1029,7 +1029,7 @@ export default function HomePage() {
                 className="font-ui bg-core-dark text-white cursor-pointer"
                 style={{
                   position: 'absolute',
-                  bottom: '52px',
+                  bottom: '68px',
                   left: '0',
                   border: 'none',
                   borderRadius: '0px',

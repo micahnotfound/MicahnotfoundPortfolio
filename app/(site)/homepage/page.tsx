@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { MorphingHeaderLogo } from '@/components/shared/MorphingHeaderLogo'
 import { Media } from '@/components/shared/Media'
@@ -10,6 +10,11 @@ export default function HomepagePage() {
   const [touchStart, setTouchStart] = useState<{ y: number; time: number } | null>(null)
   const [scrollY, setScrollY] = useState(0)
   const [manualControl, setManualControl] = useState(false) // Track if user manually swiped
+  const [isAboutExpanded, setIsAboutExpanded] = useState(false)
+  const [logoHeight, setLogoHeight] = useState(0)
+  const [contactHeight, setContactHeight] = useState(0)
+  const logoRef = useRef<HTMLDivElement | null>(null)
+  const contactRef = useRef<HTMLAnchorElement | null>(null)
 
   // Handle scroll to shrink M logo (only if no manual control)
   useEffect(() => {
@@ -147,6 +152,46 @@ export default function HomepagePage() {
     }
   }
 
+  const parsePx = (value: string) => {
+    const n = parseFloat(value.replace('px', ''))
+    return Number.isFinite(n) ? n : 0
+  }
+
+  const aboutExpandedHeight = Math.max(
+    0,
+    logoHeight - contactHeight - parsePx(getButtonGap())
+  )
+
+  useEffect(() => {
+    if (!logoRef.current) return
+
+    const observer = new ResizeObserver(entries => {
+      const entry = entries[0]
+      if (entry) {
+        setLogoHeight(entry.contentRect.height)
+      }
+    })
+
+    observer.observe(logoRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!contactRef.current) return
+
+    const update = () => {
+      if (contactRef.current) {
+        setContactHeight(contactRef.current.offsetHeight)
+      }
+    }
+
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(contactRef.current)
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       {/* Sticky Header with M Logo and Buttons - shrinks dynamically with M logo */}
@@ -164,14 +209,16 @@ export default function HomepagePage() {
           <div className="flex items-center gap-8 max-w-full">
             {/* M Logo - shrinks from state 1 to state 3 on scroll */}
             <Link href="/" className="flex-shrink-0">
-              <MorphingHeaderLogo
-                state={logoState}
-                className="transition-all duration-500 ease-out"
-                style={{
-                  width: '178px',
-                  height: 'auto'
-                }}
-              />
+              <div ref={logoRef}>
+                <MorphingHeaderLogo
+                  state={logoState}
+                  className="transition-all duration-500 ease-out"
+                  style={{
+                    width: '178px',
+                    height: 'auto'
+                  }}
+                />
+              </div>
             </Link>
 
             {/* About/Contact buttons - shrink vertically and fade out as M shrinks */}
@@ -182,24 +229,33 @@ export default function HomepagePage() {
                 gap: getButtonGap()
               }}
             >
-              <Link
-                href="/about"
-                className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
+              <button
+                type="button"
+                onClick={() => setIsAboutExpanded(prev => !prev)}
+                className="relative text-left font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] overflow-hidden flex flex-col justify-start"
                 style={{
                   border: 'none',
                   padding: '0 1rem',
                   borderRadius: '39px',
-                  height: getButtonHeight(),
+                  height: isAboutExpanded && aboutExpandedHeight > 0 ? `${aboutExpandedHeight}px` : getButtonHeight(),
                   opacity: getButtonOpacity(),
                   maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                  WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
+                  WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)`
                 }}
               >
-                about
-              </Link>
+                <div className="flex items-center justify-center h-9">
+                  about
+                </div>
+                {isAboutExpanded && (
+                  <div className="pt-2 pb-3 text-xs leading-relaxed">
+                    Creative strategist working across immersive media, XR storytelling, and cultural projects.
+                  </div>
+                )}
+              </button>
 
               <Link
                 href="/contact"
+                ref={contactRef}
                 className="relative text-center font-ui bg-core-dark text-white transition-all duration-500 ease-out text-[0.95em] whitespace-nowrap overflow-hidden flex items-center justify-center"
                 style={{
                   border: 'none',

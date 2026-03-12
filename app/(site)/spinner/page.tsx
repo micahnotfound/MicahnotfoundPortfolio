@@ -157,7 +157,7 @@ export default function SpinnerPage() {
             <div
               className="absolute inset-0"
               style={{
-                backgroundImage: 'url(https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756571798/Profile_eapqj4.png)',
+                backgroundImage: 'url(https://res.cloudinary.com/dxmq5ewnv/image/upload/v1765586579/David_Ruggles_Sprite_Atlas_pkoior.png)',
                 backgroundSize: `${COLUMNS * 100}% ${ROWS * 100}%`,
                 backgroundPosition: `-${framePosition.x}px -${framePosition.y}px`,
                 backgroundRepeat: 'no-repeat',

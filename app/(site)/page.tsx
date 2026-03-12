@@ -985,7 +985,7 @@ export default function HomePage() {
 
         {/* Desktop Header with M Logo and Buttons */}
         <div
-          className="fixed left-0 w-full z-50 transition-all duration-[900ms] ease-out"
+          className="fixed left-0 w-full z-50 transition-all duration-[900ms] ease-out pointer-events-none"
           style={{
             top: `${logoTopPosition}px`,
             paddingLeft: '100px',
@@ -993,7 +993,7 @@ export default function HomePage() {
           }}
         >
           <div className="flex items-center justify-start gap-8">
-            <div className="flex-shrink-0 cursor-pointer" onClick={() => router.push('/')}>
+            <div className="flex-shrink-0 cursor-pointer pointer-events-auto" onClick={() => router.push('/')}>
               <MorphingHeaderLogo
                 state={logoState}
                 className="transition-all duration-[900ms] ease-out"
@@ -1005,7 +1005,7 @@ export default function HomePage() {
             </div>
 
             <div
-              className="flex flex-col gap-4 transition-all duration-[900ms] ease-out"
+              className="flex flex-col gap-4 transition-all duration-[900ms] ease-out pointer-events-auto"
               style={{
                 opacity: logoState === 3 ? 0 : 1,
                 transform: logoState === 3 ? 'translateY(-20px)' : 'translateY(0)',

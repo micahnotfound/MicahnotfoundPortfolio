@@ -17,6 +17,7 @@ export function Header() {
   const isSliderPage = pathname === '/slider'
   const isCompletePage = pathname === '/complete'
   const isTestPage = pathname === '/test'
+  const isTestMobilePage = pathname === '/testmobile'
   const isProjectPage = pathname.startsWith('/work/') && pathname !== '/work'
   const { hoverArea, setHoverArea } = useHover()
   const [isMobile, setIsMobile] = useState(false)
@@ -35,9 +36,9 @@ export function Header() {
 
   // Don't render this header on:
   // - Project detail pages
-  // - /homepage, /header, /slider, /complete, /test, or /about pages
+  // - /homepage, /header, /slider, /complete, /test, /testmobile, or /about pages
   // - Homepage (mobile and desktop - homepage handles its own header)
-  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || isTestPage || isHomePage || isAboutPage) {
+  if (isProjectPage || isHomepagePage || isHeaderPage || isSliderPage || isCompletePage || isTestPage || isTestMobilePage || isHomePage || isAboutPage) {
     return null
   }
 

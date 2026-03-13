@@ -1020,7 +1020,7 @@ export default function HomePage() {
                 pointerEvents: 'auto',
                 alignItems: 'flex-start',
                 gap: '16px',
-                marginTop: '256px',
+                marginTop: '291px',
                 height: '52px',
                 overflow: 'visible'
               }}
@@ -1033,16 +1033,14 @@ export default function HomePage() {
                   left: '0',
                   border: 'none',
                   borderRadius: '0px',
-                  height: isAboutExpanded ? '316px' : '36px',
-                  width: isAboutExpanded ? '850px' : '80px',
+                  height: isAboutExpanded ? '269px' : '36px',
+                  width: isAboutExpanded ? '1000px' : '80px',
                   overflow: 'hidden',
                   transition: 'width 450ms ease-out, height 450ms ease-out',
-                  display: 'flex',
-                  flexDirection: 'column-reverse',
                   paddingLeft: '1rem',
                   paddingRight: '1rem',
                   paddingBottom: '0',
-                  paddingTop: '1rem',
+                  paddingTop: '0.5rem',
                   pointerEvents: 'auto',
                   zIndex: 10
                 }}
@@ -1050,10 +1048,49 @@ export default function HomePage() {
                 onMouseLeave={() => setIsAboutExpanded(false)}
                 data-cursor-hover
               >
-                {/* Bottom label - "about" when collapsed, white line when expanded - stays at bottom */}
+                {/* Expanded content - anchored at bottom, text reveals from bottom to top */}
+                {isAboutExpanded && (
+                  <div
+                    className="text-left"
+                    style={{
+                      opacity: isAboutExpanded ? 1 : 0,
+                      transition: 'opacity 450ms ease-out',
+                      pointerEvents: isAboutExpanded ? 'auto' : 'none',
+                      position: 'absolute',
+                      bottom: '33px',
+                      left: 'calc(1rem + 20px)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'flex-end'
+                    }}
+                  >
+                    <div className="flex" style={{ gap: '32px', alignItems: 'flex-end' }}>
+                      <div className="flex flex-col" style={{ width: '625px' }}>
+                        <p className="font-ui text-base text-white leading-relaxed">
+                          Hi, I'm Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we've raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
+                          <br /><br />
+                          Before that I was a part of the NY based art collective ART404. We explored virality as a medium, creating projects that became Twitters top trending topic of the day multiple times. The work moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies in America.
+                        </p>
+                      </div>
+
+                      <div style={{ width: '240px', height: '210px', flexShrink: 0, overflow: 'hidden' }}>
+                        <img
+                          src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
+                          alt="Micah Milner"
+                          style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'center top', marginTop: '-10%' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Bottom label - absolutely positioned to stay locked at bottom */}
                 <div
                   className="text-base"
                   style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    left: '1rem',
                     height: '36px',
                     display: 'flex',
                     alignItems: 'center',
@@ -1070,37 +1107,6 @@ export default function HomePage() {
                     'about'
                   )}
                 </div>
-
-                {/* Expanded content - grows upward from the bottom label */}
-                {isAboutExpanded && (
-                  <div
-                    className="w-full text-left"
-                    style={{
-                      opacity: isAboutExpanded ? 1 : 0,
-                      transition: 'opacity 450ms ease-out',
-                      pointerEvents: isAboutExpanded ? 'auto' : 'none',
-                      paddingBottom: '1rem'
-                    }}
-                  >
-                    <div className="flex" style={{ gap: '32px' }}>
-                      <div className="flex flex-col" style={{ width: '530px' }}>
-                        <p className="font-ui text-base text-white leading-relaxed">
-                          Hi, I'm Micah Milner. An award winning artist and entrepreneur working at the intersection of art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces.
-                          <br /><br />
-                          Before that, I was creating work as a part of the collective ART404. We explored virality as a medium using emerging tech and social media to generate sophisticated commentary with mass appeal. Our art moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies on society.
-                        </p>
-                      </div>
-
-                      <div style={{ width: '280px', height: '210px' }}>
-                        <img
-                          src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
-                          alt="Micah Milner"
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
 
               <div
@@ -1108,7 +1114,7 @@ export default function HomePage() {
                 style={{
                   border: 'none',
                   borderRadius: '0px',
-                  height: isContactExpandedDesktop ? '414px' : '36px',
+                  height: isContactExpandedDesktop ? '142px' : '36px',
                   width: isContactExpandedDesktop ? '250px' : '96px',
                   overflow: 'hidden',
                   transition: 'width 450ms ease-out, height 450ms ease-out',
@@ -1148,9 +1154,10 @@ export default function HomePage() {
 
                   {/* Expanded content - fades in below */}
                   <div
-                    className="absolute left-0 w-full text-left"
+                    className="absolute w-full text-left"
                     style={{
                       top: '36px',
+                      left: '20px',
                       opacity: isContactExpandedDesktop ? 1 : 0,
                       transition: 'opacity 450ms ease-out',
                       pointerEvents: isContactExpandedDesktop ? 'auto' : 'none',

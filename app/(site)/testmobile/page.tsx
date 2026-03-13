@@ -416,7 +416,6 @@ export default function TestMobilePage() {
             <div className="flex-shrink-0">
               <MorphingHeaderLogo
                 state={logoState}
-                className="transition-all duration-500 ease-out"
                 style={{
                   width: '174px',
                   height: 'auto'

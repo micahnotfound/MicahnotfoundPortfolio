@@ -508,7 +508,6 @@ export default function HomePage() {
             >
               <MorphingHeaderLogo
                 state={logoState}
-                className="transition-all duration-500 ease-out"
                 style={{
                   width: '205px',
                   height: 'auto'

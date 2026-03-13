@@ -45,15 +45,46 @@ export default function TestMobilePage() {
   }, [logoState])
 
   // Handle About button expansion - triggers logo animation
-  const handleAboutClick = () => {
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
     if (!isAboutExpandedMobile) {
-      // Expanding - shrink M to state 3
+      // Expanding - shrink M to state 3 and move it 50px higher (52 - 50 = 2)
       setIsAboutExpandedMobile(true)
       setLogoState(3)
-      setHeaderTopPosition(52)
+      setHeaderTopPosition(2)
     } else {
-      // Collapsing - return M to state 0
+      // Collapsing - return M to state 0 and home state
       setIsAboutExpandedMobile(false)
+      setLogoState(0)
+      setHeaderTopPosition(71)
+    }
+  }
+
+  // Handle Contact button expansion - triggers M to state 2 (medium size)
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!isContactExpandedMobile) {
+      // Expanding - M to state 2 (medium) and move it up
+      setIsContactExpandedMobile(true)
+      setLogoState(2)
+      setHeaderTopPosition(32)
+    } else {
+      // Collapsing - return M to state 0 and home state
+      setIsContactExpandedMobile(false)
+      setLogoState(0)
+      setHeaderTopPosition(71)
+    }
+  }
+
+  // Handle page click to close About or Contact
+  const handlePageClick = () => {
+    if (isAboutExpandedMobile) {
+      setIsAboutExpandedMobile(false)
+      setLogoState(0)
+      setHeaderTopPosition(71)
+    }
+    if (isContactExpandedMobile) {
+      setIsContactExpandedMobile(false)
       setLogoState(0)
       setHeaderTopPosition(71)
     }
@@ -243,8 +274,9 @@ export default function TestMobilePage() {
   }
 
   const getButtonHeight = () => {
-    if (logoState === 0) return '36px'
-    if (logoState === 1) return '36px'
+    if (logoState === 0) return '32px'
+    if (logoState === 1) return '32px'
+    if (logoState === 2) return '18px'
     if (logoState === 3) return '0px'
     return '18px'
   }
@@ -324,7 +356,7 @@ export default function TestMobilePage() {
             width: 12px;
           }
           50% {
-            width: 30px;
+            width: calc(100vw - 80px);
           }
         }
         @keyframes iconBobAndFade {
@@ -365,7 +397,7 @@ export default function TestMobilePage() {
         }
       `}</style>
 
-      <div className="h-screen w-full relative overflow-hidden bg-[#D1D5DB]">
+      <div className="h-screen w-full relative overflow-hidden bg-[#D1D5DB]" onClick={handlePageClick}>
         {/* Mobile Header */}
         <div
           className="absolute left-0 w-full pointer-events-none"
@@ -377,23 +409,16 @@ export default function TestMobilePage() {
             paddingLeft: '30px',
             paddingRight: '32px',
             transition: isDragging.current ? 'none' : 'top 500ms ease-out',
-            zIndex: isAboutExpandedMobile ? 50 : 20
+            zIndex: isAboutExpandedMobile || isContactExpandedMobile ? 50 : 20
           }}
         >
           <div className="flex flex-col items-start pointer-events-auto">
-            <div
-              className="flex-shrink-0 cursor-pointer"
-              onClick={() => {
-                setSelectedIndex(-1)
-                setLogoState(0)
-                setHeaderTopPosition(71)
-              }}
-            >
+            <div className="flex-shrink-0">
               <MorphingHeaderLogo
                 state={logoState}
                 className="transition-all duration-500 ease-out"
                 style={{
-                  width: '205px',
+                  width: '174px',
                   height: 'auto'
                 }}
               />
@@ -412,56 +437,82 @@ export default function TestMobilePage() {
                 className="font-ui bg-core-dark text-white cursor-pointer flex-shrink-0"
                 style={{
                   position: isAboutExpandedMobile ? 'absolute' : 'relative',
-                  top: 0,
+                  top: isAboutExpandedMobile ? '-11px' : (isContactExpandedMobile ? '-9px' : 0),
                   left: 0,
                   border: 'none',
                   padding: isAboutExpandedMobile ? '1rem' : '0 1rem',
+                  paddingBottom: isAboutExpandedMobile ? '2rem' : '0',
                   borderRadius: '0px',
-                  height: isAboutExpandedMobile ? `calc(100vh - ${headerTopPosition}px - ${getHeaderHeight()}px - ${getButtonsMarginTop()} - 12px)` : getButtonHeight(),
-                  width: isAboutExpandedMobile ? `calc(100vw - 30px - 32px)` : '85px',
-                  minWidth: isAboutExpandedMobile ? 'auto' : '85px',
+                  height: isAboutExpandedMobile ? `calc(100vh - ${headerTopPosition}px - ${getHeaderHeight()}px - 12px + 4px - 3px)` : '32px',
+                  width: isAboutExpandedMobile ? `calc(100vw - 30px - 32px)` : '76.5px',
+                  minWidth: isAboutExpandedMobile ? 'auto' : '76.5px',
                   opacity: 1,
                   maskImage: 'none',
                   WebkitMaskImage: 'none',
                   overflow: 'hidden',
-                  transition: 'width 600ms ease-out, height 600ms ease-out, padding 600ms ease-out, position 0s',
+                  transition: 'width 600ms ease-out, height 600ms ease-out, padding 600ms ease-out, padding-bottom 600ms ease-out, position 0s, top 600ms ease-out',
                   zIndex: isAboutExpandedMobile ? 40 : 1,
-                  display: 'inline-block'
+                  display: 'inline-block',
+                  fontSize: '14px'
                 }}
                 onClick={handleAboutClick}
               >
                 {/* Button content container */}
                 <div className="relative w-full h-full">
-                  {/* About label - always visible at top */}
-                  <div
-                    className="absolute top-0 left-0 w-full text-[0.95em]"
-                    style={{
-                      height: getButtonHeight(),
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: isAboutExpandedMobile ? 'flex-start' : 'center'
-                    }}
-                  >
-                    about
-                  </div>
+                  {/* About label - hides when expanded */}
+                  {!isAboutExpandedMobile && (
+                    <div
+                      className="absolute top-0 left-0 w-full"
+                      style={{
+                        height: '32px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '13px'
+                      }}
+                    >
+                      about
+                    </div>
+                  )}
+
+                  {/* Photo - positioned at top of expanded container */}
+                  {isAboutExpandedMobile && (
+                    <div
+                      className="absolute left-0"
+                      style={{
+                        top: '6px',
+                        opacity: isAboutExpandedMobile ? 1 : 0,
+                        transition: 'opacity 600ms ease-out',
+                        pointerEvents: isAboutExpandedMobile ? 'auto' : 'none'
+                      }}
+                    >
+                      <div style={{ width: '120px', height: '110px', overflow: 'hidden' }}>
+                        <img
+                          src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
+                          alt="Micah Milner"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', marginTop: '-15px' }}
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   {/* Expanded content - fades in below */}
                   {isAboutExpandedMobile && (
                     <div
                       className="absolute left-0 w-full text-left"
                       style={{
-                        top: '60px',
+                        top: '120px',
                         opacity: isAboutExpandedMobile ? 1 : 0,
                         transition: 'opacity 600ms ease-out',
                         pointerEvents: isAboutExpandedMobile ? 'auto' : 'none'
                       }}
                     >
-                      <div className="text-[0.75em] leading-relaxed text-white">
+                      <div className="text-[0.72em] leading-relaxed text-white">
                         <p className="mb-4">
                           Hi, I'm Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we've raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
                         </p>
                         <p>
-                          Before that I was a part of the NY based art collective ART404. We explored virality as a medium, creating projects that became Twitters top trending topic of the day multiple times. The work moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies in America.
+                          Before that I was a part of the NY based art collective ART404. We explored virality as a medium, creating projects that became Twitters top trending topic multiple times. The work moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies in America.
                         </p>
                       </div>
                     </div>
@@ -469,78 +520,84 @@ export default function TestMobilePage() {
                 </div>
               </div>
 
-              {/* Contact button - stays in place */}
+              {/* Contact button - expands upwards */}
               <div
                 className="font-ui bg-core-dark text-white cursor-pointer flex-shrink-0"
                 style={{
                   position: 'absolute',
-                  top: 0,
-                  left: '101px', // 85px (About width) + 16px gap
+                  top: isContactExpandedMobile ? `-9px` : 0,
+                  left: '92.5px', // 76.5px (About width) + 16px gap
                   border: 'none',
-                  padding: '0 1rem',
-                  paddingBottom: isContactExpandedMobile ? '1rem' : '0',
+                  padding: isContactExpandedMobile ? '1rem' : '0 1rem',
+                  paddingBottom: isContactExpandedMobile ? '2rem' : '0',
                   borderRadius: '0px',
-                  height: isContactExpandedMobile ? '140px' : getButtonHeight(),
-                  minWidth: '85px',
-                  width: isContactExpandedMobile ? 'calc(100vw - 30px - 32px - 85px - 16px)' : 'auto',
-                  maxWidth: isContactExpandedMobile ? '250px' : 'auto',
+                  height: isContactExpandedMobile ? `calc(100vh - ${headerTopPosition}px - ${getHeaderHeight()}px - 12px + 4px - 3px - 251px)` : '32px',
+                  width: isContactExpandedMobile ? `calc(100vw - 30px - 32px - 92.5px - 16px)` : 'auto',
+                  minWidth: '76.5px',
                   opacity: 1,
                   maskImage: 'none',
                   WebkitMaskImage: 'none',
                   overflow: 'hidden',
-                  transition: 'width 600ms ease-out, height 600ms ease-out, max-width 600ms ease-out, padding-bottom 600ms ease-out',
-                  zIndex: 1
+                  transition: 'width 600ms ease-out, height 600ms ease-out, padding 600ms ease-out, padding-bottom 600ms ease-out, position 0s, top 600ms ease-out',
+                  zIndex: isContactExpandedMobile ? 40 : 1,
+                  display: 'inline-block',
+                  fontSize: '14px'
                 }}
-                onClick={() => setIsContactExpandedMobile(!isContactExpandedMobile)}
+                onClick={handleContactClick}
               >
                 {/* Button content container */}
                 <div className="relative w-full h-full">
-                  {/* Contact label - always visible at top */}
-                  <div
-                    className="absolute top-0 left-0 w-full text-[0.95em]"
-                    style={{
-                      height: getButtonHeight(),
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: isContactExpandedMobile ? 'flex-start' : 'center'
-                    }}
-                  >
-                    contact
-                  </div>
+                  {/* Contact label - hides when expanded */}
+                  {!isContactExpandedMobile && (
+                    <div
+                      className="absolute top-0 left-0 w-full"
+                      style={{
+                        height: '32px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '13px'
+                      }}
+                    >
+                      contact
+                    </div>
+                  )}
 
                   {/* Expanded content - fades in below */}
-                  <div
-                    className="absolute left-0 w-full text-left"
-                    style={{
-                      top: getButtonHeight(),
-                      opacity: isContactExpandedMobile ? 1 : 0,
-                      transition: 'opacity 600ms ease-out',
-                      pointerEvents: isContactExpandedMobile ? 'auto' : 'none'
-                    }}
-                  >
-                    <div className="space-y-1 text-[0.95em] pt-2">
-                      <a href="mailto:Micah@art404.com" className="block hover:underline text-sm">
-                        Micah@art404.com
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/in/micah-milner-5bb13729/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block hover:underline text-sm"
-                      >
-                        LinkedIn
-                      </a>
-                      <a
-                        href="https://www.instagram.com/micahnotfound/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block hover:underline text-sm"
-                      >
-                        Instagram
-                      </a>
-                      <div className="text-sm">8636024715</div>
+                  {isContactExpandedMobile && (
+                    <div
+                      className="absolute left-0 w-full text-left"
+                      style={{
+                        top: '6px',
+                        opacity: isContactExpandedMobile ? 1 : 0,
+                        transition: 'opacity 600ms ease-out',
+                        pointerEvents: isContactExpandedMobile ? 'auto' : 'none'
+                      }}
+                    >
+                      <div className="space-y-1 text-[0.72em]">
+                        <a href="mailto:Micah@art404.com" className="block hover:underline">
+                          Micah@art404.com
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/micah-milner-5bb13729/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:underline"
+                        >
+                          LinkedIn
+                        </a>
+                        <a
+                          href="https://www.instagram.com/micahnotfound/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block hover:underline"
+                        >
+                          Instagram
+                        </a>
+                        <div>8636024715</div>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -670,8 +727,8 @@ export default function TestMobilePage() {
                       color: isSelected ? 'black' : 'white',
                       overflow: 'visible',
                       whiteSpace: 'nowrap',
-                      animation: !isSelected && selectedIndex === -1 ? `bubbleWave 2s ease-in-out infinite` : 'none',
-                      animationDelay: `${index * 0.15}s`
+                      animation: !isSelected && selectedIndex === -1 ? `bubbleWave 4s ease-in-out infinite` : 'none',
+                      animationDelay: `${index * 0.3}s`
                     }}
                   >
                     {isSelected && <span style={{ paddingRight: '12px' }}>{project.title}</span>}

@@ -61,10 +61,9 @@ export default function HomePage() {
     loadProjects()
   }, [setHoverArea])
 
-  // Auto-close contact buttons when logo state changes (desktop: when logoState becomes 3, mobile: when logoState becomes 3)
+  // Auto-close contact only on desktop when logo state changes
   useEffect(() => {
     if (logoState === 3) {
-      setIsContactExpandedMobile(false)
       setIsContactExpandedDesktop(false)
     }
   }, [logoState])
@@ -382,33 +381,14 @@ export default function HomePage() {
     }
   }
 
-  const getButtonsMarginTop = () => {
-    if (logoState === 0) return '15px'
-    if (logoState === 1) return '15px'
-    if (logoState === 3) return '-150px'
-    return '-75px'
-  }
+  // For the test mobile header, keep the buttons visually stable
+  const getButtonsMarginTop = () => '15px'
 
-  const getButtonHeight = () => {
-    if (logoState === 0) return '36px'
-    if (logoState === 1) return '36px'
-    if (logoState === 3) return '0px'
-    return '18px'
-  }
+  const getButtonHeight = () => '36px'
 
-  const getButtonGap = () => {
-    if (logoState === 0) return '16px'
-    if (logoState === 1) return '16px'
-    if (logoState === 3) return '0px'
-    return '8px'
-  }
+  const getButtonGap = () => '16px'
 
-  const getButtonOpacity = () => {
-    if (logoState === 0) return 1
-    if (logoState === 1) return 1
-    if (logoState === 3) return 0
-    return 0.5
-  }
+  const getButtonOpacity = () => 1
 
   const getHeaderHeight = () => {
     const logoState0Height = 534
@@ -555,9 +535,9 @@ export default function HomePage() {
                   style={{
                     border: 'none',
                     padding: '0 1rem',
-                    paddingBottom: isContactExpandedMobile ? '1rem' : '0',
                     borderRadius: '0px',
-                    height: isContactExpandedMobile ? '140px' : getButtonHeight(),
+                    // Keep the contact pill visible and let it expand into a textbox
+                    height: isContactExpandedMobile ? '160px' : '36px',
                     minWidth: '85px',
                     width: isContactExpandedMobile ? 'calc(100vw - 30px - 32px - 85px - 16px)' : 'auto',
                     maxWidth: isContactExpandedMobile ? '250px' : 'auto',
@@ -565,36 +545,23 @@ export default function HomePage() {
                     maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
                     WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
                     overflow: 'hidden',
-                    transition: 'width 600ms ease-out, height 600ms ease-out, max-width 600ms ease-out, opacity 500ms ease-out, padding-bottom 600ms ease-out'
+                    transition: 'width 600ms ease-out, height 600ms ease-out, max-width 600ms ease-out, opacity 500ms ease-out'
                   }}
-                  onClick={() => setIsContactExpandedMobile(!isContactExpandedMobile)}
+                  onClick={() => setIsContactExpandedMobile(prev => !prev)}
                 >
                   {/* Button content container */}
                   <div className="relative w-full h-full">
-                    {/* Contact label - always visible at top */}
-                    <div
-                      className="absolute top-0 left-0 w-full text-[0.95em]"
-                      style={{
-                        height: getButtonHeight(),
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: isContactExpandedMobile ? 'flex-start' : 'center'
-                      }}
-                    >
-                      contact
-                    </div>
-
-                    {/* Expanded content - fades in below */}
+                    {/* Expanded content - reveals upward, anchored above the bottom label */}
                     <div
                       className="absolute left-0 w-full text-left"
                       style={{
-                        top: getButtonHeight(),
+                        bottom: '36px',
                         opacity: isContactExpandedMobile ? 1 : 0,
                         transition: 'opacity 600ms ease-out',
                         pointerEvents: isContactExpandedMobile ? 'auto' : 'none'
                       }}
                     >
-                      <div className="space-y-1 text-[0.95em] pt-2">
+                      <div className="space-y-1 text-[0.95em] pb-2">
                         <a href="mailto:Micah@art404.com" className="block hover:underline text-sm">
                           Micah@art404.com
                         </a>
@@ -616,6 +583,20 @@ export default function HomePage() {
                         </a>
                         <div className="text-sm">8636024715</div>
                       </div>
+                    </div>
+
+                    {/* Contact label - locked at bottom so the expansion reads as upward */}
+                    <div
+                      className="absolute left-0 w-full text-[0.95em]"
+                      style={{
+                        height: '36px',
+                        bottom: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      contact
                     </div>
                   </div>
                 </div>
@@ -1069,7 +1050,7 @@ export default function HomePage() {
                         <p className="font-ui text-base text-white leading-relaxed">
                           Hi, I'm Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we've raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
                           <br /><br />
-                          Before that I was a part of the NY based art collective ART404. We explored virality as a medium, creating projects that became Twitters top trending topic of the day multiple times. The work moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies in America.
+                          Before that I was a part of the NY based art collective ART404. We explored virality as a medium, creating projects that became Twitters top trending topic multiple times. The work moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies in America.
                         </p>
                       </div>
 

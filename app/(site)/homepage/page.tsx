@@ -240,7 +240,7 @@ export default function HomepagePage() {
                   height: isAboutExpanded && aboutExpandedHeight > 0 ? `${aboutExpandedHeight}px` : getButtonHeight(),
                   opacity: getButtonOpacity(),
                   maskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                  WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)`
+                  WebkitMaskImage: (logoState === 0 || logoState === 1) ? 'none' : 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)'
                 }}
               >
                 <div className="flex items-center justify-center h-9">

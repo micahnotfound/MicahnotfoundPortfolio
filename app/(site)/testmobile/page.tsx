@@ -509,7 +509,7 @@ export default function TestMobilePage() {
                     >
                       <div className="text-[0.72em] leading-relaxed text-white">
                         <p className="mb-4">
-                          Hi, I'm Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we've raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
+                          Hi, I&apos;m Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we&apos;ve raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
                         </p>
                         <p>
                           Before that I was a part of the NY based art collective ART404. We explored virality as a medium, creating projects that became Twitters top trending topic multiple times. The work moved across digital and physical mediums commenting on the rise of internet culture and the growing influence of tech companies in America.

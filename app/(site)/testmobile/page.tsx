@@ -101,10 +101,20 @@ export default function TestMobilePage() {
   }, [])
 
   // Mobile: Show swipe indicator after 5 seconds with video bob animation
+  // Only show when About button is closed and after 5 seconds of inactivity
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (isLoading || projects.length === 0) return
+    if (isAboutExpandedMobile) {
+      // If About is open, clear any existing timer and hide indicator
+      if (swipeIndicatorTimerRef.current) {
+        clearTimeout(swipeIndicatorTimerRef.current)
+      }
+      setShowSwipeIndicator(false)
+      return
+    }
 
+    // About is closed - start timer to show indicator after 5 seconds
     swipeIndicatorTimerRef.current = setTimeout(() => {
       setShowSwipeIndicator(true)
       setTimeout(() => {
@@ -117,7 +127,7 @@ export default function TestMobilePage() {
         clearTimeout(swipeIndicatorTimerRef.current)
       }
     }
-  }, [isLoading, projects.length])
+  }, [isLoading, projects.length, isAboutExpandedMobile])
 
   // Touch event handlers for mobile carousel
   useEffect(() => {
@@ -506,7 +516,7 @@ export default function TestMobilePage() {
                         pointerEvents: isAboutExpandedMobile ? 'auto' : 'none'
                       }}
                     >
-                      <div className="text-[0.72em] leading-relaxed text-white">
+                      <div className="text-[0.8em] leading-relaxed text-white">
                         <p className="mb-4">
                           Hi, I&apos;m Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we&apos;ve raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
                         </p>
@@ -573,7 +583,7 @@ export default function TestMobilePage() {
                         pointerEvents: isContactExpandedMobile ? 'auto' : 'none'
                       }}
                     >
-                      <div className="space-y-1 text-[0.72em]">
+                      <div className="space-y-1 text-[0.8em]">
                         <a href="mailto:Micah@art404.com" className="block hover:underline">
                           Micah@art404.com
                         </a>

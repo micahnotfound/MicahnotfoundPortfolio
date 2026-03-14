@@ -88,6 +88,78 @@ export default function HomePage() {
     return () => window.removeEventListener('resize', updateViewportWidth)
   }, [])
 
+  // Calculate dynamic About button dimensions based on viewport width
+  const getAboutButtonDimensions = () => {
+    if (!isAboutExpanded) {
+      return { width: '80px', height: '36px', showPhoto: false, textWidth: '625px' }
+    }
+
+    // Default fullscreen dimensions
+    const defaultWidth = 1000
+    const defaultHeight = 269
+    const defaultTextWidth = 625
+    const photoWidth = 240
+    const gap = 32
+    const padding = 16 * 2 // 1rem on each side
+    const extraSpace = 20 * 2 // left offset space
+    const safetyMargin = 40
+
+    // Available width = viewport - padding - extra space - safety margin
+    const availableWidth = viewportWidth - padding - extraSpace - safetyMargin
+
+    // If we have enough space, use default dimensions
+    if (availableWidth >= defaultWidth) {
+      return { width: '1000px', height: '269px', showPhoto: true, textWidth: '625px' }
+    }
+
+    // If we have space for text + photo + gap but need to shrink
+    if (availableWidth >= defaultTextWidth + photoWidth + gap) {
+      const newTextWidth = availableWidth - photoWidth - gap
+      return {
+        width: `${availableWidth}px`,
+        height: '269px',
+        showPhoto: true,
+        textWidth: `${newTextWidth}px`
+      }
+    }
+
+    // Photo needs to be hidden - container grows taller dynamically
+    // As width decreases, height increases to accommodate text reflow
+
+    // The text now gets full container width (minus padding on both sides)
+    const newTextWidth = availableWidth
+
+    // Only grow taller if the container is narrower than the original text column
+    // Otherwise, we have MORE space for text, not less
+    if (newTextWidth >= defaultTextWidth) {
+      // Container is wide enough - no need to grow taller
+      return {
+        width: `${availableWidth}px`,
+        height: '269px',
+        showPhoto: false,
+        textWidth: `${newTextWidth - padding}px`
+      }
+    }
+
+    // Calculate height multiplier based on how much narrower the text column is
+    // When text width is halved, we need roughly double the height
+    const widthRatio = defaultTextWidth / newTextWidth  // This will be > 1
+
+    // Start from default height and scale up based on width reduction
+    // Use power of 1.4 for more aggressive height scaling
+    let calculatedHeight = defaultHeight * Math.pow(widthRatio, 1.4)
+
+    // Cap the maximum height at 600px (can grow up ~331px from default 269px)
+    calculatedHeight = Math.min(calculatedHeight, 600)
+
+    return {
+      width: `${availableWidth}px`,
+      height: `${Math.round(calculatedHeight)}px`,
+      showPhoto: false,
+      textWidth: `${newTextWidth - padding}px`
+    }
+  }
+
   // Mobile: Show swipe indicator after 5 seconds with video bob animation
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -1014,8 +1086,8 @@ export default function HomePage() {
                   left: '0',
                   border: 'none',
                   borderRadius: '0px',
-                  height: isAboutExpanded ? '269px' : '36px',
-                  width: isAboutExpanded ? '1000px' : '80px',
+                  height: getAboutButtonDimensions().height,
+                  width: getAboutButtonDimensions().width,
                   overflow: 'hidden',
                   transition: 'width 450ms ease-out, height 450ms ease-out',
                   paddingLeft: '1rem',
@@ -1038,15 +1110,16 @@ export default function HomePage() {
                       transition: 'opacity 450ms ease-out',
                       pointerEvents: isAboutExpanded ? 'auto' : 'none',
                       position: 'absolute',
-                      bottom: '33px',
+                      top: getAboutButtonDimensions().showPhoto ? 'auto' : '8px',
+                      bottom: getAboutButtonDimensions().showPhoto ? '33px' : 'auto',
                       left: 'calc(1rem + 20px)',
                       display: 'flex',
                       flexDirection: 'column',
-                      justifyContent: 'flex-end'
+                      justifyContent: getAboutButtonDimensions().showPhoto ? 'flex-end' : 'flex-start'
                     }}
                   >
                     <div className="flex" style={{ gap: '32px', alignItems: 'flex-end' }}>
-                      <div className="flex flex-col" style={{ width: '625px' }}>
+                      <div className="flex flex-col" style={{ width: getAboutButtonDimensions().textWidth }}>
                         <p className="font-ui text-base text-white leading-relaxed">
                           Hi, I&apos;m Micah. An award winning artist and entrepreneur with a focus on art, technology, and public storytelling. I co-founded Kinfolk Tech, a digital platform where we create and host projects that transform underrepresented histories into immersive exhibitions for museums, classrooms, and public spaces. To date we&apos;ve raised over 8 million dollars, exhibited at the MoMA and Tribeca Film Festival and worked with world renowned artists like Hank Willis Thomas and Wangechi Mutu.
                           <br /><br />
@@ -1054,13 +1127,15 @@ export default function HomePage() {
                         </p>
                       </div>
 
-                      <div style={{ width: '240px', height: '210px', flexShrink: 0, overflow: 'hidden' }}>
-                        <img
-                          src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
-                          alt="Micah Milner"
-                          style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'center top', marginTop: '-10%' }}
-                        />
-                      </div>
+                      {getAboutButtonDimensions().showPhoto && (
+                        <div style={{ width: '240px', height: '210px', flexShrink: 0, overflow: 'hidden' }}>
+                          <img
+                            src="https://res.cloudinary.com/dxmq5ewnv/image/upload/v1756680394/micah_j75jbv.png"
+                            alt="Micah Milner"
+                            style={{ width: '100%', height: '120%', objectFit: 'cover', objectPosition: 'center top', marginTop: '-10%' }}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

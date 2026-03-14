@@ -433,14 +433,15 @@ export default function TestMobilePage() {
               />
             </div>
 
-            {/* Buttons container - positioned underneath M SVG */}
-            <div
-              className="relative transition-all duration-500 ease-out"
-              style={{
-                marginTop: getButtonsMarginTop(),
-                width: '100%'
-              }}
-            >
+            {/* Buttons container - positioned underneath M SVG - only visible when no project selected */}
+            {selectedIndex === -1 && (
+              <div
+                className="relative transition-all duration-500 ease-out"
+                style={{
+                  marginTop: getButtonsMarginTop(),
+                  width: '100%'
+                }}
+              >
               {/* About button - absolutely positioned so it doesn't push Contact */}
               <div
                 className="font-ui bg-core-dark text-white cursor-pointer flex-shrink-0"
@@ -540,7 +541,7 @@ export default function TestMobilePage() {
                   padding: isContactExpandedMobile ? '1rem' : '0 1rem',
                   paddingBottom: isContactExpandedMobile ? '2rem' : '0',
                   borderRadius: '0px',
-                  height: isContactExpandedMobile ? `calc(100vh - ${headerTopPosition}px - ${getHeaderHeight()}px - 12px + 4px - 3px - 251px)` : '32px',
+                  height: isContactExpandedMobile ? `calc(100vh - ${headerTopPosition}px - ${getHeaderHeight()}px - 12px + 4px - 3px - 328px)` : '32px',
                   width: isContactExpandedMobile ? `calc(100vw - 30px - 32px - 92.5px - 16px)` : 'auto',
                   minWidth: '76.5px',
                   opacity: 1,
@@ -610,6 +611,7 @@ export default function TestMobilePage() {
                 </div>
               </div>
             </div>
+            )}
           </div>
         </div>
 
